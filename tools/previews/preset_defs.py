@@ -190,6 +190,28 @@ preset("Midnight Strum", "Guitars & Strings", ["Trapsoul", "R&B", "Dark reggaeto
        {"f_type": 0, "f_cut": 3200},
        fx(TAPE, eq_pk_f=220, eq_pk_g=1.5, ch_mix=.35, ch_depth=2, dly_beats=.75, dly_fb=.32, dly_mix=.16, rv_mix=.3, rv_size=.75, rv_decay=3.5))
 
+preset("Moon Strum", "Guitars & Strings", ["R&B", "Reggaeton", "Pop"],
+       "Dreamy plucked-string model (synthesized, not a recording): doubled strings, chorus and echoes. Kept from round 1.",
+       "Arpeggios for R&B and reggaeton intros.", "guitar_dark",
+       [L(3, bright=.55, damp=.2, decay=3, pick=.18, strings=2, sdet=4, a=.001, d=4, s=0, r=.5, keydecay=.2)],
+       {"f_type": 0, "f_cut": 5500},
+       fx(eq_lc=90, eq_pk_f=220, eq_pk_g=1.5, ch_mix=.35, ch_depth=2, dly_beats=.75, dly_fb=.3, dly_mix=.15,
+          rv_mix=.25, rv_size=.65, rv_decay=3))
+
+preset("Palm Night", "Guitars & Strings", ["Afrobeats", "Dancehall", "Reggaeton"],
+       "Muted string-model pluck (synthesized): short, thumpy palm-mute character for rhythmic patterns. Kept from round 1.",
+       "Afro, dancehall and reggaeton guitar-style rhythms.", "guitar_muted",
+       [L(3, bright=.5, damp=.45, decay=.28, pick=.22, a=.001, d=.6, s=0, r=.06)],
+       {"f_type": 0, "f_cut": 2400, "f_res": .1},
+       fx(eq_lc=100, eq_pk_f=1200, eq_pk_g=2, rv_mix=.1, rv_size=.3, ch_mix=.15))
+
+preset("Nylon Mist", "Guitars & Strings", ["Bossa / MPB", "R&B", "Latin pop"],
+       "Soft nylon-style plucked string model (synthesized): warm, rounded, gentle. Kept from round 1.",
+       "Latin and R&B figures until real guitar recordings exist.", "guitar_dark",
+       [L(3, bright=.32, damp=.3, decay=2.4, pick=.28, strings=2, sdet=2, a=.001, d=3, s=0, r=.35, keydecay=.2)],
+       {"f_type": 0, "f_cut": 3500},
+       fx(eq_lc=80, eq_pk_f=180, eq_pk_g=2, rv_mix=.2, rv_size=.5, rv_decay=2))
+
 # ======================================================== LEADS
 preset("Ghost Flute", "Synths & Leads", ["Trap", "Drill", "Latin trap"],
        "Breathy, haunting flute-style lead with air in the attack and a slow vibrato — the dark trap flute sound.",

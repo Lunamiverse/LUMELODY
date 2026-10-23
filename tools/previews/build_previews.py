@@ -150,6 +150,13 @@ def main():
         doc["id"] = s
         with open(os.path.join(ROOT, "presets", s + ".json"), "w") as f:
             json.dump(doc, f, indent=2)
+        # calibrated playing level for the plugin/web engine (about -18 LUFS on the demo phrase, headroom for effects)
+        pk = float(re.search(r"peak=([\d.]+)", out).group(1))
+        live = gain_db + (20 * np.log10(0.98 / pk) if pk > 0.98 else 0) - 2.0
+        open(os.path.join(tmp, s + ".gain"), "w").write(f"{live:.2f}\n")
+        doc["out_gain_db"] = round(float(live), 2)
+        with open(os.path.join(ROOT, "presets", s + ".json"), "w") as f:
+            json.dump(doc, f, indent=2)
         report[s] = {"name": p["name"], "engine": out, "input_lufs": float(ln["input_i"]), "trim_db": round(gain_db, 2),
                      "final_tp": round(float(ln["input_tp"]) + gain_db, 2), "preview_limit_db": limit_db, "secs": round(len(y) / sr, 2), **stats}
         print(f"{p['name']:<18} {out:<30} lufs={float(ln['input_i']):6.1f} trim={gain_db:+5.1f} cen={stats['centroid_hz']:5d} "

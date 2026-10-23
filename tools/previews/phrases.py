@@ -149,6 +149,15 @@ def build():
     ph["guitar_dark"] = P(76, n, "Moody arpeggio, Em-C-Am-B, 76 BPM", "trapsoul",
                           [(0, 28), (4, 36), (8, 33), (12, 35)])
 
+    # --- muted-guitar style rhythm (A minor, 98 BPM)
+    n = []
+    pat = [0, .5, .75, 1.5, 2, 2.75, 3, 3.5]
+    for b, rt in enumerate([57, 53, 55, 52]):
+        for i, x in enumerate(pat):
+            n += seq([(b * 4 + x, .22, rt + [0, 7, 12, 7, 0, 12, 10, 7][i], .78 if i in (0, 4) else .6)], rng=r)
+    ph["guitar_muted"] = P(98, n, "Rhythmic muted-guitar pattern, Am-F-G-Em, 98 BPM", "dancehall",
+                           [(0, 33), (4, 29), (8, 31), (12, 28)])
+
     # --- cowbell / phonk-style melody (F# minor)
     n = seq([(0, .5, 78), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78), (2, .5, 76), (2.5, .5, 78), (3, 1, 73),
              (4, .5, 78), (4.5, .5, 78), (5, .5, 81), (5.5, .5, 83), (6, .5, 81), (6.5, .5, 78), (7, 1, 76),

@@ -1,0 +1,45 @@
+{
+  "name": "Palm Night",
+  "category": "Guitars & Strings",
+  "genres": [
+    "Afrobeats",
+    "Dancehall",
+    "Reggaeton"
+  ],
+  "description": "Muted string-model pluck (synthesized): short, thumpy palm-mute character for rhythmic patterns. Kept from round 1.",
+  "use": "Afro, dancehall and reggaeton guitar-style rhythms.",
+  "preview_phrase": "guitar_muted",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.5,
+      "damp": 0.45,
+      "decay": 0.28,
+      "pick": 0.22,
+      "a": 0.001,
+      "d": 0.6,
+      "s": 0,
+      "r": 0.06,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_res": 0.1
+  },
+  "fx": {
+    "eq_lc": 100,
+    "eq_pk_f": 1200,
+    "eq_pk_g": 2,
+    "rv_mix": 0.1,
+    "rv_size": 0.3,
+    "ch_mix": 0.15
+  },
+  "loudness_trim_db": 14.76,
+  "id": "palm-night"
+}
