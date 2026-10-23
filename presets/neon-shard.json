@@ -1,0 +1,63 @@
+{
+  "name": "Neon Shard",
+  "category": "Plucks & Mallets",
+  "genres": [
+    "Jersey club",
+    "Hyperpop",
+    "Futuristic"
+  ],
+  "description": "Sharp futuristic pluck: double-modulator FM with a downward zap and a little digital crunch.",
+  "use": "Jersey club and hyperpop riffs, sci-fi ear candy.",
+  "preview_phrase": "glitch",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 2,
+      "idx": 2,
+      "idx_dec": 0.08,
+      "idx_sus": 0,
+      "mr2": 7.13,
+      "idx2": 2.5,
+      "idx2_dec": 0.03,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0,
+      "r": 0.1,
+      "type": 2
+    },
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 15,
+      "spread": 1,
+      "a": 0.001,
+      "d": 0.2,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.4,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 7000,
+    "p_env": -12,
+    "p_dec": 0.012
+  },
+  "fx": {
+    "crush_bits": 9,
+    "eq_lc": 200,
+    "dly_beats": 0.25,
+    "dly_fb": 0.3,
+    "dly_mix": 0.15,
+    "rv_mix": 0.1,
+    "width": 1.3
+  },
+  "loudness_trim_db": 1.23,
+  "id": "neon-shard"
+}

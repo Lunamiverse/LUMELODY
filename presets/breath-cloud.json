@@ -1,0 +1,57 @@
+{
+  "name": "Breath Cloud",
+  "category": "Textures & FX",
+  "genres": [
+    "Ambient",
+    "R&B",
+    "Cinematic"
+  ],
+  "description": "Breath-like pad: whispered formant noise that slowly changes vowel.",
+  "use": "Ambient layers, intimate R&B intros.",
+  "preview_phrase": "texture",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "vowel": 1,
+      "vmod": 2,
+      "tilt": 1.6,
+      "breath": 0.5,
+      "a": 1.2,
+      "d": 2,
+      "s": 0.8,
+      "r": 2,
+      "level": 0.5,
+      "type": 6
+    },
+    {
+      "ncut": 1.5,
+      "ntrack": 1,
+      "nq": 2,
+      "nmode": 1,
+      "vmod": 1,
+      "a": 1.2,
+      "d": 2,
+      "s": 0.8,
+      "r": 2,
+      "level": 0.6,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 2,
+    "f_cut": 250,
+    "lfo_rate": 0.2
+  },
+  "fx": {
+    "rv_mix": 0.45,
+    "rv_size": 0.9,
+    "rv_decay": 5,
+    "width": 1.4
+  },
+  "loudness_trim_db": 0.66,
+  "id": "breath-cloud"
+}

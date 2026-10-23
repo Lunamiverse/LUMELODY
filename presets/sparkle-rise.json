@@ -1,0 +1,69 @@
+{
+  "name": "Sparkle Rise",
+  "category": "Textures & FX",
+  "genres": [
+    "Pop",
+    "EDM",
+    "Latin pop"
+  ],
+  "description": "Sparkling transition texture: bright grains and airy noise that glitter upward.",
+  "use": "Risers, pre-chorus lifts, fairy-dust fills.",
+  "preview_phrase": "rise",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "oct": 1,
+      "grate": 30,
+      "glen": 0.08,
+      "goct": 0.6,
+      "gjit": 4,
+      "a": 0.01,
+      "d": 1.5,
+      "s": 0.4,
+      "r": 1.2,
+      "type": 7
+    },
+    {
+      "ncut": 6000,
+      "nq": 0.8,
+      "nmode": 2,
+      "a": 0.3,
+      "d": 1,
+      "s": 0.5,
+      "r": 1.2,
+      "level": 0.25,
+      "filt": 0,
+      "type": 5
+    },
+    {
+      "mat": 5,
+      "hard": 0.6,
+      "click": 0.1,
+      "decay": 1.2,
+      "a": 0.001,
+      "d": 1.5,
+      "s": 0,
+      "r": 0.5,
+      "level": 0.6,
+      "type": 4
+    }
+  ],
+  "voice": {
+    "f_type": -1
+  },
+  "fx": {
+    "eq_lc": 300,
+    "dly_beats": 0.25,
+    "dly_fb": 0.45,
+    "dly_mix": 0.2,
+    "rv_mix": 0.4,
+    "rv_size": 0.85,
+    "rv_decay": 4
+  },
+  "loudness_trim_db": 2.12,
+  "id": "sparkle-rise"
+}

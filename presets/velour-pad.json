@@ -1,0 +1,51 @@
+{
+  "name": "Velour Pad",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "R&B",
+    "Pop",
+    "House"
+  ],
+  "description": "Warm analog pad: chorused saw ensemble with a soft attack and a velvety top.",
+  "use": "Chord beds under R&B and pop.",
+  "preview_phrase": "pad",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 14,
+      "spread": 0.9,
+      "drift": 4,
+      "a": 0.5,
+      "d": 2,
+      "s": 0.85,
+      "r": 1.4,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1300,
+    "f_res": 0.1,
+    "f_key": 0.4,
+    "lfo_rate": 0.15,
+    "lfo_cut": 0.25
+  },
+  "fx": {
+    "eq_lc": 120,
+    "eq_pk_f": 400,
+    "eq_pk_g": -2,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "rv_mix": 0.25,
+    "rv_size": 0.7,
+    "rv_decay": 3
+  },
+  "loudness_trim_db": -4.09,
+  "id": "velour-pad"
+}

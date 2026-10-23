@@ -1,0 +1,52 @@
+{
+  "name": "Moon Strum",
+  "category": "Guitars & Strings",
+  "genres": [
+    "R&B",
+    "Reggaeton",
+    "Pop"
+  ],
+  "description": "Dreamy plucked-string model (synthesized, not a recording): doubled strings, chorus and echoes.",
+  "use": "Arpeggios for R&B and reggaeton intros.",
+  "preview_phrase": "guitar_arp",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.55,
+      "damp": 0.2,
+      "decay": 3,
+      "pick": 0.18,
+      "strings": 2,
+      "sdet": 4,
+      "a": 0.001,
+      "d": 4,
+      "s": 0,
+      "r": 0.5,
+      "keydecay": 0.2,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5500
+  },
+  "fx": {
+    "eq_lc": 90,
+    "eq_pk_f": 220,
+    "eq_pk_g": 1.5,
+    "ch_mix": 0.35,
+    "ch_depth": 2,
+    "dly_beats": 0.75,
+    "dly_fb": 0.3,
+    "dly_mix": 0.15,
+    "rv_mix": 0.25,
+    "rv_size": 0.65,
+    "rv_decay": 3
+  },
+  "loudness_trim_db": 8.88,
+  "id": "moon-strum"
+}

@@ -1,0 +1,4 @@
+build/
+previews/wav/
+previews/mp3/
+__pycache__/

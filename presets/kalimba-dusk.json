@@ -1,0 +1,56 @@
+{
+  "name": "Kalimba Dusk",
+  "category": "Plucks & Mallets",
+  "genres": [
+    "Afrobeats",
+    "R&B",
+    "Lo-fi"
+  ],
+  "description": "Thumb-piano style tines with a soft woody knock and a short room.",
+  "use": "Afro-R&B riffs, mellow loops.",
+  "preview_phrase": "pluck_afro",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "mat": 4,
+      "hard": 0.55,
+      "click": 0.18,
+      "decay": 1.6,
+      "beat": 1.2,
+      "a": 0.001,
+      "d": 2,
+      "s": 0,
+      "r": 0.2,
+      "type": 4
+    },
+    {
+      "bright": 0.4,
+      "damp": 0.3,
+      "decay": 0.6,
+      "pick": 0.4,
+      "a": 0.001,
+      "d": 1,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.25,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": -1
+  },
+  "fx": {
+    "eq_lc": 120,
+    "eq_ls_f": 400,
+    "eq_ls_g": 1,
+    "rv_mix": 0.16,
+    "rv_size": 0.4,
+    "rv_decay": 1.4
+  },
+  "loudness_trim_db": 5.61,
+  "id": "kalimba-dusk"
+}

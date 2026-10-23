@@ -1,0 +1,67 @@
+{
+  "name": "Prism Organ",
+  "category": "Keys",
+  "genres": [
+    "House",
+    "Pop",
+    "Experimental"
+  ],
+  "description": "Hybrid organ-synth: drawbar-like square stack with an 'ooh' formant layer and a soft rhythmic pump.",
+  "use": "House stabs, gospel-tinged pop chords, experimental hooks.",
+  "preview_phrase": "pad",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "a": 0.005,
+      "d": 1,
+      "s": 0.85,
+      "r": 0.15,
+      "level": 0.6,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": 1,
+      "a": 0.005,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.15,
+      "level": 0.35,
+      "type": 1
+    },
+    {
+      "vowel": 3.2,
+      "vmod": 0.4,
+      "tilt": 1.2,
+      "a": 0.08,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.3,
+      "level": 0.4,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3200,
+    "f_res": 0.1,
+    "lfo_rate": 5.5,
+    "lfo_amp": 0.08
+  },
+  "fx": {
+    "pump": 0.35,
+    "ch_mix": 0.4,
+    "ch_depth": 3,
+    "ch_rate": 1.1,
+    "rv_mix": 0.15,
+    "eq_lc": 100
+  },
+  "loudness_trim_db": -3.7,
+  "id": "prism-organ"
+}

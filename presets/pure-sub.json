@@ -1,0 +1,45 @@
+{
+  "name": "Pure Sub",
+  "category": "Bass",
+  "genres": [
+    "All genres"
+  ],
+  "description": "Clean, round sub-bass with just a whisper of second harmonic so it reads on phones.",
+  "use": "Doubling 808s or kicks, any genre.",
+  "preview_phrase": "bass_melodic",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.006,
+      "d": 1,
+      "s": 1,
+      "r": 0.12,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": 1,
+      "a": 0.006,
+      "d": 1,
+      "s": 1,
+      "r": 0.12,
+      "level": 0.08,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.02,
+    "f_type": -1
+  },
+  "fx": {
+    "eq_lc": 22
+  },
+  "loudness_trim_db": -3.38,
+  "id": "pure-sub"
+}

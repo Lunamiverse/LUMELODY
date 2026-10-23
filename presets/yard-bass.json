@@ -1,0 +1,49 @@
+{
+  "name": "Yard Bass",
+  "category": "Bass",
+  "genres": [
+    "Dancehall",
+    "Reggae",
+    "Afroswing"
+  ],
+  "description": "Deep, round dancehall bass \u2014 sine weight plus a soft triangle edge, slight bloom.",
+  "use": "Dancehall and reggae bass lines.",
+  "preview_phrase": "bass_dancehall",
+  "range": [
+    26,
+    55
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.004,
+      "d": 0.8,
+      "s": 0.7,
+      "r": 0.12,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.004,
+      "d": 0.4,
+      "s": 0.3,
+      "r": 0.1,
+      "level": 0.35,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.02,
+    "f_type": 0,
+    "f_cut": 700,
+    "f_key": 0.5
+  },
+  "fx": {
+    "sat_drive": 0.2,
+    "eq_lc": 28
+  },
+  "loudness_trim_db": -8.15,
+  "id": "yard-bass"
+}

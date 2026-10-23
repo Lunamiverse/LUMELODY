@@ -1,0 +1,59 @@
+{
+  "name": "Reverse Tide",
+  "category": "Textures & FX",
+  "genres": [
+    "Pop",
+    "R&B",
+    "Cinematic"
+  ],
+  "description": "Reverse-style swell: tones that rise out of nothing and cut off, like a reversed tape \u2014 great before downbeats.",
+  "use": "Transitions, intros, reversed-pad feel.",
+  "preview_phrase": "texture",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 12,
+      "spread": 1,
+      "a": 2.2,
+      "d": 1,
+      "s": 1,
+      "r": 0.06,
+      "type": 1
+    },
+    {
+      "grate": 18,
+      "glen": 0.2,
+      "goct": 0.3,
+      "a": 2.2,
+      "d": 1,
+      "s": 1,
+      "r": 0.06,
+      "level": 0.5,
+      "filt": 0,
+      "type": 7
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1600,
+    "f_env": 1.5,
+    "fa": 2.2,
+    "fd": 1,
+    "fs": 1
+  },
+  "fx": {
+    "eq_lc": 120,
+    "rv_mix": 0.25,
+    "rv_size": 0.7,
+    "rv_decay": 2.5,
+    "width": 1.3
+  },
+  "loudness_trim_db": -3.6,
+  "id": "reverse-tide"
+}

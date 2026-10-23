@@ -1,0 +1,59 @@
+{
+  "name": "Koto Circuit",
+  "category": "Guitars & Strings",
+  "genres": [
+    "Experimental",
+    "Trap",
+    "Pop"
+  ],
+  "description": "Synthetic guitar hybrid: a twangy plucked string that blooms into an FM bell tail.",
+  "use": "Unusual melodic riffs, trap toplines with character.",
+  "preview_phrase": "bell_trap",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.75,
+      "damp": 0.12,
+      "decay": 1.8,
+      "pick": 0.08,
+      "a": 0.001,
+      "d": 2.5,
+      "s": 0,
+      "r": 0.3,
+      "type": 3
+    },
+    {
+      "cr": 2,
+      "mr": 5,
+      "idx": 1.2,
+      "idx_dec": 0.5,
+      "idx_sus": 0,
+      "a": 0.03,
+      "d": 1.5,
+      "s": 0,
+      "r": 0.4,
+      "level": 0.3,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000,
+    "p_env": 0.3,
+    "p_dec": 0.05
+  },
+  "fx": {
+    "eq_lc": 150,
+    "dly_beats": 0.75,
+    "dly_fb": 0.3,
+    "dly_mix": 0.14,
+    "rv_mix": 0.2,
+    "rv_size": 0.55
+  },
+  "loudness_trim_db": 4.33,
+  "id": "koto-circuit"
+}

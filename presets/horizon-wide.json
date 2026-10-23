@@ -1,0 +1,60 @@
+{
+  "name": "Horizon Wide",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "Cinematic",
+    "Ambient",
+    "Pop"
+  ],
+  "description": "Huge cinematic pad: wide saw ensemble blended with a soft choir-like 'ah' and a long hall.",
+  "use": "Film builds, emotional choruses, intros.",
+  "preview_phrase": "pad",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 24,
+      "spread": 1,
+      "a": 0.9,
+      "d": 2,
+      "s": 0.9,
+      "r": 2.2,
+      "type": 1
+    },
+    {
+      "vowel": 0,
+      "vmod": 0.6,
+      "tilt": 1.2,
+      "breath": 0.05,
+      "a": 1.2,
+      "d": 2,
+      "s": 0.9,
+      "r": 2.2,
+      "level": 0.45,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1800,
+    "f_res": 0.08,
+    "lfo_rate": 0.1,
+    "lfo_cut": 0.3
+  },
+  "fx": {
+    "eq_lc": 140,
+    "rv_mix": 0.45,
+    "rv_size": 0.95,
+    "rv_decay": 6,
+    "rv_damp": 0.45,
+    "rv_pre": 40,
+    "width": 1.3
+  },
+  "loudness_trim_db": -3.06,
+  "id": "horizon-wide"
+}

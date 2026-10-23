@@ -1,0 +1,61 @@
+{
+  "name": "Pop Sugar",
+  "category": "Synths & Leads",
+  "genres": [
+    "Pop",
+    "Latin pop",
+    "Dance"
+  ],
+  "description": "Bright, catchy polyphonic lead: wide supersaw edge with a square core and eighth-note echoes.",
+  "use": "Choruses, drops, hooks that need to be heard.",
+  "preview_phrase": "lead_pop",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 13,
+      "spread": 0.9,
+      "a": 0.003,
+      "d": 0.6,
+      "s": 0.6,
+      "r": 0.2,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "a": 0.003,
+      "d": 0.6,
+      "s": 0.6,
+      "r": 0.2,
+      "level": 0.5,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2600,
+    "f_res": 0.15,
+    "f_env": 1.5,
+    "fd": 0.25,
+    "fs": 0.4
+  },
+  "fx": {
+    "eq_lc": 180,
+    "eq_hs_f": 9000,
+    "eq_hs_g": -2.5,
+    "dly_beats": 0.5,
+    "dly_fb": 0.28,
+    "dly_mix": 0.14,
+    "rv_mix": 0.16,
+    "rv_size": 0.5,
+    "width": 1.15
+  },
+  "loudness_trim_db": -3.27,
+  "id": "pop-sugar"
+}

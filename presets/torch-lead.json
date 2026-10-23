@@ -1,0 +1,59 @@
+{
+  "name": "Torch Lead",
+  "category": "Synths & Leads",
+  "genres": [
+    "Drill",
+    "Dark pop",
+    "EDM"
+  ],
+  "description": "Distorted melodic lead: five-voice saw stack pushed into warm saturation, tamed by a low-pass.",
+  "use": "Aggressive hooks, drops, dark-pop choruses.",
+  "preview_phrase": "lead_mono",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 14,
+      "spread": 0.7,
+      "a": 0.005,
+      "d": 1,
+      "s": 0.85,
+      "r": 0.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.04,
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_res": 0.2,
+    "f_env": 0.8,
+    "fd": 0.3,
+    "fs": 0.5,
+    "f_drive": 2.5,
+    "vib_rate": 5.6,
+    "vib_depth": 10,
+    "vib_delay": 0.5
+  },
+  "fx": {
+    "sat_drive": 0.55,
+    "sat_mix": 0.8,
+    "eq_lc": 150,
+    "eq_hc": 7000,
+    "eq_pk_f": 600,
+    "eq_pk_g": -2,
+    "rv_mix": 0.15,
+    "rv_size": 0.5,
+    "dly_beats": 0.75,
+    "dly_fb": 0.25,
+    "dly_mix": 0.1
+  },
+  "loudness_trim_db": -10.62,
+  "id": "torch-lead"
+}

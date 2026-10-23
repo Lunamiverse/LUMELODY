@@ -1,0 +1,57 @@
+{
+  "name": "Grit Reese",
+  "category": "Bass",
+  "genres": [
+    "Drill",
+    "DnB",
+    "Experimental"
+  ],
+  "description": "Distorted detuned reese: phasing saws pushed into grit, low-passed to stay heavy not harsh.",
+  "use": "Drill/UK basslines, dark experimental drops.",
+  "preview_phrase": "bass_808",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 16,
+      "spread": 0.3,
+      "a": 0.005,
+      "d": 1,
+      "s": 1,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "a": 0.005,
+      "d": 1,
+      "s": 1,
+      "r": 0.15,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.05,
+    "f_type": 0,
+    "f_cut": 650,
+    "f_res": 0.2,
+    "f_drive": 2.2,
+    "lfo_rate": 0.3,
+    "lfo_cut": 0.4
+  },
+  "fx": {
+    "sat_drive": 0.5,
+    "eq_lc": 28,
+    "eq_hc": 7000
+  },
+  "loudness_trim_db": -8.53,
+  "id": "grit-reese"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Tape Memory",
+  "category": "Keys",
+  "genres": [
+    "Lo-fi",
+    "R&B",
+    "Trap"
+  ],
+  "description": "Vintage digital keys bounced through a worn tape: gentle wow, softened top, a touch of bit grit.",
+  "use": "Sample-style loops, nostalgic R&B and trap.",
+  "preview_phrase": "keys_rnb",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 1.1,
+      "idx_dec": 0.7,
+      "idx_sus": 0.2,
+      "fb": 0.06,
+      "a": 0.002,
+      "d": 2.5,
+      "s": 0.05,
+      "r": 0.4,
+      "keydecay": 0.4,
+      "type": 2
+    },
+    {
+      "cr": 2,
+      "mr": 1,
+      "idx": 0.5,
+      "idx_dec": 0.3,
+      "idx_sus": 0.05,
+      "a": 0.002,
+      "d": 1.2,
+      "s": 0,
+      "r": 0.3,
+      "level": 0.35,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": -1,
+    "vib_rate": 0.8,
+    "vib_depth": 9,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "crush_sr": 22000,
+    "crush_bits": 11,
+    "eq_lc": 90,
+    "eq_hc": 6500,
+    "eq_ls_f": 250,
+    "eq_ls_g": 2,
+    "rv_mix": 0.14,
+    "rv_size": 0.4,
+    "rv_decay": 1.5
+  },
+  "loudness_trim_db": -7.6,
+  "id": "tape-memory"
+}

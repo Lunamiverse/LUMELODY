@@ -1,0 +1,277 @@
+<title>LUMI Sound Selection</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of sound strips on a deep studio-night ground; filters stick to the top like a console. */
+:root {
+  color-scheme: dark;
+  --bg: #0f0b16;
+  --panel: #18121f;
+  --panel-2: #211829;
+  --line: #2f2439;
+  --fg: #f1eaf5;
+  --muted: #a596b2;
+  --violet: #9b6bff;
+  --magenta: #e04fd0;
+  --pink: #ff8fc7;
+  --keep: #5fd6a4;
+  --improve: #ffc861;
+  --drop: #ff6f7d;
+  --display: "Syne", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 860px; margin: 0 auto; }
+header.top { padding-block: 28px 18px; display: grid; gap: 10px; }
+.brand { font: 800 clamp(30px, 7vw, 46px)/1 var(--display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.brand span { background: linear-gradient(90deg, var(--violet), var(--magenta) 55%, var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lede { color: var(--muted); max-width: 62ch; margin: 0; }
+.note { border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 12px 14px; color: var(--muted); font-size: 13.5px; max-width: 70ch; }
+.note b { color: var(--fg); font-weight: 600; }
+.tally { display: flex; flex-wrap: wrap; gap: 8px; font: 500 12.5px var(--mono); }
+.tally span { padding: 4px 9px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.tally .k { color: var(--keep); } .tally .i { color: var(--improve); } .tally .d { color: var(--drop); }
+.sync { font: 12px var(--mono); color: var(--muted); }
+
+.console { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+input[type=search], select {
+  font: 14px var(--body); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0;
+}
+input[type=search] { flex: 1 1 180px; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+.chip { flex: none; font: 500 12.5px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+.chip[aria-pressed=true] { color: var(--fg); border-color: var(--violet); background: color-mix(in srgb, var(--violet) 22%, transparent); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+
+h2.cat { font: 600 13px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+h2.cat small { font-weight: 400; letter-spacing: 0; text-transform: none; }
+.list { display: grid; gap: 10px; }
+.snd { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px 12px; }
+.snd.playing { border-color: color-mix(in srgb, var(--magenta) 60%, var(--line)); }
+.snd[data-v=keep] { box-shadow: inset 3px 0 0 var(--keep); }
+.snd[data-v=improve] { box-shadow: inset 3px 0 0 var(--improve); }
+.snd[data-v=drop] { box-shadow: inset 3px 0 0 var(--drop); opacity: .72; }
+.play { width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer; background: linear-gradient(135deg, var(--violet), var(--magenta)); color: #fff; display: grid; place-items: center; }
+.play svg { width: 18px; height: 18px; fill: currentColor; }
+.head { min-width: 0; display: grid; gap: 2px; }
+.title { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.title h3 { font: 600 17px/1.2 var(--display); margin: 0; letter-spacing: -.01em; }
+.meta { font: 11.5px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.desc { margin: 0; font-size: 14px; color: var(--fg); }
+.use { margin: 0; font-size: 13px; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tags span { font-size: 11.5px; color: var(--pink); border: 1px solid color-mix(in srgb, var(--pink) 35%, transparent); padding: 1px 7px; border-radius: 999px; }
+.wave { grid-column: 1 / -1; height: 38px; width: 100%; display: block; cursor: pointer; }
+.actions { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.v { font: 600 12.5px var(--body); background: var(--panel-2); color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; cursor: pointer; }
+.v[data-k=keep][aria-pressed=true] { color: #0f0b16; background: var(--keep); border-color: var(--keep); }
+.v[data-k=improve][aria-pressed=true] { color: #0f0b16; background: var(--improve); border-color: var(--improve); }
+.v[data-k=drop][aria-pressed=true] { color: #0f0b16; background: var(--drop); border-color: var(--drop); }
+.fav { margin-left: auto; background: none; border: 0; cursor: pointer; font-size: 20px; color: var(--muted); padding: 2px 6px; line-height: 1; }
+.fav[aria-pressed=true] { color: var(--magenta); }
+textarea { grid-column: 1 / -1; width: 100%; resize: vertical; min-height: 38px; font: 13.5px var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; }
+.empty { color: var(--muted); padding: 24px 0; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 class="brand"><span>LUMI</span> MELODY</h1>
+    <p class="lede">First round of sounds for the instrument. Play each one, then mark it <b>Keep</b>, <b>Improve</b> or <b>Drop</b> and leave a note on what to change. Your marks save automatically and I can read them back to tune the next round.</p>
+    <div class="note"><b>What you are hearing:</b> 50 presets, all original synthesis from the LUMI engine (the same C++ code that will run inside the plugin). Each plays a short original phrase, loudness-matched so you compare sound, not volume. <b>Not included yet:</b> real acoustic piano, guitars, brass, orchestral strings and Brazilian percussion. Those need licensed or commissioned recordings; the guitar and string sounds here are synth models and are labelled that way.</div>
+    <div class="tally" id="tally"></div>
+    <div class="sync" id="sync">Loading saved marks…</div>
+  </header>
+
+  <div class="console">
+    <div class="row">
+      <input type="search" id="q" placeholder="Search sounds, e.g. bell, dark, glide" aria-label="Search sounds">
+      <select id="genre" aria-label="Genre"></select>
+      <select id="show" aria-label="Show">
+        <option value="all">All sounds</option>
+        <option value="fav">Favorites</option>
+        <option value="unmarked">Not marked yet</option>
+        <option value="keep">Keep</option>
+        <option value="improve">Improve</option>
+        <option value="drop">Drop</option>
+      </select>
+    </div>
+    <div class="chips" id="cats" role="group" aria-label="Category"></div>
+  </div>
+
+  <main id="main"></main>
+</div>
+<audio id="player" preload="none"></audio>
+
+<script>
+const SOUNDS = __DATA__;
+const CATS = ["Keys", "Plucks & Mallets", "Synths & Leads", "Pads & Atmospheres", "Guitars & Strings", "Bass", "Textures & FX"];
+const state = { q: "", genre: "", cat: "", show: "all", playing: null };
+let marks = {};          // id -> {verdict, fav, note}
+let db = null;
+
+const LS = "lumi-marks-v1";
+function lsLoad() { try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) { return {}; } }
+function lsSave() { try { localStorage.setItem(LS, JSON.stringify(marks)); } catch (e) {} }
+marks = lsLoad();
+
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, props = {}, kids = []) => { const n = document.createElement(tag); Object.assign(n, props); for (const k of [].concat(kids)) if (k != null) n.append(k); return n; };
+
+// genre + category controls
+const genres = [...new Set(SOUNDS.flatMap(s => s.genres))].sort();
+$("#genre").append(el("option", { value: "", textContent: "All genres" }), ...genres.map(g => el("option", { value: g, textContent: g })));
+const catBtns = [["", "All"], ...CATS.map(c => [c, c])].map(([v, t]) => {
+  const b = el("button", { className: "chip", type: "button", textContent: t });
+  b.setAttribute("aria-pressed", v === state.cat ? "true" : "false");
+  b.onclick = () => { state.cat = v; catBtns.forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); render(); };
+  return b;
+});
+$("#cats").append(...catBtns);
+$("#q").oninput = e => { state.q = e.target.value.trim().toLowerCase(); render(); };
+$("#genre").onchange = e => { state.genre = e.target.value; render(); };
+$("#show").onchange = e => { state.show = e.target.value; render(); };
+
+const player = $("#player");
+const playIcon = '<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>';
+const stopIcon = '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>';
+
+function drawWave(cv, s, prog) {
+  const r = window.devicePixelRatio || 1, w = cv.clientWidth || 300, h = cv.clientHeight || 38;
+  if (cv.width !== Math.round(w * r)) { cv.width = Math.round(w * r); cv.height = Math.round(h * r); }
+  const c = cv.getContext("2d"); c.setTransform(r, 0, 0, r, 0, 0); c.clearRect(0, 0, w, h);
+  const cs = getComputedStyle(document.documentElement);
+  const n = s.peaks.length, bw = w / n;
+  for (let i = 0; i < n; i++) {
+    const v = Math.max(.04, s.peaks[i]), bh = v * (h - 4);
+    c.fillStyle = (i / n) < prog ? cs.getPropertyValue("--magenta") : cs.getPropertyValue("--line");
+    c.fillRect(i * bw + .5, (h - bh) / 2, Math.max(1, bw - 1.5), bh);
+  }
+}
+
+function play(s, card, at) {
+  if (state.playing === s.id && at == null) { player.pause(); return; }
+  player.src = "audio/" + s.id + ".mp3";
+  player.currentTime = 0;
+  player.play().then(() => { if (at != null && player.duration) player.currentTime = at * player.duration; }).catch(() => {});
+  state.playing = s.id; refreshPlaying();
+}
+function refreshPlaying() {
+  document.querySelectorAll(".snd").forEach(c => {
+    const on = c.dataset.id === state.playing && !player.paused;
+    c.classList.toggle("playing", on);
+    $(".play", c).innerHTML = on ? stopIcon : playIcon;
+    $(".play", c).setAttribute("aria-label", (on ? "Stop " : "Play ") + c.dataset.name);
+  });
+}
+player.addEventListener("play", refreshPlaying);
+player.addEventListener("pause", refreshPlaying);
+player.addEventListener("ended", () => { state.playing = null; refreshPlaying(); });
+player.addEventListener("timeupdate", () => {
+  const c = document.querySelector(`.snd[data-id="${state.playing}"]`); if (!c || !player.duration) return;
+  drawWave($("canvas", c), SOUNDS.find(s => s.id === state.playing), player.currentTime / player.duration);
+});
+
+async function saveMark(id) {
+  lsSave(); renderTally();
+  if (!db) return;
+  const m = marks[id] || {};
+  try { await db.collection("picks").doc(id).set({ verdict: m.verdict || "", fav: !!m.fav, note: m.note || "", name: SOUNDS.find(s => s.id === id).name, updated: new Date().toISOString() }); setSync("Saved"); }
+  catch (e) { setSync("Could not save to the shared record (" + (e && e.code || "error") + "). Your marks are kept in this browser."); }
+}
+function setSync(t) { $("#sync").textContent = t; }
+
+function card(s) {
+  const m = marks[s.id] || {};
+  const c = el("article", { className: "snd" });
+  c.dataset.id = s.id; c.dataset.name = s.name; c.dataset.v = m.verdict || "";
+  const pb = el("button", { className: "play", type: "button", innerHTML: playIcon });
+  pb.setAttribute("aria-label", "Play " + s.name);
+  pb.onclick = () => play(s, c);
+  const head = el("div", { className: "head" }, [
+    el("div", { className: "title" }, [el("h3", { textContent: s.name }), el("span", { className: "meta", textContent: `${s.engine} · ${s.range} · demo ${s.bpm} BPM` })]),
+    el("p", { className: "desc", textContent: s.desc }),
+    el("p", { className: "use", textContent: "Use: " + s.use }),
+    el("div", { className: "tags" }, s.genres.map(g => el("span", { textContent: g }))),
+  ]);
+  const cv = el("canvas", { className: "wave" });
+  cv.setAttribute("aria-label", "Waveform of " + s.name + ", tap to play from that point");
+  cv.onclick = e => { const r = cv.getBoundingClientRect(); play(s, c, (e.clientX - r.left) / r.width); };
+  const verdicts = [["keep", "Keep"], ["improve", "Improve"], ["drop", "Drop"]].map(([k, t]) => {
+    const b = el("button", { className: "v", type: "button", textContent: t }); b.dataset.k = k;
+    b.setAttribute("aria-pressed", m.verdict === k ? "true" : "false");
+    b.onclick = () => {
+      const cur = marks[s.id] || (marks[s.id] = {});
+      cur.verdict = cur.verdict === k ? "" : k; c.dataset.v = cur.verdict;
+      verdicts.forEach(x => x.setAttribute("aria-pressed", x.dataset.k === cur.verdict ? "true" : "false"));
+      saveMark(s.id);
+    };
+    return b;
+  });
+  const fav = el("button", { className: "fav", type: "button", textContent: "♥" });
+  fav.setAttribute("aria-pressed", m.fav ? "true" : "false"); fav.setAttribute("aria-label", "Favorite " + s.name);
+  fav.onclick = () => { const cur = marks[s.id] || (marks[s.id] = {}); cur.fav = !cur.fav; fav.setAttribute("aria-pressed", cur.fav ? "true" : "false"); saveMark(s.id); };
+  const ta = el("textarea", { id: "note-" + s.id, placeholder: "Note: what to change (brighter, less reverb, more punch…)", value: m.note || "", rows: 1 });
+  ta.onchange = () => { const cur = marks[s.id] || (marks[s.id] = {}); cur.note = ta.value.trim(); saveMark(s.id); };
+  c.append(pb, head, cv, el("div", { className: "actions" }, [...verdicts, fav]), ta);
+  requestAnimationFrame(() => drawWave(cv, s, state.playing === s.id && player.duration ? player.currentTime / player.duration : 0));
+  return c;
+}
+
+function matches(s) {
+  const m = marks[s.id] || {};
+  if (state.cat && s.cat !== state.cat) return false;
+  if (state.genre && !s.genres.includes(state.genre)) return false;
+  if (state.q && !(s.name + " " + s.desc + " " + s.use + " " + s.genres.join(" ") + " " + s.engine).toLowerCase().includes(state.q)) return false;
+  if (state.show === "fav" && !m.fav) return false;
+  if (state.show === "unmarked" && m.verdict) return false;
+  if (["keep", "improve", "drop"].includes(state.show) && m.verdict !== state.show) return false;
+  return true;
+}
+
+function renderTally() {
+  const v = Object.values(marks);
+  const n = k => v.filter(m => m.verdict === k).length;
+  $("#tally").replaceChildren(
+    el("span", { textContent: SOUNDS.length + " sounds" }),
+    el("span", { className: "k", textContent: n("keep") + " keep" }),
+    el("span", { className: "i", textContent: n("improve") + " improve" }),
+    el("span", { className: "d", textContent: n("drop") + " drop" }),
+    el("span", { textContent: v.filter(m => m.fav).length + " ♥" }));
+}
+
+function render() {
+  const main = $("#main"); main.replaceChildren();
+  let any = false;
+  for (const cat of CATS) {
+    const items = SOUNDS.filter(s => s.cat === cat && matches(s));
+    if (!items.length) continue; any = true;
+    main.append(el("h2", { className: "cat" }, [cat, el("small", { textContent: items.length + "" })]), el("div", { className: "list" }, items.map(card)));
+  }
+  if (!any) main.append(el("p", { className: "empty", textContent: "No sounds match these filters. Clear the search or pick another category." }));
+  renderTally();
+}
+render();
+window.addEventListener("resize", () => document.querySelectorAll(".snd").forEach(c => drawWave($("canvas", c), SOUNDS.find(s => s.id === c.dataset.id), 0)));
+
+// shared record: marks saved where Claude can read them back
+(async () => {
+  try { db = window.claude && await window.claude.use("db"); } catch (e) { db = null; }
+  if (!db) { setSync("Marks are saved in this browser only."); return; }
+  try {
+    const snap = await db.collection("picks").get();
+    snap.docs.forEach(d => { const x = d.data() || {}; marks[d.id] = { verdict: x.verdict || "", fav: !!x.fav, note: x.note || "" }; });
+    lsSave(); render(); setSync("Marks sync to your LUMI project record.");
+  } catch (e) { setSync("Marks are saved in this browser only."); db = null; }
+})();
+</script>

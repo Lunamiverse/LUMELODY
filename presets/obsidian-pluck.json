@@ -1,0 +1,59 @@
+{
+  "name": "Obsidian Pluck",
+  "category": "Plucks & Mallets",
+  "genres": [
+    "Drill",
+    "Trap",
+    "Dark pop"
+  ],
+  "description": "Dark, muted string pluck with a sub shadow underneath. Moody and close.",
+  "use": "Drill melodies, sinister counter-lines.",
+  "preview_phrase": "keys_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.35,
+      "damp": 0.42,
+      "decay": 1.6,
+      "pick": 0.25,
+      "strings": 2,
+      "sdet": 5,
+      "a": 0.001,
+      "d": 3,
+      "s": 0,
+      "r": 0.25,
+      "type": 3
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.002,
+      "d": 0.6,
+      "s": 0,
+      "r": 0.2,
+      "level": 0.3,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1600,
+    "f_res": 0.1,
+    "f_key": 0.5
+  },
+  "fx": {
+    "eq_lc": 60,
+    "ch_mix": 0.2,
+    "rv_mix": 0.22,
+    "rv_size": 0.55,
+    "rv_decay": 2.2,
+    "rv_damp": 0.6
+  },
+  "loudness_trim_db": 7.87,
+  "id": "obsidian-pluck"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Round Candy",
+  "category": "Plucks & Mallets",
+  "genres": [
+    "Dembow",
+    "Pop",
+    "House"
+  ],
+  "description": "Rounded analog pluck with a quick filter snap. Punchy, sweet and very clear in a dense mix.",
+  "use": "Dembow motifs, bouncy pop and house riffs.",
+  "preview_phrase": "pluck_dembow",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 9,
+      "spread": 0.5,
+      "a": 0.001,
+      "d": 0.45,
+      "s": 0,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0,
+      "r": 0.12,
+      "level": 0.35,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 450,
+    "f_res": 0.25,
+    "f_env": 4.6,
+    "fa": 0.001,
+    "fd": 0.16,
+    "fs": 0,
+    "f_vel": 1.2,
+    "f_key": 0.8
+  },
+  "fx": {
+    "sat_drive": 0.15,
+    "eq_lc": 120,
+    "dly_beats": 0.5,
+    "dly_fb": 0.2,
+    "dly_mix": 0.1,
+    "rv_mix": 0.1,
+    "rv_size": 0.3
+  },
+  "loudness_trim_db": -2.22,
+  "id": "round-candy"
+}

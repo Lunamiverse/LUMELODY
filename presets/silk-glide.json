@@ -1,0 +1,67 @@
+{
+  "name": "Silk Glide",
+  "category": "Synths & Leads",
+  "genres": [
+    "R&B",
+    "Trap",
+    "Afroswing"
+  ],
+  "description": "Smooth monophonic lead with natural portamento and delayed vibrato \u2014 sings like a vocal ad-lib.",
+  "use": "Melodic hooks, vocal-style counter-melodies.",
+  "preview_phrase": "lead_mono",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 7,
+      "spread": 0.4,
+      "a": 0.01,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.25,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "oct": -1,
+      "a": 0.01,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.25,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.06,
+    "f_type": 0,
+    "f_cut": 2100,
+    "f_poles": 4,
+    "f_res": 0.2,
+    "f_env": 1,
+    "fd": 0.4,
+    "fs": 0.3,
+    "f_key": 0.5,
+    "vib_rate": 5.3,
+    "vib_depth": 18,
+    "vib_delay": 0.35
+  },
+  "fx": {
+    "eq_lc": 120,
+    "dly_beats": 0.75,
+    "dly_fb": 0.3,
+    "dly_mix": 0.15,
+    "rv_mix": 0.2,
+    "rv_size": 0.6,
+    "rv_decay": 2.5
+  },
+  "loudness_trim_db": -2.2,
+  "id": "silk-glide"
+}

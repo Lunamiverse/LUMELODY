@@ -1,0 +1,60 @@
+{
+  "name": "Liquid Drip",
+  "category": "Plucks & Mallets",
+  "genres": [
+    "Trap",
+    "Jersey club",
+    "Experimental"
+  ],
+  "description": "Watery droplet pluck: resonant band-pass sweep with a falling pitch blip, like a drop hitting glass water.",
+  "use": "Ear-candy melodies, plinky trap and Jersey club fills.",
+  "preview_phrase": "glitch",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 0.4,
+      "s": 0,
+      "r": 0.15,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 1,
+    "f_cut": 3200,
+    "f_res": 0.75,
+    "f_env": -2.3,
+    "fa": 0.001,
+    "fd": 0.12,
+    "fs": 0,
+    "f_key": 0.9,
+    "p_env": 7,
+    "p_dec": 0.02
+  },
+  "fx": {
+    "eq_lc": 150,
+    "dly_beats": 0.375,
+    "dly_fb": 0.4,
+    "dly_mix": 0.2,
+    "dly_damp": 0.3,
+    "rv_mix": 0.18,
+    "rv_size": 0.5
+  },
+  "loudness_trim_db": -2.12,
+  "id": "liquid-drip"
+}
