@@ -7,8 +7,8 @@
     "EDM"
   ],
   "description": "Distorted melodic lead: five-voice saw stack pushed into warm saturation, tamed by a low-pass.",
-  "use": "Aggressive hooks, drops, dark-pop choruses.",
-  "preview_phrase": "lead_mono",
+  "use": "Aggressive hooks, dark-pop choruses.",
+  "preview_phrase": "reggaeton_lead",
   "range": [
     36,
     96
@@ -31,7 +31,7 @@
     "mono": 1,
     "glide": 0.04,
     "f_type": 0,
-    "f_cut": 2400,
+    "f_cut": 1800,
     "f_res": 0.2,
     "f_env": 0.8,
     "fd": 0.3,
@@ -48,12 +48,12 @@
     "eq_hc": 7000,
     "eq_pk_f": 600,
     "eq_pk_g": -2,
-    "rv_mix": 0.15,
-    "rv_size": 0.5,
+    "rv_mix": 0.18,
+    "rv_size": 0.6,
     "dly_beats": 0.75,
     "dly_fb": 0.25,
     "dly_mix": 0.1
   },
-  "loudness_trim_db": -10.62,
+  "loudness_trim_db": -10.56,
   "id": "torch-lead"
 }

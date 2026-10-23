@@ -30,7 +30,7 @@
       "d": 0.12,
       "s": 0,
       "r": 0.06,
-      "level": 0.25,
+      "level": 0.22,
       "type": 1
     }
   ],
@@ -38,7 +38,7 @@
     "mono": 1,
     "glide": 0.015,
     "f_type": 0,
-    "f_cut": 900,
+    "f_cut": 800,
     "f_env": 2,
     "fd": 0.06,
     "fs": 0,
@@ -46,9 +46,9 @@
     "p_dec": 0.012
   },
   "fx": {
-    "sat_drive": 0.35,
+    "sat_drive": 0.4,
     "eq_lc": 28
   },
-  "loudness_trim_db": -5.52,
+  "loudness_trim_db": -4.89,
   "id": "dembow-thump"
 }

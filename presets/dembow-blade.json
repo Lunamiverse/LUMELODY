@@ -1,0 +1,67 @@
+{
+  "name": "Dembow Blade",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Dembow",
+    "Dark reggaeton",
+    "Jersey club"
+  ],
+  "description": "Punchy, cutting minor pluck with a hard transient \u2014 slices through dense dembow percussion.",
+  "use": "Dembow motifs, energetic hooks.",
+  "preview_phrase": "dembow_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 2.2,
+      "idx_dec": 0.04,
+      "idx_sus": 0.1,
+      "fb": 0.3,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.1,
+      "type": 2
+    },
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 10,
+      "spread": 0.8,
+      "a": 0.001,
+      "d": 0.22,
+      "s": 0,
+      "r": 0.08,
+      "level": 0.55,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_res": 0.2,
+    "f_env": 1.5,
+    "fd": 0.08,
+    "fs": 0,
+    "p_env": 2,
+    "p_dec": 0.01
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_lc": 180,
+    "eq_pk_f": 450,
+    "eq_pk_g": -2,
+    "dly_beats": 0.5,
+    "dly_fb": 0.2,
+    "dly_mix": 0.1,
+    "rv_mix": 0.1,
+    "rv_size": 0.35
+  },
+  "loudness_trim_db": -1.14,
+  "id": "dembow-blade"
+}

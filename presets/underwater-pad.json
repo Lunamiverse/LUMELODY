@@ -1,0 +1,53 @@
+{
+  "name": "Underwater Pad",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "Trapsoul",
+    "R&B",
+    "Dark pop"
+  ],
+  "description": "Warm saw pad sunk below the surface \u2014 heavy low-pass, slow swell and a breathing duck.",
+  "use": "The bed under trapsoul and dark R&B records.",
+  "preview_phrase": "pad_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 6,
+      "det": 14,
+      "spread": 0.9,
+      "drift": 5,
+      "a": 0.8,
+      "d": 2,
+      "s": 0.9,
+      "r": 2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 700,
+    "f_res": 0.12,
+    "f_key": 0.3,
+    "lfo_rate": 0.12,
+    "lfo_cut": 0.4
+  },
+  "fx": {
+    "eq_hc": 1500,
+    "eq_lc": 70,
+    "sat_drive": 0.2,
+    "pump": 0.25,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "rv_mix": 0.35,
+    "rv_size": 0.85,
+    "rv_decay": 5,
+    "width": 1.3
+  },
+  "loudness_trim_db": -5.23,
+  "id": "underwater-pad"
+}

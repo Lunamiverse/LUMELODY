@@ -1,0 +1,51 @@
+{
+  "name": "808 Boom",
+  "category": "Bass",
+  "genres": [
+    "Trap",
+    "Trapsoul",
+    "Latin trap"
+  ],
+  "description": "Long, clean 808 with a firm knock and warm harmonics so it still reads on phone speakers. Overlap notes to slide.",
+  "use": "Trap and R&B 808 lines.",
+  "preview_phrase": "bass_trap",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 4,
+      "s": 0.7,
+      "r": 0.2,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.001,
+      "d": 0.12,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.08,
+    "f_type": -1,
+    "p_env": 8,
+    "p_dec": 0.025
+  },
+  "fx": {
+    "sat_drive": 0.4,
+    "sat_mix": 0.6,
+    "eq_lc": 24,
+    "eq_hc": 8000
+  },
+  "loudness_trim_db": -9.15,
+  "id": "808-boom"
+}

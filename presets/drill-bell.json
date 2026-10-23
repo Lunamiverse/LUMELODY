@@ -1,0 +1,78 @@
+{
+  "name": "Drill Bell",
+  "category": "Bells & Plucks",
+  "genres": [
+    "NY drill",
+    "UK drill",
+    "Trap"
+  ],
+  "description": "Hard, dark bell built for drill: metallic FM strike, a sub-octave shadow and a short black room.",
+  "use": "Staccato drill melodies over sliding 808s.",
+  "preview_phrase": "drill_bell",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 3.5,
+      "idx": 2.4,
+      "idx_dec": 0.18,
+      "idx_sus": 0.05,
+      "idx_vel": 0.7,
+      "fm_spread": 4,
+      "a": 0.001,
+      "d": 1.6,
+      "s": 0,
+      "r": 0.35,
+      "keydecay": 0.25,
+      "type": 2
+    },
+    {
+      "mat": 3,
+      "hard": 0.5,
+      "click": 0.05,
+      "decay": 1.6,
+      "beat": 1,
+      "a": 0.001,
+      "d": 2,
+      "s": 0,
+      "r": 0.4,
+      "level": 0.3,
+      "type": 4
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.6,
+      "s": 0,
+      "r": 0.2,
+      "level": 0.25,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 4200,
+    "f_key": 0.3
+  },
+  "fx": {
+    "sat_drive": 0.15,
+    "eq_lc": 150,
+    "eq_pk_f": 2800,
+    "eq_pk_g": -2,
+    "rv_mix": 0.22,
+    "rv_size": 0.5,
+    "rv_decay": 1.8,
+    "rv_damp": 0.6,
+    "dly_beats": 0.75,
+    "dly_fb": 0.2,
+    "dly_mix": 0.08
+  },
+  "loudness_trim_db": -8.15,
+  "id": "drill-bell"
+}

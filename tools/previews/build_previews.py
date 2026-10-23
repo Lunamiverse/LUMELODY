@@ -11,6 +11,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 from preset_defs import PRESETS  # noqa: E402
 from phrases import build  # noqa: E402
+import beat  # noqa: E402
 
 RENDER = os.path.join(ROOT, "build", "render_preset")
 TARGET_LUFS = -16.0
@@ -30,7 +31,9 @@ def flatten(p):
 
 def read_wav(path):
     with wave.open(path, "rb") as w:
-        n, sr = w.getnframes(), w.getframerate()
+        n, sr, sw = w.getnframes(), w.getframerate(), w.getsampwidth()
+        if sw == 2:
+            return np.frombuffer(w.readframes(n), dtype="<i2").astype(np.float32).reshape(-1, 2) / 32768.0, sr
         raw = np.frombuffer(w.readframes(n), dtype=np.uint8).reshape(-1, 3)
     v = (raw[:, 0].astype(np.int32) | (raw[:, 1].astype(np.int32) << 8) | (raw[:, 2].astype(np.int32) << 16))
     v = np.where(v >= 1 << 23, v - (1 << 24), v).astype(np.float32) / 8388608.0
@@ -81,6 +84,11 @@ def main():
         os.makedirs(os.path.join(ROOT, d), exist_ok=True)
     report_path = os.path.join(ROOT, "previews", "report.json")
     report = json.load(open(report_path)) if os.path.exists(report_path) else {}
+    if not flt:   # full rebuild: drop files from presets that no longer exist
+        for d in ("presets", "previews/mp3", "previews/wav"):
+            for f in os.listdir(os.path.join(ROOT, d)):
+                os.remove(os.path.join(ROOT, d, f))
+        report = {}
     names = [p["name"] for p in PRESETS]
     assert len(names) == len(set(names)), "duplicate preset names"
 
@@ -124,6 +132,17 @@ def main():
             w.writeframes((np.clip(y, -1, 1) * 32767).astype("<i2").tobytes())
         mp3 = os.path.join(ROOT, "previews", "mp3", s + ".mp3")
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav_out, "-codec:a", "libmp3lame", "-b:a", "192k", mp3], check=True)
+        # in-context version: same preview over a demo drum bed (+808 unless the preset is the bass)
+        bed = beat.render(ph["groove"], ph["bpm"], len(y), ph["roots"], ph.get("swing", 0.0))
+        rms = lambda a: float(np.sqrt(np.mean(a ** 2)) + 1e-9)
+        bed *= (rms(y) * 10 ** (-2.5 / 20)) / rms(bed)
+        mix, _ = peak_limit(y + bed, sr, 10 ** ((TP_CEIL - 0.3) / 20))
+        bwav = os.path.join(tmp, s + ".beat.wav")
+        with wave.open(bwav, "wb") as w:
+            w.setnchannels(2); w.setsampwidth(2); w.setframerate(sr)
+            w.writeframes((np.clip(mix, -1, 1) * 32767).astype("<i2").tobytes())
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", bwav, "-codec:a", "libmp3lame", "-b:a", "160k",
+                        os.path.join(ROOT, "previews", "mp3", s + "-beat.mp3")], check=True)
         # store the measured trim inside the preset so the plugin plays every preset at a matched level
         doc = dict(p)
         doc["fx"] = dict(p["fx"])

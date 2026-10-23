@@ -1,0 +1,55 @@
+{
+  "name": "808 Grit",
+  "category": "Bass",
+  "genres": [
+    "Drill",
+    "Rage",
+    "Brazilian phonk"
+  ],
+  "description": "Distorted 808: hard saturation folds harmonics on top of the sub. Aggressive and loud.",
+  "use": "Drill, rage and phonk low end.",
+  "preview_phrase": "bass_808",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 3,
+      "s": 0.65,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.001,
+      "d": 0.2,
+      "s": 0.1,
+      "r": 0.1,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.06,
+    "f_type": 0,
+    "f_cut": 2500,
+    "f_drive": 3,
+    "p_env": 10,
+    "p_dec": 0.022
+  },
+  "fx": {
+    "sat_drive": 0.85,
+    "sat_mix": 0.75,
+    "eq_lc": 25,
+    "eq_hc": 6500,
+    "eq_pk_f": 900,
+    "eq_pk_g": -3
+  },
+  "loudness_trim_db": -10.33,
+  "id": "808-grit"
+}

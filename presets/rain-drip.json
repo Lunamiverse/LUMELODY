@@ -1,0 +1,62 @@
+{
+  "name": "Rain Drip",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Trap",
+    "Plugg",
+    "Ambient"
+  ],
+  "description": "Dark droplet pluck: resonant band-pass blip with a falling pitch, echoing into a black room.",
+  "use": "Plugg melodies, trap ear-candy.",
+  "preview_phrase": "glitch",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 0.4,
+      "s": 0,
+      "r": 0.15,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 1,
+    "f_cut": 2000,
+    "f_res": 0.7,
+    "f_env": -1.8,
+    "fa": 0.001,
+    "fd": 0.12,
+    "fs": 0,
+    "f_key": 0.9,
+    "p_env": 5,
+    "p_dec": 0.02
+  },
+  "fx": {
+    "eq_lc": 150,
+    "eq_hc": 6500,
+    "dly_beats": 0.375,
+    "dly_fb": 0.42,
+    "dly_mix": 0.2,
+    "dly_damp": 0.5,
+    "rv_mix": 0.28,
+    "rv_size": 0.75,
+    "rv_decay": 3.5
+  },
+  "loudness_trim_db": -2.91,
+  "id": "rain-drip"
+}

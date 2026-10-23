@@ -1,0 +1,56 @@
+{
+  "name": "Cold Air",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "Trapsoul",
+    "Ambient",
+    "R&B"
+  ],
+  "description": "Dark airy layer: tuned breath and low grains drifting above the mix \u2014 cold night air.",
+  "use": "Top-layer atmosphere for R&B and trap.",
+  "preview_phrase": "pad_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "ncut": 2,
+      "ntrack": 1,
+      "nq": 3,
+      "nmode": 1,
+      "a": 0.8,
+      "d": 2,
+      "s": 0.8,
+      "r": 2,
+      "level": 0.7,
+      "type": 5
+    },
+    {
+      "grate": 10,
+      "glen": 0.3,
+      "goct": 0.15,
+      "gjit": 10,
+      "a": 1,
+      "d": 2,
+      "s": 0.8,
+      "r": 2,
+      "level": 0.4,
+      "type": 7
+    }
+  ],
+  "voice": {
+    "f_type": 2,
+    "f_cut": 250
+  },
+  "fx": {
+    "eq_hc": 6000,
+    "rv_mix": 0.5,
+    "rv_size": 0.95,
+    "rv_decay": 6,
+    "width": 1.4
+  },
+  "loudness_trim_db": -0.47,
+  "id": "cold-air"
+}

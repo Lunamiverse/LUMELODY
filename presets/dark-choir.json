@@ -1,0 +1,77 @@
+{
+  "name": "Dark Choir",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "Trap",
+    "Drill",
+    "Cinematic"
+  ],
+  "description": "Synthesized dark choir: two formant voice layers singing 'oh\u2013oo', detuned and spread in a cathedral reverb.",
+  "use": "Drill and trap intros, epic dark choruses.",
+  "preview_phrase": "cinematic",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "vowel": 3,
+      "vmod": 0.5,
+      "tilt": 1.4,
+      "breath": 0.06,
+      "fine": -9,
+      "pan": -0.5,
+      "a": 0.6,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.6,
+      "type": 6
+    },
+    {
+      "vowel": 3.4,
+      "vmod": 0.5,
+      "tilt": 1.4,
+      "breath": 0.06,
+      "fine": 9,
+      "pan": 0.5,
+      "a": 0.7,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.6,
+      "type": 6
+    },
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 12,
+      "spread": 0.8,
+      "a": 0.8,
+      "d": 2,
+      "s": 0.8,
+      "r": 1.6,
+      "level": 0.18,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2200,
+    "lfo_rate": 0.15,
+    "vib_rate": 4.8,
+    "vib_depth": 9,
+    "vib_delay": 0.5
+  },
+  "fx": {
+    "eq_lc": 110,
+    "ch_mix": 0.4,
+    "ch_depth": 3,
+    "rv_mix": 0.45,
+    "rv_size": 0.95,
+    "rv_decay": 6,
+    "rv_pre": 35,
+    "width": 1.3
+  },
+  "loudness_trim_db": -3.63,
+  "id": "dark-choir"
+}

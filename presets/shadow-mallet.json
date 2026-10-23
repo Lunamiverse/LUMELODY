@@ -1,0 +1,58 @@
+{
+  "name": "Shadow Mallet",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Trapsoul",
+    "R&B",
+    "Cinematic"
+  ],
+  "description": "Low vibraphone-style mallet, dark and slow-shimmering, drowned in a deep room.",
+  "use": "Dark R&B colour, cinematic transitions.",
+  "preview_phrase": "trapsoul",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "mat": 1,
+      "hard": 0.3,
+      "click": 0.04,
+      "decay": 3,
+      "beat": 1.5,
+      "a": 0.001,
+      "d": 4,
+      "s": 0,
+      "r": 0.8,
+      "type": 4
+    },
+    {
+      "wave": 0,
+      "a": 0.004,
+      "d": 2,
+      "s": 0,
+      "r": 0.8,
+      "level": 0.25,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2000,
+    "lfo_rate": 3.2,
+    "lfo_amp": 0.2
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 5500,
+    "eq_lc": 60,
+    "rv_mix": 0.38,
+    "rv_size": 0.85,
+    "rv_decay": 5,
+    "rv_damp": 0.65,
+    "rv_pre": 20
+  },
+  "loudness_trim_db": -3.61,
+  "id": "shadow-mallet"
+}

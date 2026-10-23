@@ -1,0 +1,74 @@
+{
+  "name": "Haunted Keys",
+  "category": "Keys",
+  "genres": [
+    "Trap",
+    "Drill",
+    "Dark pop"
+  ],
+  "description": "Seasick detuned keys \u2014 three drifting saws and an FM body that never quite agree. Eerie, wide, unsettling.",
+  "use": "Dark trap loops, horror-flavoured drill.",
+  "preview_phrase": "trapsoul",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 24,
+      "spread": 0.9,
+      "drift": 12,
+      "a": 0.004,
+      "d": 2.4,
+      "s": 0.25,
+      "r": 0.7,
+      "vel": 0.6,
+      "type": 1
+    },
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 0.9,
+      "idx_dec": 0.5,
+      "idx_sus": 0.1,
+      "a": 0.002,
+      "d": 2,
+      "s": 0.1,
+      "r": 0.6,
+      "level": 0.6,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 800,
+    "f_res": 0.2,
+    "f_env": 2,
+    "fd": 0.5,
+    "fs": 0.15,
+    "f_key": 0.6,
+    "vib_rate": 0.3,
+    "vib_depth": 10,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 60,
+    "eq_pk_f": 350,
+    "eq_pk_g": -2.5,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.2,
+    "rv_mix": 0.35,
+    "rv_size": 0.8,
+    "rv_decay": 4.5,
+    "rv_damp": 0.6,
+    "width": 1.25
+  },
+  "loudness_trim_db": -4.88,
+  "id": "haunted-keys"
+}

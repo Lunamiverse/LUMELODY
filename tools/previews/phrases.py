@@ -1,7 +1,8 @@
-"""Original demo phrases used to audition presets.
+"""Original demo phrases used to audition presets (round 2: darker, minor-key, record-ready).
 
-Every phrase is written for this project (no transcription of existing songs).
-Times are in beats; render() converts to seconds with the phrase tempo.
+Every phrase is written for this project. Production styles referenced (trapsoul, underwater R&B,
+drill, dark reggaeton, dancehall-pop, bounce house) are genres, not songs: nothing is transcribed.
+Times are in beats. `roots` drives the optional 808 in the demo beat; `groove` picks the drum pattern.
 """
 import random
 
@@ -12,194 +13,187 @@ def chord(t, d, notes, vel=0.7, roll=0.0, rng=None):
         out.append((t + i * roll, d - i * roll, n, max(0.05, min(1.0, v))))
     return out
 
-def seq(items, vel=0.75, rng=None, legato=1.0):
-    """items: (start_beat, dur_beat, note[, vel])"""
+def seq(items, vel=0.75, rng=None):
     out = []
     for it in items:
         s, d, n = it[0], it[1], it[2]
         v = it[3] if len(it) > 3 else vel
         if rng: v += rng.uniform(-0.06, 0.06)
-        out.append((s, d * legato, n, max(0.05, min(1.0, v))))
+        out.append((s, d, n, max(0.05, min(1.0, v))))
     return out
 
-def P(bpm, notes, desc):
-    return {"bpm": bpm, "notes": notes, "desc": desc}
+def P(bpm, notes, desc, groove, roots, swing=0.0):
+    return {"bpm": bpm, "notes": notes, "desc": desc, "groove": groove, "roots": roots, "swing": swing}
+
+def swung(t, amount):
+    """Delay off-beat 16ths by `amount` of a 16th (0..0.5)."""
+    six = round(t * 4, 6)
+    if abs(six - round(six)) < 1e-6 and int(round(six)) % 2 == 1:
+        return t + amount * 0.25
+    return t
 
 def build():
-    r = random.Random(7)
+    r = random.Random(11)
     ph = {}
 
-    # --- R&B keys: Ebmaj9 - Cm9 - Abmaj9 - Bb13sus -> Ebmaj9, with a top-line answer
+    # --- trapsoul / underwater R&B: Fm9 - Dbmaj7(#11) - Bbm9 - C7(b9) at 68 BPM
     n = []
-    n += chord(0, 2, [51, 58, 62, 65, 67], .62, .012, r)
-    n += chord(2, 2, [48, 55, 58, 62, 63], .58, .012, r)
-    n += chord(4, 2, [44, 51, 55, 58, 60], .60, .012, r)
-    n += chord(6, 2, [46, 53, 56, 60, 63], .57, .012, r)
-    n += chord(8, 3, [51, 58, 62, 65, 70], .55, .02, r)
-    n += seq([(.5, .5, 79), (1, .5, 77), (1.5, 1, 75), (2.75, .25, 74), (3, 1, 75),
-              (4.5, .5, 72), (5, .5, 74), (5.5, 1, 75), (6.5, .5, 77), (7, 1.5, 79), (8.5, 2.5, 82, .5)], .66, r)
-    ph["keys_rnb"] = P(72, n, "R&B progression in Eb (maj9 colours) with a top melody")
+    n += chord(0, 4, [41, 48, 51, 55, 56, 60], .58, .02, r)
+    n += chord(4, 4, [37, 48, 53, 55, 60], .55, .02, r)
+    n += chord(8, 4, [34, 49, 53, 56, 60], .57, .02, r)
+    n += chord(12, 4, [36, 46, 52, 55, 61], .6, .02, r)
+    n += seq([(1.5, .5, 72), (2, 1, 75), (3.5, .5, 72), (5, .5, 77), (5.5, 1.5, 75), (7.5, .5, 72),
+              (9.5, .5, 73), (10, 1.5, 72), (13, .5, 70), (13.5, .5, 67), (14, 2, 68)], .6, r)
+    ph["trapsoul"] = P(68, n, "Moody Fm9 progression with a sparse top line, 68 BPM",
+                       "trapsoul", [(0, 29), (4, 25), (8, 34), (12, 36)])
 
-    # --- dark trap keys: Cm - Abmaj7 - Fm9 - G7b9
-    n = []
-    n += chord(0, 4, [48, 55, 60, 63, 67], .66, .015, r)
-    n += chord(4, 4, [44, 51, 55, 60, 63], .62, .015, r)
-    n += chord(8, 4, [41, 48, 51, 55, 60], .6, .015, r)
-    n += chord(12, 4, [43, 50, 53, 56, 59], .64, .015, r)
-    n += seq([(1, .5, 75), (1.5, .5, 74), (2, 1.5, 72), (5, .5, 75), (5.5, .5, 79), (6, 2, 77),
-              (9, .5, 75), (9.5, .5, 74), (10, 1.5, 72), (13, .5, 71), (13.5, 2.5, 74)], .7, r)
-    ph["keys_dark"] = P(140, n, "Dark minor progression (Cm-Ab-Fm-G) at 140, half-time feel")
+    # --- drill bells: G minor with a flat-2 colour, staccato, 142 BPM (half-time feel)
+    mel = [(0, .5, 79), (.75, .5, 79), (1.5, .5, 80), (2, .5, 79), (3, .5, 74), (3.5, .5, 75),
+           (4, .5, 79), (4.75, .5, 79), (5.5, .5, 80), (6, .5, 82), (7, 1, 80),
+           (8, .5, 79), (8.75, .5, 79), (9.5, .5, 80), (10, .5, 79), (11, .5, 74), (11.5, .5, 75),
+           (12, .5, 77), (12.75, .5, 75), (13.5, .5, 74), (14, 2, 71)]
+    n = seq(mel, .78, r)
+    n += seq([(s, d, k - 12, .45) for s, d, k in [(0, 4, 79), (4, 4, 80), (8, 4, 79), (12, 4, 77)]], rng=r)
+    ph["drill_bell"] = P(142, n, "Staccato drill bell line in G minor (flat-2 colour), 142 BPM",
+                         "drill", [(0, 31), (2.5, 31), (4, 32), (7, 34), (8, 31), (10.5, 31), (12, 29), (14, 26)])
 
-    # --- bossa / Brazilian-inspired comping: Dm9 - G13 - Cmaj9 - A7b13
-    n = []
-    comp = [0, 1.5, 3]  # syncopated hits per 4 beats
-    voic = [[50, 57, 60, 64, 65], [43, 53, 57, 59, 64], [48, 52, 55, 59, 62], [45, 55, 61, 65, 67]]
-    for i, v in enumerate(voic):
-        for c in comp:
-            n += chord(i * 4 + c, 1.2 if c != 3 else .9, v[1:], .55 + (.08 if c == 0 else 0), .006, r)
-        n += seq([(i * 4, 1.8, v[0], .6)], rng=r)
-    n += seq([(.5, .5, 77), (1, .5, 76), (2, 1, 74), (4.5, .5, 77), (5, 1, 76), (6.5, 1, 74),
-              (8.5, .5, 76), (9, .5, 74), (9.5, 1, 71), (12.5, .5, 73), (13, 2, 72)], .62, r)
-    ph["keys_bossa"] = P(118, n, "Bossa-inspired syncopated comping in C with a light melody")
-
-    # --- reggaeton pluck riff over Am - F - C - G (3+3+2 phrasing)
+    # --- dark reggaeton: Am - F - Dm - E (harmonic minor), 3-3-2 riff at 92
     pos = [0, .75, 1.5, 2, 2.75, 3.5]
-    arps = {"Am": [69, 76, 72, 69, 76, 71], "F": [65, 72, 69, 65, 72, 67], "C": [64, 72, 67, 64, 71, 67], "G": [62, 71, 67, 62, 74, 71]}
+    arps = {"Am": [69, 72, 76, 69, 72, 71], "F": [65, 69, 72, 65, 69, 67], "Dm": [62, 65, 69, 62, 65, 64], "E": [64, 68, 71, 64, 68, 71]}
     n = []
-    for b, ch in enumerate(["Am", "F", "C", "G"]):
+    for b, ch in enumerate(["Am", "F", "Dm", "E"]):
         for p, note in zip(pos, arps[ch]):
-            n += seq([(b * 4 + p, .5, note, .78 if p in (0, 2) else .66)], rng=r)
-    ph["pluck_reggaeton"] = P(94, n, "Syncopated 3-3-2 pluck riff, Am-F-C-G at 94 BPM")
+            n += seq([(b * 4 + p, .45, note, .8 if p in (0, 2) else .66)], rng=r)
+    ph["reggaeton_dark"] = P(92, n, "Dark 3-3-2 riff, Am-F-Dm-E (harmonic minor), 92 BPM",
+                             "reggaeton", [(0, 33), (4, 29), (8, 26), (12, 28)])
 
-    # --- dancehall: playful offbeat riff in D minor
-    n = []
-    riff = [(0, .5, 74), (.75, .25, 72), (1, .5, 74), (1.5, .5, 77), (2.5, .5, 76), (3, .5, 74), (3.5, .5, 69)]
-    riff2 = [(0, .5, 70), (.75, .25, 69), (1, .5, 70), (1.5, .5, 74), (2.5, .5, 72), (3, .5, 70), (3.5, .5, 72)]
-    for b, rf in enumerate([riff, riff2, riff, [(0, .5, 72), (.75, .25, 74), (1, .5, 76), (1.5, 1, 77), (3, 1, 74)]]):
-        n += seq([(b * 4 + s, d, k) for s, d, k in rf], .74, r)
-    ph["pluck_dancehall"] = P(100, n, "Playful offbeat riff in D minor at 100 BPM")
+    # --- dark reggaeton lead (mono, slides)
+    n = seq([(0, .8, 76), (.75, .8, 77), (1.5, 1.6, 76), (3, .6, 72), (3.5, 1.1, 74),
+             (4.5, .6, 72), (5, 1.6, 69), (7, .5, 68), (7.5, .6, 69), (8, .8, 76), (8.75, .8, 77),
+             (9.5, 1.1, 79), (10.5, .6, 77), (11, 1.1, 76), (12, .6, 74), (12.5, .6, 72), (13, 3, 71)], .76, r)
+    ph["reggaeton_lead"] = P(92, n, "Sliding minor lead over the dark reggaeton changes, 92 BPM",
+                             "reggaeton", [(0, 33), (4, 29), (8, 26), (12, 28)])
 
-    # --- dembow: bouncy repetitive motif at 124
+    # --- dancehall-pop, dark: C# minor offbeat riff at 98
     n = []
-    motif = [(0, .25, 67), (.5, .25, 70), (1, .25, 74), (1.5, .25, 70), (1.75, .25, 72), (2.5, .25, 79), (3, .25, 74), (3.5, .25, 72)]
+    riff = [(.5, .5, 73), (1, .25, 76), (1.5, .5, 73), (2.5, .5, 71), (3, .5, 69), (3.5, .5, 68)]
+    for b, sh in enumerate([0, 0, -3, -1]):
+        n += seq([(b * 4 + s, d, k + sh, .75) for s, d, k in riff], rng=r)
+    ph["dancehall_dark"] = P(98, n, "Dark offbeat dancehall-pop riff in C# minor, 98 BPM",
+                             "dancehall", [(0, 37), (4, 37), (8, 33), (12, 35)])
+
+    # --- dembow, dark and hard: G minor motif at 124
+    n = []
+    motif = [(0, .25, 67), (.5, .25, 70), (.75, .25, 67), (1.5, .25, 74), (2, .25, 75), (2.5, .25, 74), (3, .25, 70), (3.5, .25, 69)]
     for b in range(4):
-        shift = [0, 0, -2, 3][b]
-        n += seq([(b * 4 + s, d, k + shift, .85 if s in (0, 1, 2.5) else .7) for s, d, k in motif], rng=r)
-    ph["pluck_dembow"] = P(124, n, "Bouncy, punchy motif in G minor at 124 BPM")
+        sh = [0, 0, -4, -2][b]
+        n += seq([(b * 4 + s, d, k + sh, .86 if s in (0, 1.5, 2.5) else .7) for s, d, k in motif], rng=r)
+    ph["dembow_dark"] = P(124, n, "Hard, dark dembow motif in G minor, 124 BPM",
+                          "dembow", [(0, 31), (4, 31), (8, 27), (12, 29)])
 
-    # --- afrobeats: pentatonic syncopation over F - Gm - Bb - C
+    # --- bounce house: swung minor-9 chord stabs, Dm9 - Gm9 - Bbmaj7 - A7(b9) at 118
     n = []
-    pat = [(0, .5, 72), (.75, .25, 69), (1.25, .5, 72), (2, .25, 74), (2.5, .5, 77), (3.25, .5, 74)]
-    for b, sh in enumerate([0, 2, -2, 0]):
-        n += seq([(b * 4 + s, d, k + sh, .72) for s, d, k in pat], rng=r)
-    n += chord(0, 4, [53, 57, 60], .45, 0, r) + chord(4, 4, [55, 58, 62], .45, 0, r) + chord(8, 4, [58, 62, 65], .45, 0, r) + chord(12, 4, [60, 64, 67], .45, 0, r)
-    ph["pluck_afro"] = P(106, n, "Syncopated pentatonic riff with soft chords, F major, 106 BPM")
+    stabs = [0, .75, 1.5, 2.5, 3.25]
+    voic = [[50, 57, 60, 64, 65], [55, 58, 62, 65, 69], [46, 57, 62, 65, 69], [45, 55, 58, 61, 64]]
+    for b, v in enumerate(voic):
+        for s in stabs:
+            n += chord(swung(b * 4 + s, .35), .35, v, .72 if s in (0, 2.5) else .6, 0, r)
+    ph["bounce_house"] = P(118, n, "Swung minor-9 chord stabs for bounce/house, 118 BPM",
+                           "bounce", [(0, 38), (4, 43), (8, 34), (12, 33)], swing=.35)
 
-    # --- trap bell melody (triplet feel) in C minor
-    n = seq([(0, .66, 72), (.67, .66, 75), (1.33, .67, 79), (2, 1, 77), (3, .5, 75), (3.5, .5, 74),
-             (4, .66, 72), (4.67, .66, 75), (5.33, .67, 80), (6, 1.5, 79), (7.5, .5, 77),
-             (8, .66, 72), (8.67, .66, 75), (9.33, .67, 79), (10, 1, 82), (11, .5, 80), (11.5, .5, 79),
-             (12, 1, 77), (13, 1, 75), (14, 2, 74)], .72, r)
-    ph["bell_trap"] = P(140, n, "Triplet bell melody in C minor at 140")
-
-    # --- glassy reggaeton/latin pop bell line with space for delay
-    n = seq([(0, .5, 76), (.75, .5, 79), (1.5, .5, 81), (2.5, 1, 79), (4, .5, 77), (4.75, .5, 76), (5.5, .5, 74), (6.5, 1.5, 76),
-             (8, .5, 76), (8.75, .5, 79), (9.5, .5, 84), (10.5, 1, 83), (12, .5, 81), (12.75, .5, 79), (13.5, 2, 81)], .72, r)
-    ph["bell_latin"] = P(96, n, "Spacious bell line in A minor, 96 BPM")
-
-    # --- expressive mono lead with slides (overlapping notes = legato/glide)
-    n = seq([(0, 1.1, 67), (1, .6, 70), (1.5, 1.6, 72), (3, .6, 75), (3.5, 1.1, 74), (4.5, .6, 72), (5, 2.1, 70),
-             (7, .6, 67), (7.5, 1.1, 70), (8.5, .6, 72), (9, 1.6, 77), (10.5, .6, 75), (11, 2.6, 74)], .74, r)
-    ph["lead_mono"] = P(92, n, "Legato G-minor line with slides at 92 BPM")
-
-    # --- bright pop hook
-    n = seq([(0, .5, 76), (.5, .5, 76), (1, .5, 79), (1.5, 1, 81), (3, .5, 79), (3.5, .5, 76),
-             (4, .5, 74), (4.5, .5, 76), (5, .5, 79), (5.5, 1.5, 76), (8, .5, 76), (8.5, .5, 76), (9, .5, 79), (9.5, 1, 84),
-             (11, .5, 83), (11.5, .5, 81), (12, .5, 79), (12.5, .5, 81), (13, 2, 79)], .76, r)
-    ph["lead_pop"] = P(118, n, "Catchy major-key hook at 118 BPM")
-
-    # --- slow cinematic / ethereal lead
-    n = seq([(0, 2.1, 69), (2, 1.1, 72), (3, 1.1, 71), (4, 3.1, 67), (7, 1.1, 64), (8, 2.1, 69), (10, 1.1, 76), (11, 3, 74)], .66, r)
-    ph["lead_slow"] = P(80, n, "Slow, open melody for ethereal/cinematic leads")
-
-    # --- pads: Fmaj9 - Am7 - Dm9 - Bbmaj7#11 (wide voicings)
+    # --- bounce lead / squelch line
     n = []
-    n += chord(0, 4, [41, 53, 57, 60, 64, 67], .62, 0, r)
-    n += chord(4, 4, [45, 52, 55, 60, 64, 67], .6, 0, r)
-    n += chord(8, 4, [38, 50, 53, 57, 60, 64], .62, 0, r)
-    n += chord(12, 4.5, [46, 53, 57, 62, 64, 69], .58, 0, r)
-    ph["pad"] = P(76, n, "Four wide chords, 76 BPM, held for the full bar")
+    line = [(0, .25, 62), (.5, .25, 65), (.75, .5, 69), (1.5, .25, 67), (2, .25, 65), (2.5, .5, 62), (3.25, .5, 60)]
+    for b, sh in enumerate([0, 5, -4, -5]):
+        n += seq([(swung(b * 4 + s, .35), d, k + sh, .75) for s, d, k in line], rng=r)
+    ph["bounce_lead"] = P(118, n, "Swung, rubbery minor line, 118 BPM", "bounce",
+                          [(0, 38), (4, 43), (8, 34), (12, 33)], swing=.35)
 
-    n = []
-    n += chord(0, 4, [36, 48, 51, 55, 58], .62, 0, r)
-    n += chord(4, 4, [32, 48, 51, 56, 60], .6, 0, r)
-    n += chord(8, 4, [29, 44, 48, 51, 56], .62, 0, r)
-    n += chord(12, 4.5, [31, 47, 50, 55, 62], .58, 0, r)
-    ph["pad_dark"] = P(70, n, "Dark minor pad progression in C, 70 BPM")
+    # --- dark trap lead / flute (slides, minor, legato overlaps)
+    n = seq([(0, 1.6, 77), (1.5, .6, 75), (2, 1.1, 73), (3, .6, 72), (3.5, 2.1, 70),
+             (6, .6, 68), (6.5, 1.6, 70), (8, 1.6, 77), (9.5, .6, 80), (10, 1.1, 77), (11, .6, 75),
+             (11.5, 1.1, 73), (12.5, .6, 72), (13, 3, 73)], .72, r)
+    ph["trap_lead"] = P(140, n, "Haunting B-flat minor lead with slides, 140 BPM (half-time)",
+                        "trap", [(0, 34), (4, 30), (8, 37), (12, 32)])
 
-    # --- string-like layer: legato voices moving under a melody
+    # --- dark pad progression: C#m9 - Amaj7 - F#m9 - G#7sus
     n = []
-    n += chord(0, 4, [50, 57, 62, 65], .55, .03, r) + chord(4, 4, [46, 58, 62, 65], .55, .03, r)
-    n += chord(8, 4, [48, 55, 60, 64], .6, .03, r) + chord(12, 4.5, [45, 57, 61, 64], .62, .03, r)
-    n += seq([(0, 2, 74), (2, 2, 72), (4, 3, 70), (7, 1, 69), (8, 2, 67), (10, 2, 72), (12, 4.5, 73)], .62, r)
-    ph["strings"] = P(72, n, "Emotional D-minor string-style voicings with a top line")
+    n += chord(0, 4, [37, 49, 52, 56, 59, 63], .6, 0, r)
+    n += chord(4, 4, [33, 49, 52, 56, 57, 61], .58, 0, r)
+    n += chord(8, 4, [30, 45, 49, 52, 56, 57], .6, 0, r)
+    n += chord(12, 4.5, [32, 49, 51, 54, 56, 61], .58, 0, r)
+    ph["pad_dark"] = P(70, n, "Dark, emotional C#m9 progression held for full bars, 70 BPM",
+                       "trapsoul", [(0, 37), (4, 33), (8, 30), (12, 32)])
 
-    # --- guitar-style pluck pattern (arpeggiated, R&B/reggaeton)
+    # --- cinematic strings / choir / brass: D minor with a phrygian turn
     n = []
-    shapes = [[52, 59, 64, 67, 71], [48, 55, 60, 64, 67], [45, 52, 57, 60, 64], [47, 54, 59, 62, 66]]
+    n += chord(0, 4, [38, 50, 57, 62, 65], .55, .03, r) + chord(4, 4, [39, 51, 58, 63, 67], .6, .03, r)
+    n += chord(8, 4, [34, 50, 58, 62, 65], .58, .03, r) + chord(12, 4.5, [33, 49, 57, 61, 64], .65, .03, r)
+    n += seq([(0, 2, 74), (2, 2, 77), (4, 3, 75), (7, 1, 74), (8, 2, 74), (10, 2, 70), (12, 4.5, 73)], .62, r)
+    ph["cinematic"] = P(70, n, "D minor with an Eb (phrygian) turn, slow and heavy, 70 BPM",
+                        "trap", [(0, 38), (4, 39), (8, 34), (12, 33)])
+
+    # --- dark brass stabs
+    n = []
+    for b, v in enumerate([[50, 57, 62, 65], [51, 58, 63, 67], [46, 58, 62, 65], [45, 57, 61, 64]]):
+        n += chord(b * 4, .9, v, .82, 0, r) + chord(b * 4 + 1.5, .4, v, .7, 0, r) + chord(b * 4 + 2.5, 1.2, v, .78, 0, r)
+    ph["brass"] = P(140, n, "Hard minor brass stabs, 140 BPM (half-time)", "trap",
+                    [(0, 38), (4, 39), (8, 34), (12, 33)])
+
+    # --- dark guitar-style arpeggio (Em(add9) - Cmaj7 - Am9 - B7)
+    n = []
+    shapes = [[40, 47, 54, 55, 59], [36, 43, 52, 55, 59], [33, 45, 52, 55, 59], [35, 47, 51, 54, 57]]
     for b, sh in enumerate(shapes):
-        order = [0, 2, 3, 4, 3, 2, 1, 3]
-        for i, o in enumerate(order):
-            n += seq([(b * 4 + i * .5, 1.2, sh[o], .7 if i % 2 == 0 else .58)], rng=r)
-    ph["guitar_arp"] = P(88, n, "Arpeggiated guitar-style figure, Em-C-Am-Bm, 88 BPM")
+        for i, o in enumerate([0, 2, 3, 4, 3, 2, 1, 3]):
+            n += seq([(b * 4 + i * .5, 1.2, sh[o] + 12, .7 if i % 2 == 0 else .56)], rng=r)
+    ph["guitar_dark"] = P(76, n, "Moody arpeggio, Em-C-Am-B, 76 BPM", "trapsoul",
+                          [(0, 28), (4, 36), (8, 33), (12, 35)])
 
-    n = []
-    pat = [0, .5, .75, 1.5, 2, 2.75, 3, 3.5]
-    roots = [57, 55, 53, 52]
-    for b, rt in enumerate(roots):
-        for i, p in enumerate(pat):
-            nn = rt + [0, 7, 12, 7, 0, 12, 10, 7][i]
-            n += seq([(b * 4 + p, .22, nn, .75 if i in (0, 4) else .6)], rng=r)
-    ph["guitar_muted"] = P(104, n, "Rhythmic muted-guitar style pattern, 104 BPM")
+    # --- cowbell / phonk-style melody (F# minor)
+    n = seq([(0, .5, 78), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78), (2, .5, 76), (2.5, .5, 78), (3, 1, 73),
+             (4, .5, 78), (4.5, .5, 78), (5, .5, 81), (5.5, .5, 83), (6, .5, 81), (6.5, .5, 78), (7, 1, 76),
+             (8, .5, 78), (8.5, .5, 78), (9, .5, 81), (9.5, .5, 78), (10, .5, 76), (10.5, .5, 78), (11, 1, 73),
+             (12, .5, 74), (12.5, .5, 73), (13, .5, 71), (13.5, .5, 69), (14, 2, 66)], .8, r)
+    ph["phonk"] = P(130, n, "Driving F#-minor cowbell melody, 130 BPM", "phonk",
+                    [(0, 30), (4, 30), (8, 30), (12, 26)])
 
     # --- basses
-    n = seq([(0, 1.4, 36), (1.5, .4, 36), (2, 1.1, 36), (3, 1.0, 43), (4, 1.5, 39), (5.5, .5, 39), (6, 2.1, 41),
-             (8, 1.4, 36), (9.5, .4, 36), (10, 1.1, 36), (11, 1.1, 46), (12, 1.6, 44), (13.5, 2.5, 43)], .85, r)
-    ph["bass_808"] = P(140, n, "808 pattern with slides in C minor, 140 BPM")
+    n = seq([(0, 1.4, 31), (1.5, .4, 31), (2, 1.1, 31), (3, 1.0, 38), (4, 1.5, 34), (5.5, .5, 34), (6, 2.1, 32),
+             (8, 1.4, 31), (9.5, .4, 31), (10, 1.1, 31), (11, 1.1, 41), (12, 1.6, 39), (13.5, 2.5, 38)], .88, r)
+    ph["bass_808"] = P(142, n, "808 line with slides in G minor, 142 BPM", "drill_no808", [])
+
+    n = seq([(0, 1.0, 34), (1, .5, 34), (1.5, 1.6, 46), (3, 1.1, 41), (4, 2, 37), (6, 2, 36),
+             (8, 1.0, 34), (9, .5, 34), (9.5, 1.6, 46), (11, 1.1, 44), (12, 4, 41)], .86, r)
+    ph["bass_trap"] = P(140, n, "Long trap 808 with octave slides in B-flat minor, 140 BPM", "trap_no808", [])
 
     n = []
-    for b, rt in enumerate([31, 31, 34, 29]):
-        n += seq([(b * 4 + 0, .6, rt), (b * 4 + .75, .4, rt), (b * 4 + 1.5, .45, rt + 12, .7), (b * 4 + 2, .6, rt), (b * 4 + 3, .4, rt + 3, .75), (b * 4 + 3.5, .4, rt + 5, .7)], .85, r)
-    ph["bass_dembow"] = P(124, n, "Punchy dembow/reggaeton bass in G minor, 124 BPM")
+    for b, rt in enumerate([31, 31, 27, 29]):
+        n += seq([(b * 4 + 0, .6, rt), (b * 4 + .75, .4, rt), (b * 4 + 1.5, .45, rt + 12, .7),
+                  (b * 4 + 2, .6, rt), (b * 4 + 3, .4, rt + 3, .75), (b * 4 + 3.5, .4, rt - 2, .7)], .86, r)
+    ph["bass_dembow"] = P(124, n, "Punchy dembow/reggaeton bass in G minor, 124 BPM", "dembow_no808", [])
 
-    n = seq([(0, 1.5, 39), (1.5, .5, 46), (2, 1, 48), (3, .9, 51), (4, 1.5, 36), (5.5, .5, 43), (6, 1, 46), (7, .9, 48),
-             (8, 1.5, 44), (9.5, .5, 51), (10, 1, 53), (11, .9, 51), (12, 1.5, 46), (13.5, .5, 48), (14, 2, 51)], .75, r)
-    ph["bass_melodic"] = P(76, n, "Melodic R&B bass line in Eb, 76 BPM")
+    n = seq([(0, 1.5, 29), (1.5, .5, 36), (2, 1, 39), (3, .9, 41), (4, 1.5, 25), (5.5, .5, 32), (6, 1, 37), (7, .9, 36),
+             (8, 1.5, 34), (9.5, .5, 41), (10, 1, 44), (11, .9, 41), (12, 1.5, 36), (13.5, .5, 37), (14, 2, 36)], .78, r)
+    ph["bass_rnb"] = P(68, n, "Melodic trapsoul bass in F minor, 68 BPM", "trapsoul_no808", [])
 
     n = []
-    for b, rt in enumerate([33, 33, 29, 31]):
-        n += seq([(b * 4 + x, .3, rt + o) for x, o in [(.5, 0), (1.5, 0), (1.75, 12), (2.5, 0), (3.5, 0), (3.75, 10)]], .8, r)
-    ph["bass_house"] = P(124, n, "Offbeat plucky bass, 124 BPM")
+    for b, rt in enumerate([38, 43, 34, 33]):
+        n += seq([(swung(b * 4 + x, .35), .3, rt + o) for x, o in [(0, 0), (.75, 0), (1.5, 12), (2.5, 0), (3, 10), (3.5, 7)]], .82, r)
+    ph["bass_bounce"] = P(118, n, "Swung squelch bass line, 118 BPM", "bounce_no808", [], swing=.35)
 
-    n = seq([(0, 1.0, 38), (1.5, .5, 38), (2, .75, 41), (3, 1.0, 43), (4, .75, 38), (5, .5, 36), (5.5, .5, 38), (6, 2, 41),
-             (8, 1.0, 38), (9.5, .5, 38), (10, .75, 45), (11, 1.0, 43), (12, 2, 41), (14, 2, 36)], .82, r)
-    ph["bass_dancehall"] = P(98, n, "Deep, round dancehall bass line in D minor, 98 BPM")
+    n = seq([(0, 1.0, 37), (1.5, .5, 37), (2, .75, 40), (3, 1.0, 42), (4, .75, 37), (5, .5, 35), (5.5, .5, 37), (6, 2, 33),
+             (8, 1.0, 37), (9.5, .5, 37), (10, .75, 44), (11, 1.0, 42), (12, 2, 40), (14, 2, 35)], .84, r)
+    ph["bass_dancehall"] = P(98, n, "Deep dancehall bass line in C# minor, 98 BPM", "dancehall_no808", [])
 
     # --- textures
-    n = seq([(0, 6, 60, .6), (2, 6, 67, .5), (4, 8, 74, .45), (8, 6, 63, .55), (10, 6, 70, .5)], rng=r)
-    ph["texture"] = P(80, n, "Sparse overlapping long notes for textures")
+    n = seq([(0, 6, 61, .6), (2, 6, 68, .5), (4, 8, 73, .45), (8, 6, 64, .55), (10, 6, 71, .5)], rng=r)
+    ph["texture"] = P(70, n, "Sparse overlapping C#-minor notes for textures", "trapsoul", [(0, 37), (8, 33)])
 
     n = []
-    for i in range(16):
-        n += seq([(i * .25, .3, 60 + [0, 3, 7, 10, 12, 15, 19, 22][i % 8] + (12 if i >= 8 else 0), .5 + i * .025)], rng=r)
-    n += chord(4, 4, [72, 79, 84, 87], .6, 0, r)
-    ph["rise"] = P(120, n, "Rising sparkle arpeggio then a held chord")
-
-    n = []
-    arp = [72, 75, 79, 84, 79, 75, 82, 79]
+    arp = [72, 75, 79, 82, 79, 75, 80, 79]
     for b in range(4):
         for i, k in enumerate(arp):
-            n += seq([(b * 4 + i * .5, .45, k + [0, 0, -4, -2][b], .72)], rng=r)
-    ph["glitch"] = P(130, n, "Steady arpeggio so glitch/stutter effects are audible, 130 BPM")
+            n += seq([(b * 4 + i * .5, .45, k + [0, 0, -4, -1][b], .72)], rng=r)
+    ph["glitch"] = P(140, n, "Minor arpeggio so stutter/glitch effects are audible, 140 BPM", "trap", [(0, 36), (8, 32), (12, 35)])
 
     return ph

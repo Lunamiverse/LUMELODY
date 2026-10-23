@@ -3,11 +3,11 @@
   "category": "Bass",
   "genres": [
     "Dancehall",
-    "Reggae",
+    "Dancehall-pop",
     "Afroswing"
   ],
   "description": "Deep, round dancehall bass \u2014 sine weight plus a soft triangle edge, slight bloom.",
-  "use": "Dancehall and reggae bass lines.",
+  "use": "Dancehall and dark dancehall-pop bass lines.",
   "preview_phrase": "bass_dancehall",
   "range": [
     26,
@@ -37,13 +37,13 @@
     "mono": 1,
     "glide": 0.02,
     "f_type": 0,
-    "f_cut": 700,
+    "f_cut": 650,
     "f_key": 0.5
   },
   "fx": {
-    "sat_drive": 0.2,
+    "sat_drive": 0.25,
     "eq_lc": 28
   },
-  "loudness_trim_db": -8.15,
+  "loudness_trim_db": -8.72,
   "id": "yard-bass"
 }

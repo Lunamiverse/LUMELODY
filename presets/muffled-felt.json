@@ -1,0 +1,82 @@
+{
+  "name": "Muffled Felt",
+  "category": "Keys",
+  "genres": [
+    "Trapsoul",
+    "Drill",
+    "Ambient"
+  ],
+  "description": "Soft felt-piano tone with the hammer muted \u2014 close, intimate and dark, like a piano in the next room.",
+  "use": "Sad intros, drill and trapsoul piano lines.",
+  "preview_phrase": "trapsoul",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 0.9,
+      "idx_dec": 0.4,
+      "idx_sus": 0.1,
+      "idx_vel": 0.8,
+      "a": 0.004,
+      "d": 3.5,
+      "s": 0,
+      "r": 0.7,
+      "keydecay": 0.5,
+      "type": 2
+    },
+    {
+      "cr": 2,
+      "mr": 1,
+      "idx": 0.4,
+      "idx_dec": 0.2,
+      "idx_sus": 0,
+      "a": 0.004,
+      "d": 1.8,
+      "s": 0,
+      "r": 0.5,
+      "level": 0.35,
+      "keydecay": 0.5,
+      "type": 2
+    },
+    {
+      "ncut": 2.5,
+      "ntrack": 1,
+      "nq": 1,
+      "nmode": 1,
+      "a": 0.001,
+      "d": 0.05,
+      "s": 0,
+      "r": 0.04,
+      "level": 0.08,
+      "filt": 0,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1300,
+    "f_res": 0.05,
+    "f_env": 1,
+    "fd": 0.3,
+    "f_key": 0.5,
+    "f_vel": 1
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 6000,
+    "eq_lc": 60,
+    "eq_ls_f": 180,
+    "eq_ls_g": 2.5,
+    "rv_mix": 0.3,
+    "rv_size": 0.7,
+    "rv_decay": 3.5,
+    "rv_damp": 0.7
+  },
+  "loudness_trim_db": -5.88,
+  "id": "muffled-felt"
+}

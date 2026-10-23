@@ -1,0 +1,50 @@
+{
+  "name": "Drill Slide 808",
+  "category": "Bass",
+  "genres": [
+    "NY drill",
+    "UK drill",
+    "Trap"
+  ],
+  "description": "Punchy, short-tailed 808 tuned for drill: fast pitch knock and long, smooth slides between notes.",
+  "use": "Sliding drill bass lines.",
+  "preview_phrase": "bass_808",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 1.4,
+      "s": 0.45,
+      "r": 0.12,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.001,
+      "d": 0.08,
+      "s": 0,
+      "r": 0.08,
+      "level": 0.25,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.12,
+    "f_type": -1,
+    "p_env": 12,
+    "p_dec": 0.018
+  },
+  "fx": {
+    "sat_drive": 0.5,
+    "sat_mix": 0.7,
+    "eq_lc": 25
+  },
+  "loudness_trim_db": -7.24,
+  "id": "drill-slide-808"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Phonk Cowbell",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Phonk",
+    "Brazilian phonk",
+    "Memphis"
+  ],
+  "description": "Tuned 808-style cowbell melody: two clashing square tones through a band-pass, driven hard.",
+  "use": "Phonk and drift-phonk melodies; also great as a rhythmic hit.",
+  "preview_phrase": "phonk",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "semi": 6.79,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.08,
+      "level": 0.85,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 1,
+    "f_cut": 1300,
+    "f_res": 0.35,
+    "f_key": 1
+  },
+  "fx": {
+    "sat_drive": 0.55,
+    "sat_mix": 0.8,
+    "eq_lc": 300,
+    "eq_hc": 9000,
+    "rv_mix": 0.12,
+    "rv_size": 0.35
+  },
+  "loudness_trim_db": -9.27,
+  "id": "phonk-cowbell"
+}

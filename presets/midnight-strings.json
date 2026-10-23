@@ -1,0 +1,69 @@
+{
+  "name": "Midnight Strings",
+  "category": "Pads & Atmospheres",
+  "genres": [
+    "Cinematic",
+    "Drill",
+    "Dark pop"
+  ],
+  "description": "Dark cinematic string-like section (synthesized), weighted low with a bowed swell and vibrato.",
+  "use": "Drill strings, dramatic intros. Pair with real strings later.",
+  "preview_phrase": "cinematic",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 12,
+      "spread": 0.9,
+      "a": 0.4,
+      "d": 1,
+      "s": 0.9,
+      "r": 1,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.3,
+      "uni": 3,
+      "det": 8,
+      "oct": -1,
+      "a": 0.4,
+      "d": 1,
+      "s": 0.9,
+      "r": 1,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1600,
+    "f_res": 0.1,
+    "f_env": 0.6,
+    "fa": 0.5,
+    "fd": 1,
+    "fs": 0.7,
+    "f_key": 0.5,
+    "vib_rate": 5,
+    "vib_depth": 12,
+    "vib_delay": 0.4
+  },
+  "fx": {
+    "eq_lc": 80,
+    "eq_pk_f": 900,
+    "eq_pk_g": 1,
+    "eq_hs_f": 7000,
+    "eq_hs_g": -4,
+    "ch_mix": 0.25,
+    "rv_mix": 0.38,
+    "rv_size": 0.9,
+    "rv_decay": 4.5
+  },
+  "loudness_trim_db": -4.14,
+  "id": "midnight-strings"
+}

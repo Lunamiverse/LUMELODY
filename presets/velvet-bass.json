@@ -2,22 +2,22 @@
   "name": "Velvet Bass",
   "category": "Bass",
   "genres": [
+    "Trapsoul",
     "R&B",
-    "Neo-soul",
-    "Afroswing"
+    "Neo-soul"
   ],
-  "description": "Round melodic synth bass with a soft filter pluck \u2014 warm and articulate.",
+  "description": "Round, dark melodic synth bass with a soft filter pluck \u2014 warm and articulate.",
   "use": "Moving R&B bass lines.",
-  "preview_phrase": "bass_melodic",
+  "preview_phrase": "bass_rnb",
   "range": [
-    28,
+    24,
     60
   ],
   "source": "original synthesis (LUMI engine)",
   "layers": [
     {
       "wave": 2,
-      "a": 0.003,
+      "a": 0.004,
       "d": 0.8,
       "s": 0.6,
       "r": 0.15,
@@ -25,7 +25,7 @@
     },
     {
       "wave": 0,
-      "a": 0.003,
+      "a": 0.004,
       "d": 1,
       "s": 0.9,
       "r": 0.15,
@@ -36,19 +36,19 @@
   ],
   "voice": {
     "mono": 1,
-    "glide": 0.03,
+    "glide": 0.04,
     "f_type": 0,
-    "f_cut": 350,
+    "f_cut": 300,
     "f_res": 0.15,
-    "f_env": 2,
+    "f_env": 1.8,
     "fd": 0.25,
     "fs": 0.2,
     "f_key": 0.6
   },
   "fx": {
-    "eq_lc": 28,
-    "sat_drive": 0.1
+    "eq_lc": 26,
+    "sat_drive": 0.15
   },
-  "loudness_trim_db": -0.61,
+  "loudness_trim_db": -1.12,
   "id": "velvet-bass"
 }

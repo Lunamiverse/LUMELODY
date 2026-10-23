@@ -1,0 +1,71 @@
+{
+  "name": "Grave Bell",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Trap",
+    "Dark pop",
+    "Cinematic"
+  ],
+  "description": "Haunting, slightly detuned bell with a long low halo \u2014 the kind of bell that opens a dark record.",
+  "use": "Intros, dark trap hooks, cinematic hits.",
+  "preview_phrase": "trap_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 3.5,
+      "idx": 2,
+      "idx_dec": 0.35,
+      "idx_sus": 0.05,
+      "idx_vel": 0.7,
+      "fm_spread": 7,
+      "a": 0.001,
+      "d": 3,
+      "s": 0,
+      "r": 1,
+      "keydecay": 0.3,
+      "type": 2
+    },
+    {
+      "mat": 3,
+      "hard": 0.4,
+      "click": 0,
+      "decay": 4,
+      "beat": 2,
+      "a": 0.001,
+      "d": 4,
+      "s": 0,
+      "r": 1,
+      "level": 0.4,
+      "type": 4
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3200,
+    "f_key": 0.3,
+    "vib_rate": 0.25,
+    "vib_depth": 6,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 120,
+    "rv_mix": 0.4,
+    "rv_size": 0.9,
+    "rv_decay": 6,
+    "rv_damp": 0.6,
+    "rv_pre": 30,
+    "dly_beats": 1.5,
+    "dly_fb": 0.3,
+    "dly_mix": 0.12,
+    "width": 1.2
+  },
+  "loudness_trim_db": -7.4,
+  "id": "grave-bell"
+}

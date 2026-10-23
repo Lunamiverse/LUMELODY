@@ -1,0 +1,82 @@
+{
+  "name": "Underwater Keys",
+  "category": "Keys",
+  "genres": [
+    "Trapsoul",
+    "R&B",
+    "Dark pop"
+  ],
+  "description": "Electric piano heard through a wall: heavily low-passed, tape-warm, with a long dark room and a soft duck on every beat.",
+  "use": "Late-night R&B and trapsoul chord loops under a vocal.",
+  "preview_phrase": "trapsoul",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 1.4,
+      "idx_dec": 0.8,
+      "idx_sus": 0.2,
+      "fb": 0.05,
+      "fm_spread": 6,
+      "a": 0.003,
+      "d": 3.5,
+      "s": 0.1,
+      "r": 0.8,
+      "keydecay": 0.35,
+      "type": 2
+    },
+    {
+      "cr": 1,
+      "mr": 14,
+      "idx": 1,
+      "idx_dec": 0.012,
+      "idx_sus": 0,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.15,
+      "type": 2
+    },
+    {
+      "wave": 0,
+      "a": 0.004,
+      "d": 3,
+      "s": 0.1,
+      "r": 0.8,
+      "level": 0.25,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1100,
+    "f_res": 0.12,
+    "f_key": 0.3,
+    "vib_rate": 0.6,
+    "vib_depth": 7,
+    "vib_delay": 0
+  },
+  "fx": {
+    "eq_hc": 1500,
+    "eq_lc": 70,
+    "sat_drive": 0.2,
+    "pump": 0.18,
+    "ch_mix": 0.3,
+    "ch_depth": 2,
+    "rv_mix": 0.32,
+    "rv_size": 0.8,
+    "rv_decay": 4.5,
+    "rv_damp": 0.7,
+    "rv_pre": 20,
+    "width": 1.2
+  },
+  "loudness_trim_db": -4.43,
+  "id": "underwater-keys"
+}

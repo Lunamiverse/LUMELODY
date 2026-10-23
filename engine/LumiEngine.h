@@ -146,6 +146,7 @@ struct LayerP {
     // grain
     float grate = 20, glen = .12f, gjit = 8, goct = .3f, gfifth = .15f, gfm = 0;
 
+    float ratio = 1, panL = 1, panR = 1;   // derived at load (not per sample)
     void load(const ParamMap& p, const std::string& px) {
         auto g = [&](const char* k, float d) { return p.get(px + k, d); };
         type = (int)g("type", 0); level = g("level", 1); pan = g("pan", 0); oct = g("oct", 0); semi = g("semi", 0); fine = g("fine", 0);
@@ -158,6 +159,9 @@ struct LayerP {
         ncut = g("ncut", 2000); nq = g("nq", .7f); ntrack = g("ntrack", 0); nmode = g("nmode", 0);
         vowel = g("vowel", 0); vmod = g("vmod", 0); formShift = g("formshift", 1); tilt = g("tilt", 1); breath = g("breath", 0);
         grate = g("grate", 20); glen = g("glen", .12f); gjit = g("gjit", 8); goct = g("goct", .3f); gfifth = g("gfifth", .15f); gfm = g("gfm", 0);
+        ratio = std::pow(2.f, oct + semi / 12.f + fine / 1200.f);
+        float a = (clampf(pan, -1.f, 1.f) + 1.f) * kPi * 0.25f;
+        panL = std::cos(a) * 1.41421f; panR = std::sin(a) * 1.41421f;
     }
 };
 
@@ -405,8 +409,9 @@ struct VoxGen : Gen {
             for (int k = 0; k < nh; ++k) amps[k] *= norm * 0.5f;
             br.set(f2, 2.f, c.sr);
         }
-        float v = 0;
-        for (int k = 0; k < nh; ++k) v += amps[k] * std::sin(kTwoPi * phase * (k + 1));
+        // sin(k*th) by Chebyshev recurrence: one sin/cos per sample instead of one sin per harmonic
+        float th = kTwoPi * phase, s1 = std::sin(th), c2 = 2.f * std::cos(th), sPrev = 0.f, sCur = s1, v = 0;
+        for (int k = 0; k < nh; ++k) { v += amps[k] * sCur; float sNext = c2 * sCur - sPrev; sPrev = sCur; sCur = sNext; }
         phase += freq / c.sr; if (phase >= 1) phase -= 1;
         if (p.breath > 0) v += br.bp(c.rng->bi()) * p.breath;
         L = R = v;
@@ -493,7 +498,7 @@ struct Voice {
     float vel = 0, freq = 440, target = 440, t = 0, pEnvLvl = 0, pEnvK = 0, glideK = 0;
     float vibPh = 0, lfoPh = 0, sh = 0, drift[VoiceP::kLayers]{}, driftT[VoiceP::kLayers]{};
     int ctr = 0; float cutCache = 1000;
-    float lastL = 0, lastR = 0, bleedL = 0, bleedR = 0, velSm = 0;   // de-click: old output bleeds out after a hard restart
+    float lastL = 0, lastR = 0, bleedL = 0, bleedR = 0, velSm = 0, pitchAtStart = 0;   // de-click: old output bleeds out after a hard restart
     Rng rng;
     bool active() const { for (auto& e : amp) if (e.active()) return true; return false; }
     bool sounding() const { return active() || bleedL != 0.f || bleedR != 0.f; }
@@ -558,6 +563,95 @@ struct Reverb {
     }
 };
 
+// Delay-line pitch shifter with three overlapping read heads (sin^2 windows at thirds sum to a constant).
+// Three heads avoid the deep notches a two-head design gets when both heads land out of phase.
+// Used inside the shimmer reverb feedback path, where small artefacts are hidden by the tail.
+struct PitchShifter {
+    std::vector<float> buf; int w = 0; float ph = 0, win = 1800, ratio = 2;
+    void prepare(float sr) { buf.assign(8192, 0.f); win = 0.041f * sr; }
+    inline float tick(float x) {
+        buf[w] = x;
+        auto rd = [&](float d) {
+            float rp = (float)w - d; while (rp < 0) rp += (float)buf.size();
+            int i0 = (int)rp; float fr = rp - i0; int i1 = (i0 + 1) % (int)buf.size();
+            return buf[i0] + (buf[i1] - buf[i0]) * fr;
+        };
+        float y = 0;
+        for (int h = 0; h < 3; ++h) {
+            float p = ph + h / 3.f; if (p >= 1) p -= 1;
+            float g = std::sin(kPi * p);
+            y += rd(1.f + p * win) * g * g;
+        }
+        ph -= (ratio - 1.f) / win; while (ph < 0) ph += 1.f; while (ph >= 1) ph -= 1.f;
+        if (++w >= (int)buf.size()) w = 0;
+        return y * (2.f / 3.f);
+    }
+};
+
+// Tempo-synced stutter. At the start of each window (one beat; two beats for 1/4 slices) the intensity
+// decides whether that window stutters. If it does, the first slice (the division) is captured and looped
+// for the rest of the window. The loop seam is crossfaded with the audio from just before the slice, so the
+// loop is seamless, and leaving a loop crossfades back to the live signal: no clicks, no gain jumps.
+struct Stutter {
+    std::vector<float> bl, br, hl, hr, pl, pr;   // slice buffer, rolling history, pre-roll copy
+    int hw = 0, X = 256, pos = 0, slice = 0, fade = 0, fadePos = 0, oldSlice = 0;
+    bool on = false, wasOn = false; Rng rng{4242};
+    std::vector<float> obl, obr, opl, opr;        // previous loop, kept alive while it fades out
+    void prepare(float sr) {
+        int n = (int)(2.5f * sr);
+        bl.assign(n, 0.f); br.assign(n, 0.f); obl.assign(n, 0.f); obr.assign(n, 0.f);
+        hl.assign(512, 0.f); hr.assign(512, 0.f); pl.assign(512, 0.f); pr.assign(512, 0.f); opl.assign(512, 0.f); opr.assign(512, 0.f);
+    }
+    // loop sample k (k >= slice - x) of a captured slice: crossfade seam into the pre-roll
+    static inline float loopAt(const std::vector<float>& buf, const std::vector<float>& pre, int sl, int x, int k) {
+        int c = (k - (sl - x)) % sl;
+        if (c < x) { float w = 0.5f - 0.5f * std::cos(kPi * (c + 0.5f) / x); return buf[sl - x + c] * (1.f - w) + pre[c] * w; }
+        return buf[c - x];
+    }
+    void process(float& L, float& R, double samplePos, float bpm, float sr, float amount, float divBeats) {
+        int beat = std::max(256, (int)(60.f / bpm * sr));
+        int window = divBeats >= 1.f ? 2 * beat : beat;
+        int posInWin = (int)std::fmod(samplePos, (double)window);
+        if (posInWin == 0) {
+            if (on && pos > slice - X) {   // a loop was playing: keep it running while it fades out
+                std::swap(bl, obl); std::swap(br, obr); std::swap(pl, opl); std::swap(pr, opr);
+                oldSlice = slice; fadePos = pos; fade = X;
+            }
+            on = amount > 0.f && rng.uni() < amount;
+            slice = std::min((int)bl.size() - 1, std::max(4 * 64, (int)(divBeats * beat)));
+            X = std::max(32, std::min(256, slice / 4));
+            pos = 0;
+            if (on) for (int i = 0; i < X; ++i) { int h = (hw - X + i + 512) % 512; pl[i] = hl[h]; pr[i] = hr[h]; }
+        }
+        float liveL = L, liveR = R, outL = L, outR = R;
+        if (on) {
+            if (pos < slice) { bl[pos] = L; br[pos] = R; }
+            if (pos >= slice - X) { outL = loopAt(bl, pl, slice, X, pos); outR = loopAt(br, pr, slice, X, pos); }
+            ++pos;
+        }
+        if (fade > 0) {   // equal-gain raised-cosine crossfade from the old loop to whatever plays now
+            float w = 0.5f - 0.5f * std::cos(kPi * (float)(X - fade) / X);
+            int sx = std::max(32, std::min(256, oldSlice / 4));
+            float oL = loopAt(obl, opl, oldSlice, sx, fadePos), oR = loopAt(obr, opr, oldSlice, sx, fadePos);
+            outL = oL * (1.f - w) + outL * w; outR = oR * (1.f - w) + outR * w;
+            ++fadePos; --fade;
+        }
+        hl[hw] = liveL; hr[hw] = liveR; hw = (hw + 1) % 512;
+        L = outL; R = outR;
+    }
+};
+
+// Live performance controls (the four knobs + options). Stored with the plugin state.
+struct Performance {
+    float reverb = 0;      int reverbType = 0;   // 0 preset, 1 room, 2 hall, 3 plate, 4 shimmer
+    float delay = 0;       int delayDiv = 2;     // 0 1/4, 1 1/8, 2 dotted 1/8, 3 1/16
+    float delayFeedback = .3f;
+    float pitch = 0;       float pitchRange = 12;  // semitones (fractional = fine tune)
+    float stutter = 0;     int stutterDiv = 2;   // 0 1/4, 1 1/8, 2 1/16, 3 1/32
+};
+inline float delayDivBeats(int d) { static const float b[4] = {1.f, .5f, .75f, .25f}; return b[std::max(0, std::min(3, d))]; }
+inline float stutterDivBeats(int d) { static const float b[4] = {1.f, .5f, .25f, .125f}; return b[std::max(0, std::min(3, d))]; }
+
 struct FX {
     float sr = 44100, bpm = 120;
     // params
@@ -566,6 +660,11 @@ struct FX {
     float chRate = .4f, chDepth = 0, chMix = 0;
     float dlyBeats = .75f, dlyFb = .3f, dlyMix = 0, dlyDamp = .4f, dlyPP = 1;
     float rvMix = 0, width = 1, pump = 0, stutBeats = .25f, stutProb = 0, gain = 1;
+    float rvSize = .6f, rvDecay = 2.5f, rvDamp = .4f, rvPre = 15;   // the preset's own reverb character
+    // live performance targets + smoothed values
+    float rvMixT = 0, dlyMixT = 0, dlyFbT = .3f, dlyBeatsT = .75f, dlyTimeCur = -1, stutAmt = 0, stutDiv = .25f;
+    int rvType = 0; bool shimmer = false; float shimFb = 0;
+    PitchShifter shim; Stutter stut;
     // state
     SVF lcL, lcR, hcL, hcR; Biquad ls[2], pk[2], hs[2];
     DelayLine chL, chR, dL, dR; float chPh = 0, dlpL = 0, dlpR = 0;
@@ -578,7 +677,7 @@ struct FX {
         sr = SR;
         chL.prepare((int)(0.05f * sr)); chR.prepare((int)(0.05f * sr));
         dL.prepare((int)(2.5f * sr)); dR.prepare((int)(2.5f * sr));
-        rv.prepare(sr);
+        rv.prepare(sr); shim.prepare(sr); stut.prepare(sr);
         stBufL.assign((int)(2.f * sr), 0.f); stBufR.assign((int)(2.f * sr), 0.f);
     }
     void load(const ParamMap& p, float tempo) {
@@ -590,13 +689,36 @@ struct FX {
         hsF = p.get("eq_hs_f", 6000); hsG = p.get("eq_hs_g", 0);
         chRate = p.get("ch_rate", .4f); chDepth = p.get("ch_depth", 0); chMix = p.get("ch_mix", 0);
         dlyBeats = p.get("dly_beats", .75f); dlyFb = p.get("dly_fb", .3f); dlyMix = p.get("dly_mix", 0); dlyDamp = p.get("dly_damp", .4f); dlyPP = p.get("dly_pp", 1);
-        rvMix = p.get("rv_mix", 0);
-        rv.set(p.get("rv_size", .6f), p.get("rv_decay", 2.5f), p.get("rv_damp", .4f), p.get("rv_pre", 15));
+        rvMix = rvMixT = p.get("rv_mix", 0);
+        rvSize = p.get("rv_size", .6f); rvDecay = p.get("rv_decay", 2.5f); rvDamp = p.get("rv_damp", .4f); rvPre = p.get("rv_pre", 15);
+        rvType = -1; setReverbType(0);
+        dlyMixT = dlyMix; dlyFbT = dlyFb; dlyBeatsT = dlyBeats; dlyTimeCur = -1;
         width = p.get("width", 1); pump = p.get("pump", 0);
         stutBeats = p.get("stut_beats", .25f); stutProb = p.get("stut_prob", 0);
         gain = std::pow(10.f, p.get("gain_db", 0) / 20.f);
         lcL.set(lc, .707f, sr); lcR.set(lc, .707f, sr); hcL.set(hc, .707f, sr); hcR.set(hc, .707f, sr);
         for (int c = 0; c < 2; ++c) { ls[c].set(1, lsF, lsG, .707f, sr); pk[c].set(0, pkF, pkG, pkQ, sr); hs[c].set(2, hsF, hsG, .707f, sr); }
+    }
+    void setReverbType(int t) {
+        if (t == rvType) return;
+        rvType = t; shimmer = (t == 4);
+        switch (t) {
+            case 1: rv.set(.25f, .9f, .5f, 4); break;       // room: small, short, a little dark
+            case 2: rv.set(.92f, 4.2f, .42f, 28); break;    // hall: large, long, natural top
+            case 3: rv.set(.5f, 2.4f, .12f, 0); break;      // plate: dense and bright, no pre-delay
+            case 4: rv.set(.95f, 5.5f, .35f, 30); break;    // shimmer: hall + octave-up feedback
+            default: rv.set(rvSize, rvDecay, rvDamp, rvPre); break;
+        }
+    }
+    // knobs: reverb/delay are 0..1 amounts mapped to wet level; called from the engine when knobs move
+    void setPerformance(const Performance& pf) {
+        rvMixT = clampf(pf.reverb, 0.f, 1.f) * 0.85f;
+        setReverbType(pf.reverbType);
+        dlyMixT = clampf(pf.delay, 0.f, 1.f) * 0.6f;
+        dlyFbT = clampf(pf.delayFeedback, 0.f, 0.85f);
+        dlyBeatsT = delayDivBeats(pf.delayDiv);
+        stutAmt = clampf(pf.stutter, 0.f, 1.f);
+        stutDiv = stutterDivBeats(pf.stutterDiv);
     }
     inline float sat(float x) const {
         if (satDrive <= 0) return x;
@@ -630,7 +752,7 @@ struct FX {
             float b = chR.readFrac(0.011f * sr + dm * (1 + std::sin(kTwoPi * chPh + 1.7f)));
             L = L * (1 - chMix * 0.5f) + a * chMix * 0.7f; R = R * (1 - chMix * 0.5f) + b * chMix * 0.7f;
         }
-        // tempo-synced stutter (glitch repeats)
+        // preset's own baked glitch (a few presets), then the STUTTER knob
         if (stutProb > 0) {
             int step = std::max(16, (int)(stutBeats * 60.f / bpm * sr));
             int posInStep = (int)std::fmod(samplePos, (double)step);
@@ -641,20 +763,30 @@ struct FX {
                 ++stPos;
             }
         }
-        // delay (send)
+        stut.process(L, R, samplePos, bpm, sr, stutAmt, stutDiv);
+        // knob smoothing (~20 ms) so moves never zipper
+        const float k = 0.0012f;
+        rvMix += (rvMixT - rvMix) * k; dlyMix += (dlyMixT - dlyMix) * k; dlyFb += (dlyFbT - dlyFb) * k;
+        // delay (send): stereo ping-pong, damped, soft-clipped feedback so repeats never run away
         float wetL = 0, wetR = 0;
-        if (dlyMix > 0) {
-            float dt = clampf(dlyBeats * 60.f / bpm * sr, 1.f, 2.4f * sr);
-            float a = dL.readFrac(dt), b = dR.readFrac(dt);
+        if (dlyMix > 1e-4f || dlyMixT > 0) {
+            float target = clampf(dlyBeatsT * 60.f / bpm * sr, 1.f, 2.4f * sr);
+            dlyTimeCur = dlyTimeCur < 0 ? target : dlyTimeCur + (target - dlyTimeCur) * 0.0005f;
+            float a = dL.readFrac(dlyTimeCur), b = dR.readFrac(dlyTimeCur);
             dlpL = a + dlyDamp * (dlpL - a); dlpR = b + dlyDamp * (dlpR - b);
+            float fbL = std::tanh(dlpL * dlyFb * 1.2f) / 1.2f, fbR = std::tanh(dlpR * dlyFb * 1.2f) / 1.2f;
             float in = (L + R) * 0.5f;
-            if (dlyPP > 0.5f) { dL.push(in + dlpR * dlyFb); dR.push(dlpL * dlyFb); }
-            else { dL.push(L + dlpL * dlyFb); dR.push(R + dlpR * dlyFb); }
+            if (dlyPP > 0.5f) { dL.push(in + fbR); dR.push(fbL); }
+            else { dL.push(L + fbL); dR.push(R + fbR); }
             wetL += a * dlyMix; wetR += b * dlyMix;
         }
-        // reverb (send, fed by dry + some delay)
-        if (rvMix > 0) {
-            float rl, rr; rv.tick(L + wetL * 0.5f, R + wetR * 0.5f, rl, rr);
+        // reverb (send, fed by dry + some delay); shimmer feeds an octave-up copy of the tail back in
+        if (rvMix > 1e-4f || rvMixT > 0) {
+            float inL = L + wetL * 0.5f, inR = R + wetR * 0.5f;
+            if (shimmer) { inL += shimFb; inR += shimFb; }
+            float rl, rr; rv.tick(inL, inR, rl, rr);
+            // shimmer loop gain 0.45, soft-limited: tested to always decay (fx_test)
+            if (shimmer) shimFb = 0.5f * std::tanh(shim.tick((rl + rr) * 0.5f) * 0.9f); else shimFb = 0;
             wetL += rl * rvMix; wetR += rr * rvMix;
         }
         L += wetL; R += wetR;
@@ -662,7 +794,10 @@ struct FX {
         if (pump > 0) {
             double beatLen = 60.0 / bpm * sr;
             float ph = (float)(std::fmod(samplePos, beatLen) / beatLen);
-            float g = 1.f - pump * std::pow(std::max(0.f, 1.f - ph / 0.55f), 2.f);
+            // duck ramps in over ~2% of a beat (no step = no click), then recovers by 55% of the beat
+            const float att = 0.02f;
+            float shape = ph < att ? ph / att : std::pow(std::max(0.f, 1.f - (ph - att) / (0.55f - att)), 2.f);
+            float g = 1.f - pump * shape;
             L *= g; R *= g;
         }
         // width
@@ -687,6 +822,7 @@ public:
         vp.load(p);
         fx.load(p, tempo);
         bpm = tempo;
+        stack.clear();
         for (int v = 0; v < kVoices; ++v) {
             voices[v].rng = Rng(1234567u + v * 7919u);
             for (int l = 0; l < VoiceP::kLayers; ++l) {
@@ -698,6 +834,26 @@ public:
     }
 
     void setPitchBend(float norm) { bendSemi = clampf(norm, -1.f, 1.f) * vp.bend; }
+
+    // the knobs as the preset was designed (reverb/delay amounts and delay division come from the preset)
+    Performance presetPerformance() const {
+        Performance pf;
+        pf.reverb = clampf(params.get("rv_mix", 0) / 0.85f, 0.f, 1.f);
+        pf.delay = clampf(params.get("dly_mix", 0) / 0.6f, 0.f, 1.f);
+        pf.delayFeedback = params.get("dly_fb", .3f);
+        float b = params.get("dly_beats", .75f); int best = 0; float bd = 9;
+        for (int i = 0; i < 4; ++i) if (std::fabs(delayDivBeats(i) - b) < bd) { bd = std::fabs(delayDivBeats(i) - b); best = i; }
+        pf.delayDiv = best;
+        return pf;
+    }
+    void setPerformance(const Performance& pf) {
+        perf = pf;
+        perf.pitchRange = clampf(pf.pitchRange, 1.f, 24.f);
+        perf.pitch = clampf(pf.pitch, -perf.pitchRange, perf.pitchRange);
+        fx.setPerformance(perf);
+    }
+    const Performance& performance() const { return perf; }
+    void setTempo(float t) { bpm = clampf(t, 40.f, 240.f); fx.bpm = bpm; }
 
     void noteOn(int note, float velocity) {
         velocity = clampf(velocity, 0.f, 1.f);
@@ -717,7 +873,7 @@ public:
             stack.erase(std::remove(stack.begin(), stack.end(), note), stack.end());
             Voice& v = voices[0];
             if (v.note == note) {
-                if (!stack.empty()) { v.note = stack.back(); v.target = mtof((float)v.note); }
+                if (!stack.empty()) { v.note = stack.back(); v.target = mtof((float)v.note + v.pitchAtStart); }
                 else release(v);
             }
             return;
@@ -730,6 +886,7 @@ public:
     void process(float* outL, float* outR, int n) {
         for (int i = 0; i < n; ++i) {
             float L = 0, R = 0;
+            pitchSm += (perf.pitch - pitchSm) * 0.0015f;   // pitch knob glides (~15 ms), no zipper
             for (auto& v : voices) if (v.sounding()) { float l, r; renderVoice(v, l, r); L += l; R += r; }
             L *= 0.35f; R *= 0.35f;
             fx.process(L, R);
@@ -738,7 +895,8 @@ public:
     }
 
 private:
-    float sr = 44100, bpm = 120, bendSemi = 0;
+    float sr = 44100, bpm = 120, bendSemi = 0, pitchSm = 0;
+    Performance perf;
     uint64_t counter = 0;
     ParamMap params; VoiceP vp; FX fx;
     std::array<Voice, kVoices> voices;
@@ -762,7 +920,8 @@ private:
     }
 
     void startVoice(Voice& v, int note, float vel, bool legato) {
-        float f = mtof((float)note);
+        if (!legato) v.pitchAtStart = pitchSm;
+        float f = mtof((float)note + v.pitchAtStart);
         v.note = note; v.held = true; v.order = ++counter;
         v.target = f;
         if (!legato || vp.glide <= 0) v.freq = f;
@@ -779,7 +938,7 @@ private:
         for (int l = 0; l < VoiceP::kLayers; ++l) {
             const LayerP& lp = vp.layer[l];
             if (!v.gen[l]) continue;
-            float lf = f * std::pow(2.f, lp.oct + lp.semi / 12.f + lp.fine / 1200.f);
+            float lf = f * lp.ratio;
             c.startFreq = lf;
             v.gen[l]->retrig = wasActive && vp.mono;
             v.gen[l]->start(lp, c);
@@ -806,14 +965,14 @@ private:
     void renderVoice(Voice& v, float& outL, float& outR) {
         // pitch: glide, pitch envelope, vibrato, bend, drift
         if (v.glideK > 0) v.freq = v.target + (v.freq - v.target) * v.glideK; else v.freq = v.target;
-        float semis = v.pEnvLvl + bendSemi; v.pEnvLvl *= v.pEnvK;
+        float semis = v.pEnvLvl + bendSemi + (pitchSm - v.pitchAtStart); v.pEnvLvl *= v.pEnvK;
         if (vp.vibDepth > 0) {
             float ramp = clampf((v.t - vp.vibDelay) / 0.4f, 0.f, 1.f);
             v.vibPh += vp.vibRate / sr; if (v.vibPh >= 1) v.vibPh -= 1;
             semis += std::sin(kTwoPi * v.vibPh) * vp.vibDepth / 100.f * ramp;
         }
         float lfo = lfoValue(v);
-        float baseF = v.freq * std::pow(2.f, semis / 12.f);
+        float baseF = semis != 0.f ? v.freq * std::exp2(semis * (1.f / 12.f)) : v.freq;
         v.velSm += (v.vel - v.velSm) * 0.004f;
         NoteCtx c{sr, v.vel, baseF, v.t, lfo, &v.rng};
 
@@ -822,16 +981,17 @@ private:
             if (!v.gen[l] || !v.amp[l].active()) continue;
             const LayerP& lp = vp.layer[l];
             float e = v.amp[l].tick();
-            float lf = baseF * std::pow(2.f, lp.oct + lp.semi / 12.f + lp.fine / 1200.f);
+            float lf = baseF * lp.ratio;
             if (lp.drift > 0) {
                 v.driftT[l] += 0.0004f * v.rng.bi();
                 v.driftT[l] = clampf(v.driftT[l], -1.f, 1.f);
                 v.drift[l] += (v.driftT[l] - v.drift[l]) * 0.0005f;
-                lf *= std::pow(2.f, v.drift[l] * lp.drift / 1200.f);
+                lf *= std::exp2(v.drift[l] * lp.drift * (1.f / 1200.f));
             }
             float L, R; v.gen[l]->tick(lp, lf, c, L, R);
-            float velG = 1.f - lp.vel + lp.vel * std::pow(v.velSm, vp.ampVelCurve);
-            float gL, gR; panGains(lp.pan, gL, gR);
+            float vc = vp.ampVelCurve == 1.f ? v.velSm : std::pow(v.velSm, vp.ampVelCurve);
+            float velG = 1.f - lp.vel + lp.vel * vc;
+            float gL = lp.panL, gR = lp.panR;
             float g = e * lp.level * velG;
             if (lp.filt > 0.5f) { fl += L * g * gL; fr += R * g * gR; }
             else { bl += L * g * gL; br += R * g * gR; }
@@ -840,8 +1000,8 @@ private:
         if (vp.fType >= 0 && vp.fType <= 2) {
             float fe = v.fenv.tick();
             if ((v.ctr & 15) == 0) {
-                float oct = fe * vp.fEnv + vp.fKey * (std::log2(v.freq / 261.6f)) + (v.velSm - 0.8f) * vp.fVel + lfo * vp.lfoCut;
-                v.cutCache = clampf(vp.fCut * std::pow(2.f, oct), 20.f, sr * 0.45f);
+                float oct = fe * vp.fEnv + vp.fKey * (std::log2(baseF / 261.6f)) + (v.velSm - 0.8f) * vp.fVel + lfo * vp.lfoCut;
+                v.cutCache = clampf(vp.fCut * std::exp2(oct), 20.f, sr * 0.45f);
                 float q = 0.55f + vp.fRes * vp.fRes * (vp.fPoles > 2.5f ? 6.f : 12.f);
                 for (int ch = 0; ch < 2; ++ch) {
                     v.filt[ch][0].set(v.cutCache, q, sr);

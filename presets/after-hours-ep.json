@@ -1,0 +1,85 @@
+{
+  "name": "After Hours EP",
+  "category": "Keys",
+  "genres": [
+    "R&B",
+    "Trapsoul",
+    "Neo-soul"
+  ],
+  "description": "Dark Rhodes-style piano: round low-mids, bark only when you hit hard, slow tremolo and tape wobble.",
+  "use": "Moody R&B chords and intros.",
+  "preview_phrase": "trapsoul",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 1.3,
+      "idx_dec": 0.9,
+      "idx_sus": 0.18,
+      "fb": 0.04,
+      "idx_vel": 0.9,
+      "fm_spread": 5,
+      "a": 0.002,
+      "d": 3.2,
+      "s": 0.05,
+      "r": 0.5,
+      "keydecay": 0.45,
+      "type": 2
+    },
+    {
+      "cr": 1,
+      "mr": 14,
+      "idx": 1.2,
+      "idx_dec": 0.012,
+      "idx_sus": 0,
+      "idx_vel": 1,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.22,
+      "type": 2
+    },
+    {
+      "wave": 0,
+      "a": 0.003,
+      "d": 2.5,
+      "s": 0,
+      "r": 0.3,
+      "level": 0.15,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_res": 0.05,
+    "f_vel": 1.4,
+    "lfo_rate": 3.2,
+    "lfo_pan": 0.35,
+    "vib_rate": 0.7,
+    "vib_depth": 5,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 60,
+    "eq_ls_f": 200,
+    "eq_ls_g": 2,
+    "ch_mix": 0.25,
+    "ch_depth": 1.5,
+    "rv_mix": 0.22,
+    "rv_size": 0.6,
+    "rv_decay": 2.8,
+    "rv_damp": 0.6
+  },
+  "loudness_trim_db": -5.33,
+  "id": "after-hours-ep"
+}

@@ -1,0 +1,72 @@
+{
+  "name": "Ghost Flute",
+  "category": "Synths & Leads",
+  "genres": [
+    "Trap",
+    "Drill",
+    "Latin trap"
+  ],
+  "description": "Breathy, haunting flute-style lead with air in the attack and a slow vibrato \u2014 the dark trap flute sound.",
+  "use": "Trap and drill toplines, eerie hooks.",
+  "preview_phrase": "trap_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.05,
+      "d": 0.6,
+      "s": 0.85,
+      "r": 0.35,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.05,
+      "d": 0.6,
+      "s": 0.85,
+      "r": 0.35,
+      "level": 0.25,
+      "type": 1
+    },
+    {
+      "ncut": 1,
+      "ntrack": 1,
+      "nq": 3,
+      "nmode": 1,
+      "a": 0.02,
+      "d": 0.18,
+      "s": 0.35,
+      "r": 0.3,
+      "level": 0.6,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.05,
+    "f_type": 0,
+    "f_cut": 2800,
+    "f_key": 0.4,
+    "vib_rate": 5,
+    "vib_depth": 22,
+    "vib_delay": 0.25
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 250,
+    "dly_beats": 0.75,
+    "dly_fb": 0.3,
+    "dly_mix": 0.14,
+    "dly_damp": 0.6,
+    "rv_mix": 0.3,
+    "rv_size": 0.75,
+    "rv_decay": 3.5
+  },
+  "loudness_trim_db": -10.29,
+  "id": "ghost-flute"
+}

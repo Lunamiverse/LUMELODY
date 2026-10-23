@@ -4,9 +4,9 @@
   "genres": [
     "All genres"
   ],
-  "description": "Clean, round sub-bass with just a whisper of second harmonic so it reads on phones.",
+  "description": "Clean, round sub-bass with a whisper of second harmonic so it reads on phones.",
   "use": "Doubling 808s or kicks, any genre.",
-  "preview_phrase": "bass_melodic",
+  "preview_phrase": "bass_rnb",
   "range": [
     24,
     52
@@ -15,7 +15,7 @@
   "layers": [
     {
       "wave": 0,
-      "a": 0.006,
+      "a": 0.008,
       "d": 1,
       "s": 1,
       "r": 0.12,
@@ -24,7 +24,7 @@
     {
       "wave": 0,
       "oct": 1,
-      "a": 0.006,
+      "a": 0.008,
       "d": 1,
       "s": 1,
       "r": 0.12,
@@ -40,6 +40,6 @@
   "fx": {
     "eq_lc": 22
   },
-  "loudness_trim_db": -3.38,
+  "loudness_trim_db": -2.0,
   "id": "pure-sub"
 }

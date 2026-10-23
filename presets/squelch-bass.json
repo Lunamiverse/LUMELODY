@@ -1,0 +1,54 @@
+{
+  "name": "Squelch Bass",
+  "category": "Bass",
+  "genres": [
+    "Bounce house",
+    "Funk",
+    "Jersey club"
+  ],
+  "description": "Resonant, rubbery bass that squelches on every note \u2014 swung, funky and dark.",
+  "use": "Bounce house and funk bass grooves.",
+  "preview_phrase": "bass_bounce",
+  "range": [
+    28,
+    60
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 6,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.1,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0.2,
+      "r": 0.08,
+      "level": 0.6,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 240,
+    "f_res": 0.55,
+    "f_env": 3.2,
+    "fd": 0.1,
+    "fs": 0.05,
+    "f_vel": 1.2
+  },
+  "fx": {
+    "eq_lc": 30,
+    "sat_drive": 0.25
+  },
+  "loudness_trim_db": -1.41,
+  "id": "squelch-bass"
+}

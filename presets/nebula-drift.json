@@ -6,9 +6,9 @@
     "Trap",
     "R&B"
   ],
-  "description": "Dreamy ambient layer: a cloud of soft grains over a slow FM pad that breathes in and out.",
-  "use": "Ambient interludes, spacious trap and R&B.",
-  "preview_phrase": "pad",
+  "description": "Dark ambient cloud of soft grains over a slow FM pad that breathes in and out.",
+  "use": "Interludes, spacious trap and R&B.",
+  "preview_phrase": "pad_dark",
   "range": [
     36,
     96
@@ -18,7 +18,7 @@
     {
       "grate": 22,
       "glen": 0.3,
-      "goct": 0.2,
+      "goct": 0.1,
       "gfifth": 0.2,
       "gjit": 12,
       "a": 1.2,
@@ -45,20 +45,20 @@
   ],
   "voice": {
     "f_type": 0,
-    "f_cut": 2200,
+    "f_cut": 1400,
     "lfo_rate": 0.12,
     "lfo_cut": 0.6
   },
   "fx": {
-    "eq_lc": 130,
+    "eq_lc": 110,
     "dly_beats": 1.5,
     "dly_fb": 0.4,
     "dly_mix": 0.15,
-    "dly_damp": 0.6,
+    "dly_damp": 0.7,
     "rv_mix": 0.45,
     "rv_size": 0.9,
     "rv_decay": 6
   },
-  "loudness_trim_db": -5.45,
+  "loudness_trim_db": -4.66,
   "id": "nebula-drift"
 }

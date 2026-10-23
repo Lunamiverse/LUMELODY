@@ -1,0 +1,65 @@
+{
+  "name": "Siren Vox",
+  "category": "Synths & Leads",
+  "genres": [
+    "Dark pop",
+    "R&B",
+    "Cinematic"
+  ],
+  "description": "Dark vocal-like synth that moves between 'oh' and 'oo' \u2014 wordless, human-feeling, slightly eerie.",
+  "use": "Wordless hooks, ghostly vocal layers.",
+  "preview_phrase": "trap_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "vowel": 3,
+      "vmod": 0.8,
+      "tilt": 1.4,
+      "breath": 0.08,
+      "a": 0.06,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.5,
+      "type": 6
+    },
+    {
+      "vowel": 3.5,
+      "vmod": 0.6,
+      "tilt": 1.4,
+      "fine": -12,
+      "oct": -1,
+      "a": 0.08,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.5,
+      "level": 0.4,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.08,
+    "f_type": 0,
+    "f_cut": 2500,
+    "lfo_rate": 0.2,
+    "vib_rate": 5,
+    "vib_depth": 20,
+    "vib_delay": 0.3
+  },
+  "fx": {
+    "eq_lc": 150,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "rv_mix": 0.38,
+    "rv_size": 0.85,
+    "rv_decay": 4.5,
+    "rv_pre": 30,
+    "width": 1.2
+  },
+  "loudness_trim_db": -2.27,
+  "id": "siren-vox"
+}

@@ -3,10 +3,10 @@
   "category": "Textures & FX",
   "genres": [
     "Experimental",
-    "Hyperpop",
+    "Rage",
     "Trap"
   ],
-  "description": "Glitchy melodic bell: tempo-synced stutter repeats and bit-grit chop an FM melody into new rhythms.",
+  "description": "Glitchy dark bell: tempo-synced stutters and bit-grit chop a minor melody into new rhythms.",
   "use": "Ear-candy, transitions, glitch hooks.",
   "preview_phrase": "glitch",
   "range": [
@@ -29,7 +29,8 @@
     }
   ],
   "voice": {
-    "f_type": -1
+    "f_type": 0,
+    "f_cut": 3500
   },
   "fx": {
     "stut_prob": 0.4,
@@ -37,12 +38,13 @@
     "crush_bits": 8,
     "crush_sr": 16000,
     "eq_lc": 200,
-    "eq_hc": 11000,
+    "eq_hc": 9000,
     "dly_beats": 0.375,
     "dly_fb": 0.3,
     "dly_mix": 0.15,
-    "rv_mix": 0.15
+    "rv_mix": 0.2,
+    "rv_size": 0.6
   },
-  "loudness_trim_db": -2.64,
+  "loudness_trim_db": -2.58,
   "id": "glitch-prism"
 }

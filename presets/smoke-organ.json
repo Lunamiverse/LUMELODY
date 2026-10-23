@@ -1,0 +1,68 @@
+{
+  "name": "Smoke Organ",
+  "category": "Keys",
+  "genres": [
+    "Dark pop",
+    "Dancehall-pop",
+    "Gospel trap"
+  ],
+  "description": "Dark drawbar-style organ with a slow rotating shimmer, low-passed and driven \u2014 church in a basement.",
+  "use": "Dark pop choruses, gospel-tinged trap.",
+  "preview_phrase": "pad_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.006,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.2,
+      "level": 0.7,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": 1,
+      "a": 0.006,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.2,
+      "level": 0.4,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.5,
+      "oct": -1,
+      "a": 0.006,
+      "d": 1,
+      "s": 0.7,
+      "r": 0.2,
+      "level": 0.25,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1800,
+    "lfo_rate": 5.6,
+    "lfo_amp": 0.1,
+    "lfo_pan": 0.3
+  },
+  "fx": {
+    "sat_drive": 0.35,
+    "eq_lc": 60,
+    "ch_mix": 0.45,
+    "ch_depth": 3,
+    "ch_rate": 0.9,
+    "rv_mix": 0.25,
+    "rv_size": 0.7,
+    "rv_decay": 3
+  },
+  "loudness_trim_db": -7.14,
+  "id": "smoke-organ"
+}

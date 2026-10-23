@@ -1,0 +1,68 @@
+{
+  "name": "Perreo Lead",
+  "category": "Synths & Leads",
+  "genres": [
+    "Dark reggaeton",
+    "Latin trap",
+    "Dembow"
+  ],
+  "description": "Dark, hollow detuned square lead with slides \u2014 the moody reggaeton lead voice.",
+  "use": "Reggaeton hooks, Latin trap melodies.",
+  "preview_phrase": "reggaeton_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.45,
+      "uni": 2,
+      "det": 9,
+      "spread": 0.5,
+      "a": 0.005,
+      "d": 0.8,
+      "s": 0.75,
+      "r": 0.2,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.005,
+      "d": 0.8,
+      "s": 0.75,
+      "r": 0.2,
+      "level": 0.3,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.05,
+    "f_type": 0,
+    "f_cut": 1300,
+    "f_res": 0.25,
+    "f_env": 1.2,
+    "fd": 0.25,
+    "fs": 0.4,
+    "f_key": 0.5,
+    "vib_rate": 5.4,
+    "vib_depth": 12,
+    "vib_delay": 0.4
+  },
+  "fx": {
+    "sat_drive": 0.25,
+    "eq_lc": 150,
+    "dly_beats": 0.75,
+    "dly_fb": 0.3,
+    "dly_mix": 0.15,
+    "rv_mix": 0.2,
+    "rv_size": 0.6,
+    "rv_decay": 2.5
+  },
+  "loudness_trim_db": -9.91,
+  "id": "perreo-lead"
+}

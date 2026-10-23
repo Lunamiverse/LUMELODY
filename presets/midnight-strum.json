@@ -1,0 +1,54 @@
+{
+  "name": "Midnight Strum",
+  "category": "Guitars & Strings",
+  "genres": [
+    "Trapsoul",
+    "R&B",
+    "Dark reggaeton"
+  ],
+  "description": "Moody doubled plucked-string model (synthesized): dark, chorused, trailing echoes. Placeholder until real guitar is recorded.",
+  "use": "Guitar-style arpeggios for R&B and reggaeton intros.",
+  "preview_phrase": "guitar_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.42,
+      "damp": 0.25,
+      "decay": 3,
+      "pick": 0.2,
+      "strings": 2,
+      "sdet": 5,
+      "a": 0.001,
+      "d": 4,
+      "s": 0,
+      "r": 0.5,
+      "keydecay": 0.2,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3200
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 60,
+    "eq_pk_f": 220,
+    "eq_pk_g": 1.5,
+    "ch_mix": 0.35,
+    "ch_depth": 2,
+    "dly_beats": 0.75,
+    "dly_fb": 0.32,
+    "dly_mix": 0.16,
+    "rv_mix": 0.3,
+    "rv_size": 0.75,
+    "rv_decay": 3.5
+  },
+  "loudness_trim_db": -0.82,
+  "id": "midnight-strum"
+}

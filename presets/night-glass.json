@@ -1,0 +1,74 @@
+{
+  "name": "Night Glass",
+  "category": "Bells & Plucks",
+  "genres": [
+    "Dark reggaeton",
+    "Latin trap",
+    "R&B"
+  ],
+  "description": "Dark glass pluck: inharmonic glass partials rolled off at the top, trailing into tempo echoes.",
+  "use": "Romantic-dark reggaeton and Latin trap toplines.",
+  "preview_phrase": "reggaeton_dark",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "mat": 2,
+      "hard": 0.5,
+      "click": 0.08,
+      "decay": 1.2,
+      "beat": 1.5,
+      "a": 0.001,
+      "d": 2,
+      "s": 0,
+      "r": 0.3,
+      "level": 0.8,
+      "keydecay": 0.2,
+      "type": 4
+    },
+    {
+      "cr": 1,
+      "mr": 4,
+      "idx": 0.8,
+      "idx_dec": 0.06,
+      "idx_sus": 0,
+      "a": 0.001,
+      "d": 0.8,
+      "s": 0,
+      "r": 0.25,
+      "level": 0.45,
+      "type": 2
+    },
+    {
+      "wave": 1,
+      "oct": -1,
+      "a": 0.002,
+      "d": 0.5,
+      "s": 0,
+      "r": 0.2,
+      "level": 0.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2600,
+    "f_key": 0.4
+  },
+  "fx": {
+    "eq_lc": 160,
+    "sat_drive": 0.12,
+    "dly_beats": 0.75,
+    "dly_fb": 0.38,
+    "dly_mix": 0.2,
+    "dly_damp": 0.6,
+    "rv_mix": 0.25,
+    "rv_size": 0.7,
+    "rv_decay": 3
+  },
+  "loudness_trim_db": -1.41,
+  "id": "night-glass"
+}
