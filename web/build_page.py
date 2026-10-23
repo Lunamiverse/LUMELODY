@@ -25,7 +25,10 @@ for p in PRESETS:
                  "params": text, "gainDb": 0, "baseNote": base})
     for suf in ("", "-beat"):
         shutil.copy(os.path.join(ROOT, "previews", "mp3", s + suf + ".mp3"), os.path.join(out, "audio", s + suf + ".mp3"))
-html = open(os.path.join(ROOT, "web", "instrument_template.html")).read().replace("__PRESETS__", json.dumps(data))
+import subprocess
+schema = subprocess.run([os.path.join(ROOT, "build", "schema_dump")], capture_output=True, text=True, check=True).stdout.strip()
+json.loads(schema)
+html = open(os.path.join(ROOT, "web", "instrument_template.html")).read().replace("__PRESETS__", json.dumps(data)).replace("__SCHEMA__", schema)
 open(os.path.join(out, "index.html"), "w").write(html)
 shutil.copy(os.path.join(ROOT, "build", "lumi.wasm"), os.path.join(out, "lumi.wasm"))
 shutil.copy(os.path.join(ROOT, "web", "lumi-worklet.js"), os.path.join(out, "lumi-worklet.js"))
