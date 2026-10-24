@@ -22,6 +22,12 @@
 @property --pearl { syntax: "<color>"; inherits: true; initial-value: #f4f6f9; }
 @property --pearl2 { syntax: "<color>"; inherits: true; initial-value: #cfd4dc; }
 @property --line { syntax: "<color>"; inherits: true; initial-value: #23262c; }
+@property --h1 { syntax: "<color>"; inherits: true; initial-value: #ff7ab8; }
+@property --h2 { syntax: "<color>"; inherits: true; initial-value: #ffd877; }
+@property --h3 { syntax: "<color>"; inherits: true; initial-value: #8dffb8; }
+@property --h4 { syntax: "<color>"; inherits: true; initial-value: #6fe3ff; }
+@property --h5 { syntax: "<color>"; inherits: true; initial-value: #8a96ff; }
+@property --h6 { syntax: "<color>"; inherits: true; initial-value: #cf8bff; }
 :root {
   color-scheme: dark;
   --display: "Jost", "Futura", "Avenir Next", "Segoe UI", sans-serif;
@@ -31,51 +37,64 @@
   --ch0: #ffffff; --ch1: #dfe3e9; --ch2: #8a9099; --ch3: #2a2d33;
   --ir1: #ffb6d9; --ir2: #b9a8ff; --ir3: #9fe6ff; --glow: #cfe2ff;
   --ink: #eef1f5; --muted: #8c939d; --pearl: #f4f6f9; --pearl2: #cfd4dc; --line: #23262c;
-  --ir-op: .28;
+  --ir-op: .5;
+  --h1: #ff7ab8; --h2: #ffd877; --h3: #8dffb8; --h4: #6fe3ff; --h5: #8a96ff; --h6: #cf8bff;
+  /* holographic foil, as a reusable paint: streaky (like a foil can) and a softer sweep */
+  --holo: linear-gradient(100deg, var(--h1), var(--h2), var(--h3), var(--h4), var(--h5), var(--h6), var(--h1));
+  --holo-v: linear-gradient(180deg, var(--h4), var(--h5) 30%, var(--h6) 50%, var(--h1) 70%, var(--h2));
+  --panel: color-mix(in oklab, var(--obs2) 72%, transparent);
   transition: --bg .8s, --obs1 .8s, --obs2 .8s, --ch0 .8s, --ch1 .8s, --ch2 .8s, --ch3 .8s, --ir1 .8s, --ir2 .8s, --ir3 .8s,
-              --glow .8s, --ink .8s, --muted .8s, --pearl .8s, --pearl2 .8s, --line .8s;
+              --glow .8s, --ink .8s, --muted .8s, --pearl .8s, --pearl2 .8s, --line .8s,
+              --h1 .8s, --h2 .8s, --h3 .8s, --h4 .8s, --h5 .8s, --h6 .8s;
 }
 :root[data-theme="rose"] { --bg: #0a0708; --obs1: #1a1316; --obs2: #0a0708; --ch0: #fff7f9; --ch1: #f0dde3; --ch2: #a8858f; --ch3: #3a2a30;
-  --ir1: #ffb3cf; --ir2: #e0b8ff; --ir3: #ffd3c4; --glow: #ffb7cf; --ink: #fbeff3; --muted: #a8919a; --pearl: #fdf4f6; --pearl2: #e6d0d7; --line: #2c2125; --ir-op: .34; }
+  --ir1: #ffb3cf; --ir2: #e0b8ff; --ir3: #ffd3c4; --glow: #ffb7cf; --ink: #fbeff3; --muted: #a8919a; --pearl: #fdf4f6; --pearl2: #e6d0d7; --line: #2c2125; --ir-op: .55; --h1: #ff8fc4; --h2: #ffc7da; --h3: #ffd6b8; --h4: #f4b4ff; --h5: #c8a8ff; --h6: #ffa3cf; }
 :root[data-theme="gold"] { --bg: #090806; --obs1: #18150f; --obs2: #090806; --ch0: #fffaf0; --ch1: #ece2cc; --ch2: #a59573; --ch3: #3a3223;
-  --ir1: #ffe2a6; --ir2: #ffc9b0; --ir3: #e6efc6; --glow: #ffd79a; --ink: #f8f2e6; --muted: #a59a85; --pearl: #fdf8ee; --pearl2: #e5dac4; --line: #2b261c; --ir-op: .26; }
+  --ir1: #ffe2a6; --ir2: #ffc9b0; --ir3: #e6efc6; --glow: #ffd79a; --ink: #f8f2e6; --muted: #a59a85; --pearl: #fdf8ee; --pearl2: #e5dac4; --line: #2b261c; --ir-op: .55; --h1: #ffd27a; --h2: #fff0b8; --h3: #ffbf94; --h4: #f2f6bf; --h5: #ffb0a0; --h6: #e8d4ff; }
 :root[data-theme="violet"] { --bg: #08070c; --obs1: #16131f; --obs2: #08070c; --ch0: #fbf9ff; --ch1: #e2dcf2; --ch2: #8f87a8; --ch3: #2c2840;
-  --ir1: #c4a8ff; --ir2: #ff9fe0; --ir3: #93d6ff; --glow: #c6a6ff; --ink: #f2eefc; --muted: #9a92b0; --pearl: #f8f5ff; --pearl2: #d8d0ec; --line: #262137; --ir-op: .36; }
+  --ir1: #c4a8ff; --ir2: #ff9fe0; --ir3: #93d6ff; --glow: #c6a6ff; --ink: #f2eefc; --muted: #9a92b0; --pearl: #f8f5ff; --pearl2: #d8d0ec; --line: #262137; --ir-op: .55; --h1: #b07dff; --h2: #ff8fe0; --h3: #7fd8ff; --h4: #9f9bff; --h5: #e7a8ff; --h6: #74e8ff; }
 :root[data-theme="prism"] { --bg: #070709; --obs1: #16161b; --obs2: #07070a; --ch0: #ffffff; --ch1: #e6e6ee; --ch2: #8e8e9c; --ch3: #2b2b34;
-  --ir1: #ff9fd0; --ir2: #9fd8ff; --ir3: #ffe49f; --glow: #f0d2ff; --ink: #f4f3f8; --muted: #9795a3; --pearl: #fbfaff; --pearl2: #dedce8; --line: #26252e; --ir-op: .55; }
+  --ir1: #ff9fd0; --ir2: #9fd8ff; --ir3: #ffe49f; --glow: #f0d2ff; --ink: #f4f3f8; --muted: #9795a3; --pearl: #fbfaff; --pearl2: #dedce8; --line: #26252e; --ir-op: .55; --h1: #ff4f9a; --h2: #ffd24f; --h3: #5cff9a; --h4: #3fd8ff; --h5: #6a6bff; --h6: #c34fff; }
 * { box-sizing: border-box; }
 body {
   margin: 0; color: var(--ink); font: 13px/1.45 var(--ui); -webkit-font-smoothing: antialiased;
-  background: radial-gradient(90% 60% at 50% 0%, color-mix(in oklab, var(--obs1) 70%, transparent), transparent 70%), var(--bg);
+  background: var(--holo), var(--bg); background-attachment: fixed;
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 18px 40px;
 }
 button, select, input, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 1.5px solid var(--glow); outline-offset: 2px; }
 
 /* ------------------------------------------------ the instrument object */
-.unit { max-width: 980px; margin: 0 auto; position: relative; border-radius: 22px; padding: 2px;
-  /* polished chrome bezel */
-  background: linear-gradient(calc(160deg + var(--lx, 0) * 25deg), var(--ch0), var(--ch2) 18%, var(--ch3) 34%, var(--ch1) 52%, var(--ch3) 70%, var(--ch2) 86%, var(--ch0));
-  box-shadow: 0 30px 70px -28px #000, 0 2px 6px rgba(0,0,0,.6); }
-.unit::after { /* holographic film on the bezel, strongest where the light grazes */
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: soft-light; opacity: var(--ir-op);
-  background: conic-gradient(from calc(200deg + var(--lx, 0) * 60deg), var(--ir1), var(--ir2), var(--ir3), var(--ir1), var(--ir2), var(--ir3), var(--ir1)); }
-.body { position: relative; border-radius: 20px; padding: 12px 14px 14px; display: grid; gap: 10px;
-  /* obsidian glass */
-  background: linear-gradient(180deg, var(--obs1), var(--obs2) 55%), var(--obs2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(0,0,0,.7), inset 0 -20px 40px -20px rgba(0,0,0,.8); overflow: hidden; }
-.body::before { /* glass reflection: one soft diagonal sheen */
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(162deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.02) 22%, transparent 23%, transparent 100%); }
+.bgfoil { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+.unit { max-width: 1060px; margin: 0 auto; position: relative; border-radius: 24px; padding: 3px;
+  /* holographic chrome bezel: foil streaks over polished metal, sliding with the light */
+  background:
+    repeating-linear-gradient(calc(96deg + var(--lx, 0) * 12deg),
+      color-mix(in oklab, var(--h1) 70%, transparent) 0, color-mix(in oklab, var(--h2) 70%, transparent) 11px, color-mix(in oklab, var(--h3) 70%, transparent) 23px,
+      color-mix(in oklab, var(--h4) 70%, transparent) 31px, color-mix(in oklab, var(--h5) 70%, transparent) 44px, color-mix(in oklab, var(--h6) 70%, transparent) 52px, color-mix(in oklab, var(--h1) 70%, transparent) 63px),
+    linear-gradient(calc(160deg + var(--lx, 0) * 25deg), var(--ch0), var(--ch2) 18%, var(--ch3) 34%, var(--ch1) 52%, var(--ch3) 70%, var(--ch2) 86%, var(--ch0));
+  box-shadow: 0 30px 70px -24px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.5); }
+.unit::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: soft-light; opacity: .6;
+  background: linear-gradient(calc(150deg + var(--lx, 0) * 30deg), rgba(255,255,255,.9), transparent 30%, transparent 60%, rgba(255,255,255,.7) 75%, transparent 90%); }
+.body { position: relative; border-radius: 21px; padding: 14px; display: grid; gap: 12px; overflow: hidden;
+  background: var(--holo), var(--obs2);   /* shown only if WebGL is unavailable; the live foil canvas covers it */
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.35); }
+.body > .foil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.body::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(162deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.03) 22%, transparent 23%); }
+/* smoked glass over the foil: the foil glows through, text stays readable */
+.glass { position: relative; z-index: 2; border-radius: 16px; background: var(--panel); --muted: color-mix(in oklab, var(--ink) 74%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.16), 0 10px 26px -14px rgba(0,0,0,.7); }
 
 /* ------------------------------------------------ top bar */
-.top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; position: relative; z-index: 2; }
+.top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 7px 10px; }
 .logo { display: flex; align-items: center; gap: 8px; }
 .logo canvas { width: 26px; height: 26px; display: block; }
 .wm { font: 400 17px/1 var(--display); letter-spacing: .34em; text-transform: uppercase; margin: 0; white-space: nowrap;
   background-image:
     linear-gradient(100deg, transparent 0 38%, rgba(255,255,255,.95) 48%, transparent 58% 100%),
-    linear-gradient(100deg, transparent 10%, color-mix(in oklab, var(--ir1) 55%, transparent) 30%, color-mix(in oklab, var(--ir2) 50%, transparent) 50%, color-mix(in oklab, var(--ir3) 50%, transparent) 70%, transparent 90%),
+    linear-gradient(100deg, color-mix(in oklab, var(--h1) 60%, transparent) 10%, color-mix(in oklab, var(--h2) 55%, transparent) 26%, color-mix(in oklab, var(--h3) 55%, transparent) 42%, color-mix(in oklab, var(--h4) 55%, transparent) 58%, color-mix(in oklab, var(--h5) 55%, transparent) 74%, color-mix(in oklab, var(--h6) 60%, transparent) 90%),
     linear-gradient(180deg, var(--ch0) 0%, var(--ch1) 32%, var(--ch2) 47%, var(--ch3) 51%, var(--ch1) 58%, var(--ch0) 78%, var(--ch2) 100%);
   background-size: 250% 100%, 200% 100%, 100% 100%; background-position: 140% 0, calc(50% + var(--lx, 0) * 40%) 0, 0 0;
   -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,.8)); animation: sheen 2.2s .3s cubic-bezier(.3,.6,.2,1) both; }
@@ -89,10 +108,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .picker .c { font: 600 9.5px var(--ui); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .right { display: flex; align-items: center; gap: 10px; }
 .swatches { display: flex; gap: 6px; }
-.sw { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; position: relative;
-  background: radial-gradient(circle at 35% 28%, #fff 0 8%, transparent 26%), linear-gradient(180deg, var(--a), var(--b) 48%, var(--c) 52%, var(--a));
-  box-shadow: inset 0 -2px 3px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.6); }
-.sw::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(var(--d), transparent 40%, var(--e), transparent 80%, var(--d)); mix-blend-mode: soft-light; }
+.sw { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 -2px 3px rgba(0,0,0,.35), 0 1px 3px rgba(0,0,0,.6); }
 .sw[aria-pressed="true"] { box-shadow: 0 0 0 1.5px var(--obs2), 0 0 0 2.5px var(--glow); }
 .icon-b { height: 30px; padding: 0 10px; cursor: pointer; font: 600 10.5px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .icon-b[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--glow) 70%, transparent), 0 0 12px -4px var(--glow); }
@@ -102,7 +118,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
 
 /* ------------------------------------------------ effect rows */
 .rack { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(7, auto); justify-content: space-between; gap: 4px 6px;
-  padding: 10px 6px 8px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(0,0,0,.15)); box-shadow: inset 0 0 0 1px var(--line); }
+  padding: 10px 8px 8px; }
 .grp { display: grid; gap: 4px; justify-items: center; min-width: 0; align-content: start; }
 .grp > .gname { font: 600 9px var(--ui); letter-spacing: .26em; text-transform: uppercase; color: var(--muted); padding-bottom: 2px; width: 100%; text-align: center;
   border-bottom: 1px solid var(--line); }
@@ -125,8 +141,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .knob.mini .face { width: 34px; height: 34px; }
 
 /* detail strip for the selected effect */
-.detail { position: relative; z-index: 2; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 12px; border-radius: 14px; min-height: 56px;
-  background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(255,255,255,.02)); box-shadow: inset 0 1px 3px rgba(0,0,0,.7), inset 0 0 0 1px var(--line); }
+.detail { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 12px; min-height: 56px; }
 .detail .ttl { display: grid; gap: 2px; min-width: 0; max-width: 220px; }
 .detail .ttl b { font: 400 13px var(--display); letter-spacing: .22em; text-transform: uppercase; }
 .detail .ttl span { font-size: 11px; color: var(--muted); line-height: 1.35; }
@@ -142,45 +157,39 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .empty { color: var(--muted); font-size: 11.5px; }
 
 /* ------------------------------------------------ compact piano */
-.piano { position: relative; z-index: 2; display: grid; gap: 6px; }
+.piano { display: grid; gap: 8px; padding: 8px; }
 .pbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .pbar .row { display: flex; align-items: center; gap: 6px; }
 .oct { font: 400 12px var(--display); letter-spacing: .16em; min-width: 7.4em; text-align: center; font-variant-numeric: tabular-nums; }
 .bpm { width: 58px; height: 30px; padding: 0 8px; text-align: center; font-variant-numeric: tabular-nums; }
-.keybed { position: relative; border-radius: 12px; padding: 0 6px 8px; background: linear-gradient(180deg, #000, color-mix(in oklab, var(--obs2) 80%, #000));
-  box-shadow: inset 0 6px 14px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.03); }
-.keybed::before { /* chrome name-board strip the keys disappear under */
-  content: ""; display: block; height: 7px; margin: 0 -6px 0; border-radius: 12px 12px 0 0;
-  background: linear-gradient(180deg, var(--ch1), var(--ch2) 45%, var(--ch3) 55%, #000); box-shadow: 0 3px 6px rgba(0,0,0,.9); }
-.keys { position: relative; height: clamp(104px, 17vw, 132px); perspective: 900px; touch-action: none; user-select: none; -webkit-user-select: none; }
-.spill { position: absolute; left: -6px; top: -6px; width: calc(100% + 12px); height: calc(100% + 14px); pointer-events: none; z-index: 4; mix-blend-mode: screen; }
-.key { position: absolute; top: 0; border: 0; padding: 0; cursor: pointer; transform-origin: 50% 0; --lum: 0;
-  transition: transform 160ms cubic-bezier(.2,.8,.3,1.15), filter 160ms; -webkit-tap-highlight-color: transparent; }
+.keybed { position: relative; border-radius: 12px; padding: 6px; background: rgba(4,4,7,.72);
+  box-shadow: inset 0 8px 18px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06); }
+.keybed::before { /* foil frame around the keys */
+  content: ""; position: absolute; inset: 6px; border-radius: 3px; pointer-events: none; z-index: 5; padding: 1.2px;
+  background: var(--holo); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .95; }
+.keys { position: relative; height: clamp(84px, 10vw, 112px); touch-action: none; user-select: none; -webkit-user-select: none; }
+.spill { position: absolute; left: -6px; top: -6px; width: calc(100% + 12px); height: calc(100% + 12px); pointer-events: none; z-index: 4; mix-blend-mode: screen; }
+.key { position: absolute; top: 0; border: 0; padding: 0; margin: 0; cursor: pointer; background: none; --lum: 0;
+  transition: transform 150ms cubic-bezier(.2,.8,.3,1.15); -webkit-tap-highlight-color: transparent; }
 .key.down { transition-duration: 40ms; transition-timing-function: ease-out; }
-.wk { height: 100%; z-index: 1; border-radius: 2px 2px 6px 6px;
-  /* translucent pearl glass: layered whites with depth toward the front */
-  background: linear-gradient(180deg, color-mix(in oklab, var(--pearl2) 70%, #000 10%) 0%, var(--pearl) 7%, color-mix(in oklab, var(--pearl) 92%, var(--pearl2)) 60%, var(--pearl2) 92%);
-  box-shadow: inset 1px 0 0 rgba(255,255,255,.95), inset -1px 0 0 rgba(0,0,0,.2), 0 6px 10px -5px rgba(0,0,0,.9), 0 1px 1px rgba(0,0,0,.6),
-    0 0 calc(var(--lum) * 18px) color-mix(in oklab, var(--glow) calc(var(--lum) * 90%), transparent); }
-.wk::before { /* light inside the glass: rises from the front edge while the note sounds */
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--lum);
-  background: radial-gradient(120% 70% at 50% 100%, color-mix(in oklab, var(--glow) 85%, #fff), color-mix(in oklab, var(--ir2) 40%, transparent) 55%, transparent 80%),
-              linear-gradient(115deg, transparent 20%, color-mix(in oklab, var(--ir1) 45%, transparent) 45%, color-mix(in oklab, var(--ir3) 40%, transparent) 60%, transparent 80%); }
-.wk::after { /* chrome lip on the front edge */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7px; border-radius: 0 0 6px 6px; pointer-events: none;
-  background: linear-gradient(180deg, var(--ch3), var(--ch1) 35%, var(--ch0) 55%, var(--ch2) 100%); opacity: .9; }
-.wk.down { transform: rotateX(-6deg) translateY(1.5px); filter: brightness(.96); }
-.wk span { position: absolute; left: 0; right: 0; bottom: 11px; text-align: center; font: 600 8.5px var(--ui); letter-spacing: .08em; color: color-mix(in oklab, var(--ch2) 80%, #000); pointer-events: none; }
-.bk { height: 60%; z-index: 3; border-radius: 1px 1px 4px 4px;
-  /* obsidian crystal with a mirror-chrome top facet */
-  background: linear-gradient(180deg, #000 0%, #16171b 5%, #0b0c0f 70%, color-mix(in oklab, var(--ch3) 60%, #000) 88%, var(--ch2) 96%, #000 100%);
-  box-shadow: inset 1px 0 0 rgba(255,255,255,.12), inset -1px 0 0 rgba(255,255,255,.05), 0 6px 8px -3px rgba(0,0,0,.95), 0 0 0 1px #000,
-    0 0 calc(var(--lum) * 16px) color-mix(in oklab, var(--glow) calc(var(--lum) * 100%), transparent); }
-.bk::before { content: ""; position: absolute; left: 14%; right: 14%; top: 6%; height: 70%; border-radius: 2px; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,.16), transparent 35%), linear-gradient(90deg, transparent, color-mix(in oklab, var(--ir2) 30%, transparent) 50%, transparent); opacity: .7; }
-.bk::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--lum);
-  background: linear-gradient(0deg, color-mix(in oklab, var(--glow) 80%, transparent), color-mix(in oklab, var(--ir1) 30%, transparent) 45%, transparent 75%); }
-.bk.down { transform: rotateX(-7deg) translateY(1px); }
+.wk { height: 100%; z-index: 1; background: linear-gradient(180deg, rgba(255,255,255,.012), rgba(255,255,255,.045)); }
+.wk::before { /* the key fills with foil light while its note sounds; brightness follows velocity */
+  content: ""; position: absolute; inset: 0 1px 0 0; pointer-events: none; opacity: var(--lum);
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.08) 35%, rgba(255,255,255,.55) 100%), var(--holo-v);
+  box-shadow: 0 0 calc(var(--lum) * 18px) color-mix(in oklab, var(--glow) 70%, transparent); }
+.wk::after { /* foil separator line */
+  content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1.2px; pointer-events: none; background: var(--holo-v); opacity: .85; }
+.wk:last-child::after { display: none; }
+.wk.down { transform: translateY(1.5px); }
+.wk span { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font: 600 8.5px var(--ui); letter-spacing: .08em; color: var(--muted); pointer-events: none; }
+.bk { height: 58%; z-index: 3; border: 1.3px solid transparent; border-top: 0; border-radius: 0 0 3px 3px;
+  /* outlined black key: dark glass inside, holographic foil outline */
+  background: linear-gradient(180deg, #050508, #0b0b10) padding-box, var(--holo-v) border-box;
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.8); }
+.bk::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--lum);
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.45)), var(--holo-v);
+  box-shadow: 0 0 calc(var(--lum) * 16px) color-mix(in oklab, var(--glow) 70%, transparent); }
+.bk.down { transform: translateY(1.5px); }
 
 /* ------------------------------------------------ browser sheet */
 .sheet { position: absolute; inset: 52px 14px 14px; z-index: 10; border-radius: 16px; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 8px; padding: 12px;
@@ -214,7 +223,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .start button { border: 0; cursor: pointer; border-radius: 999px; padding: 13px 30px; font: 400 14px var(--display); letter-spacing: .34em; text-transform: uppercase; color: #0b0c0f;
   background: linear-gradient(180deg, var(--ch0), var(--ch1) 40%, var(--ch2) 50%, var(--ch1) 62%, var(--ch0)); box-shadow: 0 0 26px -8px var(--glow), 0 2px 0 rgba(255,255,255,.4) inset; }
 .start p { margin: 0; color: var(--muted); font-size: 12.5px; }
-.foot { max-width: 980px; margin: 14px auto 0; font-size: 11.5px; color: var(--muted); }
+.foot { max-width: 1060px; margin: 14px auto 0; font-size: 11.5px; color: var(--ink); padding: 10px 14px; border-radius: 14px; background: var(--panel); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 
 @media (max-width: 900px) {
   .rack { grid-template-columns: repeat(4, auto); justify-content: space-around; }
@@ -231,6 +240,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) { .wm { animation: none; } .key { transition: none; } }
 </style>
 
+<canvas class="bgfoil" id="bgfoil" aria-hidden="true"></canvas>
 <div class="start" id="start">
   <div>
     <button type="button" id="startBtn">Play</button>
@@ -240,7 +250,8 @@ button, select, input, textarea { font: inherit; color: inherit; }
 
 <div class="unit" id="unit">
   <div class="body" id="body">
-    <header class="top">
+    <canvas class="foil" id="foil" aria-hidden="true"></canvas>
+    <header class="top glass">
       <div class="logo">
         <canvas id="moon" width="64" height="64" aria-hidden="true"></canvas>
         <h1 class="wm">Lumelody</h1>
@@ -258,10 +269,10 @@ button, select, input, textarea { font: inherit; color: inherit; }
       </div>
     </header>
 
-    <section class="rack" id="rack" aria-label="Effects"></section>
-    <section class="detail" id="detail" aria-live="polite"></section>
+    <section class="rack glass" id="rack" aria-label="Effects"></section>
+    <section class="detail glass" id="detail" aria-live="polite"></section>
 
-    <section class="piano" aria-label="Keyboard">
+    <section class="piano glass" aria-label="Keyboard">
       <div class="pbar">
         <div class="row">
           <button class="glass-pill icon-b" type="button" id="octDown" aria-label="Octave down">Oct −</button>
@@ -308,7 +319,7 @@ button, select, input, textarea { font: inherit; color: inherit; }
     <div class="toast" id="toast" hidden></div>
   </div>
 </div>
-<p class="foot">All sounds are original synthesis from the LUMELODY engine (the plugin's C++ code, compiled for the browser); every key is synthesized at its own pitch. All 20 effects run in that engine and pass 184 automated checks. Chrome, glass and film are rendered live (WebGL knobs and logo, CSS keys); they approximate these materials and fall back to flat drawing without WebGL. Recorded acoustic instruments are not included yet.</p>
+<p class="foot">All sounds are original synthesis from the LUMELODY engine (the plugin's C++ code, compiled for the browser); every key is synthesized at its own pitch. All 20 effects run in that engine and pass 184 automated checks. The holographic foil, chrome knobs and logo are rendered live in WebGL and react to your pointer; they approximate real foil and fall back to a still gradient without WebGL. Recorded acoustic instruments are not included yet.</p>
 <audio id="demo" preload="none"></audio>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -330,11 +341,11 @@ const GROUPS = [["Space", ["reverb", "delay", "shimmer", "freeze"]], ["Motion", 
                 ["Rhythm", ["stutter", "gate", "reverse"]], ["Pitch", ["pitch", "glide", "octave"]], ["Texture", ["granular"]], ["Dynamics", ["glue"]]];
 const SHORT = { reverse: "Reverse", gate: "Gate", octave: "Octave", resonator: "Resonator", glue: "Glue", saturation: "Saturate", granular: "Granular" };
 const THEMES = {
-  silver: { name: "Silver Chrome", sw: ["#ffffff", "#c4c9d1", "#555b64", "#9fe6ff", "#ffb6d9"], k: { tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .28 } },
-  rose:   { name: "Rose Chrome",   sw: ["#fff4f7", "#e9c6d1", "#7a5560", "#ffb3cf", "#e0b8ff"], k: { tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .4 } },
-  gold:   { name: "Gold Chrome",   sw: ["#fffaf0", "#e8d6ac", "#7a6640", "#ffe2a6", "#ffc9b0"], k: { tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .3 } },
-  violet: { name: "Violet Chrome", sw: ["#f8f5ff", "#cdc2ec", "#4d4370", "#c4a8ff", "#ff9fe0"], k: { tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .45 } },
-  prism:  { name: "Prism Chrome",  sw: ["#ffffff", "#d9d9e6", "#55556a", "#ff9fd0", "#9fd8ff"], k: { tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: .8 } },
+  silver: { name: "Silver Chrome", k: { tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .85, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
+  rose:   { name: "Rose Chrome",   k: { tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .8, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
+  gold:   { name: "Gold Chrome",   k: { tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .7, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
+  violet: { name: "Violet Chrome", k: { tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .85, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
+  prism:  { name: "Prism Chrome",  k: { tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: 1, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -358,7 +369,7 @@ const CR = (() => {
   let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false }); } catch (e) { gl = null; }
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
   const theme = {}; let from = null, target = null, t0 = 0;
-  function conv(k) { return { tint: k.tint, ir1: hex(k.ir1), ir2: hex(k.ir2), ir3: hex(k.ir3), glow: hex(k.glow), glass: k.glass, iri: [k.iri] }; }
+  function conv(k) { return { tint: k.tint, glow: hex(k.glow), glass: k.glass, iri: [k.iri], hh: k.h.flatMap(hex) }; }
   function setTheme(k, animate) {
     const tgt = conv(k);
     if (!animate || !target) { for (const key in tgt) theme[key] = tgt[key].slice(); target = tgt; from = null; return; }
@@ -376,7 +387,7 @@ const CR = (() => {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
       uniform float rot, glow, on, mode, iri, time; uniform vec2 light;
-      uniform vec3 tint, ir1, ir2, ir3, gcol, glass;
+      uniform vec3 tint, gcol, glass; uniform vec3 hh[6];
       // procedural photo studio: dark room, a big softbox that follows the light, a horizon line, two strip lights
       vec3 env(vec3 d) {
         float up = d.y;
@@ -388,7 +399,7 @@ const CR = (() => {
         c += vec3(.35) * smoothstep(.05, 0., abs(d.x - .62)) * smoothstep(0., .8, up);
         return c * tint;
       }
-      vec3 film(float t) { vec3 w = .5 + .5 * cos(6.28318 * (t + vec3(0., .33, .67))); return (ir1 * w.x + ir2 * w.y + ir3 * w.z) / 1.5; }
+      vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
       float fres(float c, float f0) { return f0 + (1. - f0) * pow(1. - c, 5.); }
       void main() {
         vec2 p = v; float r = length(p); float a = atan(p.y, p.x);
@@ -423,7 +434,10 @@ const CR = (() => {
               c = metal * (.62 + .22 * dot(q, normalize(light)) - .18 * q.y) + e * .22;
               c += vec3(.42) * tint * aniso * (.55 + .45 * brush) + vec3(.3) * streak;
               c *= .9 + .14 * brush;
-              c += film(a * .32 + r * 2.4 + time * .02) * iri * aniso * .22;   // optical film caught in the brushing
+              // holographic foil caught in the brushing: the spectrum sweeps around the cap and slides as the light moves
+              vec3 holo = film((a - la) * .32 + r * 1.3 + brush * .05 + time * .02);
+              float lv = dot(c, vec3(.333));
+              c = mix(c, holo * (lv * 1.3 + .08) + vec3(.3) * streak, clamp(iri, 0., 1.) * .78);
               c *= mix(.62, 1., smoothstep(.765, .72, r));   // the cap falls off into the rim
               // indicator: a small domed chrome bead set into the cap, ringed with light when the effect is on
               vec2 dp = vec2(cos(rot), sin(rot)) * .56;
@@ -463,7 +477,7 @@ const CR = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["rot", "glow", "on", "mode", "iri", "time", "light", "tint", "ir1", "ir2", "ir3", "gcol", "glass"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["rot", "glow", "on", "mode", "iri", "time", "light", "tint", "hh", "gcol", "glass"]) U[u] = gl.getUniformLocation(prog, u);
       gl.viewport(0, 0, size, size);
     } catch (e) { console.warn("chrome shader unavailable:", e); gl = null; }
   }
@@ -475,7 +489,7 @@ const CR = (() => {
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform1f(U.rot, rot); gl.uniform1f(U.glow, opts.glow || 0); gl.uniform1f(U.on, opts.on ? 1 : 0); gl.uniform1f(U.mode, opts.mode || 0);
       gl.uniform1f(U.iri, theme.iri[0]); gl.uniform1f(U.time, performance.now() / 1000); gl.uniform2f(U.light, light[0], light[1]);
-      gl.uniform3fv(U.tint, theme.tint); gl.uniform3fv(U.ir1, theme.ir1); gl.uniform3fv(U.ir2, theme.ir2); gl.uniform3fv(U.ir3, theme.ir3); gl.uniform3fv(U.gcol, theme.glow); gl.uniform3fv(U.glass, theme.glass);
+      gl.uniform3fv(U.tint, theme.tint); gl.uniform3fv(U.hh, theme.hh); gl.uniform3fv(U.gcol, theme.glow); gl.uniform3fv(U.glass, theme.glass);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       c2.drawImage(cv, 0, 0, w, h);
     } else {
@@ -485,8 +499,90 @@ const CR = (() => {
         c2.fillStyle = "#e8ebf0"; c2.beginPath(); c2.arc(w / 2 + Math.cos(rot) * w * .24, h / 2 - Math.sin(rot) * h * .24, w * .045, 0, 7); c2.fill(); }
     }
   }
-  return { draw, setTheme, step, light, ok: () => !!gl };
+  return { draw, setTheme, step, light, theme, ok: () => !!gl };
 })();
+
+// ================================================================ holographic foil (background + plugin body)
+// A crinkled metal sheet (domain-warped noise height field) lit by a moving light; its tilt picks a colour from the
+// theme's foil spectrum, like a diffraction foil. Rendered at reduced resolution and redrawn ~24 times a second.
+function makeFoil(cv, P) {
+  // Two passes: the crinkled surface (height + normal) is baked once into a texture whenever the size changes;
+  // every frame only re-lights it with the moving light, which is cheap enough for any GPU.
+  let gl = null; try { gl = cv.getContext("webgl", { antialias: false, alpha: false }); } catch (e) {}
+  if (!gl) return null;
+  const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
+  const bakeFs = `precision highp float; varying vec2 v; uniform vec2 res; uniform float scale;
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
+      return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
+    float fbm(vec2 p) { float s = 0., a = .5; for (int i = 0; i < 5; i++) { s += a * noise(p); p = mat2(1.6, 1.2, -1.2, 1.6) * p; a *= .5; } return s; }
+    float H(vec2 p) { vec2 q = vec2(fbm(p), fbm(p + vec2(5.2, 1.3))); return fbm(p + 1.7 * q); }
+    void main() {
+      vec2 uv = v * .5 + .5; vec2 p = vec2(uv.x * res.x / res.y, uv.y) * scale;
+      float e = .015, h0 = H(p), hx = H(p + vec2(e, 0.)), hy = H(p + vec2(0., e));
+      vec2 g = clamp(vec2(h0 - hx, h0 - hy) / e * .32, -1., 1.);
+      gl_FragColor = vec4(g * .5 + .5, h0, hash(floor(gl_FragCoord.xy)));
+    }`;
+  const litFs = `precision mediump float; varying vec2 v;
+    uniform sampler2D tex; uniform vec2 res, light; uniform float time, contrast, sat, grain, bright, streak; uniform vec3 hh[6]; uniform vec3 tint;
+    vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
+    void main() {
+      vec2 uv = v * .5 + .5; vec4 T = texture2D(tex, uv);
+      vec3 n = normalize(vec3(T.xy * 2. - 1., 1.)); float h0 = T.z;
+      vec3 L = normalize(vec3(light, .9));
+      float diff = max(0., dot(n, L)), spec = pow(max(0., reflect(-L, n).z), 16.);
+      float asp = res.x / res.y;
+      float st = sin(uv.x * asp * 38. + h0 * 6. + sin(uv.x * asp * 7.) * 2.) * .5 + .5;   // foil-can streaks
+      float phase = dot(n.xy, light) * 1.4 + h0 * 2.6 + st * .3 * streak + time * .012;
+      vec3 f = film(phase);
+      float silver = .42 + .55 * diff;
+      vec3 col = mix(vec3(silver), f * (.3 + .8 * silver), sat);
+      col *= mix(1., .3 + .95 * smoothstep(.15, .85, diff), contrast);
+      col += (vec3(.85) + f * .5) * spec * .75;
+      col += (T.w - .5) * grain;   // fine sparkle, like printed holographic film
+      gl_FragColor = vec4(col * bright * tint, 1.);
+    }`;
+  const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  const prog = fs => { const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr); return pr; };
+  let bake, lit, tex, fb; const UB = {}, UL = {};
+  try {
+    bake = prog(bakeFs); lit = prog(litFs);
+    const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    for (const pr of [bake, lit]) { const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0); }
+    for (const u of ["res", "scale"]) UB[u] = gl.getUniformLocation(bake, u);
+    for (const u of ["tex", "res", "light", "time", "contrast", "sat", "grain", "bright", "streak", "hh", "tint"]) UL[u] = gl.getUniformLocation(lit, u);
+    tex = gl.createTexture(); fb = gl.createFramebuffer();
+  } catch (e) { console.warn("foil shader unavailable:", e); return null; }
+  let bw = 0, bh = 0;
+  function rebake(w, h) {
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    gl.viewport(0, 0, w, h); gl.useProgram(bake); gl.uniform2f(UB.res, w, h); gl.uniform1f(UB.scale, P.scale);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); bw = w; bh = h;
+  }
+  return {
+    draw(now) {
+      const r = cv.getBoundingClientRect(), d = Math.min(1.5, window.devicePixelRatio || 1) * P.res;
+      const w = Math.max(2, Math.round(r.width * d)), h = Math.max(2, Math.round(r.height * d));
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+      if (bw !== w || bh !== h) rebake(w, h);
+      gl.viewport(0, 0, w, h); gl.useProgram(lit);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(UL.tex, 0);
+      gl.uniform2f(UL.res, w, h); gl.uniform2f(UL.light, CR.light[0] + P.lx + Math.sin(now / 5200) * .12, CR.light[1] + Math.cos(now / 6100) * .08);
+      gl.uniform1f(UL.time, now / 1000); gl.uniform1f(UL.contrast, P.contrast); gl.uniform1f(UL.sat, P.sat); gl.uniform1f(UL.grain, P.grain);
+      gl.uniform1f(UL.bright, P.bright); gl.uniform1f(UL.streak, P.streak);
+      gl.uniform3fv(UL.hh, CR.theme.hh); gl.uniform3fv(UL.tint, CR.theme.tint);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+  };
+}
+const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const foils = [makeFoil($("#bgfoil"), { res: .35, scale: 1.3, contrast: .35, sat: .7, grain: .05, bright: .92, streak: .3, lx: .2 }),
+               makeFoil($("#foil"), { res: .7, scale: 2.4, contrast: .8, sat: .8, grain: .045, bright: 1.05, streak: .7, lx: 0 })].filter(Boolean);
+let foilT = 0, foilFrozen = 0;
 
 // ================================================================ knobs
 const knobs = [];
@@ -611,6 +707,7 @@ function frame(now) {
   if (moving || !moonDone) { CR.draw(moon, 0, { mode: 2 }); moonDone = true; }
   dirty.clear();
   stepLights(now);
+  if (foils.length && now - foilT > 41) { foilT = now; const t = reduceMotion ? foilFrozen : now; for (const f of foils) f.draw(t); }
   requestAnimationFrame(frame);
 }
 
@@ -701,7 +798,9 @@ function loadPreset(i, skipSaved) {
 $("#bpm").onchange = e => { const v = Math.max(40, Math.min(240, +e.target.value || 120)); e.target.value = v; send({ type: "tempo", bpm: v }); };
 
 // ================================================================ compact piano + note-driven light
-const OCTAVES = 2;   // two octaves + top C: compact, still enough for melodies and chords
+let OCTAVES = 2;   // set from the window width: 4 octaves on a desktop plugin window, 3 on a tablet, 2 on a phone
+const fitOctaves = () => innerWidth >= 900 ? 4 : innerWidth >= 560 ? 3 : 2;
+OCTAVES = fitOctaves();
 const lights = new Map();   // note -> {lum, target, el}
 function renderKeyboard() {
   const kb = $("#kb"); for (const k of [...kb.querySelectorAll(".key")]) k.remove();
@@ -792,7 +891,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("keyup", e => { const key = e.key.toLowerCase(); if (key in KEYMAP) noteOff("k" + key); });
 window.addEventListener("blur", releaseAll);
-window.addEventListener("resize", sizeSpill);
+window.addEventListener("resize", () => { const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
 $("#midiBtn").onclick = async () => {
   if (!navigator.requestMIDIAccess) { toast("No MIDI in this browser here. Your MIDI keyboard works in the plugin."); return; }
   try {
@@ -824,7 +923,7 @@ setInterval(() => { const L = CR.light, dx = lightT[0] - L[0], dy = lightT[1] - 
 let curTheme = "silver";
 const swEls = Object.entries(THEMES).map(([id, t]) => {
   const b = el("button", { className: "sw", type: "button", title: t.name }); b.setAttribute("aria-label", t.name);
-  ["--a", "--b", "--c", "--d", "--e"].forEach((v, i) => b.style.setProperty(v, t.sw[i]));
+  b.style.background = `radial-gradient(circle at 35% 28%, rgba(255,255,255,.95) 0 9%, transparent 30%), conic-gradient(from 200deg, ${t.k.h.join(", ")}, ${t.k.h[0]})`;
   b.dataset.id = id; b.onclick = () => setTheme(id, true); $("#swatches").append(b); return b;
 });
 function setTheme(id, animate) {
