@@ -1,0 +1,53 @@
+{
+  "name": "Dusty Sub",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Lo-fi"
+  ],
+  "description": "Clean sub with a soft second harmonic and tape warmth: felt more than heard.",
+  "use": "Long low notes under sparse drums.",
+  "preview_phrase": "nj_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.005,
+      "d": 2,
+      "s": 0.85,
+      "r": 0.3,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "oct": 1,
+      "a": 0.005,
+      "d": 1,
+      "s": 0.3,
+      "r": 0.3,
+      "level": 0.12,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.05,
+    "f_type": -1
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 4000,
+    "eq_lc": 25
+  },
+  "library": "New Jazz",
+  "kind": "Bass",
+  "loudness_trim_db": 1.52,
+  "id": "dusty-sub",
+  "out_gain_db": -0.48
+}

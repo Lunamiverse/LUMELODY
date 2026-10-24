@@ -1,0 +1,55 @@
+{
+  "name": "Pizzicato Rain",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop"
+  ],
+  "description": "Plucked string section, short and woody, scattering into a long dark room.",
+  "use": "Ostinatos, counter-melodies and tension.",
+  "preview_phrase": "nj_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.5,
+      "damp": 0.4,
+      "decay": 0.8,
+      "pick": 0.3,
+      "strings": 3,
+      "sdet": 5,
+      "a": 0.001,
+      "d": 0.9,
+      "s": 0,
+      "r": 0.3,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 4500,
+    "f_key": 0.3
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "dly_beats": 0.5,
+    "dly_fb": 0.3,
+    "dly_mix": 0.12,
+    "dly_damp": 0.5,
+    "eq_lc": 100,
+    "width": 1.4
+  },
+  "library": "New Jazz",
+  "kind": "Strings",
+  "loudness_trim_db": 24.17,
+  "id": "pizzicato-rain",
+  "out_gain_db": 22.17
+}

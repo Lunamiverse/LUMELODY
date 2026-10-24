@@ -1,0 +1,66 @@
+{
+  "name": "Sensual Piano",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Romantic"
+  ],
+  "description": "Soft piano with a long dark reverb, for romantic and emotional reggaet\u00f3n.",
+  "use": "Intros, ballad sections and emotional hooks.",
+  "preview_phrase": "rg_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.55,
+      "damp": 0.35,
+      "decay": 3,
+      "pick": 0.12,
+      "strings": 2,
+      "sdet": 1.5,
+      "a": 0.001,
+      "d": 3.5,
+      "s": 0.05,
+      "r": 0.5,
+      "keydecay": 0.45,
+      "type": 3
+    },
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 0.4,
+      "idx_dec": 0.5,
+      "idx_sus": 0.1,
+      "a": 0.002,
+      "d": 3,
+      "s": 0.05,
+      "r": 0.5,
+      "level": 0.25,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000,
+    "f_vel": 1
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "eq_lc": 90,
+    "width": 1.25
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Keys",
+  "loudness_trim_db": 16.41,
+  "id": "sensual-piano",
+  "out_gain_db": 14.41
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Bajo Calle",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Street"
+  ],
+  "description": "Gritty mid-range bass that reads on small speakers: street and punchy.",
+  "use": "Bass riffs that need to cut through.",
+  "preview_phrase": "dd_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 6,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.4,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.6,
+      "r": 0.08,
+      "level": 0.6,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 1100,
+    "f_res": 0.3,
+    "f_env": 1.5,
+    "fa": 0.001,
+    "fd": 0.1,
+    "fs": 0.3,
+    "f_drive": 1.8
+  },
+  "fx": {
+    "eq_lc": 30,
+    "sat_drive": 0.4,
+    "sat_mix": 0.5
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Bass",
+  "loudness_trim_db": 8.79,
+  "id": "bajo-calle",
+  "out_gain_db": 6.79
+}

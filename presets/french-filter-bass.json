@@ -1,0 +1,59 @@
+{
+  "name": "French Filter Bass",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "French house"
+  ],
+  "description": "Resonant filtered bass that wah-wahs in time: the retro filter-house sound.",
+  "use": "Hypnotic, filtered basslines.",
+  "preview_phrase": "disco_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.002,
+      "d": 0.6,
+      "s": 0.7,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.3,
+      "a": 0.002,
+      "d": 0.6,
+      "s": 0.7,
+      "r": 0.15,
+      "level": 0.4,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.03,
+    "f_type": 0,
+    "f_cut": 600,
+    "f_res": 0.55,
+    "f_poles": 4,
+    "lfo_sync": 1,
+    "lfo_cut": 1.2
+  },
+  "fx": {
+    "eq_lc": 35,
+    "sat_drive": 0.2,
+    "sat_mix": 0.4
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Bass",
+  "loudness_trim_db": 12.17,
+  "id": "french-filter-bass",
+  "out_gain_db": 10.17
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Silk Violins",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "Dance-pop"
+  ],
+  "description": "Bright, high violins with an expressive vibrato, silky on top.",
+  "use": "Toplines and counter-melodies above the chords.",
+  "preview_phrase": "disco_strings",
+  "range": [
+    52,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 4,
+      "det": 8,
+      "spread": 0.8,
+      "a": 0.12,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.5,
+      "type": 1
+    },
+    {
+      "vowel": 2,
+      "vmod": 0.1,
+      "breath": 0.1,
+      "a": 0.15,
+      "d": 1,
+      "s": 0.6,
+      "r": 0.5,
+      "level": 0.2,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 7500,
+    "vib_rate": 5.8,
+    "vib_depth": 14,
+    "vib_delay": 0.35
+  },
+  "fx": {
+    "rv_mix": 0.24,
+    "rv_size": 0.65,
+    "rv_decay": 2.2,
+    "rv_damp": 0.35,
+    "eq_lc": 250,
+    "width": 1.4
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Strings",
+  "loudness_trim_db": 4.19,
+  "id": "silk-violins",
+  "out_gain_db": 2.19
+}

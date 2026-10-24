@@ -578,3 +578,8 @@ preset("Smoke 808", "Trippy", ["Cloud rap", "Plugg", "Dark R&B"],
         L(1, wave=2, uni=2, det=8, a=.002, d=.8, s=.2, r=.2, level=.2)],
        {"mono": 1, "glide": .1, "f_type": 0, "f_cut": 900, "f_key": .3, "p_env": 6, "p_dec": .03},
        fx(sat_drive=.4, sat_mix=.6, eq_lc=24, eq_hc=5500, ch_mix=.3, ch_depth=2.5), rng=(24, 48))
+
+
+# ======================================================== the four sound libraries' instruments (pads, bass, strings, keys)
+from preset_defs_libs import add as _add_library_instruments  # noqa: E402
+_add_library_instruments(preset, L, fx, TAPE, UNDERWATER, PRESETS)

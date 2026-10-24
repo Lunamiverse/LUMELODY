@@ -1,0 +1,60 @@
+{
+  "name": "Funk Finger Bass",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "Funk"
+  ],
+  "description": "Round finger-style bass (string model) with a short growl, made for syncopation.",
+  "use": "Funky disco lines with ghost notes.",
+  "preview_phrase": "disco_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.45,
+      "damp": 0.45,
+      "decay": 1.2,
+      "pick": 0.3,
+      "a": 0.001,
+      "d": 1.2,
+      "s": 0,
+      "r": 0.15,
+      "keydecay": 0.2,
+      "type": 3
+    },
+    {
+      "wave": 0,
+      "a": 0.003,
+      "d": 0.9,
+      "s": 0.3,
+      "r": 0.15,
+      "level": 0.4,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 1800,
+    "f_vel": 1.2
+  },
+  "fx": {
+    "eq_lc": 35,
+    "eq_hc": 6000,
+    "sat_drive": 0.15,
+    "sat_mix": 0.3
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Bass",
+  "loudness_trim_db": 16.37,
+  "id": "funk-finger-bass",
+  "out_gain_db": 14.37
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Perreo Keys",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Dark reggaet\u00f3n"
+  ],
+  "description": "Dark, warm electric keys with a soft bark: sensual minor chords.",
+  "use": "Chord loops for dark and sensual reggaet\u00f3n.",
+  "preview_phrase": "rg_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 1.8,
+      "idx_dec": 0.6,
+      "idx_sus": 0.2,
+      "fb": 0.06,
+      "a": 0.002,
+      "d": 3,
+      "s": 0.15,
+      "r": 0.6,
+      "keydecay": 0.3,
+      "type": 2
+    },
+    {
+      "wave": 1,
+      "a": 0.003,
+      "d": 2.5,
+      "s": 0.15,
+      "r": 0.6,
+      "level": 0.2,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_key": 0.35
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 100,
+    "width": 1.3
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Keys",
+  "loudness_trim_db": 10.79,
+  "id": "perreo-keys",
+  "out_gain_db": 8.79
+}

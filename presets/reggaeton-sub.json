@@ -1,0 +1,40 @@
+{
+  "name": "Reggaet\u00f3n Sub",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo"
+  ],
+  "description": "Deep, clean sub locked to the dembow: pure low end, no mud.",
+  "use": "Bass on the kick pattern.",
+  "preview_phrase": "rg_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.003,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.12,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": -1
+  },
+  "fx": {
+    "eq_lc": 25,
+    "eq_hc": 3000
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Bass",
+  "loudness_trim_db": 11.8,
+  "id": "reggaeton-sub",
+  "out_gain_db": 9.8
+}

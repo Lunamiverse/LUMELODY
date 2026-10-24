@@ -1,0 +1,69 @@
+{
+  "name": "Tape Nebula",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Ambient"
+  ],
+  "description": "A cloud of soft grains over a warm saw bed, warbling like an old tape.",
+  "use": "Atmosphere for intros, interludes and outros.",
+  "preview_phrase": "nj_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "grate": 18,
+      "glen": 0.3,
+      "goct": 0.15,
+      "gjit": 12,
+      "gfifth": 0.2,
+      "a": 1.4,
+      "d": 2,
+      "s": 0.85,
+      "r": 2.8,
+      "level": 0.6,
+      "type": 7
+    },
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 10,
+      "drift": 12,
+      "a": 1.2,
+      "d": 2,
+      "s": 0.8,
+      "r": 2.8,
+      "level": 0.6,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1800,
+    "f_res": 0.1,
+    "vib_rate": 0.3,
+    "vib_depth": 14,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7000,
+    "eq_lc": 60,
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "width": 1.5
+  },
+  "library": "New Jazz",
+  "kind": "Pads",
+  "loudness_trim_db": 1.79,
+  "id": "tape-nebula",
+  "out_gain_db": -0.21
+}

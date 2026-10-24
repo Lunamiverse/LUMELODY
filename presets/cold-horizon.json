@@ -1,0 +1,69 @@
+{
+  "name": "Cold Horizon",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop"
+  ],
+  "description": "Glassy FM pad with a slow attack and faint bell partials, clean and futuristic.",
+  "use": "Chord pads that leave room for 808 and vocals.",
+  "preview_phrase": "nj_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 2,
+      "idx": 0.9,
+      "idx_dec": 2,
+      "idx_sus": 0.4,
+      "fm_spread": 8,
+      "a": 1.5,
+      "d": 3,
+      "s": 0.8,
+      "r": 3,
+      "type": 2
+    },
+    {
+      "cr": 2,
+      "mr": 5,
+      "idx": 0.4,
+      "idx_dec": 1,
+      "idx_sus": 0.2,
+      "a": 2,
+      "d": 3,
+      "s": 0.6,
+      "r": 3,
+      "level": 0.3,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000,
+    "lfo_rate": 0.09,
+    "lfo_pan": 0.3
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "dly_beats": 0.75,
+    "dly_fb": 0.35,
+    "dly_mix": 0.16,
+    "dly_damp": 0.5,
+    "eq_lc": 120,
+    "width": 1.6
+  },
+  "library": "New Jazz",
+  "kind": "Pads",
+  "loudness_trim_db": 1.38,
+  "id": "cold-horizon",
+  "out_gain_db": -0.62
+}

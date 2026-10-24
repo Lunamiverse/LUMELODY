@@ -1,0 +1,46 @@
+{
+  "name": "Oscuro 808",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Dark reggaet\u00f3n"
+  ],
+  "description": "Long, dark, distorted 808 with wide slides for dark reggaet\u00f3n.",
+  "use": "Slow, heavy 808 lines with slides.",
+  "preview_phrase": "rg_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 5,
+      "s": 0.7,
+      "r": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.15,
+    "f_type": -1,
+    "p_env": 6,
+    "p_dec": 0.03
+  },
+  "fx": {
+    "eq_lc": 24,
+    "eq_hc": 6000,
+    "sat_drive": 0.6,
+    "sat_mix": 0.6
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Bass",
+  "loudness_trim_db": 2.87,
+  "id": "oscuro-808",
+  "out_gain_db": 0.87
+}

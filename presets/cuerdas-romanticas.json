@@ -1,0 +1,55 @@
+{
+  "name": "Cuerdas Rom\u00e1nticas",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Romantic"
+  ],
+  "description": "Lush, sweet strings for romantic dembow.",
+  "use": "Held chords and slow melodies.",
+  "preview_phrase": "dd_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 11,
+      "spread": 1,
+      "a": 0.4,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 4000,
+    "vib_rate": 5.2,
+    "vib_depth": 8,
+    "vib_delay": 0.5
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 130,
+    "width": 1.5
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Strings",
+  "loudness_trim_db": 15.03,
+  "id": "cuerdas-romanticas",
+  "out_gain_db": 13.03
+}

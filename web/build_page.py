@@ -22,14 +22,16 @@ def preset_data():
         text = "\n".join(f"{k} {float(v)}" for k, v in flat.items())
         data.append({"id": s, "name": p["name"], "cat": p["category"], "genres": p["genres"], "desc": p["description"],
                      "use": p["use"], "range": p["range"], "engine": " + ".join(dict.fromkeys(LT[l["type"]] for l in p["layers"])),
-                     "params": text, "gainDb": 0, "baseNote": base})
+                     "params": text, "gainDb": 0, "baseNote": base, **({"kind": p["kind"]} if p.get("kind") else {})})
     return data
 
 def template():
     """The instrument page source with the LUMI tools (Chord Progression Finder, library, export) inlined."""
     html = open(os.path.join(ROOT, "web", "instrument_template.html")).read()
     assert "/*__PROGRESSIONS__*/" in html
-    tools = "\n".join(open(os.path.join(ROOT, "web", f)).read() for f in ("tools_core.js", "tools_ui.js", "tools_pads.js", "tools_sampler.js"))
+    tools = "\n".join(open(os.path.join(ROOT, "web", f)).read() for f in ("tools_core.js", "tools_ui.js", "tools_pads.js", "tools_sampler.js", "tools_libs.js", "tools_arp.js"))
+    manifest = open(os.path.join(ROOT, "web", "samples", "manifest.json")).read()
+    tools = "const LIB_MANIFEST = " + json.dumps(json.loads(manifest), separators=(",", ":")) + ";\n" + tools
     return html.replace("/*__PROGRESSIONS__*/", tools)
 
 def schema_json():
@@ -50,4 +52,7 @@ if __name__ == "__main__":
     open(os.path.join(out, "index.html"), "w").write(html)
     shutil.copy(os.path.join(ROOT, "build", "lumi.wasm"), os.path.join(out, "lumi.wasm"))
     shutil.copy(os.path.join(ROOT, "web", "lumi-worklet.js"), os.path.join(out, "lumi-worklet.js"))
+    os.makedirs(os.path.join(out, "samples"), exist_ok=True)
+    for f in os.listdir(os.path.join(ROOT, "web", "samples")):
+        if f.endswith(".flac"): shutil.copy(os.path.join(ROOT, "web", "samples", f), os.path.join(out, "samples", f))
     print(len(data), "presets")

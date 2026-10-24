@@ -1,0 +1,62 @@
+{
+  "name": "Tropical Haze",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Melodic"
+  ],
+  "description": "Airy, wide pad with a soft breathy top: warm, tropical, light.",
+  "use": "Lighter, melodic dembow and intros.",
+  "preview_phrase": "dd_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 1,
+      "uni": 5,
+      "det": 10,
+      "spread": 1,
+      "a": 0.6,
+      "d": 2,
+      "s": 0.85,
+      "r": 1.6,
+      "type": 1
+    },
+    {
+      "ncut": 5000,
+      "nq": 0.5,
+      "nmode": 2,
+      "a": 0.8,
+      "d": 2,
+      "s": 0.7,
+      "r": 1.6,
+      "level": 0.12,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000,
+    "lfo_rate": 0.12,
+    "lfo_pan": 0.25
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "eq_lc": 150,
+    "width": 1.7
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Pads",
+  "loudness_trim_db": 6.09,
+  "id": "tropical-haze",
+  "out_gain_db": 4.09
+}

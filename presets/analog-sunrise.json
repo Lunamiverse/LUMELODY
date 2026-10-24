@@ -1,0 +1,57 @@
+{
+  "name": "Analog Sunrise",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "French house"
+  ],
+  "description": "Warm analog saw pad whose filter slowly opens and closes: retro and hypnotic.",
+  "use": "Filter-house chords; automate the filter for builds.",
+  "preview_phrase": "disco_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 4,
+      "det": 10,
+      "spread": 0.8,
+      "drift": 4,
+      "a": 0.3,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1500,
+    "f_res": 0.3,
+    "f_poles": 4,
+    "lfo_sync": 4,
+    "lfo_cut": 1.4
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 100,
+    "width": 1.4
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Pads",
+  "loudness_trim_db": 5.86,
+  "id": "analog-sunrise",
+  "out_gain_db": 3.86
+}

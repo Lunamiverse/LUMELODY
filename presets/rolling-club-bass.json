@@ -1,0 +1,61 @@
+{
+  "name": "Rolling Club Bass",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "Tech house"
+  ],
+  "description": "Offbeat saw bass that rolls under four-on-the-floor, ducking with the kick.",
+  "use": "Rolling offbeat bass for club grooves.",
+  "preview_phrase": "disco_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 5,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0.2,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0.5,
+      "r": 0.08,
+      "level": 0.6,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 700,
+    "f_res": 0.25,
+    "f_env": 1.8,
+    "fa": 0.001,
+    "fd": 0.1,
+    "fs": 0.2
+  },
+  "fx": {
+    "pump": 0.4,
+    "eq_lc": 30
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Bass",
+  "loudness_trim_db": 17.17,
+  "id": "rolling-club-bass",
+  "out_gain_db": 15.17
+}

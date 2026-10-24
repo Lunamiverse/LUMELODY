@@ -1,0 +1,49 @@
+{
+  "name": "Pizzicato Perreo",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo"
+  ],
+  "description": "Short plucked strings with a playful bounce, tight to the beat.",
+  "use": "Rhythmic pizzicato riffs on the 3-3-2.",
+  "preview_phrase": "rg_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.55,
+      "damp": 0.35,
+      "decay": 0.6,
+      "pick": 0.3,
+      "strings": 3,
+      "sdet": 4,
+      "a": 0.001,
+      "d": 0.7,
+      "s": 0,
+      "r": 0.2,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "eq_lc": 120,
+    "width": 1.35
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Strings",
+  "loudness_trim_db": 25.68,
+  "id": "pizzicato-perreo",
+  "out_gain_db": 23.68
+}

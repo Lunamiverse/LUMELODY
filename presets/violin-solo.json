@@ -1,0 +1,63 @@
+{
+  "name": "Viol\u00edn Solo",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Melodic"
+  ],
+  "description": "Expressive solo violin-style lead with bow air and vibrato.",
+  "use": "Emotional melodies and intros.",
+  "preview_phrase": "rg_strings",
+  "range": [
+    55,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 4,
+      "a": 0.1,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.35,
+      "type": 1
+    },
+    {
+      "vowel": 2,
+      "vmod": 0.15,
+      "breath": 0.12,
+      "a": 0.12,
+      "d": 1,
+      "s": 0.7,
+      "r": 0.35,
+      "level": 0.3,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.07,
+    "f_type": 0,
+    "f_cut": 5000,
+    "vib_rate": 5.6,
+    "vib_depth": 14,
+    "vib_delay": 0.4
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "eq_lc": 200,
+    "width": 1.2
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Strings",
+  "loudness_trim_db": 12.65,
+  "id": "violin-solo",
+  "out_gain_db": 10.65
+}

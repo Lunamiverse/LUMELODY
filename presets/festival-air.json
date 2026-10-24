@@ -1,0 +1,64 @@
+{
+  "name": "Festival Air",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "EDM",
+    "Festival"
+  ],
+  "description": "Airy, open pad of noise and saws, huge and light at the top of the mix.",
+  "use": "Intros, risers and breakdown atmospheres.",
+  "preview_phrase": "disco_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 6,
+      "det": 24,
+      "spread": 1,
+      "a": 0.8,
+      "d": 2,
+      "s": 0.85,
+      "r": 2,
+      "type": 1
+    },
+    {
+      "ncut": 6000,
+      "nq": 0.5,
+      "nmode": 2,
+      "a": 1,
+      "d": 2,
+      "s": 0.8,
+      "r": 2,
+      "level": 0.16,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 9000,
+    "lfo_rate": 0.1,
+    "lfo_pan": 0.3
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "eq_lc": 220,
+    "width": 1.8
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Pads",
+  "loudness_trim_db": 4.66,
+  "id": "festival-air",
+  "out_gain_db": 2.66
+}

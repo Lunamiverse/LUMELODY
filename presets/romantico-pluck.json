@@ -1,0 +1,54 @@
+{
+  "name": "Rom\u00e1ntico Pluck",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Bachata-pop"
+  ],
+  "description": "Nylon-string pluck (string model), warm and romantic, with a short echo.",
+  "use": "Romantic guitar-style riffs and arpeggios.",
+  "preview_phrase": "rg_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.5,
+      "damp": 0.3,
+      "decay": 1.8,
+      "pick": 0.2,
+      "strings": 2,
+      "sdet": 3,
+      "a": 0.001,
+      "d": 2,
+      "s": 0,
+      "r": 0.3,
+      "type": 3
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 6000
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "dly_beats": 0.5,
+    "dly_fb": 0.3,
+    "dly_mix": 0.12,
+    "dly_damp": 0.5,
+    "eq_lc": 120,
+    "width": 1.3
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Keys",
+  "loudness_trim_db": 19.28,
+  "id": "romantico-pluck",
+  "out_gain_db": 17.28
+}

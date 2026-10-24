@@ -1,0 +1,61 @@
+{
+  "name": "Calle Keys",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow"
+  ],
+  "description": "Bright, punchy square-wave keys that cut through fast dembow: street energy.",
+  "use": "Catchy dembow riffs and hooks.",
+  "preview_phrase": "dd_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.4,
+      "a": 0.001,
+      "d": 0.5,
+      "s": 0.3,
+      "r": 0.1,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.25,
+      "oct": 1,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.1,
+      "r": 0.1,
+      "level": 0.25,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3500,
+    "f_res": 0.2,
+    "f_env": 1,
+    "fa": 0.001,
+    "fd": 0.15,
+    "fs": 0.5
+  },
+  "fx": {
+    "rv_mix": 0.18,
+    "rv_size": 0.5,
+    "rv_decay": 1.4,
+    "rv_damp": 0.5,
+    "eq_lc": 180,
+    "width": 1.2
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Keys",
+  "loudness_trim_db": 9.68,
+  "id": "calle-keys",
+  "out_gain_db": 7.68
+}

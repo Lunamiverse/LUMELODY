@@ -1,0 +1,64 @@
+{
+  "name": "Funk Clav",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "Funk"
+  ],
+  "description": "Wah-ed clav with a resonant envelope filter: quacky, tight and danceable.",
+  "use": "16th-note funk riffs and syncopated chords.",
+  "preview_phrase": "disco_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.22,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.15,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 2,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0.05,
+      "r": 0.08,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 1,
+    "f_cut": 700,
+    "f_res": 0.55,
+    "f_env": 3.5,
+    "fa": 0.001,
+    "fd": 0.13,
+    "fs": 0.1,
+    "fr": 0.08,
+    "f_key": 0.4,
+    "f_vel": 1.6
+  },
+  "fx": {
+    "rv_mix": 0.18,
+    "rv_size": 0.5,
+    "rv_decay": 1.4,
+    "rv_damp": 0.5,
+    "eq_lc": 140,
+    "width": 1.15
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Keys",
+  "loudness_trim_db": 7.71,
+  "id": "funk-clav",
+  "out_gain_db": 5.71
+}

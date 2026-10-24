@@ -30,6 +30,17 @@
     Fresnel studio reflections, crisp lips, light running round the rim when played), pearlescent neon surfaces with
     liquid light, a luminous core and an inner reflection, contact shadows, a subtle press-in. Palette: hot pink, magenta,
     ultraviolet, deep purple, icy cyan (cyan = root/home).
+  - *Arpeggiator:* notes from the chord blocks, a neon pads take, the keys / MIDI keyboard (latch) or generated chords;
+    up, down, up-down, random, as played, octave jumps, rhythmic and a 16-step custom grid; rate (1/4 to 1/32, triplets),
+    octaves, gate, swing, velocity variation, length, complexity. Style starting points, surprise me, regenerate, compare
+    (previous / new), keep notes / rhythm / sound, favourites, beginner and advanced views, a live note lane. Everything
+    is computed from the settings and a seed, so what plays is what exports (MIDI drag, audio).
   - *Library:* the curated R&B, psychedelic trap and disco & club progressions with producer notes.
+- **Sounds** (deck button): four sound libraries (New Jazz, Disco + EDM + Club Bangers, Reggaetón, Dembow Dominicano),
+  nine categories each. Drums, hi-hats, percussion, effects and textures are original samples (see SAMPLE_LICENSES.md);
+  pads, bass, strings and keys load a playable sound. Search, favourites, previews, BPM-synced patterns that layer into
+  a groove, MIDI (GM drums, channel 10) and WAV export, drag to the DAW. While the Disco + EDM + Club Bangers library is
+  open the moon is the disco ball; any other library, closing the panel or another tool restores the moon, and reopening
+  comes back to the same library and moon.
 - **Limits:** WebGL approximations of optics, not physically based rendering; without WebGL the moon and pads fall back
   to still drawings.

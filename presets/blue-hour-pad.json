@@ -1,0 +1,68 @@
+{
+  "name": "Blue Hour Pad",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop"
+  ],
+  "description": "Dark, wide detuned pad whose filter breathes very slowly, like the sky right after sunset.",
+  "use": "Long chords under rap verses; let it evolve.",
+  "preview_phrase": "nj_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 6,
+      "det": 16,
+      "spread": 1,
+      "drift": 8,
+      "a": 1.2,
+      "d": 2,
+      "s": 0.9,
+      "r": 2.5,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 1,
+      "d": 2,
+      "s": 0.9,
+      "r": 2.5,
+      "level": 0.3,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1100,
+    "f_res": 0.18,
+    "f_poles": 4,
+    "lfo_rate": 0.07,
+    "lfo_cut": 0.9,
+    "lfo_pan": 0.2
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 70,
+    "width": 1.5
+  },
+  "library": "New Jazz",
+  "kind": "Pads",
+  "loudness_trim_db": 7.81,
+  "id": "blue-hour-pad",
+  "out_gain_db": 5.81
+}

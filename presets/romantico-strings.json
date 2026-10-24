@@ -1,0 +1,55 @@
+{
+  "name": "Rom\u00e1ntico Strings",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Romantic"
+  ],
+  "description": "Lush, warm string section for romantic reggaet\u00f3n and Latin pop.",
+  "use": "Held chords in choruses and bridges.",
+  "preview_phrase": "rg_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 12,
+      "spread": 1,
+      "a": 0.4,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3500,
+    "vib_rate": 5.2,
+    "vib_depth": 8,
+    "vib_delay": 0.5
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 120,
+    "width": 1.5
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Strings",
+  "loudness_trim_db": 6.62,
+  "id": "romantico-strings",
+  "out_gain_db": 4.62
+}

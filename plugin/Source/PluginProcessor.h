@@ -8,7 +8,9 @@
 #include <atomic>
 #include <memory>
 #include <vector>
+#include <map>
 #include "LumiEngine.h"
+#include "LumiLibPlayer.h"
 #include "PresetData.h"
 #include "SampleFiles.h"
 
@@ -76,6 +78,16 @@ public:
     void previewStop();
     bool previewPlaying() const { return previewOn.load(); }
 
+    // ---- sound libraries (message thread): factory samples embedded in the plugin, previewed and rendered natively
+    std::shared_ptr<const lumi::AudioData> librarySample (const juce::String& id);   // decoded once, cached; nullptr if unknown
+    void libraryStart (std::shared_ptr<const lumi::LibPlayer::Song> song);
+    void libraryStop();
+    void libraryGain (float g);
+    bool libraryPlaying() const;
+    // {layers:[{events:[{s,b,v}], beats, swing, vol}], bpm} or {id}: the song the page asks for (samples resolved); error text if not
+    std::shared_ptr<lumi::LibPlayer::Song> librarySong (const juce::var& msg, juce::String& error);
+    juce::String libraryRenderWav (const juce::var& msg, const juce::File& out);   // "" = ok; 44.1 kHz 24-bit stereo
+
     struct NoteEvent { int note; float velocity; bool on; };
     int popHostNotes (NoteEvent* out, int max);   // notes the host played, for the keyboard lights
     int presetSerial() const { return presetChangeSerial.load(); }
@@ -110,6 +122,7 @@ private:
     float layerCache[3] { -1, -1, -1 };
     SampleInfo smp; lumi::SamplerSettings smpSet; juce::String smpError;
     std::shared_ptr<const lumi::AudioData> previewBuf; double previewPos = 0; std::atomic<bool> previewOn { false };
+    lumi::LibPlayer libPlayer; std::map<juce::String, std::shared_ptr<const lumi::AudioData>> libCache;
     juce::RangedAudioParameter* soundParam = nullptr;
 
     std::unique_ptr<lumi::Engine> engine;

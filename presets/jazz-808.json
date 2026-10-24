@@ -1,0 +1,56 @@
+{
+  "name": "Jazz 808",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Melodic trap"
+  ],
+  "description": "Mellow 808 with a soft knock and a gentle pitch drop, round enough for jazzy chords.",
+  "use": "808 lines under extended chords.",
+  "preview_phrase": "nj_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 4,
+      "s": 0.75,
+      "r": 0.35,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "oct": 1,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0.05,
+      "r": 0.2,
+      "level": 0.1,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.12,
+    "f_type": -1,
+    "p_env": 5,
+    "p_dec": 0.03
+  },
+  "fx": {
+    "eq_lc": 24,
+    "eq_hc": 6000,
+    "sat_drive": 0.25,
+    "sat_mix": 0.4
+  },
+  "library": "New Jazz",
+  "kind": "Bass",
+  "loudness_trim_db": 6.33,
+  "id": "jazz-808",
+  "out_gain_db": 4.33
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Disco Strings",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club"
+  ],
+  "description": "Bright, lush disco string section with a chorus sheen and a light vibrato.",
+  "use": "Runs, stabs and soaring held chords.",
+  "preview_phrase": "disco_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 12,
+      "spread": 1,
+      "a": 0.08,
+      "d": 1.5,
+      "s": 0.9,
+      "r": 0.6,
+      "type": 1
+    },
+    {
+      "wave": 2,
+      "oct": 1,
+      "uni": 3,
+      "det": 8,
+      "a": 0.1,
+      "d": 1.5,
+      "s": 0.7,
+      "r": 0.6,
+      "level": 0.25,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 7000,
+    "vib_rate": 5.5,
+    "vib_depth": 8,
+    "vib_delay": 0.3
+  },
+  "fx": {
+    "rv_mix": 0.24,
+    "rv_size": 0.65,
+    "rv_decay": 2.2,
+    "rv_damp": 0.35,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 160,
+    "width": 1.6
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Strings",
+  "loudness_trim_db": 4.03,
+  "id": "disco-strings",
+  "out_gain_db": 2.03
+}

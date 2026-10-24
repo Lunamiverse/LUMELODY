@@ -39,7 +39,7 @@ private:
     void addToLibrary (const juce::var& m, const juce::File& f, std::shared_ptr<lumi::AudioData> audio);
     void runAsync (std::function<juce::var()> work, std::function<void (const juce::var&)> done);
     std::unique_ptr<juce::FileChooser> chooser;
-    bool previewWasOn = false;
+    bool previewWasOn = false, libWasOn = false;
 
     LumiProcessor& proc;
     juce::WebBrowserComponent web;

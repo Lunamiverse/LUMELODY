@@ -1,0 +1,66 @@
+{
+  "name": "Velvet Ladder",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Experimental R&B"
+  ],
+  "description": "Warm analog saw bass through a four-pole filter that opens on every note.",
+  "use": "Moving bass lines with a little bite.",
+  "preview_phrase": "nj_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 4,
+      "a": 0.002,
+      "d": 0.8,
+      "s": 0.6,
+      "r": 0.2,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.002,
+      "d": 0.8,
+      "s": 0.7,
+      "r": 0.2,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.04,
+    "f_type": 0,
+    "f_cut": 380,
+    "f_res": 0.32,
+    "f_poles": 4,
+    "f_env": 2.4,
+    "fa": 0.002,
+    "fd": 0.28,
+    "fs": 0.25,
+    "fr": 0.2,
+    "f_key": 0.3,
+    "f_drive": 1.4
+  },
+  "fx": {
+    "eq_lc": 30,
+    "sat_drive": 0.2,
+    "sat_mix": 0.4
+  },
+  "library": "New Jazz",
+  "kind": "Bass",
+  "loudness_trim_db": 10.08,
+  "id": "velvet-ladder",
+  "out_gain_db": 8.08
+}

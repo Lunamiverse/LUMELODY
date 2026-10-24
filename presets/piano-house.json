@@ -1,0 +1,66 @@
+{
+  "name": "Piano House",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "Piano house"
+  ],
+  "description": "Bright, percussive piano for house chords: strong attack, quick decay, a touch of plate.",
+  "use": "Classic piano-house riffs and uplifting chords.",
+  "preview_phrase": "disco_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.75,
+      "damp": 0.25,
+      "decay": 2.4,
+      "pick": 0.1,
+      "strings": 3,
+      "sdet": 2,
+      "a": 0.001,
+      "d": 2.5,
+      "s": 0.05,
+      "r": 0.35,
+      "keydecay": 0.4,
+      "type": 3
+    },
+    {
+      "mat": 3,
+      "hard": 0.6,
+      "click": 0.25,
+      "a": 0.001,
+      "d": 1.2,
+      "s": 0,
+      "r": 0.3,
+      "level": 0.25,
+      "type": 4
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 9000,
+    "f_vel": 1
+  },
+  "fx": {
+    "rv_mix": 0.24,
+    "rv_size": 0.65,
+    "rv_decay": 2.2,
+    "rv_damp": 0.35,
+    "eq_lc": 120,
+    "eq_hs_f": 5000,
+    "eq_hs_g": 2.5,
+    "width": 1.25
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Keys",
+  "loudness_trim_db": 14.64,
+  "id": "piano-house",
+  "out_gain_db": 12.64
+}

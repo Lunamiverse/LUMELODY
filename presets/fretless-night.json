@@ -1,0 +1,59 @@
+{
+  "name": "Fretless Night",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop"
+  ],
+  "description": "Singing fretless-style bass that slides between notes with a slow vibrato.",
+  "use": "Melodic bass lines that answer the vocal.",
+  "preview_phrase": "nj_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 1,
+      "a": 0.01,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.3,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.01,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.3,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.09,
+    "f_type": 0,
+    "f_cut": 900,
+    "f_key": 0.4,
+    "vib_rate": 4.8,
+    "vib_depth": 14,
+    "vib_delay": 0.35
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 30,
+    "rv_mix": 0.06
+  },
+  "library": "New Jazz",
+  "kind": "Bass",
+  "loudness_trim_db": 3.65,
+  "id": "fretless-night",
+  "out_gain_db": 1.65
+}

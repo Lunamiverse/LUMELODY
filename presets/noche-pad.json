@@ -1,0 +1,55 @@
+{
+  "name": "Noche Pad",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Dark reggaet\u00f3n"
+  ],
+  "description": "Warm, dark pad that sits under the dembow without crowding it.",
+  "use": "Chord bed for dark reggaet\u00f3n.",
+  "preview_phrase": "rg_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 12,
+      "spread": 1,
+      "a": 0.6,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.5,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1300,
+    "f_res": 0.15,
+    "f_poles": 4,
+    "lfo_rate": 0.1,
+    "lfo_cut": 0.4
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 110,
+    "width": 1.45
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Pads",
+  "loudness_trim_db": 8.47,
+  "id": "noche-pad",
+  "out_gain_db": 6.47
+}

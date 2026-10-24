@@ -1,0 +1,63 @@
+{
+  "name": "Coro Pad",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow"
+  ],
+  "description": "Synthesized choir 'ah' for big moments: wide and bright.",
+  "use": "Hooks, chants and big chord moments.",
+  "preview_phrase": "dd_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "vowel": 0,
+      "vmod": 0.3,
+      "breath": 0.25,
+      "a": 0.4,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.5,
+      "type": 6
+    },
+    {
+      "vowel": 1,
+      "vmod": 0.3,
+      "breath": 0.2,
+      "formshift": 1.05,
+      "oct": 1,
+      "a": 0.5,
+      "d": 2,
+      "s": 0.8,
+      "r": 1.5,
+      "level": 0.5,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 4000,
+    "vib_rate": 5,
+    "vib_depth": 8,
+    "vib_delay": 0.4
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "eq_lc": 180,
+    "width": 1.6
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Pads",
+  "loudness_trim_db": 6.56,
+  "id": "coro-pad",
+  "out_gain_db": 4.56
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Perreo 808",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo"
+  ],
+  "description": "Punchy 808 with a short tail and some drive: hits hard on the dembow.",
+  "use": "808 lines that follow the kick.",
+  "preview_phrase": "rg_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 1.2,
+      "s": 0.4,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "oct": 1,
+      "a": 0.001,
+      "d": 0.15,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.15,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.06,
+    "f_type": -1,
+    "p_env": 4,
+    "p_dec": 0.025
+  },
+  "fx": {
+    "eq_lc": 25,
+    "sat_drive": 0.4,
+    "sat_mix": 0.5
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Bass",
+  "loudness_trim_db": 6.94,
+  "id": "perreo-808",
+  "out_gain_db": 4.94
+}

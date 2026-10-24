@@ -1,0 +1,54 @@
+{
+  "name": "Bounce Bass",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Playful"
+  ],
+  "description": "Playful bass with a pitch bounce on every note: fun, light and catchy.",
+  "use": "Bouncy patterns for party dembow.",
+  "preview_phrase": "dd_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 1,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0.2,
+      "r": 0.08,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0.4,
+      "r": 0.08,
+      "level": 0.6,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 900,
+    "p_env": 3,
+    "p_dec": 0.04
+  },
+  "fx": {
+    "eq_lc": 30
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Bass",
+  "loudness_trim_db": 17.86,
+  "id": "bounce-bass",
+  "out_gain_db": 15.86
+}

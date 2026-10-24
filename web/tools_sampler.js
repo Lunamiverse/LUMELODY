@@ -535,7 +535,7 @@ const SAMPLER = (() => {
   }
   function open(on) {
     const p = $("#smp");
-    if (on) { if (!$("#prog").hidden) WORKSPACE.open(false); const det = $("#detail"); p.style.height = Math.max(420, $("#rack").offsetHeight + det.offsetHeight + 14) + "px"; }
+    if (on) { if (!$("#prog").hidden) WORKSPACE.open(false); if (typeof LIBS !== "undefined" && !$("#libs").hidden) LIBS.open(false); const det = $("#detail"); p.style.height = Math.max(420, $("#rack").offsetHeight + det.offsetHeight + 14) + "px"; }
     p.hidden = !on; $("#rack").style.visibility = on ? "hidden" : ""; $("#detail").style.display = on ? "none" : "";
     $("#smpBtn").setAttribute("aria-pressed", on ? "true" : "false");
     if (on) { loadLib().then(renderLib); renderPresets(); tab(cur ? "edit" : "lib"); } else stopPreview();

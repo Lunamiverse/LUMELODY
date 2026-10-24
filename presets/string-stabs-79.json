@@ -1,0 +1,62 @@
+{
+  "name": "String Stabs 79",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club"
+  ],
+  "description": "Short, punchy orchestral stabs: fast attack, quick decay, a bit of plate.",
+  "use": "Rhythmic hits on the offbeats.",
+  "preview_phrase": "disco_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 6,
+      "det": 10,
+      "spread": 1,
+      "a": 0.005,
+      "d": 0.3,
+      "s": 0.1,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "ncut": 3000,
+      "nq": 0.6,
+      "a": 0.001,
+      "d": 0.08,
+      "s": 0,
+      "r": 0.05,
+      "level": 0.15,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 6000,
+    "f_env": 1,
+    "fa": 0.001,
+    "fd": 0.1,
+    "fs": 0.5
+  },
+  "fx": {
+    "rv_mix": 0.24,
+    "rv_size": 0.65,
+    "rv_decay": 2.2,
+    "rv_damp": 0.35,
+    "eq_lc": 180,
+    "width": 1.5
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Strings",
+  "loudness_trim_db": 11.68,
+  "id": "string-stabs-79",
+  "out_gain_db": 9.68
+}

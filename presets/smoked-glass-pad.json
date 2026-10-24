@@ -1,0 +1,67 @@
+{
+  "name": "Smoked Glass Pad",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Melodic trap"
+  ],
+  "description": "Hollow pulse pad with breath noise on top, low-passed and moody.",
+  "use": "Minor chords for melodic trap and underground rap.",
+  "preview_phrase": "nj_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 3,
+      "pw": 0.4,
+      "uni": 3,
+      "det": 9,
+      "a": 0.9,
+      "d": 2,
+      "s": 0.85,
+      "r": 2.2,
+      "type": 1
+    },
+    {
+      "ncut": 1.5,
+      "nq": 2,
+      "ntrack": 1,
+      "nmode": 1,
+      "a": 1,
+      "d": 2,
+      "s": 0.7,
+      "r": 2,
+      "level": 0.2,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 1400,
+    "f_res": 0.2,
+    "f_poles": 4,
+    "lfo_rate": 0.12,
+    "lfo_cut": 0.6
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 80,
+    "width": 1.35
+  },
+  "library": "New Jazz",
+  "kind": "Pads",
+  "loudness_trim_db": 3.5,
+  "id": "smoked-glass-pad",
+  "out_gain_db": 1.5
+}

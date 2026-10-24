@@ -18,6 +18,8 @@ TARGET_LUFS = -16.0
 TP_CEIL = -1.0
 
 def slug(s):
+    import unicodedata
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()   # Romántico -> romantico
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 def flatten(p):
@@ -97,7 +99,9 @@ def main():
 
     for p in PRESETS:
         s = slug(p["name"])
-        if flt and flt not in s:
+        if flt.startswith("cat:"):
+            if p["category"].lower() not in flt[4:].split("|"): continue
+        elif flt and flt not in s:
             continue
         ph = phrases[p["preview_phrase"]]
         flat = flatten(p)

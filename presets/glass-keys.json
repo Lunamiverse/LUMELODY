@@ -1,0 +1,76 @@
+{
+  "name": "Glass Keys",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Melodic trap"
+  ],
+  "description": "Digital glassy keys: a bell-like FM tine over a soft body, spread by a dotted echo.",
+  "use": "Top-line chords and sparkling melodies over dark pads.",
+  "preview_phrase": "nj_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 3.5,
+      "idx": 1.4,
+      "idx_dec": 0.5,
+      "idx_sus": 0.1,
+      "a": 0.002,
+      "d": 2.5,
+      "s": 0.08,
+      "r": 0.8,
+      "keydecay": 0.25,
+      "type": 2
+    },
+    {
+      "mat": 2,
+      "hard": 0.55,
+      "click": 0.15,
+      "a": 0.001,
+      "d": 2.5,
+      "s": 0,
+      "r": 0.6,
+      "level": 0.35,
+      "type": 4
+    },
+    {
+      "wave": 1,
+      "a": 0.01,
+      "d": 2,
+      "s": 0.2,
+      "r": 0.6,
+      "level": 0.18,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 6000,
+    "f_key": 0.2
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "dly_beats": 0.75,
+    "dly_fb": 0.35,
+    "dly_mix": 0.16,
+    "dly_damp": 0.5,
+    "eq_lc": 140,
+    "width": 1.4
+  },
+  "library": "New Jazz",
+  "kind": "Keys",
+  "loudness_trim_db": 8.67,
+  "id": "glass-keys",
+  "out_gain_db": 6.67
+}

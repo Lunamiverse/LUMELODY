@@ -1,0 +1,42 @@
+{
+  "name": "Sub Malec\u00f3n",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Melodic"
+  ],
+  "description": "Deep, clean, round sub for the melodic side of dembow.",
+  "use": "Long low notes under chords.",
+  "preview_phrase": "dd_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.003,
+      "d": 1.5,
+      "s": 0.85,
+      "r": 0.15,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.05,
+    "f_type": -1
+  },
+  "fx": {
+    "eq_lc": 25,
+    "eq_hc": 2500
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Bass",
+  "loudness_trim_db": 12.36,
+  "id": "sub-malecon",
+  "out_gain_db": 10.36
+}

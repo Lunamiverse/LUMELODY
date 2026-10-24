@@ -1,0 +1,73 @@
+{
+  "name": "Cello Dusk",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop"
+  ],
+  "description": "Solo cello-style voice with bow noise and a slow vibrato that blooms after the attack.",
+  "use": "Lead lines in the low-mid register; play legato.",
+  "preview_phrase": "nj_strings",
+  "range": [
+    28,
+    72
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.15,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.4,
+      "type": 1
+    },
+    {
+      "vowel": 2,
+      "vmod": 0.15,
+      "breath": 0.2,
+      "a": 0.18,
+      "d": 1,
+      "s": 0.7,
+      "r": 0.4,
+      "level": 0.35,
+      "type": 6
+    },
+    {
+      "ncut": 3,
+      "nq": 1.5,
+      "ntrack": 1,
+      "nmode": 1,
+      "a": 0.05,
+      "d": 0.3,
+      "s": 0.15,
+      "r": 0.3,
+      "level": 0.08,
+      "type": 5
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.08,
+    "f_type": 0,
+    "f_cut": 2200,
+    "f_key": 0.4,
+    "vib_rate": 5.2,
+    "vib_depth": 18,
+    "vib_delay": 0.45
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "eq_lc": 60,
+    "width": 1.2
+  },
+  "library": "New Jazz",
+  "kind": "Strings",
+  "loudness_trim_db": 13.51,
+  "id": "cello-dusk",
+  "out_gain_db": 11.51
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Late Set Piano",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Lo-fi"
+  ],
+  "description": "Soft, slightly detuned upright piano with the felt pressed down: intimate and imperfect.",
+  "use": "Sparse melodies and slow chords; leave space.",
+  "preview_phrase": "nj_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "bright": 0.42,
+      "damp": 0.45,
+      "decay": 3.5,
+      "pick": 0.12,
+      "strings": 2,
+      "sdet": 3,
+      "a": 0.001,
+      "d": 4,
+      "s": 0.05,
+      "r": 0.5,
+      "keydecay": 0.5,
+      "type": 3
+    },
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 0.5,
+      "idx_dec": 0.3,
+      "idx_sus": 0.1,
+      "a": 0.002,
+      "d": 3,
+      "s": 0.05,
+      "r": 0.5,
+      "level": 0.3,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3800,
+    "f_key": 0.4,
+    "f_vel": 1.2
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 6500,
+    "eq_lc": 60,
+    "rv_mix": 0.18,
+    "rv_size": 0.5,
+    "rv_decay": 1.4,
+    "rv_damp": 0.5,
+    "width": 1.15
+  },
+  "library": "New Jazz",
+  "kind": "Keys",
+  "loudness_trim_db": 7.01,
+  "id": "late-set-piano",
+  "out_gain_db": 5.01
+}

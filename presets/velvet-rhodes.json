@@ -1,0 +1,85 @@
+{
+  "name": "Velvet Rhodes",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Experimental R&B"
+  ],
+  "description": "Warm tine electric piano with a soft bark, slow tremolo and a dark room: the late-night chord sound.",
+  "use": "Extended chords (9ths, 13ths) and lazy voicings.",
+  "preview_phrase": "nj_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 1.6,
+      "idx_dec": 0.7,
+      "idx_sus": 0.18,
+      "fb": 0.04,
+      "fm_spread": 4,
+      "a": 0.002,
+      "d": 3.8,
+      "s": 0.12,
+      "r": 0.7,
+      "keydecay": 0.3,
+      "type": 2
+    },
+    {
+      "cr": 1,
+      "mr": 14,
+      "idx": 1.2,
+      "idx_dec": 0.01,
+      "idx_sus": 0,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0,
+      "r": 0.1,
+      "level": 0.16,
+      "type": 2
+    },
+    {
+      "wave": 0,
+      "a": 0.003,
+      "d": 3,
+      "s": 0.1,
+      "r": 0.7,
+      "level": 0.2,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2600,
+    "f_res": 0.1,
+    "f_key": 0.35,
+    "lfo_rate": 4.2,
+    "lfo_amp": 0.16,
+    "lfo_pan": 0.2
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 9000,
+    "eq_lc": 60,
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "width": 1.25
+  },
+  "library": "New Jazz",
+  "kind": "Keys",
+  "loudness_trim_db": 0.45,
+  "id": "velvet-rhodes",
+  "out_gain_db": -1.55
+}

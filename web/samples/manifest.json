@@ -1,0 +1,4341 @@
+{
+ "libraries": [
+  "New Jazz",
+  "Disco + EDM + Club",
+  "Reggaetón",
+  "Dembow Dominicano"
+ ],
+ "categories": [
+  "Drums",
+  "Hi-Hats",
+  "Percussion",
+  "Effects",
+  "Textures"
+ ],
+ "items": [
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Drums",
+   "id": "nj-dust-kick",
+   "name": "Dust Kick",
+   "desc": "Soft, round kick with a felt-like attack and a warm saturated body: sits under jazzy chords.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -11.34,
+    "max_step": 0.055,
+    "dc": 0.00023,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.5,
+   "file": "nj-dust-kick.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Drums",
+   "id": "nj-knock-kick",
+   "name": "Knock Kick",
+   "desc": "Short, tight kick with a woody knock on top, for busy underground patterns.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -12.06,
+    "max_step": 0.417,
+    "dc": 0.00038,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.9,
+   "file": "nj-knock-kick.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Drums",
+   "id": "nj-brushed-snare",
+   "name": "Brushed Snare",
+   "desc": "Brush-like snare: a soft swish of noise with a quiet head tone and a short room.",
+   "note": 38,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.39,
+    "max_step": 0.641,
+    "dc": 3e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.693,
+   "file": "nj-brushed-snare.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Drums",
+   "id": "nj-rim-knock",
+   "name": "Rim Knock",
+   "desc": "Dry stick-on-rim click with a hollow wooden tone.",
+   "note": 37,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.83,
+    "max_step": 0.617,
+    "dc": 0.00034,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.271,
+   "file": "nj-rim-knock.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "New Jazz",
+   "cat": "Drums",
+   "id": "nj-pattern-laidback",
+   "name": "Laid-Back Pattern",
+   "desc": "Swung, behind-the-beat new-jazz groove: kick, brushed snare and rim knocks, 84 BPM.",
+   "bpm": 84,
+   "beats": 4,
+   "events": [
+    {
+     "s": "nj-dust-kick",
+     "b": 0,
+     "v": 0.95
+    },
+    {
+     "s": "nj-dust-kick",
+     "b": 1.75,
+     "v": 0.65
+    },
+    {
+     "s": "nj-dust-kick",
+     "b": 2.5,
+     "v": 0.8
+    },
+    {
+     "s": "nj-brushed-snare",
+     "b": 1,
+     "v": 0.8
+    },
+    {
+     "s": "nj-brushed-snare",
+     "b": 3,
+     "v": 0.85
+    },
+    {
+     "s": "nj-rim-knock",
+     "b": 2.75,
+     "v": 0.4
+    },
+    {
+     "s": "nj-rim-knock",
+     "b": 3.75,
+     "v": 0.35
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 0.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 0.5,
+     "v": 0.38
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.5,
+     "v": 0.38
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.5,
+     "v": 0.38
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.5,
+     "v": 0.38
+    }
+   ],
+   "swing": 0.3
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Hi-Hats",
+   "id": "nj-hat-tight",
+   "name": "Tight Hat",
+   "desc": "Crisp, short closed hat with a dark top, for intricate patterns.",
+   "note": 42,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.45,
+    "max_step": 1.082,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.192,
+   "file": "nj-hat-tight.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Hi-Hats",
+   "id": "nj-hat-open",
+   "name": "Smoky Open Hat",
+   "desc": "Dark open hat that breathes out slowly.",
+   "note": 46,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -23.97,
+    "max_step": 0.971,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.227,
+   "file": "nj-hat-open.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Hi-Hats",
+   "id": "nj-hat-pedal",
+   "name": "Pedal Chick",
+   "desc": "Soft foot-pedal 'chick': short, closed and low in the mix.",
+   "note": 44,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -23.15,
+    "max_step": 0.952,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.116,
+   "file": "nj-hat-pedal.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "New Jazz",
+   "cat": "Hi-Hats",
+   "id": "nj-hat-roll",
+   "name": "Triplet Roll",
+   "desc": "Hat pattern with triplet rolls and ghost notes for melodic trap and new jazz, 84 BPM.",
+   "bpm": 84,
+   "beats": 4,
+   "events": [
+    {
+     "s": "nj-hat-tight",
+     "b": 0.0,
+     "v": 0.6
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 0.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.0,
+     "v": 0.6
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.0,
+     "v": 0.6
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3,
+     "v": 0.45
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.1667,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.3333,
+     "v": 0.45
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.5,
+     "v": 0.5
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.6667,
+     "v": 0.42
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.8333,
+     "v": 0.5
+    }
+   ],
+   "swing": 0.15
+  },
+  {
+   "kind": "pattern",
+   "lib": "New Jazz",
+   "cat": "Hi-Hats",
+   "id": "nj-hat-shuffle",
+   "name": "Shuffle Hats",
+   "desc": "Swung 8ths with an open hat on the 'and' of 4, 84 BPM.",
+   "bpm": 84,
+   "beats": 4,
+   "events": [
+    {
+     "s": "nj-hat-tight",
+     "b": 0.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 0.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 1.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 2.5,
+     "v": 0.4
+    },
+    {
+     "s": "nj-hat-tight",
+     "b": 3.0,
+     "v": 0.55
+    },
+    {
+     "s": "nj-hat-open",
+     "b": 3.5,
+     "v": 0.5
+    },
+    {
+     "s": "nj-hat-pedal",
+     "b": 1,
+     "v": 0.35
+    },
+    {
+     "s": "nj-hat-pedal",
+     "b": 3,
+     "v": 0.35
+    }
+   ],
+   "swing": 0.35
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Percussion",
+   "id": "nj-finger-snap",
+   "name": "Finger Snap",
+   "desc": "Close, dry finger snap with a quick room.",
+   "note": 39,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -24.34,
+    "max_step": 0.522,
+    "dc": 1e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.382,
+   "file": "nj-finger-snap.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Percussion",
+   "id": "nj-woodblock",
+   "name": "Night Woodblock",
+   "desc": "Hollow, pitched woodblock: a soft accent for off-beats.",
+   "note": 76,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.32,
+    "max_step": 0.326,
+    "dc": 0.00021,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.4,
+   "file": "nj-woodblock.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Percussion",
+   "id": "nj-shaker",
+   "name": "Dust Shaker",
+   "desc": "Gentle, grainy shaker stroke.",
+   "note": 82,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.73,
+    "max_step": 0.981,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.25,
+   "file": "nj-shaker.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Percussion",
+   "id": "nj-metal-ping",
+   "name": "Metal Ping",
+   "desc": "Small, bright metal ping with a long, quiet ring: a futuristic accent.",
+   "note": 81,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.47,
+    "max_step": 0.302,
+    "dc": 1e-05,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.818,
+   "file": "nj-metal-ping.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Percussion",
+   "id": "nj-box-slap",
+   "name": "Box Slap",
+   "desc": "Cajón-style slap: a low thump with a snare buzz on top.",
+   "note": 40,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.23,
+    "max_step": 0.237,
+    "dc": 0.00105,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.42,
+   "file": "nj-box-slap.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Effects",
+   "id": "nj-tape-stop",
+   "name": "Tape Stop",
+   "desc": "A held Dm9 chord that slows to a halt like a stopped tape.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -14.25,
+    "max_step": 0.041,
+    "dc": 0.00023,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.196,
+   "file": "nj-tape-stop.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Effects",
+   "id": "nj-reverse-cymbal",
+   "name": "Reverse Cymbal",
+   "desc": "A dark cymbal played backwards: swells up into the downbeat.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.2,
+    "max_step": 1.128,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0018,
+    "clipped": 0
+   },
+   "seconds": 2.0,
+   "file": "nj-reverse-cymbal.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Effects",
+   "id": "nj-spinback",
+   "name": "Vinyl Spinback",
+   "desc": "A record pulled back by hand: a quick rising-falling rewind sweep.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -8.8,
+    "max_step": 0.232,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.7,
+   "file": "nj-spinback.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Effects",
+   "id": "nj-space-riser",
+   "name": "Space Riser",
+   "desc": "Filtered noise and a rising tone that climb for two bars at 84 BPM.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.29,
+    "max_step": 0.97,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 7.21,
+   "file": "nj-space-riser.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "New Jazz",
+   "cat": "Effects",
+   "id": "nj-sub-drop",
+   "name": "Sub Drop",
+   "desc": "A deep sine falling an octave and a half: the drop under a transition.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -12.55,
+    "max_step": 0.028,
+    "dc": 5e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.2,
+   "file": "nj-sub-drop.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "New Jazz",
+   "cat": "Textures",
+   "id": "nj-vinyl-crackle",
+   "name": "Vinyl Crackle",
+   "desc": "Warm surface noise with soft pops, loopable.",
+   "qa": {
+    "peak_db": -6.0,
+    "rms_db": -37.62,
+    "max_step": 0.404,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "nj-vinyl-crackle.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "New Jazz",
+   "cat": "Textures",
+   "id": "nj-rain-room",
+   "name": "Rain Room",
+   "desc": "Rain on a window heard from inside: soft, dense, loopable.",
+   "qa": {
+    "peak_db": -10.46,
+    "rms_db": -28.0,
+    "max_step": 0.168,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 9.01,
+   "file": "nj-rain-room.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "New Jazz",
+   "cat": "Textures",
+   "id": "nj-granular-night",
+   "name": "Granular Night",
+   "desc": "Scattered glassy grains in a dark space: a slowly shifting bed.",
+   "qa": {
+    "peak_db": -10.19,
+    "rms_db": -26.0,
+    "max_step": 0.026,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 11.01,
+   "file": "nj-granular-night.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "New Jazz",
+   "cat": "Textures",
+   "id": "nj-tape-air",
+   "name": "Tape Air",
+   "desc": "Soft tape hiss with a gentle wow: adds 'air' and age to a mix.",
+   "qa": {
+    "peak_db": -20.19,
+    "rms_db": -34.0,
+    "max_step": 0.108,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "nj-tape-air.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "New Jazz",
+   "cat": "Textures",
+   "id": "nj-midnight-hum",
+   "name": "Midnight Hum",
+   "desc": "Low, warm, slowly beating drone on D: a bed under intros.",
+   "qa": {
+    "peak_db": -13.92,
+    "rms_db": -24.0,
+    "max_step": 0.005,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "nj-midnight-hum.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Drums",
+   "id": "dc-floor-kick",
+   "name": "Four-Floor Kick",
+   "desc": "Punchy, tight house kick: firm click, round 50 Hz body, short tail.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -10.92,
+    "max_step": 0.377,
+    "dc": 0.00027,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.3,
+   "file": "dc-floor-kick.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Drums",
+   "id": "dc-bigroom-kick",
+   "name": "Big Room Kick",
+   "desc": "Long, distorted festival kick with a pitched tail.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -8.5,
+    "max_step": 0.615,
+    "dc": 0.00014,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.4,
+   "file": "dc-bigroom-kick.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Drums",
+   "id": "dc-disco-snare",
+   "name": "Disco Snare",
+   "desc": "Bright, open snare with a short plate: classic dance snare.",
+   "note": 38,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.98,
+    "max_step": 0.985,
+    "dc": 0.0002,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.244,
+   "file": "dc-disco-snare.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Drums",
+   "id": "dc-club-clap",
+   "name": "Club Clap",
+   "desc": "Wide, layered clap with a short room, for 2 and 4.",
+   "note": 39,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.81,
+    "max_step": 0.698,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.049,
+   "file": "dc-club-clap.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Disco + EDM + Club",
+   "cat": "Drums",
+   "id": "dc-disco-house-groove",
+   "name": "Disco House Groove",
+   "desc": "Four-on-the-floor with claps on 2 and 4, offbeat open hats and 16th shakers, 124 BPM.",
+   "bpm": 124,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dc-floor-kick",
+     "b": 0,
+     "v": 1
+    },
+    {
+     "s": "dc-floor-kick",
+     "b": 1,
+     "v": 1
+    },
+    {
+     "s": "dc-floor-kick",
+     "b": 2,
+     "v": 1
+    },
+    {
+     "s": "dc-floor-kick",
+     "b": 3,
+     "v": 1
+    },
+    {
+     "s": "dc-club-clap",
+     "b": 1,
+     "v": 0.85
+    },
+    {
+     "s": "dc-club-clap",
+     "b": 3,
+     "v": 0.9
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 0.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 1.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 2.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 3.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 0.25,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 0.75,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.25,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.75,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.25,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.75,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.25,
+     "v": 0.32
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.75,
+     "v": 0.32
+    },
+    {
+     "s": "dc-shaker",
+     "b": 0.0,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 0.25,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 0.5,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 0.75,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 1.0,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 1.25,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 1.5,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 1.75,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 2.0,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 2.25,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 2.5,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 2.75,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 3.0,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 3.25,
+     "v": 0.3
+    },
+    {
+     "s": "dc-shaker",
+     "b": 3.5,
+     "v": 0.22
+    },
+    {
+     "s": "dc-shaker",
+     "b": 3.75,
+     "v": 0.3
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Hi-Hats",
+   "id": "dc-hat-closed",
+   "name": "Sparkle Hat",
+   "desc": "Bright, crisp closed hat that sparkles at the top.",
+   "note": 42,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.37,
+    "max_step": 1.218,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.244,
+   "file": "dc-hat-closed.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Hi-Hats",
+   "id": "dc-hat-open",
+   "name": "Offbeat Open Hat",
+   "desc": "Classic open hat for the offbeats, with a clean decay.",
+   "note": 46,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -25.09,
+    "max_step": 1.124,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.899,
+   "file": "dc-hat-open.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Hi-Hats",
+   "id": "dc-hat-sizzle",
+   "name": "Sizzle Hat",
+   "desc": "Long, sizzling hat with a ride-like shimmer.",
+   "note": 51,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -23.52,
+    "max_step": 1.357,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.501,
+   "file": "dc-hat-sizzle.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Disco + EDM + Club",
+   "cat": "Hi-Hats",
+   "id": "dc-hat-16-groove",
+   "name": "16th Groove",
+   "desc": "Dynamic 16th-note hats with accents and an open hat on every 'and', 124 BPM.",
+   "bpm": 124,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dc-hat-closed",
+     "b": 0.0,
+     "v": 0.7
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 0.25,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 0.75,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.0,
+     "v": 0.7
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.25,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.75,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.0,
+     "v": 0.7
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.25,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.75,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.0,
+     "v": 0.7
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.25,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.75,
+     "v": 0.35
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 0.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 1.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 2.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-open",
+     "b": 3.5,
+     "v": 0.55
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Disco + EDM + Club",
+   "cat": "Hi-Hats",
+   "id": "dc-hat-build",
+   "name": "Build Hats",
+   "desc": "Hats that double from 8ths to 16ths to 32nds over two bars: a build-up, 128 BPM.",
+   "bpm": 128,
+   "beats": 8,
+   "events": [
+    {
+     "s": "dc-hat-closed",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 0.5,
+     "v": 0.47
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.0,
+     "v": 0.49
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 1.5,
+     "v": 0.51
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.0,
+     "v": 0.53
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 2.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.0,
+     "v": 0.57
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 3.5,
+     "v": 0.59
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 4.0,
+     "v": 0.5
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 4.25,
+     "v": 0.51
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 4.5,
+     "v": 0.52
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 4.75,
+     "v": 0.53
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 5.0,
+     "v": 0.54
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 5.25,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 5.5,
+     "v": 0.56
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 5.75,
+     "v": 0.57
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.0,
+     "v": 0.55
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.125,
+     "v": 0.57
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.25,
+     "v": 0.59
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.375,
+     "v": 0.61
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.5,
+     "v": 0.63
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.625,
+     "v": 0.65
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.75,
+     "v": 0.67
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 6.875,
+     "v": 0.69
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.0,
+     "v": 0.71
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.125,
+     "v": 0.73
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.25,
+     "v": 0.75
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.375,
+     "v": 0.77
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.5,
+     "v": 0.79
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.625,
+     "v": 0.81
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.75,
+     "v": 0.83
+    },
+    {
+     "s": "dc-hat-closed",
+     "b": 7.875,
+     "v": 0.85
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Percussion",
+   "id": "dc-tambourine",
+   "name": "Tambourine",
+   "desc": "Bright tambourine shake: jingles over a soft skin tap.",
+   "note": 54,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.43,
+    "max_step": 1.09,
+    "dc": 0.00014,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.45,
+   "file": "dc-tambourine.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Percussion",
+   "id": "dc-shaker",
+   "name": "Groove Shaker",
+   "desc": "Even, crisp shaker for 16th-note movement.",
+   "note": 82,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.29,
+    "max_step": 1.181,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.15,
+   "file": "dc-shaker.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Percussion",
+   "id": "dc-conga",
+   "name": "Conga Open",
+   "desc": "Open, ringing high conga for disco percussion grooves.",
+   "note": 63,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.02,
+    "max_step": 0.081,
+    "dc": 4e-05,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.78,
+   "file": "dc-conga.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Percussion",
+   "id": "dc-cowbell",
+   "name": "Dance Cowbell",
+   "desc": "Two-tone electronic cowbell, short and bright.",
+   "note": 56,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.98,
+    "max_step": 0.121,
+    "dc": 0.00022,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.5,
+   "file": "dc-cowbell.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Percussion",
+   "id": "dc-clave",
+   "name": "Clave",
+   "desc": "Hard, bright wooden clave click.",
+   "note": 75,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.95,
+    "max_step": 0.488,
+    "dc": 0.00013,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.272,
+   "file": "dc-clave.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Effects",
+   "id": "dc-uplifter",
+   "name": "Uplifter",
+   "desc": "Eight-bar white-noise uplifter with a rising filter and a lifting tone, 124 BPM.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.11,
+    "max_step": 1.206,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 17.006,
+   "file": "dc-uplifter.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Effects",
+   "id": "dc-downlifter",
+   "name": "Downlifter",
+   "desc": "Falling noise sweep after a drop, two bars.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.47,
+    "max_step": 1.486,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 4.714,
+   "file": "dc-downlifter.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Effects",
+   "id": "dc-drop-impact",
+   "name": "Drop Impact",
+   "desc": "Boom + crash + sub for the first beat of a drop.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.96,
+    "max_step": 0.654,
+    "dc": 5e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 4.391,
+   "file": "dc-drop-impact.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Disco + EDM + Club",
+   "cat": "Effects",
+   "id": "dc-filter-sweep",
+   "name": "Filter Sweep",
+   "desc": "An Am7 supersaw chord opening from dark to bright over two bars.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -15.29,
+    "max_step": 0.303,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 5.242,
+   "file": "dc-filter-sweep.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Disco + EDM + Club",
+   "cat": "Effects",
+   "id": "dc-snare-build",
+   "name": "Snare Roll Build",
+   "desc": "Snare roll from quarters to 32nds over four bars, rising in level: the classic build, 128 BPM.",
+   "bpm": 128,
+   "beats": 16,
+   "events": [
+    {
+     "s": "dc-disco-snare",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 1.0,
+     "v": 0.45
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 2.0,
+     "v": 0.45
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 3.0,
+     "v": 0.45
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 4.0,
+     "v": 0.5
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 4.5,
+     "v": 0.51
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 5.0,
+     "v": 0.52
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 5.5,
+     "v": 0.53
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 6.0,
+     "v": 0.54
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 6.5,
+     "v": 0.55
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 7.0,
+     "v": 0.56
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 7.5,
+     "v": 0.57
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 8.0,
+     "v": 0.55
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 8.25,
+     "v": 0.56
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 8.5,
+     "v": 0.57
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 8.75,
+     "v": 0.58
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 9.0,
+     "v": 0.59
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 9.25,
+     "v": 0.6
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 9.5,
+     "v": 0.61
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 9.75,
+     "v": 0.62
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 10.0,
+     "v": 0.63
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 10.25,
+     "v": 0.64
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 10.5,
+     "v": 0.65
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 10.75,
+     "v": 0.66
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 11.0,
+     "v": 0.67
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 11.25,
+     "v": 0.68
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 11.5,
+     "v": 0.69
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 11.75,
+     "v": 0.7
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.0,
+     "v": 0.6
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.125,
+     "v": 0.612
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.25,
+     "v": 0.624
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.375,
+     "v": 0.636
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.5,
+     "v": 0.648
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.625,
+     "v": 0.66
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.75,
+     "v": 0.672
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 12.875,
+     "v": 0.684
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.0,
+     "v": 0.696
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.125,
+     "v": 0.708
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.25,
+     "v": 0.72
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.375,
+     "v": 0.732
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.5,
+     "v": 0.744
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.625,
+     "v": 0.756
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.75,
+     "v": 0.768
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 13.875,
+     "v": 0.78
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.0,
+     "v": 0.792
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.125,
+     "v": 0.804
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.25,
+     "v": 0.816
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.375,
+     "v": 0.828
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.5,
+     "v": 0.84
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.625,
+     "v": 0.852
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.75,
+     "v": 0.864
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 14.875,
+     "v": 0.876
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.0,
+     "v": 0.888
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.125,
+     "v": 0.9
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.25,
+     "v": 0.912
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.375,
+     "v": 0.924
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.5,
+     "v": 0.936
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.625,
+     "v": 0.948
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.75,
+     "v": 0.96
+    },
+    {
+     "s": "dc-disco-snare",
+     "b": 15.875,
+     "v": 0.972
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "loop",
+   "lib": "Disco + EDM + Club",
+   "cat": "Textures",
+   "id": "dc-shimmer-air",
+   "name": "Shimmer Air",
+   "desc": "Bright, shimmering high air with sparkling partials.",
+   "qa": {
+    "peak_db": -14.22,
+    "rms_db": -28.0,
+    "max_step": 0.106,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 11.01,
+   "file": "dc-shimmer-air.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Disco + EDM + Club",
+   "cat": "Textures",
+   "id": "dc-analog-warmth",
+   "name": "Analog Warmth",
+   "desc": "Warm, chorused analog drone on A: glue under chords.",
+   "qa": {
+    "peak_db": -10.5,
+    "rms_db": -24.0,
+    "max_step": 0.053,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 10.01,
+   "file": "dc-analog-warmth.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Disco + EDM + Club",
+   "cat": "Textures",
+   "id": "dc-neon-buzz",
+   "name": "Neon Buzz",
+   "desc": "A neon sign's hum and flicker: futuristic room tone.",
+   "qa": {
+    "peak_db": -17.72,
+    "rms_db": -30.0,
+    "max_step": 0.033,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "dc-neon-buzz.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Disco + EDM + Club",
+   "cat": "Textures",
+   "id": "dc-club-room",
+   "name": "Club Room Tone",
+   "desc": "A muffled big room heard from the bar: low thumps and air, at 124 BPM.",
+   "bpm": 124,
+   "beats": 16,
+   "qa": {
+    "peak_db": -18.27,
+    "rms_db": -28.0,
+    "max_step": 0.014,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 9.55,
+   "file": "dc-club-room.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Disco + EDM + Club",
+   "cat": "Textures",
+   "id": "dc-glitter",
+   "name": "Glitter Sparkles",
+   "desc": "Random tiny bell sparkles across the stereo field.",
+   "qa": {
+    "peak_db": -12.15,
+    "rms_db": -30.0,
+    "max_step": 0.088,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 11.01,
+   "file": "dc-glitter.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Drums",
+   "id": "rg-dembow-kick",
+   "name": "Dembow Kick",
+   "desc": "Punchy, short reggaetón kick: tight low end that leaves room for the 808.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -10.67,
+    "max_step": 0.315,
+    "dc": 0.0003,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.1,
+   "file": "rg-dembow-kick.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Drums",
+   "id": "rg-perreo-snare",
+   "name": "Perreo Snare",
+   "desc": "Crisp, snappy reggaetón snare with a bright crack.",
+   "note": 38,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -16.39,
+    "max_step": 1.057,
+    "dc": 0.00036,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.742,
+   "file": "rg-perreo-snare.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Drums",
+   "id": "rg-rimshot",
+   "name": "Rimshot",
+   "desc": "Hard rimshot click with a ringing tone: the classic dembow accent.",
+   "note": 37,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.43,
+    "max_step": 0.363,
+    "dc": 0.00014,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.368,
+   "file": "rg-rimshot.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Reggaetón",
+   "cat": "Drums",
+   "id": "rg-classic-dembow",
+   "name": "Classic Dembow",
+   "desc": "The core reggaetón rhythm: kick on every beat, snare on the 3-3-2 'boom-ch-boom-chick', 94 BPM.",
+   "bpm": 94,
+   "beats": 4,
+   "events": [
+    {
+     "s": "rg-dembow-kick",
+     "b": 0,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 1,
+     "v": 0.9
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 2,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 3,
+     "v": 0.9
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 0.75,
+     "v": 0.85
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 1.5,
+     "v": 0.8
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 2.75,
+     "v": 0.85
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 3.5,
+     "v": 0.8
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5,
+     "v": 0.45
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Reggaetón",
+   "cat": "Drums",
+   "id": "rg-dark-perreo",
+   "name": "Dark Perreo",
+   "desc": "Heavier, sparser dembow with rimshots and a fill in the last beat, 92 BPM.",
+   "bpm": 92,
+   "beats": 8,
+   "events": [
+    {
+     "s": "rg-dembow-kick",
+     "b": 0,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 1,
+     "v": 0.85
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 2,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 3,
+     "v": 0.85
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 0.75,
+     "v": 0.8
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 1.5,
+     "v": 0.75
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 2.75,
+     "v": 0.8
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 3.5,
+     "v": 0.85
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 4,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 5,
+     "v": 0.85
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 6,
+     "v": 1
+    },
+    {
+     "s": "rg-dembow-kick",
+     "b": 7,
+     "v": 0.85
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 4.75,
+     "v": 0.8
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 5.5,
+     "v": 0.75
+    },
+    {
+     "s": "rg-rimshot",
+     "b": 6.75,
+     "v": 0.8
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 7.5,
+     "v": 0.85
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 4.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 4.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 5.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 5.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 6.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 6.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 7.0,
+     "v": 0.4
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 7.5,
+     "v": 0.4
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 7.75,
+     "v": 0.6
+    },
+    {
+     "s": "rg-perreo-snare",
+     "b": 7.875,
+     "v": 0.7
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Hi-Hats",
+   "id": "rg-hat-closed",
+   "name": "Perreo Hat",
+   "desc": "Clean, tight closed hat for reggaetón grooves.",
+   "note": 42,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.17,
+    "max_step": 1.496,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.22,
+   "file": "rg-hat-closed.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Hi-Hats",
+   "id": "rg-hat-open",
+   "name": "Open Hat Suave",
+   "desc": "Smooth open hat for the 'and' of the beat.",
+   "note": 46,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.4,
+    "max_step": 1.227,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.98,
+   "file": "rg-hat-open.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Reggaetón",
+   "cat": "Hi-Hats",
+   "id": "rg-hat-16",
+   "name": "16ths Perreo",
+   "desc": "Steady 16th hats with accents that follow the dembow, 94 BPM.",
+   "bpm": 94,
+   "beats": 4,
+   "events": [
+    {
+     "s": "rg-hat-closed",
+     "b": 0.0,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.25,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.5,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.75,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.0,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.25,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.5,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.75,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.0,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.25,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.5,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.75,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.0,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.25,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5,
+     "v": 0.55
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.75,
+     "v": 0.3
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Reggaetón",
+   "cat": "Hi-Hats",
+   "id": "rg-hat-rolls",
+   "name": "Hat Rolls",
+   "desc": "Hats with fast 32nd rolls leading into each half-bar, 94 BPM.",
+   "bpm": 94,
+   "beats": 4,
+   "events": [
+    {
+     "s": "rg-hat-closed",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 0.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 2.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.0,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5,
+     "v": 0.45
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.75,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.8125,
+     "v": 0.36
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.875,
+     "v": 0.42
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 1.9375,
+     "v": 0.48
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5,
+     "v": 0.3
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.5625,
+     "v": 0.36
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.625,
+     "v": 0.42
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.6875,
+     "v": 0.48
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.75,
+     "v": 0.54
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.8125,
+     "v": 0.6
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.875,
+     "v": 0.66
+    },
+    {
+     "s": "rg-hat-closed",
+     "b": 3.9375,
+     "v": 0.72
+    },
+    {
+     "s": "rg-hat-open",
+     "b": 3,
+     "v": 0.45
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Hi-Hats",
+   "id": "rg-hat-shaker",
+   "name": "Shaker Hat",
+   "desc": "A hat made of shaker grains: softer, for old-school grooves.",
+   "note": 70,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.79,
+    "max_step": 1.318,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.2,
+   "file": "rg-hat-shaker.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Percussion",
+   "id": "rg-bongo-hi",
+   "name": "Bongo Macho",
+   "desc": "Bright high bongo slap.",
+   "note": 60,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.56,
+    "max_step": 0.082,
+    "dc": 0.00039,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.42,
+   "file": "rg-bongo-hi.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Percussion",
+   "id": "rg-conga-low",
+   "name": "Conga Tumba",
+   "desc": "Deep, round low conga (tumba).",
+   "note": 64,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.01,
+    "max_step": 0.047,
+    "dc": 0.00053,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.96,
+   "file": "rg-conga-low.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Percussion",
+   "id": "rg-timbal",
+   "name": "Timbal",
+   "desc": "Metal-shelled timbal hit with a bright ring.",
+   "note": 65,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.37,
+    "max_step": 0.101,
+    "dc": 0.00025,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.6,
+   "file": "rg-timbal.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Percussion",
+   "id": "rg-guiro",
+   "name": "Güiro",
+   "desc": "Scraped güiro stroke: a gourd with ridges, long-short.",
+   "note": 73,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -27.7,
+    "max_step": 0.408,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.41,
+   "file": "rg-guiro.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Percussion",
+   "id": "rg-clave",
+   "name": "Clave Perreo",
+   "desc": "Dry, high clave accent.",
+   "note": 75,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.62,
+    "max_step": 0.529,
+    "dc": 6e-05,
+    "start": 0.0002,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.231,
+   "file": "rg-clave.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Effects",
+   "id": "rg-riser",
+   "name": "Riser Perreo",
+   "desc": "A two-bar riser: filtered noise climbing to the drop, 94 BPM.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.73,
+    "max_step": 1.152,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 6.599,
+   "file": "rg-riser.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Effects",
+   "id": "rg-reverse-crash",
+   "name": "Reverse Crash",
+   "desc": "Bright crash played backwards into the downbeat.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.19,
+    "max_step": 1.25,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0011,
+    "clipped": 0
+   },
+   "seconds": 2.6,
+   "file": "rg-reverse-crash.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Effects",
+   "id": "rg-sub-drop",
+   "name": "Sub Drop",
+   "desc": "Short sub drop with a little grit, for the space before the chorus.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -10.41,
+    "max_step": 0.027,
+    "dc": 0.0001,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.6,
+   "file": "rg-sub-drop.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Effects",
+   "id": "rg-laser",
+   "name": "Laser Zap",
+   "desc": "Classic falling 'laser' zap.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -16.82,
+    "max_step": 0.27,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.95,
+   "file": "rg-laser.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Reggaetón",
+   "cat": "Effects",
+   "id": "rg-whoosh",
+   "name": "Whoosh",
+   "desc": "Fast stereo whoosh that pans across.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.31,
+    "max_step": 0.527,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.77,
+   "file": "rg-whoosh.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Reggaetón",
+   "cat": "Textures",
+   "id": "rg-noche",
+   "name": "Noche Ambience",
+   "desc": "Warm night air with soft insect chirps, loopable.",
+   "qa": {
+    "peak_db": -6.57,
+    "rms_db": -30.0,
+    "max_step": 0.279,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 9.51,
+   "file": "rg-noche.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Reggaetón",
+   "cat": "Textures",
+   "id": "rg-dark-drone",
+   "name": "Dark Drone",
+   "desc": "Low, dark, slowly filtered drone on B.",
+   "qa": {
+    "peak_db": -14.68,
+    "rms_db": -24.0,
+    "max_step": 0.004,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "rg-dark-drone.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Reggaetón",
+   "cat": "Textures",
+   "id": "rg-vinyl-old",
+   "name": "Old-School Vinyl",
+   "desc": "Thin, crackly vinyl with a band-limited hiss: early-2000s feel.",
+   "qa": {
+    "peak_db": -6.0,
+    "rms_db": -34.42,
+    "max_step": 0.408,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "rg-vinyl-old.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Reggaetón",
+   "cat": "Textures",
+   "id": "rg-rain",
+   "name": "Lluvia",
+   "desc": "Heavy tropical rain bed.",
+   "qa": {
+    "peak_db": -12.21,
+    "rms_db": -27.0,
+    "max_step": 0.176,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 9.01,
+   "file": "rg-rain.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Reggaetón",
+   "cat": "Textures",
+   "id": "rg-futuro-glitch",
+   "name": "Futuro Glitch",
+   "desc": "Stuttering digital texture for experimental reggaetón, at 94 BPM.",
+   "bpm": 94,
+   "beats": 8,
+   "qa": {
+    "peak_db": -6.0,
+    "rms_db": -36.06,
+    "max_step": 0.389,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 5.1,
+   "file": "rg-futuro-glitch.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-palito",
+   "name": "Tambora Palito",
+   "desc": "Tambora: stick on the head, open — the bright, ringing accent (physical model).",
+   "note": 45,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -13.52,
+    "max_step": 0.951,
+    "dc": 0.00048,
+    "start": 0.0002,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.9,
+   "file": "dd-tambora-palito.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-mano",
+   "name": "Tambora Mano",
+   "desc": "Tambora: open hand on the goat-skin head — a deeper, warmer tone (physical model).",
+   "note": 43,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -16.74,
+    "max_step": 0.056,
+    "dc": 1e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.0,
+   "file": "dd-tambora-mano.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-tapao",
+   "name": "Tambora Tapao",
+   "desc": "Tambora: muted hand slap, short and dry (physical model).",
+   "note": 41,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -21.03,
+    "max_step": 0.135,
+    "dc": 0.00059,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.245,
+   "file": "dd-tambora-tapao.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-cascara",
+   "name": "Tambora Cáscara",
+   "desc": "Tambora: stick on the wooden shell — the clicking timekeeper (physical model).",
+   "note": 48,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -19.97,
+    "max_step": 0.66,
+    "dc": 4e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.232,
+   "file": "dd-tambora-cascara.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-redoble",
+   "name": "Tambora Redoble",
+   "desc": "A tambora roll (redoble) that accelerates into the downbeat.",
+   "note": 47,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -13.1,
+    "max_step": 0.752,
+    "dc": 9e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.4,
+   "file": "dd-tambora-redoble.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-kick-calle",
+   "name": "Kick Calle",
+   "desc": "Hard, punchy dembow kick with a distorted knock.",
+   "note": 36,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -9.46,
+    "max_step": 0.564,
+    "dc": 0.00028,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.0,
+   "file": "dd-kick-calle.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-snare-dembow",
+   "name": "Snare Dembow",
+   "desc": "Sharp, cracking snare for fast Dominican dembow.",
+   "note": 38,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -16.15,
+    "max_step": 1.231,
+    "dc": 0.00028,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.692,
+   "file": "dd-snare-dembow.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-clap-calle",
+   "name": "Clap Calle",
+   "desc": "Tight, aggressive clap.",
+   "note": 39,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -24.65,
+    "max_step": 0.654,
+    "dc": 1e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.7,
+   "file": "dd-clap-calle.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-rim-dembow",
+   "name": "Rim Dembow",
+   "desc": "Bright rimshot for the dembow off-beats.",
+   "note": 37,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.33,
+    "max_step": 0.579,
+    "dc": 0.00017,
+    "start": 0.0001,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.312,
+   "file": "dd-rim-dembow.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-tambora-jaleo",
+   "name": "Tambora Jaleo",
+   "desc": "Tambora pattern: cáscara clicks keep time, the palito accents the 'and' of 2 and the 4, the mano answers — a merengue-rooted figure adapted to dembow, 122 BPM.",
+   "bpm": 122,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dd-tambora-cascara",
+     "b": 0,
+     "v": 0.7
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 0.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 1,
+     "v": 0.65
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 1.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 2,
+     "v": 0.7
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 2.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 3,
+     "v": 0.65
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 3.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 1.75,
+     "v": 0.9
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 3,
+     "v": 0.95
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 3.75,
+     "v": 0.8
+    },
+    {
+     "s": "dd-tambora-mano",
+     "b": 0,
+     "v": 0.8
+    },
+    {
+     "s": "dd-tambora-mano",
+     "b": 2,
+     "v": 0.75
+    },
+    {
+     "s": "dd-tambora-mano",
+     "b": 2.75,
+     "v": 0.6
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 1.25,
+     "v": 0.55
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 3.25,
+     "v": 0.5
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-dembow-dominicano",
+   "name": "Dembow Dominicano",
+   "desc": "Fast Dominican dembow: hard four-on-the-floor kick, snare/rim on the dembow, tambora accents and güira, 124 BPM.",
+   "bpm": 124,
+   "beats": 8,
+   "events": [
+    {
+     "s": "dd-kick-calle",
+     "b": 0,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 1,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 2,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 3,
+     "v": 1
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 0.75,
+     "v": 0.85
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 1.5,
+     "v": 0.8
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 2.75,
+     "v": 0.85
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 3.5,
+     "v": 0.8
+    },
+    {
+     "s": "dd-clap-calle",
+     "b": 1,
+     "v": 0.55
+    },
+    {
+     "s": "dd-clap-calle",
+     "b": 3,
+     "v": 0.6
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 1.75,
+     "v": 0.7
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 3.75,
+     "v": 0.75
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 0.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 0.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 1.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 1.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 2.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 2.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 3.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 3.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 0.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 0.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 1.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 1.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 2.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 2.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 3.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 3.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 4,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 5,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 6,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 7,
+     "v": 1
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 4.75,
+     "v": 0.85
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 5.5,
+     "v": 0.8
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 6.75,
+     "v": 0.85
+    },
+    {
+     "s": "dd-snare-dembow",
+     "b": 7.5,
+     "v": 0.8
+    },
+    {
+     "s": "dd-clap-calle",
+     "b": 5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-clap-calle",
+     "b": 7,
+     "v": 0.6
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 5.75,
+     "v": 0.7
+    },
+    {
+     "s": "dd-tambora-palito",
+     "b": 7.75,
+     "v": 0.75
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 4.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 4.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 5.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 5.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 6.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 6.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 7.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-cascara",
+     "b": 7.75,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 4.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 4.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 4.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 4.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 5.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 5.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 5.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 5.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 6.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 6.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 6.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 6.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 7.0,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 7.25,
+     "v": 0.42
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 7.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 7.75,
+     "v": 0.42
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 4.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 4.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 5.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 5.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 6.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 6.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 7.0,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 7.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-redoble",
+     "b": 7.0,
+     "v": 0.8
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Drums",
+   "id": "dd-dembow-calle",
+   "name": "Dembow Calle",
+   "desc": "Underground street dembow: kick and rimshots, rolling hats, tambora tapao ghost notes, 120 BPM.",
+   "bpm": 120,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dd-kick-calle",
+     "b": 0,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 1,
+     "v": 0.9
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 2,
+     "v": 1
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 2.5,
+     "v": 0.7
+    },
+    {
+     "s": "dd-kick-calle",
+     "b": 3,
+     "v": 0.9
+    },
+    {
+     "s": "dd-rim-dembow",
+     "b": 0.75,
+     "v": 0.8
+    },
+    {
+     "s": "dd-rim-dembow",
+     "b": 1.5,
+     "v": 0.75
+    },
+    {
+     "s": "dd-rim-dembow",
+     "b": 2.75,
+     "v": 0.8
+    },
+    {
+     "s": "dd-rim-dembow",
+     "b": 3.5,
+     "v": 0.75
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 0.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 1.25,
+     "v": 0.45
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 2.25,
+     "v": 0.4
+    },
+    {
+     "s": "dd-tambora-tapao",
+     "b": 3.25,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.5,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.75,
+     "v": 0.3
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Hi-Hats",
+   "id": "dd-hat-fast",
+   "name": "Hat Rápido",
+   "desc": "Tight, bright closed hat that can run fast 16ths.",
+   "note": 42,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.18,
+    "max_step": 1.309,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.18,
+   "file": "dd-hat-fast.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Hi-Hats",
+   "id": "dd-hat-open",
+   "name": "Hat Abierto",
+   "desc": "Short, bright open hat for dembow off-beats.",
+   "note": 46,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.6,
+    "max_step": 1.233,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.737,
+   "file": "dd-hat-open.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Hi-Hats",
+   "id": "dd-hat-rolls",
+   "name": "Rolls Dembow",
+   "desc": "16th hats with 32nd and triplet rolls, the energy of fast dembow, 124 BPM.",
+   "bpm": 124,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dd-hat-fast",
+     "b": 0.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.5,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.5,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.0,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.5,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.75,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.0,
+     "v": 0.35
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.125,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.25,
+     "v": 0.45
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.375,
+     "v": 0.5
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.625,
+     "v": 0.6
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.75,
+     "v": 0.65
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.875,
+     "v": 0.7
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Hi-Hats",
+   "id": "dd-hat-galope",
+   "name": "Hats Galope",
+   "desc": "Galloping hats (16th + two 32nds) with an open hat on the 'and' of 4, 122 BPM.",
+   "bpm": 122,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dd-hat-fast",
+     "b": 0,
+     "v": 0.5
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.375,
+     "v": 0.35
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1,
+     "v": 0.5
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.375,
+     "v": 0.35
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2,
+     "v": 0.5
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.375,
+     "v": 0.35
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3,
+     "v": 0.5
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.25,
+     "v": 0.3
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.375,
+     "v": 0.35
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 0.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 1.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 2.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-fast",
+     "b": 3.5,
+     "v": 0.4
+    },
+    {
+     "s": "dd-hat-open",
+     "b": 3.5,
+     "v": 0.5
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Hi-Hats",
+   "id": "dd-hat-crunch",
+   "name": "Hat Crunch",
+   "desc": "Crushed, lo-fi hat with a gritty edge for underground dembow.",
+   "note": 44,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -17.81,
+    "max_step": 1.246,
+    "dc": 2e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.124,
+   "file": "dd-hat-crunch.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-guira-largo",
+   "name": "Güira Raspado",
+   "desc": "Güira: a long scrape down the metal (physical model).",
+   "note": 69,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -24.23,
+    "max_step": 0.741,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.47,
+   "file": "dd-guira-largo.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-guira-corto",
+   "name": "Güira Corto",
+   "desc": "Güira: a short, crisp stroke for 8th-note patterns (physical model).",
+   "note": 82,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -23.74,
+    "max_step": 0.891,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.24,
+   "file": "dd-guira-corto.flac"
+  },
+  {
+   "kind": "pattern",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-guira-pattern",
+   "name": "Güira Merengue",
+   "desc": "Güira pattern: long scrape on the beat, short strokes on the 16ths, a merengue-rooted figure for dembow, 122 BPM.",
+   "bpm": 122,
+   "beats": 4,
+   "events": [
+    {
+     "s": "dd-guira-largo",
+     "b": 0,
+     "v": 0.8
+    },
+    {
+     "s": "dd-guira-largo",
+     "b": 2,
+     "v": 0.8
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 0.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 0.75,
+     "v": 0.45
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 1,
+     "v": 0.65
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 1.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 1.75,
+     "v": 0.45
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 2.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 2.75,
+     "v": 0.45
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 3,
+     "v": 0.65
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 3.5,
+     "v": 0.55
+    },
+    {
+     "s": "dd-guira-corto",
+     "b": 3.75,
+     "v": 0.5
+    }
+   ],
+   "swing": 0.0
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-campana",
+   "name": "Campana",
+   "desc": "Bright, cutting cowbell (campana) for dembow accents.",
+   "note": 56,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.9,
+    "max_step": 0.153,
+    "dc": 0.00017,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.5,
+   "file": "dd-campana.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-jaleo-claps",
+   "name": "Palmas Jaleo",
+   "desc": "A group of hand claps, a little loose, like a crowd keeping time.",
+   "note": 39,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -23.05,
+    "max_step": 0.551,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.724,
+   "file": "dd-jaleo-claps.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Percussion",
+   "id": "dd-maracas",
+   "name": "Maracas",
+   "desc": "Bright maracas shake.",
+   "note": 70,
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -20.77,
+    "max_step": 1.197,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.12,
+   "file": "dd-maracas.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Effects",
+   "id": "dd-sirena",
+   "name": "Sirena",
+   "desc": "Dembow siren: a rising-falling alarm tone with a wobble.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -10.49,
+    "max_step": 0.185,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 2.951,
+   "file": "dd-sirena.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Effects",
+   "id": "dd-vocal-ey",
+   "name": "Vocal 'Ey!'",
+   "desc": "A short synthesized shout-like 'ey!' (formant model, not a recorded voice).",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -12.64,
+    "max_step": 0.133,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 0.749,
+   "file": "dd-vocal-ey.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Effects",
+   "id": "dd-impact-calle",
+   "name": "Impacto Calle",
+   "desc": "Hard impact: distorted boom, crash and sub.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -18.16,
+    "max_step": 0.955,
+    "dc": 5e-05,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 4.622,
+   "file": "dd-impact-calle.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Effects",
+   "id": "dd-riser",
+   "name": "Subida",
+   "desc": "Fast one-bar riser into the drop, 124 BPM.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -22.43,
+    "max_step": 1.206,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 3.448,
+   "file": "dd-riser.flac"
+  },
+  {
+   "kind": "oneshot",
+   "lib": "Dembow Dominicano",
+   "cat": "Effects",
+   "id": "dd-rewind",
+   "name": "Rewind DJ",
+   "desc": "DJ rewind: the track pulled back fast.",
+   "hidden": false,
+   "qa": {
+    "peak_db": -1.0,
+    "rms_db": -9.05,
+    "max_step": 0.292,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 1.1,
+   "file": "dd-rewind.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Dembow Dominicano",
+   "cat": "Textures",
+   "id": "dd-calle",
+   "name": "Calle Ambience",
+   "desc": "A distant street at night: traffic rumble, far-off murmur, loopable.",
+   "qa": {
+    "peak_db": -14.63,
+    "rms_db": -30.0,
+    "max_step": 0.034,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 10.21,
+   "file": "dd-calle.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Dembow Dominicano",
+   "cat": "Textures",
+   "id": "dd-hum",
+   "name": "Bajo Hum",
+   "desc": "Gritty low hum on A for dark dembow intros.",
+   "qa": {
+    "peak_db": -17.65,
+    "rms_db": -24.0,
+    "max_step": 0.013,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "dd-hum.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Dembow Dominicano",
+   "cat": "Textures",
+   "id": "dd-playa",
+   "name": "Playa",
+   "desc": "Waves on the shore: slow swells of noise, loopable.",
+   "qa": {
+    "peak_db": -9.8,
+    "rms_db": -28.0,
+    "max_step": 0.161,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "dd-playa.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Dembow Dominicano",
+   "cat": "Textures",
+   "id": "dd-radio",
+   "name": "Radio Lo-Fi",
+   "desc": "A tiny old radio's crackle and tuning hiss.",
+   "qa": {
+    "peak_db": -10.95,
+    "rms_db": -30.0,
+    "max_step": 0.151,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 8.0,
+   "file": "dd-radio.flac"
+  },
+  {
+   "kind": "loop",
+   "lib": "Dembow Dominicano",
+   "cat": "Textures",
+   "id": "dd-fiesta-air",
+   "name": "Aire de Fiesta",
+   "desc": "Bright, airy party ambience with a soft pulse at 122 BPM.",
+   "bpm": 122,
+   "beats": 16,
+   "qa": {
+    "peak_db": -12.28,
+    "rms_db": -28.0,
+    "max_step": 0.213,
+    "dc": 0.0,
+    "start": 0.0,
+    "end": 0.0,
+    "clipped": 0
+   },
+   "seconds": 9.38,
+   "file": "dd-fiesta-air.flac"
+  }
+ ]
+}

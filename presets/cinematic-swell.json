@@ -1,0 +1,53 @@
+{
+  "name": "Cinematic Swell",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Cinematic"
+  ],
+  "description": "A string swell that rises out of nothing: transitions and builds.",
+  "use": "Hold one chord into a drop.",
+  "preview_phrase": "rg_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 14,
+      "spread": 1,
+      "a": 2.2,
+      "d": 2,
+      "s": 1,
+      "r": 1,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2500,
+    "f_env": 1.4,
+    "fa": 2.4,
+    "fd": 1,
+    "fs": 1
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "eq_lc": 120,
+    "width": 1.6
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Strings",
+  "loudness_trim_db": 6.38,
+  "id": "cinematic-swell",
+  "out_gain_db": 4.38
+}

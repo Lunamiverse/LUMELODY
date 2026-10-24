@@ -435,5 +435,11 @@ const PADS = (() => {
   }
   function useSlices(base, count) { sliceBase = base; sliceCount = Math.min(N, count); allOff(); S.layout = "slices"; save(); render(); }
   function show(on) { window.LUMI_PADS_ON = on; if (on) { render(); kick(); } else allOff(); }
-  return { init, show, render, padDown, padUp, useSlices, reverseNotes, state: S, map: () => map, score, midiOf, undo: doUndo, redo: doRedo, REC };
+  function loadNotes(ev, beats, bpm) {   // from the arpeggiator: its notes become an editable take
+    const opts = [...document.querySelectorAll("#npBars option")].map(o => +o.value).sort((a, b) => a - b);
+    const bars = opts.find(b => b * 4 >= beats) || opts[opts.length - 1] || 2;
+    commit(() => { S.bars = bars; S.bpm = bpm || S.bpm; S.pattern = ev.filter(e => e.t < bars * 4).map(e => ({ t: +e.t.toFixed(4), d: +Math.min(e.d, bars * 4 - e.t).toFixed(4), n: e.n, vel: +e.vel.toFixed(3) })); });
+    WORKSPACE.tab("pads");
+  }
+  return { init, show, render, padDown, loadNotes, padUp, useSlices, reverseNotes, state: S, map: () => map, score, midiOf, undo: doUndo, redo: doRedo, REC };
 })();

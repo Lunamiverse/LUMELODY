@@ -479,6 +479,9 @@ void LumiProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midi)
         }
     }
 
+    if (buffer.getNumChannels() > 0)   // sound-library previews and patterns (sample-accurate, tempo from the UI)
+        libPlayer.render (buffer.getWritePointer (0), buffer.getWritePointer (buffer.getNumChannels() > 1 ? 1 : 0), numSamples, sampleRate);
+
     outGain.setTargetValue (Decibels::decibelsToGain (volumeRaw->load()));
     if (outGain.isSmoothing() || std::abs (outGain.getTargetValue() - 1.0f) > 1e-6f)
     {
@@ -602,6 +605,103 @@ void LumiProcessor::previewStart (std::shared_ptr<const lumi::AudioData> audio)
 }
 
 void LumiProcessor::previewStop() { previewOn = false; }
+
+#if LUMI_LIBRARY_SAMPLES
+ #include "BinaryData.h"
+#endif
+std::shared_ptr<const lumi::AudioData> LumiProcessor::librarySample (const String& id)
+{
+    if (auto it = libCache.find (id); it != libCache.end()) return it->second;
+    std::shared_ptr<const lumi::AudioData> out;
+   #if LUMI_LIBRARY_SAMPLES
+    const String want = id + ".flac";
+    for (int i = 0; i < BinaryData::namedResourceListSize; ++i)
+        if (want == BinaryData::originalFilenames[i])
+        {
+            int size = 0;
+            if (auto* data = BinaryData::getNamedResource (BinaryData::namedResourceList[i], size))
+            {
+                auto d = lumifiles::decodeMemory (want, MemoryBlock (data, (size_t) size));
+                out = d.audio;
+            }
+            break;
+        }
+   #endif
+    if (out != nullptr) libCache[id] = out;
+    return out;
+}
+
+void LumiProcessor::libraryStart (std::shared_ptr<const lumi::LibPlayer::Song> song)
+{
+    previewOn = false;
+    const ScopedLock sl (engineLock);
+    libPlayer.start (std::move (song));
+}
+void LumiProcessor::libraryStop() { const ScopedLock sl (engineLock); libPlayer.stop(); }
+void LumiProcessor::libraryGain (float g) { const ScopedLock sl (engineLock); libPlayer.gain = jlimit (0.0f, 1.5f, g); }
+std::shared_ptr<lumi::LibPlayer::Song> LumiProcessor::librarySong (const var& m, String& error)
+{
+    auto song = std::make_shared<lumi::LibPlayer::Song>();
+    song->bpm = jlimit (40.0, 300.0, m.hasProperty ("bpm") ? (double) m["bpm"] : 120.0);
+    song->loop = (bool) m["loop"];
+    if (m["id"].toString().isNotEmpty())
+    {
+        song->single = librarySample (m["id"].toString()); song->singleLoop = (bool) m["loop"];
+        if (song->single == nullptr) { error = "this sound is not in the plugin: " + m["id"].toString(); return nullptr; }
+        return song;
+    }
+    std::map<String, int> index;
+    if (auto* layers = m["layers"].getArray())
+        for (const auto& L : *layers)
+        {
+            lumi::LibPlayer::Layer ly;
+            ly.beats = jlimit (0.25, 256.0, (double) L["beats"]); ly.swing = jlimit (-1.0, 1.0, (double) L["swing"]);
+            ly.vol = jlimit (0.0f, 2.0f, L.hasProperty ("vol") ? (float) (double) L["vol"] : 1.0f);
+            if (auto* evs = L["events"].getArray())
+                for (const auto& e : *evs)
+                {
+                    const String id = e["s"].toString();
+                    auto it = index.find (id);
+                    if (it == index.end())
+                    {
+                        auto a = librarySample (id);
+                        if (a == nullptr) { error = "this sound is not in the plugin: " + id; return nullptr; }
+                        it = index.emplace (id, (int) song->samples.size()).first; song->samples.push_back (a);
+                    }
+                    ly.ev.push_back ({ jlimit (0.0, 256.0, (double) e["b"]), it->second, jlimit (0.0f, 2.0f, (float) (double) e["v"]) });
+                }
+            song->layers.push_back (std::move (ly));
+        }
+    if (song->layers.empty()) { error = "nothing to play"; return nullptr; }
+    return song;
+}
+
+String LumiProcessor::libraryRenderWav (const var& m, const File& f)
+{
+    String err; auto song = librarySong (m, err);
+    if (song == nullptr) return err;
+    std::vector<float> L, R;
+    if (song->single != nullptr)
+    {   // a single sample is exported exactly as it is (its own rate)
+        L = song->single->L; R = song->single->R;
+    }
+    else lumi::LibPlayer::renderSong (*song, L, R, 44100.0);
+    const double rate = song->single != nullptr ? song->single->sr : 44100.0;
+    float pk = 0; for (size_t i = 0; i < L.size(); ++i) pk = jmax (pk, std::abs (L[i]), std::abs (R[i]));
+    const float g = pk > 0.98f ? 0.98f / pk : 1.0f;
+    AudioBuffer<float> buf (2, (int) L.size());
+    for (size_t i = 0; i < L.size(); ++i) { buf.setSample (0, (int) i, L[i] * g); buf.setSample (1, (int) i, R[i] * g); }
+    if (! f.getParentDirectory().createDirectory().wasOk()) return "could not create " + f.getParentDirectory().getFullPathName();
+    f.deleteFile();
+    WavAudioFormat wav;
+    std::unique_ptr<OutputStream> os (f.createOutputStream().release());
+    std::unique_ptr<AudioFormatWriter> w (os != nullptr ? wav.createWriterFor (os.get(), rate, 2, 24, {}, 0) : nullptr);
+    if (w == nullptr) return "could not write " + f.getFullPathName();
+    os.release();
+    return w->writeFromAudioSampleBuffer (buf, 0, buf.getNumSamples()) ? String() : "could not write " + f.getFullPathName();
+}
+
+bool LumiProcessor::libraryPlaying() const { const ScopedLock sl (engineLock); return libPlayer.playing(); }
 
 AudioProcessorEditor* LumiProcessor::createEditor() { return new LumiEditor (*this); }
 

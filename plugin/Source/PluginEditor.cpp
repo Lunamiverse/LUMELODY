@@ -211,6 +211,8 @@ void LumiEditor::reply (const String& type, bool ok, const String& detail)
 void LumiEditor::timerCallback()
 {
     if (! pageReady) return;
+    if (libWasOn && ! proc.libraryPlaying()) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "libEnd"); send (o); }
+    libWasOn = proc.libraryPlaying();
     if (previewWasOn && ! proc.previewPlaying()) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "smpPreviewEnd"); send (o); }
     previewWasOn = proc.previewPlaying();
 
@@ -368,6 +370,27 @@ void LumiEditor::sendSamplerState()
 
 bool LumiEditor::onSamplerMessage (const String& type, const var& m)
 {
+    // ---- sound libraries: the factory samples are inside the plugin; previews play through the plugin's output
+    if (type == "libPlay" || type == "libPattern")
+    {
+        String err; auto song = proc.librarySong (m, err);
+        if (song == nullptr) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "libError"); o->setProperty ("error", err); send (o); return true; }
+        if (m.hasProperty ("vol")) proc.libraryGain ((float) (double) m["vol"]);
+        proc.libraryStart (song); libWasOn = true;
+        return true;
+    }
+    if (type == "libStop") { proc.libraryStop(); return true; }
+    if (type == "libVol") { proc.libraryGain ((float) (double) m["vol"]); return true; }
+    if (type == "libExport")
+    {
+        const String name = File::createLegalFileName (m["name"].toString().isNotEmpty() ? m["name"].toString() : String ("LUMELODY sound.wav"));
+        const bool drag = (bool) m["drag"];
+        const File f = drag ? dragFolder().getChildFile (name) : exportFolder().getNonexistentChildFile (name.upToLastOccurrenceOf (".", false, false), ".wav", false);
+        const String err = proc.libraryRenderWav (m, f);
+        if (err.isNotEmpty()) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "libError"); o->setProperty ("error", err); send (o); return true; }
+        if (drag) dragOut (f); else reply ("saved", true, f.getFullPathName());
+        return true;
+    }
     if (type == "smpImport")
     {
         chooser = std::make_unique<FileChooser> ("Import audio into LUMELODY", File(), "*.wav;*.wave;*.aif;*.aiff;*.flac;*.mp3;*.ogg;*.m4a;*.aac;*.caf");

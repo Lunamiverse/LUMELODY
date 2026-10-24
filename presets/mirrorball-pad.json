@@ -1,0 +1,78 @@
+{
+  "name": "Mirrorball Pad",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club"
+  ],
+  "description": "Shimmering detuned pad with a glassy top and a lush chorus, like light on a disco ball.",
+  "use": "Glittering chord beds for disco and nu-disco.",
+  "preview_phrase": "disco_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 14,
+      "spread": 1,
+      "a": 0.4,
+      "d": 2,
+      "s": 0.85,
+      "r": 1.6,
+      "type": 1
+    },
+    {
+      "mat": 2,
+      "hard": 0.4,
+      "click": 0,
+      "a": 0.6,
+      "d": 2,
+      "s": 0.3,
+      "r": 1.6,
+      "level": 0.18,
+      "type": 4
+    },
+    {
+      "cr": 2,
+      "mr": 1,
+      "idx": 0.5,
+      "idx_dec": 1.5,
+      "idx_sus": 0.3,
+      "a": 0.5,
+      "d": 2,
+      "s": 0.6,
+      "r": 1.6,
+      "level": 0.25,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 6000,
+    "lfo_rate": 0.25,
+    "lfo_pan": 0.25
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "ch_mix": 0.35,
+    "ch_depth": 2.5,
+    "ch_rate": 0.4,
+    "eq_lc": 140,
+    "width": 1.6
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Pads",
+  "loudness_trim_db": 4.89,
+  "id": "mirrorball-pad",
+  "out_gain_db": 2.89
+}

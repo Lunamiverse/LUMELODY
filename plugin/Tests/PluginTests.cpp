@@ -245,6 +245,64 @@ int main()
         tmp.deleteRecursively();
     }
 
-    std::printf (failures ? "\n%d FAILED\n" : "\nALL PASSED\n", failures);
+    {   // ---- sound libraries: embedded factory samples, previews through the plugin's output, tempo-synced patterns, export
+        LumiProcessor p; p.prepareToPlay (44100, 512);
+        const char* ids[] = { "dd-tambora-palito", "dd-guira-largo", "dc-floor-kick", "nj-hat-tight", "rg-dembow-kick" };
+        int found = 0;
+        for (auto* id : ids) if (auto a = p.librarySample (id)) { ++found; CHECK (a->frames() > 1000 && a->sr == 44100, "%s decoded badly", id); }
+        CHECK (found >= 4, "embedded library samples found: %d of 5", found);
+        CHECK (p.librarySample ("../../etc/passwd") == nullptr && p.librarySample ("nope") == nullptr, "unknown ids must not resolve");
+        const auto kick = p.librarySample ("dc-floor-kick");
+        CHECK (kick != nullptr, "dc-floor-kick missing");
+        if (kick != nullptr)
+        {
+            // a 4-on-the-floor pattern at 120 bpm: hits every 22050 samples, starting right at the first block
+            auto mk = [] (double bpm) {
+                DynamicObject::Ptr L = new DynamicObject(); Array<var> ev;
+                for (int b = 0; b < 4; ++b) { DynamicObject::Ptr e = new DynamicObject(); e->setProperty ("s", "dc-floor-kick"); e->setProperty ("b", b); e->setProperty ("v", 1.0); ev.add (var (e.get())); }
+                L->setProperty ("events", ev); L->setProperty ("beats", 4); L->setProperty ("swing", 0); L->setProperty ("vol", 1.0);
+                DynamicObject::Ptr m = new DynamicObject(); m->setProperty ("layers", Array<var> { var (L.get()) }); m->setProperty ("bpm", bpm); m->setProperty ("loop", true);
+                return var (m.get());
+            };
+            String err; auto song = p.librarySong (mk (120), err);
+            CHECK (song != nullptr && err.isEmpty(), "pattern song: %s", err.toRawUTF8());
+            p.setNonRealtime (false);
+            p.libraryGain (1.0f); p.libraryStart (song);
+            p.apvts.getParameter ("volume")->setValueNotifyingHost (p.apvts.getParameter ("volume")->convertTo0to1 (0.0f));
+            auto o = run (p, {}, 2.5);
+            // the reference: the kick placed by hand every 22050 samples (120 bpm), looping after 4 beats
+            std::vector<float> ref (o.L.size(), 0.0f);
+            for (size_t at = 0; at < ref.size(); at += 22050)
+                for (size_t i = 0; i < kick->frames() && at + i < ref.size(); ++i) ref[at + i] += kick->L[i];
+            float md = 0, pk = 0; for (size_t i = 0; i < ref.size(); ++i) { md = jmax (md, std::abs (o.L[i] - ref[i])); pk = jmax (pk, std::abs (ref[i])); }
+            CHECK (pk > 0.5f && md < 1e-4f, "pattern != kicks at exact 120 bpm positions (max diff %g, peak %g)", md, pk);
+            std::printf ("library pattern: 4 bars of 120 bpm kicks match the hand-placed reference to %g (peak %.2f)\n", md, pk);
+            p.libraryStop();
+            auto quiet = run (p, {}, 0.3);
+            CHECK (quiet.peak() < 1e-6f, "library stop leaves silence (%g)", quiet.peak());
+            // export: render to WAV, same timing at 90 bpm, file reopens
+            const File f = File::getSpecialLocation (File::tempDirectory).getChildFile ("lumi-lib-test.wav");
+            CHECK (p.libraryRenderWav (mk (90), f).isEmpty(), "pattern export");
+            auto back = lumifiles::decodeFile (f);
+            CHECK (back.audio != nullptr && std::abs ((double) back.audio->frames() - (4 * 60.0 / 90 + 2.5) * 44100) < 2, "export length %d", back.audio ? (int) back.audio->frames() : -1);
+            if (back.audio)
+            {
+                std::vector<float> ref (back.audio->frames(), 0.0f);
+                for (int k = 0; k < 4; ++k) { const size_t at = (size_t) std::llround (k * 60.0 / 90 * 44100); for (size_t i = 0; i < kick->frames() && at + i < ref.size(); ++i) ref[at + i] += kick->L[i]; }
+                float pk = 0; for (auto v : ref) pk = jmax (pk, std::abs (v)); const float g = pk > 0.98f ? 0.98f / pk : 1.0f;
+                float md = 0; for (size_t i = 0; i < ref.size(); ++i) md = jmax (md, std::abs (back.audio->L[i] - ref[i] * g));
+                CHECK (md < 1e-4f, "exported 90 bpm pattern differs from the reference by %g", md);
+            }
+            DynamicObject::Ptr one = new DynamicObject(); one->setProperty ("id", "dc-floor-kick");
+            CHECK (p.libraryRenderWav (var (one.get()), f).isEmpty(), "one-shot export");
+            auto b2 = lumifiles::decodeFile (f);
+            CHECK (b2.audio && b2.audio->frames() == kick->frames(), "one-shot exported exactly (%d vs %d)", b2.audio ? (int) b2.audio->frames() : -1, (int) kick->frames());
+            DynamicObject::Ptr bad = new DynamicObject(); bad->setProperty ("id", "missing-sound");
+            CHECK (p.libraryRenderWav (var (bad.get()), f).contains ("not in the plugin"), "missing sound reports an error");
+            f.deleteFile();
+        }
+    }
+
+    std::printf (failures ?"\n%d FAILED\n" : "\nALL PASSED\n", failures);
     return failures ? 1 : 0;
 }

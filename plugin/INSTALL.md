@@ -19,3 +19,8 @@ The window uses Microsoft Edge WebView2, which is already part of Windows 10 and
 - FL's preset arrows step through the sounds. The project remembers the sound and every effect.
 - Chord Progression Finder: **drag to daw ↗** drags the MIDI (chords + bass) straight into the piano roll or playlist;
   **save midi** / **save audio** put the files in `Documents/LUMELODY`.
+- Arpeggiator (inside the Chord Progression Finder): **midi ↗** drags the arpeggio into the piano roll. Notes you hold
+  on LUMELODY's keys feed it live; notes from FL's piano roll play the sound directly (export the arpeggio as MIDI to put
+  it in the piano roll).
+- Sounds: the library samples are inside the plugin. Previews and patterns play through LUMELODY's output (so they go
+  through FL's mixer); **wav ↗** / **midi ↗** drag a sample, a pattern or a layered groove into the playlist or piano roll.

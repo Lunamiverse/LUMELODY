@@ -523,6 +523,7 @@ const WORKSPACE = (() => {
   function open(on) {
     const ws = $("#prog");
     if (on && !$("#smp").hidden) SAMPLER.open(false);
+    if (on && typeof LIBS !== "undefined" && !$("#libs").hidden) LIBS.open(false);
     if (on) fit();
     ws.hidden = !on; $("#rack").style.visibility = on ? "hidden" : ""; $("#detail").style.display = on ? "none" : "";
     $("#chordsBtn").setAttribute("aria-pressed", on ? "true" : "false");
@@ -531,14 +532,14 @@ const WORKSPACE = (() => {
   }
   function tab(t) {
     tabNow = t;
-    $("#finder").hidden = t !== "create"; $("#libPane").hidden = t !== "library"; $("#npPane").hidden = t !== "pads";
+    $("#finder").hidden = t !== "create"; $("#libPane").hidden = t !== "library"; $("#npPane").hidden = t !== "pads"; $("#arpPane").hidden = t !== "arp";
     PADS.show(t === "pads" && !$("#prog").hidden);
     document.querySelectorAll("#wsTabs [data-t]").forEach(b => b.setAttribute("aria-pressed", b.dataset.t === t ? "true" : "false"));
-    if (t === "library") PROG.render(); else FINDER.render();
+    if (t === "library") PROG.render(); else if (t === "arp") ARP.render(); else FINDER.render();
     mood();
   }
   // the moon becomes a disco ball only in the Disco & Club section
-  function mood() { if (typeof ORB !== "undefined" && ORB.setDisco) ORB.setDisco(!$("#prog").hidden && tabNow === "library" && PROG.isDisco(), !FINDER.prefs.motion || reduceMotion); }
+  function mood() { if (typeof ORB !== "undefined" && ORB.setDisco) ORB.setDisco((!$("#prog").hidden && tabNow === "library" && PROG.isDisco()) || (typeof LIBS !== "undefined" && LIBS.discoActive()), !FINDER.prefs.motion || reduceMotion); }
   function applyFx(v) {
     for (const [fx, ps] of Object.entries(v)) {
       const f = fxIndex(fx); if (f < 0) continue;
@@ -554,7 +555,7 @@ const WORKSPACE = (() => {
   }
   function useSound(id) { const i = PRESETS.findIndex(p => p.id === id); if (i >= 0) { loadPreset(i); toast("Sound: " + PRESETS[i].name); } }
   function init() {
-    PROG.init(); FINDER.init(); PADS.init(); SAMPLER.init();
+    PROG.init(); FINDER.init(); PADS.init(); SAMPLER.init(); LIBS.init(); ARP.init();
     document.querySelectorAll("#wsTabs [data-t]").forEach(b => b.onclick = () => tab(b.dataset.t));
     $("#wsClose").onclick = () => open(false);
     $("#chordsBtn").onclick = () => open($("#prog").hidden);

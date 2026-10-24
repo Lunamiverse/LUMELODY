@@ -132,8 +132,8 @@ const LUMI_EXPORT = (() => {
     const us = Math.round(60e6 / bpm);
     const out = [0x4d, 0x54, 0x68, 0x64, 0, 0, 0, 6, 0, 1, 0, tracks.length, PPQ >> 8, PPQ & 255];
     tracks.forEach((tr, ti) => {
-      const list = [];
-      for (const e of tr.ev) { const a = Math.max(0, Math.round(e.t * PPQ)), b = Math.max(a + 1, Math.round((e.t + e.d) * PPQ)); list.push([a, 1, 0x90, e.n, Math.max(1, Math.min(127, Math.round(e.vel * 127)))], [b, 0, 0x80, e.n, 0]); }
+      const list = [], ch = (tr.channel || 0) & 15;
+      for (const e of tr.ev) { const a = Math.max(0, Math.round(e.t * PPQ)), b = Math.max(a + 1, Math.round((e.t + e.d) * PPQ)); list.push([a, 1, 0x90 | ch, e.n, Math.max(1, Math.min(127, Math.round(e.vel * 127)))], [b, 0, 0x80 | ch, e.n, 0]); }
       list.sort((x, y) => x[0] - y[0] || x[1] - y[1]);
       const body = [0, 0xff, 3, ...vlq(str(tr.name).length), ...str(tr.name)];
       if (ti === 0) body.push(0, 0xff, 0x51, 3, (us >> 16) & 255, (us >> 8) & 255, us & 255, 0, 0xff, 0x58, 4, 4, 2, 24, 8);

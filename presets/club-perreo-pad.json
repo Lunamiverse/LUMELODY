@@ -1,0 +1,50 @@
+{
+  "name": "Club Perreo Pad",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Club"
+  ],
+  "description": "Brighter saw pad that pumps in time: club reggaet\u00f3n energy.",
+  "use": "Choruses and club drops.",
+  "preview_phrase": "rg_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 18,
+      "spread": 1,
+      "a": 0.2,
+      "d": 2,
+      "s": 0.9,
+      "r": 1,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 5000,
+    "f_res": 0.1
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "pump": 0.4,
+    "eq_lc": 140,
+    "width": 1.6
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Pads",
+  "loudness_trim_db": 5.48,
+  "id": "club-perreo-pad",
+  "out_gain_db": 3.48
+}

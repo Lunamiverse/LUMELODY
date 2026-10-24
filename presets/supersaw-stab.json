@@ -1,0 +1,71 @@
+{
+  "name": "Supersaw Stab",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "EDM"
+  ],
+  "description": "Seven-voice supersaw chord stab with a short tail and a sidechain pump.",
+  "use": "EDM chord stabs and drop riffs.",
+  "preview_phrase": "disco_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 22,
+      "spread": 1,
+      "a": 0.001,
+      "d": 0.4,
+      "s": 0.25,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 2,
+      "oct": -1,
+      "uni": 3,
+      "det": 10,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.2,
+      "r": 0.12,
+      "level": 0.35,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 6500,
+    "f_res": 0.1,
+    "f_env": 1,
+    "fa": 0.001,
+    "fd": 0.2,
+    "fs": 0.5
+  },
+  "fx": {
+    "rv_mix": 0.24,
+    "rv_size": 0.65,
+    "rv_decay": 2.2,
+    "rv_damp": 0.35,
+    "dly_beats": 0.5,
+    "dly_fb": 0.3,
+    "dly_mix": 0.12,
+    "dly_damp": 0.5,
+    "pump": 0.35,
+    "eq_lc": 150,
+    "width": 1.6
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Keys",
+  "loudness_trim_db": 10.42,
+  "id": "supersaw-stab",
+  "out_gain_db": 8.42
+}

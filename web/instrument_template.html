@@ -365,6 +365,13 @@ html.calm .finder *, html.calm .libpane * { transition: none !important; animati
 .nppane .nsound { max-width: 190px; }
 .nppane .bpm { width: 52px; }
 .nppane .sp { flex: 1; }
+#arpPane.beginner .arp-adv { display: none !important; }
+.arppane input[type=range], .libs input[type=range] { accent-color: #fff; width: 84px; }
+.arppane .arpsrc { margin: 0; font-size: 11px; color: #fff; opacity: .8; }
+.arproll { width: 100%; height: 92px; border: 1px solid rgba(255,255,255,.16); border-radius: 10px; background: rgba(255,255,255,.02); }
+.agrid { overflow-x: auto; } .agrow { display: flex; align-items: center; gap: 2px; } .agrow > span { width: 44px; font-size: 9.5px; }
+.agcell { width: 18px; height: 14px; border: 1px solid rgba(255,255,255,.18); background: transparent; border-radius: 3px; cursor: pointer; padding: 0; }
+.agcell.beat { border-color: rgba(255,255,255,.34); } .agcell.on { background: #fff; box-shadow: 0 0 8px -2px #fff; }
 .nppane:not(.adv) .adv-only { display: none !important; }
 .nppane .seg-mini button { font-size: 11px; padding: 3px 9px; }
 .npgrid { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 8px;
@@ -393,6 +400,18 @@ html.calm .finder *, html.calm .libpane * { transition: none !important; animati
 .nhead { position: absolute; top: 0; bottom: 0; width: 1.5px; background: #fff; box-shadow: 0 0 6px #fff; pointer-events: none; }
 .nempty { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 16px; text-align: center; font-size: 11px; color: var(--muted); pointer-events: none; }
 html.calm .npad { transition: none; }
+
+.main > #libs { grid-column: 2; grid-row: 1; }
+.libs .lcats { flex-wrap: wrap; }
+.litems { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.lcard { border: 1px solid rgba(255,255,255,.16); border-radius: 10px; padding: 7px 9px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); display: grid; gap: 4px; min-width: 0; }
+.lcard.on { border-color: #fff; box-shadow: 0 0 14px -6px #fff; }
+.lhead { display: flex; align-items: center; gap: 5px; min-width: 0; } .lhead b { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ltag { margin-left: auto; font-size: 9.5px; color: var(--muted); white-space: nowrap; }
+.ldesc { margin: 0; font-size: 10.5px; color: var(--muted); line-height: 1.35; }
+.lacts { display: flex; gap: 4px; flex-wrap: wrap; } .lacts .btn { padding: 2px 8px; font-size: 10.5px; }
+.lgroove { border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 5px 8px; }
+.grvl { display: flex; gap: 8px; flex-wrap: wrap; } .glayer { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; } .glayer input { width: 70px; }
 
 /* ------------------------------------------------ sampler */
 .main > #smp { grid-column: 2; grid-row: 1; }
@@ -534,6 +553,7 @@ html.calm .npad { transition: none; }
           <div class="ws-tabs" id="wsTabs" role="tablist">
             <button class="chip" type="button" data-t="create">chord blocks</button>
             <button class="chip" type="button" data-t="pads">neon pads</button>
+            <button class="chip" type="button" data-t="arp">arpeggiator</button>
             <button class="chip" type="button" data-t="library">library</button>
           </div>
           <span class="ws-title">chord progression finder</span>
@@ -647,6 +667,51 @@ html.calm .npad { transition: none; }
           </div>
         </div>
 
+        <div class="nppane arppane" id="arpPane" hidden>
+          <div class="frow">
+            <span class="dim">notes from</span><span class="seg-mini" id="arpSrc" role="group" aria-label="Where the notes come from"></span>
+            <button class="chip" type="button" id="arpLatch" title="Keep arpeggiating after you let go of the keys">latch</button>
+            <span class="sp"></span><span class="seg-mini" id="arpMode" role="group" aria-label="Beginner or advanced"></span>
+          </div>
+          <div class="frow" id="arpGenRow" hidden><label class="dim" for="arpGenKey">key</label><select class="field" id="arpGenKey"></select><button class="btn" type="button" id="arpGenNew">new chords</button></div>
+          <p class="dim arpsrc" id="arpSrcInfo" role="status" aria-live="polite"></p>
+          <div class="frow"><span class="dim">style</span><span class="chips" id="arpGenres"></span></div>
+          <div class="frow">
+            <button class="btn hot big" type="button" id="arpPlay" aria-pressed="false">play</button>
+            <button class="btn" type="button" id="arpSurprise" title="A new style, pattern and feel (what you lock below stays)">surprise me</button>
+            <button class="btn" type="button" id="arpRegen" title="Same settings, a new variation">regenerate</button>
+            <button class="btn" type="button" id="arpCmp" title="Switch between the previous and the new version">compare</button>
+            <button class="btn" type="button" id="arpReset" title="Start again from the first step (and forget latched notes)">reset</button>
+            <label class="dim" for="arpBpm">bpm</label><input class="bpm" id="arpBpm" type="number" min="40" max="240">
+          </div>
+          <div class="frow"><label class="dim" for="arpCx">complexity</label><input type="range" id="arpCx" min="1" max="5" step="1"><span class="dim" id="arpCxV"></span>
+            <span class="arp-adv frow"><span class="dim">pattern</span><span class="seg-mini" id="arpPat" role="group" aria-label="Pattern"></span></span></div>
+          <div class="frow arp-adv">
+            <span class="dim">rate</span><span class="seg-mini" id="arpRate" role="group" aria-label="Rate"></span>
+            <span class="dim">octaves</span><span class="seg-mini" id="arpOct" role="group" aria-label="Octaves"></span>
+            <span class="dim">length</span><span class="seg-mini" id="arpLen" role="group" aria-label="Loop length"></span>
+          </div>
+          <div class="frow arp-adv">
+            <label class="dim" for="arpGate">gate</label><input type="range" id="arpGate" min=".1" max="1" step=".01"><span class="dim" id="arpGateV"></span>
+            <label class="dim" for="arpSwing">swing</label><input type="range" id="arpSwing" min="0" max=".6" step=".01"><span class="dim" id="arpSwingV"></span>
+            <label class="dim" for="arpVel">velocity variation</label><input type="range" id="arpVel" min="0" max="1" step=".01"><span class="dim" id="arpVelV"></span>
+          </div>
+          <div class="agrid" id="arpGridWrap" hidden><div id="arpGrid"></div></div>
+          <canvas class="arproll" id="arpRoll" aria-label="The arpeggio's notes"></canvas>
+          <div class="frow">
+            <span class="dim">keep</span><button class="chip" type="button" data-keep="notes">notes</button><button class="chip" type="button" data-keep="rhythm">rhythm</button><button class="chip" type="button" data-keep="sound">sound</button>
+            <span class="sp"></span><select class="field nsound" id="arpSound" aria-label="Sound"></select>
+          </div>
+          <div class="frow">
+            <input class="field" id="arpFavName" placeholder="name" aria-label="Favourite name"><button class="btn" type="button" id="arpFavSave">★ save</button>
+            <select class="field" id="arpFavs" aria-label="Favourites"></select><button class="btn" type="button" id="arpFavDel">remove</button>
+            <span class="sp"></span>
+            <button class="btn drag big" type="button" id="arpMidi" title="Drag the MIDI into FL Studio's piano roll. Click to save it.">midi ↗</button>
+            <button class="btn drag" type="button" id="arpWav" title="Drag the audio (current sound and effects). Click to save it.">audio ↗</button>
+            <button class="btn" type="button" id="arpToBlocks" title="Open the notes in the Neon Pads editor">edit in pads</button>
+          </div>
+        </div>
+
         <div class="libpane" id="libPane" hidden>
           <div class="pg-top">
             <div class="chips" id="libTabs" role="group" aria-label="Progression style"></div>
@@ -738,6 +803,31 @@ html.calm .npad { transition: none; }
         <input type="file" id="smFileIn" accept="audio/*,.wav,.aif,.aiff,.flac,.mp3,.ogg,.m4a,.aac,.opus" multiple hidden>
         <input type="file" id="smFolderIn" webkitdirectory multiple hidden>
       </section>
+      <section class="prog smp libs hl" id="libs" aria-label="Sound libraries" hidden>
+        <div class="ws-top">
+          <div class="ws-tabs" id="libTabs2" role="tablist"></div>
+          <button class="btn" type="button" id="libClose">close</button>
+        </div>
+        <div class="smbody">
+          <div class="frow"><div class="ws-tabs lcats" id="libCats"></div></div>
+          <div class="frow">
+            <input class="field" type="search" id="libSearch" placeholder="search this library" aria-label="Search the library">
+            <button class="chip" type="button" id="libFav" aria-pressed="false">★ favourites</button>
+            <label class="dim" for="libBpm">pattern bpm</label><input class="bpm" id="libBpm" type="number" min="60" max="200" aria-label="Pattern tempo (empty = the pattern's own)">
+            <label class="dim" for="libVol">volume</label><input type="range" id="libVol" min="0" max="1.2" step=".01" aria-label="Preview volume">
+            <span class="sp"></span><button class="btn" type="button" id="libStop">stop</button>
+          </div>
+          <div class="frow lgroove" id="libGroove" hidden>
+            <b>groove</b><span class="grvl" id="grvLayers"></span><span class="sp"></span>
+            <button class="btn hot" type="button" id="grvPlay">play groove</button>
+            <button class="btn drag" type="button" id="grvMidi" title="Drag the layered patterns as MIDI. Click to save.">midi ↗</button>
+            <button class="btn drag" type="button" id="grvWav" title="Drag the layered patterns as audio. Click to save.">wav ↗</button>
+            <button class="btn" type="button" id="grvClear">clear</button>
+          </div>
+          <div class="litems" id="libItems"></div>
+          <p class="smhint dim">drums, hi-hats, percussion, effects and textures are original LUMELODY samples; pads, bass, strings and keys are playable LUMELODY sounds. patterns follow the tempo, layer together and export as MIDI or audio.</p>
+        </div>
+      </section>
     </div>
 
     <section class="detail hl" id="detail" aria-live="polite"></section>
@@ -748,6 +838,7 @@ html.calm .npad { transition: none; }
         <span class="oct" id="octLabel"></span>
         <button class="btn" type="button" id="octUp" aria-label="Octave up">+</button>
       </div>
+      <button class="btn" type="button" id="libsBtn" aria-pressed="false" title="Sound libraries: New Jazz, Disco + EDM + Club Bangers, Reggaetón, Dembow Dominicano">sounds</button>
       <button class="btn" type="button" id="smpBtn" aria-pressed="false" title="Sampler: your own samples, played from MIDI, layered with the piano">sampler</button>
       <button class="btn" type="button" id="chordsBtn" aria-pressed="false" title="Chord Progression Finder: build chords without playing piano">chord progression finder</button>
       <button class="btn" type="button" id="demoSolo">demo</button>
@@ -1544,6 +1635,7 @@ const ORB = (() => {
   const body = $("#orbBody");
   return {
     setDisco(on, instant) { discoT = on ? 1 : 0; still = !!instant; if (!on) burstDone = false; },
+    discoOn: () => discoT === 1,
     kick() { kick = 1; spinV = 2.6; },
     press(v) { scT = v; },
     draw(now, target, dt) {
@@ -1871,6 +1963,7 @@ function startPlugin() {
   } } };
   B.addEventListener("lumi", m => {
     if (typeof SAMPLER !== "undefined" && SAMPLER.onPluginEvent(m)) return;
+    if (typeof LIBS !== "undefined" && LIBS.onPluginEvent(m)) return;
     if (m.type === "note") { hostNote(m.note, m.vel, m.on); return; }
     if (m.type === "saved") { toast(m.ok ? "Saved in Documents/LUMELODY: drag it into the piano roll or playlist" : "Could not save or drag the file"); return; }
     if (m.type === "preset") { const i = PRESETS.findIndex(p => p.id === m.id); if (i >= 0 && i !== cur) loadPreset(i, true, true); if (m.values) applyValues(m.values); return; }
@@ -1979,12 +2072,14 @@ function stepLights(now) {
   }
 }
 function noteOn(id, note, vel) {
+  if (typeof ARP !== "undefined" && ARP.capture(id, note, true)) return;   // the arpeggiator is listening to the keys
   if (held.has(id)) noteOff(id);
   held.set(id, note); send({ type: "on", note, vel });
   const k = keyEl(note); if (k) k.classList.add("down");
   lightOn(note, vel);
 }
 function noteOff(id) {
+  if (typeof ARP !== "undefined" && ARP.capture(id, null, false) && !held.has(id)) return;
   const note = held.get(id); if (note == null) return;
   held.delete(id);
   if (![...held.values()].includes(note)) { send({ type: "off", note }); const k = keyEl(note); if (k) k.classList.remove("down"); lightOff(note); }
@@ -2074,7 +2169,7 @@ function setName(t) {   // the selected sound's name in pixel capitals with a ho
 }
 function renderSound() {
   const p = PRESETS[cur], m = marks[p.id] || {};
-  $("#sCat").textContent = (p.cat + " · " + p.genres.slice(0, 2).join(" · ")).toLowerCase();
+  $("#sCat").textContent = [...new Set([p.cat, ...p.genres.slice(0, 2)].map(x => x.toLowerCase()))].join(" · ");
   setName(p.name); $("#sPick").innerHTML = PIXEL_TYPE.svg(p.name); $("#sPick").setAttribute("aria-label", p.name);
   $("#sDesc").textContent = p.desc + " " + p.use;
   $("#sMeta").textContent = `${p.engine} · plays ${nn(p.range[0])}–${nn(p.range[1])}`;

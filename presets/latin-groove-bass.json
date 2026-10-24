@@ -1,0 +1,57 @@
+{
+  "name": "Latin Groove Bass",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Latin pop"
+  ],
+  "description": "Round, bouncy synth bass with a soft filter pluck: groovy and controlled.",
+  "use": "Melodic Latin bass lines.",
+  "preview_phrase": "rg_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.002,
+      "d": 0.4,
+      "s": 0.5,
+      "r": 0.1,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.002,
+      "d": 0.4,
+      "s": 0.7,
+      "r": 0.1,
+      "level": 0.5,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 650,
+    "f_res": 0.2,
+    "f_env": 1.6,
+    "fa": 0.001,
+    "fd": 0.15,
+    "fs": 0.3
+  },
+  "fx": {
+    "eq_lc": 30
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Bass",
+  "loudness_trim_db": 15.47,
+  "id": "latin-groove-bass",
+  "out_gain_db": 13.47
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Velvet Quartet",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Experimental R&B"
+  ],
+  "description": "Soft, warm chamber strings: four voices close together, gentle attack.",
+  "use": "Supporting chords under keys and vocals.",
+  "preview_phrase": "nj_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 4,
+      "det": 8,
+      "spread": 0.7,
+      "a": 0.35,
+      "d": 2,
+      "s": 0.88,
+      "r": 1.2,
+      "type": 1
+    },
+    {
+      "cr": 1,
+      "mr": 1,
+      "idx": 0.4,
+      "idx_dec": 1,
+      "idx_sus": 0.4,
+      "a": 0.4,
+      "d": 2,
+      "s": 0.8,
+      "r": 1.2,
+      "level": 0.3,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 2400,
+    "f_key": 0.3,
+    "vib_rate": 5.4,
+    "vib_depth": 7,
+    "vib_delay": 0.6
+  },
+  "fx": {
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "eq_lc": 110,
+    "width": 1.3
+  },
+  "library": "New Jazz",
+  "kind": "Strings",
+  "loudness_trim_db": 6.16,
+  "id": "velvet-quartet",
+  "out_gain_db": 4.16
+}

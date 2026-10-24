@@ -1,0 +1,61 @@
+{
+  "name": "Disco Octave Bass",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club"
+  ],
+  "description": "Plucky, bright octave bass: a snappy filter attack on every note, tight low end.",
+  "use": "Classic octave-jumping disco lines.",
+  "preview_phrase": "disco_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "a": 0.001,
+      "d": 0.35,
+      "s": 0.3,
+      "r": 0.1,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.45,
+      "oct": -1,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.4,
+      "r": 0.1,
+      "level": 0.4,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 500,
+    "f_res": 0.3,
+    "f_env": 2.8,
+    "fa": 0.001,
+    "fd": 0.12,
+    "fs": 0.2,
+    "fr": 0.1,
+    "f_key": 0.3
+  },
+  "fx": {
+    "eq_lc": 35,
+    "sat_drive": 0.15,
+    "sat_mix": 0.3
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Bass",
+  "loudness_trim_db": 13.34,
+  "id": "disco-octave-bass",
+  "out_gain_db": 11.34
+}

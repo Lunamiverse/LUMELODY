@@ -1,0 +1,55 @@
+{
+  "name": "Neon Marimba",
+  "category": "Reggaet\u00f3n",
+  "genres": [
+    "Reggaet\u00f3n",
+    "Latin urban",
+    "Perreo",
+    "Old-school reggaet\u00f3n"
+  ],
+  "description": "Bright marimba with a round wooden tone: the old-school reggaet\u00f3n melody sound.",
+  "use": "Catchy riffs and 3-3-2 melodies.",
+  "preview_phrase": "rg_keys",
+  "range": [
+    40,
+    88
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "mat": 0,
+      "hard": 0.6,
+      "click": 0.3,
+      "a": 0.001,
+      "d": 1.2,
+      "s": 0,
+      "r": 0.3,
+      "type": 4
+    },
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0,
+      "r": 0.2,
+      "level": 0.15,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": -1
+  },
+  "fx": {
+    "rv_mix": 0.18,
+    "rv_size": 0.5,
+    "rv_decay": 1.4,
+    "rv_damp": 0.5,
+    "eq_lc": 150,
+    "width": 1.2
+  },
+  "library": "Reggaet\u00f3n",
+  "kind": "Keys",
+  "loudness_trim_db": 15.7,
+  "id": "neon-marimba",
+  "out_gain_db": 13.7
+}

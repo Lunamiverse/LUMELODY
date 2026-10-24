@@ -1,0 +1,56 @@
+{
+  "name": "Tape Violins",
+  "category": "New Jazz",
+  "genres": [
+    "New jazz",
+    "Underground rap",
+    "Ambient hip-hop",
+    "Lo-fi"
+  ],
+  "description": "High violins that waver like a worn tape, band-limited and nostalgic.",
+  "use": "Sampled-sounding string loops and hooks.",
+  "preview_phrase": "nj_strings",
+  "range": [
+    40,
+    90
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 10,
+      "spread": 0.8,
+      "drift": 14,
+      "a": 0.25,
+      "d": 1.5,
+      "s": 0.85,
+      "r": 0.8,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3000,
+    "f_key": 0.2,
+    "vib_rate": 0.45,
+    "vib_depth": 18,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 6000,
+    "eq_lc": 300,
+    "rv_mix": 0.3,
+    "rv_size": 0.8,
+    "rv_decay": 3.5,
+    "rv_damp": 0.55,
+    "crush_bits": 0,
+    "width": 1.3
+  },
+  "library": "New Jazz",
+  "kind": "Strings",
+  "loudness_trim_db": 0.48,
+  "id": "tape-violins",
+  "out_gain_db": -1.52
+}

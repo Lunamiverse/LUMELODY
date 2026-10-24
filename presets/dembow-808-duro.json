@@ -1,0 +1,55 @@
+{
+  "name": "Dembow 808 Duro",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Aggressive"
+  ],
+  "description": "Hard, distorted 808 with a short tail and a big knock: aggressive and club-ready.",
+  "use": "Hard dembow lines on the accents.",
+  "preview_phrase": "dd_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 0.9,
+      "s": 0.3,
+      "r": 0.1,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "oct": 1,
+      "a": 0.001,
+      "d": 0.12,
+      "s": 0,
+      "r": 0.08,
+      "level": 0.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.04,
+    "f_type": -1,
+    "p_env": 8,
+    "p_dec": 0.02
+  },
+  "fx": {
+    "eq_lc": 28,
+    "sat_drive": 0.7,
+    "sat_mix": 0.6
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Bass",
+  "loudness_trim_db": 4.6,
+  "id": "dembow-808-duro",
+  "out_gain_db": 2.6
+}

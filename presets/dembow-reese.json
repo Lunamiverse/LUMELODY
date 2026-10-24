@@ -1,0 +1,62 @@
+{
+  "name": "Dembow Reese",
+  "category": "Dembow Dominicano",
+  "genres": [
+    "Dembow dominicano",
+    "Dominican urban",
+    "Dembow",
+    "Underground"
+  ],
+  "description": "Dark detuned reese for underground dembow: wide, moving and menacing.",
+  "use": "Sustained bass in dark sections.",
+  "preview_phrase": "dd_bass",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 3,
+      "det": 22,
+      "spread": 0.5,
+      "a": 0.004,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.15,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": -1,
+      "a": 0.004,
+      "d": 1,
+      "s": 0.9,
+      "r": 0.15,
+      "level": 0.6,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "f_type": 0,
+    "f_cut": 900,
+    "f_res": 0.25,
+    "f_poles": 4,
+    "lfo_rate": 0.5,
+    "lfo_cut": 0.5
+  },
+  "fx": {
+    "eq_lc": 30,
+    "sat_drive": 0.45,
+    "sat_mix": 0.5,
+    "width": 1.25
+  },
+  "library": "Dembow Dominicano",
+  "kind": "Bass",
+  "loudness_trim_db": 6.73,
+  "id": "dembow-reese",
+  "out_gain_db": 4.73
+}

@@ -1,0 +1,64 @@
+{
+  "name": "Euphoria Pad",
+  "category": "Disco + EDM + Club",
+  "genres": [
+    "Disco house",
+    "Nu-disco",
+    "Dance-pop",
+    "Club",
+    "EDM"
+  ],
+  "description": "Bright, wide supersaw pad that pumps with the kick: hands-in-the-air energy.",
+  "use": "Breakdowns and big drops.",
+  "preview_phrase": "disco_pad",
+  "range": [
+    36,
+    84
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 20,
+      "spread": 1,
+      "a": 0.25,
+      "d": 2,
+      "s": 0.9,
+      "r": 1.2,
+      "type": 1
+    },
+    {
+      "wave": 2,
+      "oct": 1,
+      "uni": 3,
+      "det": 12,
+      "a": 0.3,
+      "d": 2,
+      "s": 0.8,
+      "r": 1.2,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 7000,
+    "f_res": 0.1
+  },
+  "fx": {
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 5.5,
+    "rv_damp": 0.5,
+    "rv_pre": 25,
+    "pump": 0.45,
+    "eq_lc": 130,
+    "width": 1.7
+  },
+  "library": "Disco + EDM + Club",
+  "kind": "Pads",
+  "loudness_trim_db": 3.11,
+  "id": "euphoria-pad",
+  "out_gain_db": 1.11
+}
