@@ -186,6 +186,7 @@ const LIBS = (() => {
   function renderPlayState() {
     document.querySelectorAll("#libItems .lplay").forEach(b => { const on = playing && playing.id === b.dataset.id; b.textContent = on ? "■" : "▶"; b.closest(".lcard").classList.toggle("on", !!on); });
     const gp = $("#grvPlay"); if (gp) gp.textContent = playing && playing.key === "groove" ? "stop" : "play groove";
+    window.dispatchEvent(new CustomEvent("lumi:libplay", { detail: playing ? playing.id : null }));   // the sound list's drums show what is playing
   }
   function renderGroove() {
     const g = $("#grvLayers"); if (!g) return;
@@ -233,5 +234,7 @@ const LIBS = (() => {
     if (m.type === "libError") { playing = null; renderPlayState(); toast(m.error || "could not play that sound"); return true; }
     return false;
   }
-  return { init, open, onPluginEvent, setLib, render, discoActive, state: S, manifest: M, renderPatterns, patternMidi, sampleWav, playPatterns, stopAll, groove: () => groove, byId };
+  const preview = id => { const it = byId.get(id); if (it) return togglePlay(it); };
+  const playingId = () => (playing ? playing.id : null);
+  return { preview, playingId, init, open, onPluginEvent, setLib, render, discoActive, state: S, manifest: M, renderPatterns, patternMidi, sampleWav, playPatterns, stopAll, groove: () => groove, byId };
 })();

@@ -468,6 +468,11 @@ html.calm .npad { transition: none; }
 .list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; align-content: start; }
 .item { text-align: left; border: 1px solid var(--line); border-radius: 6px; background: none; cursor: pointer; padding: 7px 10px; display: grid; gap: 1px; min-width: 0; }
 .item { position: relative; }
+.lhdr { grid-column: 1 / -1; margin: 8px 2px 0; font: 400 9px/1.6 var(--micro); letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+.item.drum .idrags { position: absolute; right: 7px; bottom: 6px; display: flex; gap: 4px; }
+.idrag { font-size: 10px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; color: var(--muted); cursor: grab; }
+.idrag:hover { color: #fff; border-color: #fff; }
+.item.drum small { padding-right: 96px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .item[aria-current="true"] { border-color: color-mix(in oklab, var(--hair) 45%, transparent); background: linear-gradient(90deg, rgba(255,255,255,.06), transparent 70%); }
 .item[aria-current="true"]::before { content: ""; position: absolute; left: -1px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #fff, var(--h4)); box-shadow: 0 0 8px var(--glow); }
 
@@ -2219,7 +2224,8 @@ const genres = [...new Set(PRESETS.flatMap(p => p.genres))].sort();
 $("#genre").append(el("option", { value: "", textContent: "all genres" }), ...genres.map(g => el("option", { value: g, textContent: g })));
 // the four sound libraries' instruments (pads, bass, strings, keys) have their own chips, by genre
 const LIB_CATS = [["New Jazz", "New Jazz"], ["Disco + EDM + Club", "Disco + EDM + Club Bangers"], ["Reggaetón", "Reggaetón"], ["Dembow Dominicano", "Dembow Dominicano"]];
-const chipBtns = [["", "all"], ...CATS.map(c => [c, c]), ...LIB_CATS].map(([v, t]) => {
+const DRUMS = "__drums";   // every drum, hi-hat and percussion sample (and the drum patterns) from the four libraries
+const chipBtns = [["", "all"], ...CATS.slice(0, 1).map(c => [c, c]), [DRUMS, "drums"], ...CATS.slice(1).map(c => [c, c]), ...LIB_CATS].map(([v, t]) => {
   const b = el("button", { className: "chip", type: "button", textContent: t }); b.setAttribute("aria-pressed", v === "" ? "true" : "false");
   b.onclick = () => { lib.cat = v; chipBtns.forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); renderList(); };
   return b;
@@ -2228,8 +2234,39 @@ $("#cats").append(...chipBtns);
 $("#q").oninput = e => { lib.q = e.target.value.trim().toLowerCase(); renderList(); };
 $("#genre").onchange = e => { lib.genre = e.target.value; renderList(); };
 $("#show").onchange = e => { lib.show = e.target.value; renderList(); };
+function renderDrums() {
+  const M = LIBS.manifest, q = lib.q, ORDER = ["Drums", "Hi-Hats", "Percussion"];
+  const items = M.items.filter(i => ORDER.includes(i.cat) && !i.hidden && (!q || (i.name + " " + i.desc + " " + i.cat + " " + i.lib).toLowerCase().includes(q)));
+  const out = [];
+  for (const [libId, libName] of LIB_CATS) {
+    const mine = items.filter(i => i.lib === libId).sort((a, b) => (a.kind === "pattern") - (b.kind === "pattern") || ORDER.indexOf(a.cat) - ORDER.indexOf(b.cat));
+    if (!mine.length) continue;
+    out.push(el("h4", { className: "lhdr", textContent: libName.toLowerCase() + " · " + mine.length }));
+    for (const it of mine) {
+      const nb = el("b"); nb.innerHTML = PIXEL_TYPE.svg(it.name); nb.setAttribute("aria-label", it.name);
+      const what = it.kind === "pattern" ? `${it.bpm} bpm` : ({ Drums: "drum", "Hi-Hats": "hi-hat", Percussion: "percussion" })[it.cat];
+      const drag = el("span", { className: "idrag", textContent: "wav ↗", title: "Drag into FL Studio (click to save)" });
+      const name = "LUMELODY " + it.name + (it.kind === "pattern" ? ` ${it.bpm} bpm` : "");
+      LUMI_EXPORT.dragHandle(drag, () => it.kind === "pattern"
+        ? { lazy: true, name, get: async () => ({ name, bytes: await LIBS.renderPatterns([{ id: it.id, vol: 1 }]) }), native: { type: "libExport", layers: [{ events: it.events, beats: it.beats, swing: it.swing || 0, vol: 1 }], bpm: it.bpm, name: name + ".wav", drag: true } }
+        : { lazy: true, name, get: async () => ({ name, bytes: await LIBS.sampleWav(it.id) }), native: { type: "libExport", id: it.id, name: name + ".wav", drag: true } });
+      const kids = [drag];
+      if (it.kind === "pattern") { const dm = el("span", { className: "idrag", textContent: "midi ↗", title: "Drag the pattern as MIDI (GM drums)" }); LUMI_EXPORT.dragHandle(dm, () => ({ name, bytes: LIBS.patternMidi([{ id: it.id, vol: 1 }]) })); kids.unshift(dm); }
+      for (const k of kids) { k.addEventListener("click", e => e.stopPropagation()); k.addEventListener("pointerdown", e => e.stopPropagation()); }
+      const card = el("div", { className: "item drum", tabIndex: 0, role: "button" }, [nb, el("small", { textContent: what }), el("span", { className: "idrags" }, kids)]);
+      card.dataset.id = it.id;
+      if (LIBS.playingId() === it.id) card.setAttribute("aria-current", "true");
+      const go = () => { if (!ctx) startFromGesture(); LIBS.preview(it.id); };
+      card.onclick = go; card.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+      out.push(card);
+    }
+  }
+  $("#list").replaceChildren(...(out.length ? out : [el("p", { className: "empty", textContent: "No drums match. Clear the search." })]));
+}
+window.addEventListener("lumi:libplay", e => { if (lib.cat === DRUMS) document.querySelectorAll("#list .item.drum").forEach(c => c.dataset.id === e.detail ? c.setAttribute("aria-current", "true") : c.removeAttribute("aria-current")); });
 function renderList() {
   if (sheet.hidden) return;
+  if (lib.cat === DRUMS) { renderDrums(); return; }
   const items = PRESETS.map((p, i) => [p, i]).filter(([p]) => {
     const m = marks[p.id] || {};
     if (lib.cat && p.cat !== lib.cat) return false;
