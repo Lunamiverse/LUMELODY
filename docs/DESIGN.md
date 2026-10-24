@@ -44,13 +44,14 @@
   release; a tap spins it, flares the light, sends out foil ripples and loads a random sound, whose name fades in
   out of a blur. Keys press with a quick tilt and spring back with a small overshoot; their light rises from the
   front edge on the strike and sinks as it fades.
-- **Crystal Holo (the only theme):** photoreal clear glass/acrylic like a holographic cassette shell. Panels are thick clear acrylic: a gloss streak, a double moulded rim (outer edge + inner rim line), pink/cyan light refracting inside the edges, a conic rainbow along the rim that turns with the pointer, a soft magenta/cyan outer glow; the casing interior shows a holographic smear like the cassette window, colours magenta,
-  pink, white, violet, cyan and gold. Panels and buttons are clear glossy shells with a holographic sheen and an
-  iridescent edge glow; the window background shows the device's insides through a shell whose tint shifts across
-  the spectrum; the border keeps its exact tube shape, rendered as clear crystal refracting the spectrum, with
-  chrome bands along both edges; the moon and ring keep their rendering, coloured by the theme's foil spectrum,
-  with a soft magenta + cyan glow; four-point star glints twinkle on the corners. (The earlier Acid Lime theme and
-  its slime were removed.)
+- **Clear-plastic look (the only theme), after the CD jewel case and the clear cassette:** pure black, no background
+  art. Panels and buttons are colourless clear moulded plastic: bright rims, an inner moulded rim line, a gloss streak,
+  a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is the cassette rim: a
+  clear acrylic tube refracting the spectrum with chrome edge lines, plus a moulded ledge line and four screw bosses
+  just inside it, and white star glints on the corners. Knobs are clear acrylic discs like tape-reel hubs (see-through
+  body, solid-looking edges with rim refraction, moulded rings, six hub teeth that turn with the value, a bright
+  indicator slit, a gloss streak) with a white value arc. All text is white (no coloured type). Colour lives only in
+  the moon and its ring, like the disc in the case.
 - **Theme:** one only, Crystal Holo (the theme picker was removed). Each defines window tones, hairline tint, accent and a
   six-colour foil spectrum (registered CSS colours, 0.8 s morph); the WebGL moon and knobs lerp the same palette.
 - **Knobs:** brushed-metal caps (concentric brushing, anisotropic highlight) carrying holographic film, a polished

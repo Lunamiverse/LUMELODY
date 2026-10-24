@@ -39,9 +39,8 @@
   transition: --bg .8s, --win1 .8s, --win2 .8s, --ink .8s, --muted .8s, --hair .8s, --glow .8s, --ch1 .8s, --ch2 .8s, --obs2 .8s,
               --h1 .8s, --h2 .8s, --h3 .8s, --h4 .8s, --h5 .8s, --h6 .8s;
 }
-:root[data-theme="crystal"] { --plastic: #f4dcff; --glow: #ff6fe0; --h1: #ff3fd0; --h2: #ff9ae8; --h3: #ffffff; --h4: #8a5cff; --h5: #3fe9ff; --h6: #ffd36b;
-  --holo-sheen: linear-gradient(115deg, rgba(255,63,208,.17), rgba(255,154,232,.06) 22%, rgba(63,233,255,.15) 45%, rgba(138,92,255,.14) 70%, rgba(255,211,107,.13));
-  --holo-edge: 0 0 16px -5px rgba(255,63,208,.45), 0 0 26px -10px rgba(63,233,255,.4); }
+:root[data-theme="crystal"] { --plastic: #eef0f6; --glow: #f4f6ff; --bg: #000; --win1: #000; --win2: #000; --ink: #f4f5f8; --muted: #9a9ca4; --hair: #ffffff; --h1: #ff3fd0; --h2: #ff9ae8; --h3: #ffffff; --h4: #8a5cff; --h5: #3fe9ff; --h6: #ffd36b;
+  --holo-sheen: linear-gradient(transparent, transparent); --holo-edge: 0 0 0 0 transparent; }
 :root[data-theme="rose"] { --bg: #050305; --win1: #0e060b; --win2: #050305; --ink: #fff0f7; --muted: #a8909d; --hair: #ffd1ea; --glow: #ff4fa8; --ch1: #f6e9f0; --ch2: #8e7c87; --obs2: #050305;
   --h1: #ff3d9a; --h2: #ff8fd0; --h3: #ffe1f2; --h4: #8ff3ff; --h5: #3fd2ff; --h6: #c26bff; }
 :root[data-theme="gold"] { --bg: #060403; --win1: #0f0a05; --win2: #060403; --ink: #fff6e6; --muted: #ab9b80; --hair: #ffe2b0; --glow: #ffb547; --ch1: #f3e6cc; --ch2: #8f7c5c; --obs2: #060403;
@@ -52,10 +51,7 @@
   --h1: #ff2e88; --h2: #ffd23f; --h3: #3dff8f; --h4: #29d6ff; --h5: #5b5cff; --h6: #c13dff; }
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--ink); font: 400 12px/1.5 var(--mono); letter-spacing: .01em; -webkit-font-smoothing: antialiased; text-transform: lowercase;
-  background:
-    radial-gradient(45% 40% at 22% 30%, color-mix(in oklab, var(--h5) 13%, transparent), transparent 70%),
-    radial-gradient(40% 40% at 82% 65%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%),
-    radial-gradient(60% 45% at 50% 105%, color-mix(in oklab, var(--h4) 8%, transparent), transparent 70%), var(--bg);
+  background: #000;
   background-blend-mode: normal;
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
 button, select, input, textarea { font: inherit; color: inherit; text-transform: inherit; }
@@ -67,42 +63,46 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .glints { position: absolute; inset: 0; pointer-events: none; z-index: 20; display: none; }
 :root[data-theme="crystal"] .glints { display: block; }
 .glints .g { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; animation: glint 4.2s ease-in-out infinite; }
-.glints svg { width: 100%; height: 100%; overflow: visible; fill: #fff; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(255,140,236,.8)); }
+.glints svg { width: 100%; height: 100%; overflow: visible; fill: #fff; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 9px rgba(255,255,255,.75)); }
 .glints .g1 { left: 1.2%; top: 2.4%; } .glints .g2 { left: 98.6%; top: 1.6%; animation-delay: -1.3s; width: 42px; height: 42px; margin: -21px 0 0 -21px; }
 .glints .g3 { left: 99.2%; top: 97%; animation-delay: -2.6s; } .glints .g4 { left: 2%; top: 98%; animation-delay: -.7s; width: 26px; height: 26px; margin: -13px 0 0 -13px; }
 .glints .g5 { left: 52%; top: .4%; animation-delay: -3.4s; width: 22px; height: 22px; margin: -11px 0 0 -11px; }
 @keyframes glint { 0%, 100% { opacity: .95; transform: scale(1) rotate(0deg); } 45% { opacity: .2; transform: scale(.45) rotate(25deg); } 60% { opacity: 1; transform: scale(1.1) rotate(10deg); } }
 @media (prefers-reduced-motion: reduce) { .glints .g { animation: none; } }
 .win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 26px; overflow: hidden;
-  background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--h5) 14%, transparent), transparent 70%), radial-gradient(50% 60% at 85% 80%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
-  box-shadow: 0 60px 110px -40px #000, 0 30px 80px -50px color-mix(in oklab, var(--glow) 55%, transparent), 0 0 0 1px rgba(0,0,0,.6); }
+  background: #000;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.6); }
 .frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 6; display: block; }
 .frame-css { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 5; border: 16px solid transparent; background: linear-gradient(160deg, #fff, var(--ch2) 20%, #111 40%, var(--ch1) 55%, #222 75%, #fff) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
 .win::after { content: ""; position: absolute; inset: 16px; border-radius: 12px; pointer-events: none; z-index: 4; box-shadow: inset 0 0 0 1px rgba(0,0,0,.9), inset 0 10px 24px -8px rgba(0,0,0,.85), inset 0 -8px 20px -10px rgba(0,0,0,.7); }
 
-.stars { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.stars { display: none; }
 .inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 30px 34px 34px; }
 
 /* hairline boxes */
-.hl { position: relative; border: 1.5px solid rgba(255,255,255,.78); border-radius: 9px; isolation: isolate;
-  /* thick clear acrylic: almost no tint in the middle, a gloss streak across the top, refraction gathering at the edges */
+.hl { position: relative; border: 1.5px solid rgba(255,255,255,.82); border-radius: 9px; isolation: isolate;
+  /* clear moulded plastic over black: no tint, a gloss streak, light caught by the edges */
   background:
-    linear-gradient(118deg, transparent 0 18%, rgba(255,255,255,.16) 22%, rgba(255,255,255,.03) 30%, transparent 34%),
-    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.02) 22%, rgba(255,255,255,0) 60%, rgba(255,255,255,.05)),
-    radial-gradient(120% 90% at 85% 15%, rgba(255,63,208,.13), transparent 55%),
-    radial-gradient(110% 90% at 10% 95%, rgba(63,233,255,.11), transparent 55%),
-    color-mix(in oklab, var(--win2) 42%, transparent);
-  -webkit-backdrop-filter: blur(3px) saturate(1.6) brightness(1.08); backdrop-filter: blur(3px) saturate(1.6) brightness(1.08);
+    linear-gradient(118deg, transparent 0 18%, rgba(255,255,255,.09) 22%, rgba(255,255,255,.02) 30%, transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.01) 20%, rgba(255,255,255,0) 70%, rgba(255,255,255,.03)),
+    rgba(255,255,255,.012);
   box-shadow:
-    inset 0 0 0 4px rgba(255,255,255,.035), inset 0 0 0 5px rgba(255,255,255,.4),           /* the inner moulded rim (double edge) */
-    inset 0 2px 0 rgba(255,255,255,.7), inset 0 -2px 6px rgba(255,255,255,.12),
-    inset 0 0 22px rgba(255,63,208,.22), inset 0 0 40px rgba(63,233,255,.12),               /* light refracting inside the edges */
-    0 0 0 1px rgba(0,0,0,.5), 0 0 18px -5px rgba(255,63,208,.5), 0 0 30px -10px rgba(63,233,255,.45), 0 14px 30px -18px #000; }
-.hl::before { /* rainbow refraction along the rim, strongest on the lit corners */
+    inset 0 0 0 4px rgba(255,255,255,.02), inset 0 0 0 5px rgba(255,255,255,.34),            /* inner moulded rim */
+    inset 0 2px 0 rgba(255,255,255,.75), inset 0 -1px 0 rgba(255,255,255,.3), inset 0 0 14px rgba(255,255,255,.07),
+    0 0 0 1px rgba(0,0,0,.6), 0 0 14px -6px rgba(255,255,255,.35); }
+.hl::before { /* faint refraction along the rim, like the cassette's edges catching light */
   content: ""; position: absolute; inset: -1.5px; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: -1;
-  background: conic-gradient(from calc(210deg + var(--lx, 0) * 40deg), #ff3fd0, #ffd36b, #ffffff, #3fe9ff, #8a5cff, #ff9ae8, #ff3fd0);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .9; filter: blur(.3px); }
-.btn { border: 1px solid rgba(255,255,255,.7); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.03) 50%, rgba(255,255,255,.08)), radial-gradient(90% 120% at 80% 0%, rgba(255,63,208,.18), transparent 60%), radial-gradient(90% 120% at 10% 100%, rgba(63,233,255,.16), transparent 60%), color-mix(in oklab, var(--win2) 45%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 0 0 3px rgba(255,255,255,.04), inset 0 0 10px rgba(255,63,208,.18), 0 0 12px -4px rgba(255,63,208,.4); font-family: var(--pixel); cursor: pointer;
+  background: conic-gradient(from calc(210deg + var(--lx, 0) * 40deg), #fff, #ffd3f3, #fff, #c9f6ff, #fff, #fff3c8, #fff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .8; }
+.hl::after { /* corner screw bosses moulded into the plastic */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(circle at 9px 9px, transparent 2.2px, rgba(255,255,255,.55) 2.8px, transparent 3.6px, transparent 4.6px, rgba(255,255,255,.22) 5px, transparent 5.6px),
+    radial-gradient(circle at calc(100% - 9px) 9px, transparent 2.2px, rgba(255,255,255,.55) 2.8px, transparent 3.6px, transparent 4.6px, rgba(255,255,255,.22) 5px, transparent 5.6px),
+    radial-gradient(circle at 9px calc(100% - 9px), transparent 2.2px, rgba(255,255,255,.55) 2.8px, transparent 3.6px, transparent 4.6px, rgba(255,255,255,.22) 5px, transparent 5.6px),
+    radial-gradient(circle at calc(100% - 9px) calc(100% - 9px), transparent 2.2px, rgba(255,255,255,.55) 2.8px, transparent 3.6px, transparent 4.6px, rgba(255,255,255,.22) 5px, transparent 5.6px);
+  background-size: 100% 100%; background-repeat: no-repeat; }
+.btn { border: 1px solid rgba(255,255,255,.75); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.02) 50%, rgba(255,255,255,.05)), rgba(255,255,255,.015); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 0 0 3px rgba(255,255,255,.03), inset 0 0 0 4px rgba(255,255,255,.18), 0 0 10px -5px rgba(255,255,255,.4); font-family: var(--pixel); cursor: pointer;
   height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
 .btn:hover { border-color: var(--line-strong); }
 .btn[aria-pressed="true"] { border-color: color-mix(in oklab, var(--glow) 70%, transparent); box-shadow: 0 0 12px -5px var(--glow); }
@@ -113,7 +113,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
 .wm { margin: 0; line-height: 0; }
 .wm svg { height: 30px; width: auto; display: block; overflow: visible; filter: drop-shadow(0 1px 0 rgba(0,0,0,.9)) drop-shadow(0 0 16px rgba(255,255,255,.08)); }
-.wm .holo { mix-blend-mode: soft-light; opacity: .55; }
+.wm .holo { display: none; }
 @keyframes sheen { from { background-position: 140% 0, 0% 0, 0 0; } to { background-position: -40% 0, 30% 0, 0 0; } }
 @keyframes drift { to { background-position: -40% 0, 230% 0, 0 0; } }
 .preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
@@ -140,7 +140,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .orb * { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 .hero { user-select: none; -webkit-user-select: none; }
 .orb .body { position: absolute; inset: 0; will-change: transform; }
-.orb canvas { position: absolute; inset: -52.5%; width: 205%; height: 205%; display: block; pointer-events: none; filter: drop-shadow(0 0 14px color-mix(in oklab, var(--h1) 38%, transparent)) drop-shadow(0 0 34px color-mix(in oklab, var(--h5) 22%, transparent)); }
+.orb canvas { position: absolute; inset: -52.5%; width: 205%; height: 205%; display: block; pointer-events: none; filter: drop-shadow(0 0 16px rgba(255,255,255,.16)); }
 .orb .fallback { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, var(--ch1) 25%, transparent 60%), var(--foil); opacity: .9; }
 .orb svg { position: absolute; inset: -9%; width: 118%; height: 118%; pointer-events: none; overflow: visible; }
 .orb .ripple { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; padding: 1.2px; background: var(--foil);
@@ -156,9 +156,9 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .px { display: block; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; font-family: var(--pixel); }
 .hero .ntxt .nm { font-weight: 600; font-size: 32px; letter-spacing: .09em; padding-left: .09em; overflow: visible; text-overflow: clip;
   background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%),
-                    linear-gradient(180deg, #ffffff 0%, #ffe6f8 26%, #ff9ae8 46%, #c7a8ff 60%, #9ff4ff 76%, #fff1c4 100%);
+                    linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #d9dbe0 70%, #ffffff 100%);
   background-size: 260% 100%, 100% 100%; background-position: -60% 0, 0 0; -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 0 1px rgba(255,255,255,.7)) drop-shadow(0 0 12px rgba(255,63,208,.4)) drop-shadow(0 0 22px rgba(63,233,255,.2));
+  filter: drop-shadow(0 0 1px rgba(255,255,255,.6)) drop-shadow(0 0 10px rgba(255,255,255,.18));
   animation: nsweep 1.7s .1s cubic-bezier(.3,.6,.2,1) both; }
 @keyframes nsweep { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 .hero .ntxt-old {
@@ -266,7 +266,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 .item b { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--ink); padding: 2px 0 1px; }
 .item b .px { font-weight: 500; font-size: 13px; letter-spacing: .08em; }
-.item[aria-current="true"] b .px { background: linear-gradient(180deg, #fff, #ff9ae8 55%, #9ff4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.item[aria-current="true"] b .px { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,.45); }
 .item b .fav { font-size: 10px; line-height: 1; color: var(--glow); }
 .item small { font-size: 10.5px; color: var(--muted); }
 .mk { font-size: 10.5px; } .mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
@@ -404,7 +404,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
       <stop offset="0" style="stop-color:color-mix(in oklab, var(--hair) 55%, transparent)"/><stop offset="1" style="stop-color:color-mix(in oklab, var(--hair) 12%, transparent)"/>
     </radialGradient>
     <linearGradient id="neonGrad" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" style="stop-color:var(--h1)"/><stop offset=".55" style="stop-color:var(--h2)"/><stop offset="1" style="stop-color:var(--h4)"/>
+      <stop offset="0" stop-color="#cfd2da"/><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/>
     </linearGradient>
     <filter id="neonBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
     <!-- LUMELODY wordmark (custom vector letterforms, not a font) -->
@@ -470,7 +470,7 @@ const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", 
                 ["rhythm", ["stutter", "gate", "reverse"]], ["pitch", ["pitch", "glide", "octave"]], ["grain & glue", ["granular", "glue"]]];
 const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
 const THEMES = {   // each theme: two studio lights reflected in the chrome (key + fill), an accent glow, and a six-colour foil spectrum
-  crystal: { name: "Crystal Holo", k: { night: "#06050a", tint: [1, 1, 1], glow: "#ff6fe0", plastic: "#f4dcff", holo: 1, key: "#ffd6f6", fill: "#7fefff", glass: [.03, .03, .04], iri: .9, h: ["#ff3fd0", "#ff9ae8", "#ffffff", "#8a5cff", "#3fe9ff", "#ffd36b"] } },
+  crystal: { name: "Crystal Holo", k: { night: "#000000", tint: [1, 1, 1], glow: "#f4f6ff", plastic: "#eef0f6", holo: 1, key: "#ffffff", fill: "#eaf6ff", glass: [.03, .03, .04], iri: .9, h: ["#ff3fd0", "#ff9ae8", "#ffffff", "#8a5cff", "#3fe9ff", "#ffd36b"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -620,39 +620,37 @@ const CR = (() => {
         vec3 V = vec3(0., 0., 1.);
         vec4 col = vec4(0.);
         if (mode < 1.5) {
-          col = vec4(0., 0., 0., smoothstep(1., .7, length(p + light * .1 + vec2(0., .09))) * .85);   // contact shadow
+          col = vec4(0., 0., 0., smoothstep(1., .76, length(p + light * .08 + vec2(0., .07))) * .5);   // soft contact shadow
           const float R = .9;
           if (r < R + .01) {
-            vec3 c; vec2 rad = p / max(r, 1e-4);
-            if (r > .7) {
-              // knurled chrome skirt: rounded profile with fine grip ridges that catch the studio lights
-              float u = clamp((r - .8) / .1, -1., 1.);
-              vec3 n = normalize(vec3(rad * (u * 1.3 + .35), sqrt(max(0., 1. - u * u)) * .8 + .05));
-              vec3 tg = vec3(-rad.y, rad.x, 0.);
-              n = normalize(n + tg * sin(a * 64.) * .24 * smoothstep(.72, .76, r) * smoothstep(.88, .84, r));
-              c = env(reflect(-V, n));
-              c = mix(c * .62, c, fres(n.z, .6));
-              c *= mix(.22, 1., smoothstep(.7, .726, r));   // machined seam
-            } else {
-              // dark glass face over fine machined rings, a chrome lip, one crisp glint
-              vec2 q = p / .7;
-              vec3 n = normalize(vec3(q * .2, 1.));
-              vec3 refl = env(reflect(-V, n));
-              c = vec3(.01, .01, .014) + refl * .5 * fres(n.z, .05) + vec3(.018) * (.5 + .5 * sin(r * 240.)) * smoothstep(.7, .12, r);
-              vec2 gd = normalize(vec2(1., -.75) + light * .3);
-              c += vec3(.42) * smoothstep(.1, .0, abs(dot(q, gd) - .38)) * smoothstep(1., .55, length(q)) * smoothstep(-.2, .5, dot(q, vec2(-gd.y, gd.x)) + .4);
-              c += film(dot(q, light) * .6 + time * .02) * iri * .05 * smoothstep(.3, 1., length(q));
-              c += vec3(.95) * exp(-pow((r - .698) / .012, 2.)) * (.55 + .45 * dot(rad, normalize(-light)));   // chrome lip catching the light
-              // indicator: a slit cut into the dome that glows in the accent colour
-              vec2 dv = vec2(cos(rot), sin(rot));
-              float along = dot(p, dv), across = abs(dot(p, vec2(-dv.y, dv.x)));
-              float slit = smoothstep(.045, .024, across) * smoothstep(.16, .22, along) * smoothstep(.66, .6, along);
-              float bloom = exp(-across * 24.) * smoothstep(.1, .28, along) * smoothstep(.72, .5, along);
-              c = mix(c, vec3(.008), slit * .9);
-              c += gcol * slit * (.3 + 1.7 * on) * (1. + glow * .4) + gcol * bloom * (.06 + .5 * on + .3 * glow);
-            }
-            float alpha = smoothstep(R + .006, R - .006, r);
-            col = vec4(mix(col.rgb, c, alpha), max(col.a, alpha));
+            vec2 rad = p / max(r, 1e-4);
+            // a thick clear acrylic disc: flat top, rounded outer edge; mostly see-through, the edges look solid
+            float u = clamp((r - .76) / .14, 0., 1.);
+            vec3 n = normalize(vec3(rad * u * 1.7, 1.));
+            vec3 E = env(reflect(-V, n));
+            float F = .04 + .96 * pow(1. - n.z, 4.);
+            vec3 c = E * (.3 + .9 * F) + vec3(.9) * pow(u, 3.) * .35;
+            float al = .16 + .8 * F + pow(u, 3.) * .3;
+            c += film(a * .22 + dot(rad, light) * .8 + time * .02) * iri * pow(u, 1.6) * .75; al += pow(u, 2.) * .25;   // rim refraction
+            // moulded rings on the face, like a reel hub
+            float rings = exp(-pow((r - .74) / .011, 2.)) + .8 * exp(-pow((r - .58) / .01, 2.)) + .55 * exp(-pow((r - .42) / .009, 2.));
+            float lit = .45 + .55 * max(0., dot(rad, -normalize(light)));
+            c += vec3(1.) * rings * lit * 1.4; al += rings * .8 * lit;
+            // six hub teeth turning with the value; the indicator is a bright slit
+            float ang = a - rot, k = cos(ang * 6.);
+            float teeth = smoothstep(.2, .21, r) * smoothstep(.31, .3, r) * smoothstep(.82, .95, k);
+            float hubR = exp(-pow((r - .2) / .01, 2.)) + exp(-pow((r - .31) / .01, 2.));
+            c += vec3(.9) * (teeth * .55 + hubR * .7) * lit; al += teeth * .35 + hubR * .5 * lit;
+            vec2 dv = vec2(cos(rot), sin(rot));
+            float along = dot(p, dv), across = abs(dot(p, vec2(-dv.y, dv.x)));
+            float slit = smoothstep(.034, .016, across) * smoothstep(.33, .38, along) * smoothstep(.72, .67, along);
+            c += mix(vec3(.75), gcol, .5) * slit * (.55 + 1.3 * on) * (1. + glow * .4); al += slit * (.6 + .4 * on);
+            // gloss streak across the top face
+            float gl2 = smoothstep(.07, .0, abs(dot(p, normalize(vec2(1., -.7))) - .26)) * smoothstep(.78, .3, r) * smoothstep(-.4, .3, dot(p, normalize(vec2(.7, 1.))));
+            c += vec3(.7) * gl2; al += gl2 * .4;
+            al = clamp(al, 0., 1.) * smoothstep(R + .006, R - .006, r);
+            float oa = al + col.a * (1. - al);
+            col = vec4((c * al + col.rgb * col.a * (1. - al)) / max(oa, 1e-4), oa);
           }
         } else {
           // sculpted chrome crescent: a sphere cut by a second sphere, iridescent along the cut
@@ -722,7 +720,17 @@ const FRAME = (() => {
       void main() {
         vec2 c = (v * .5) * res;
         float d = sdr(c);
-        if (d > .5 || d < -bw - .5) { gl_FragColor = vec4(0.); return; }
+        if (d > .5) { gl_FragColor = vec4(0.); return; }
+        if (d < -bw - .5) {   // moulded details just inside the rim: a ledge line and four screw bosses
+          float uu = bw / 16.;
+          float ledge = exp(-pow((d + bw + 7. * uu) / (.8 * uu), 2.)) * .4;
+          vec2 cc = abs(c) - (res * .5 - vec2(bw + 16. * uu)); float lr = length(cc);
+          float screw = exp(-pow((lr - 5.6 * uu) / (1. * uu), 2.)) * .85 + exp(-pow((lr - 2.4 * uu) / (.8 * uu), 2.)) * .55;
+          float a2 = clamp(ledge + screw, 0., 1.);
+          if (a2 < .004) { gl_FragColor = vec4(0.); return; }
+          vec3 cl = vec3(.96) + film(atan(cc.y, cc.x) * .3 + lr * .05 + time * .02) * iri * .25;
+          gl_FragColor = vec4(cl * a2, a2); return;
+        }
         vec2 g = normalize(vec2(sdr(c + vec2(1., 0.)) - sdr(c - vec2(1., 0.)), sdr(c + vec2(0., 1.)) - sdr(c - vec2(0., 1.))) + 1e-5);
         float t = clamp(-d / bw, 0., 1.), s = t * 2. - 1.;
         float slope = -s / sqrt(max(.02, 1. - s * s * .97));                       // rounded tube across the bezel
@@ -1127,7 +1135,6 @@ function frame(now) {
   dirty.clear();
   stepLights(now);
   FRAME.draw(now);
-  if (now - (frame.bgT || 0) > 70) { frame.bgT = now; BG.draw(false); }
   if (now - orbT > 15) {   // the moon follows the notes being played: total key light, softly limited
     const dt = Math.min(.1, (now - (orbT || now)) / 1000); orbT = now;
     let sum = 0; for (const L of lights.values()) sum += L.lum;
