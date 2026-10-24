@@ -28,6 +28,8 @@
   --bg: #040507; --win1: #0a0c10; --win2: #040507; --ink: #eef4fb; --muted: #8e98a6; --hair: #d8ecff; --glow: #8fe3ff; --ch1: #e6eef6; --ch2: #7d8794; --obs2: #040507;
   --h1: #e9f4ff; --h2: #9fe8ff; --h3: #ffffff; --h4: #c8b6ff; --h5: #7fd0ff; --h6: #ffd6f0;
   --plastic: var(--glow);
+  --holo-sheen: linear-gradient(transparent, transparent);
+  --holo-edge: 0 0 0 0 transparent;
   --line: color-mix(in oklab, var(--hair) 20%, transparent);
   --line-strong: color-mix(in oklab, var(--hair) 42%, transparent);
   --foil: linear-gradient(100deg, var(--h1), var(--h2), var(--h3), var(--h4), var(--h5), var(--h6), var(--h1));
@@ -35,7 +37,9 @@
   transition: --bg .8s, --win1 .8s, --win2 .8s, --ink .8s, --muted .8s, --hair .8s, --glow .8s, --ch1 .8s, --ch2 .8s, --obs2 .8s,
               --h1 .8s, --h2 .8s, --h3 .8s, --h4 .8s, --h5 .8s, --h6 .8s;
 }
-:root[data-theme="acid"] { --plastic: #a6ff1c; --glow: #b4ff3a; }
+:root[data-theme="crystal"] { --plastic: #f4dcff; --glow: #ff6fe0; --h1: #ff3fd0; --h2: #ff9ae8; --h3: #ffffff; --h4: #8a5cff; --h5: #3fe9ff; --h6: #ffd36b;
+  --holo-sheen: linear-gradient(115deg, rgba(255,63,208,.17), rgba(255,154,232,.06) 22%, rgba(63,233,255,.15) 45%, rgba(138,92,255,.14) 70%, rgba(255,211,107,.13));
+  --holo-edge: 0 0 16px -5px rgba(255,63,208,.45), 0 0 26px -10px rgba(63,233,255,.4); }
 :root[data-theme="rose"] { --bg: #050305; --win1: #0e060b; --win2: #050305; --ink: #fff0f7; --muted: #a8909d; --hair: #ffd1ea; --glow: #ff4fa8; --ch1: #f6e9f0; --ch2: #8e7c87; --obs2: #050305;
   --h1: #ff3d9a; --h2: #ff8fd0; --h3: #ffe1f2; --h4: #8ff3ff; --h5: #3fd2ff; --h6: #c26bff; }
 :root[data-theme="gold"] { --bg: #060403; --win1: #0f0a05; --win2: #060403; --ink: #fff6e6; --muted: #ab9b80; --hair: #ffe2b0; --glow: #ffb547; --ch1: #f3e6cc; --ch2: #8f7c5c; --obs2: #060403;
@@ -58,8 +62,15 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 /* ------------------------------------------------ window */
 .case { position: relative; max-width: 1120px; margin: 0 auto; }
-.slime { position: absolute; top: -18px; right: -78px; width: 236px; height: calc(100% + 230px); pointer-events: none; z-index: 20; display: block; }
-.slime[hidden] { display: none; }
+.glints { position: absolute; inset: 0; pointer-events: none; z-index: 20; display: none; }
+:root[data-theme="crystal"] .glints { display: block; }
+.glints .g { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; animation: glint 4.2s ease-in-out infinite; }
+.glints svg { width: 100%; height: 100%; overflow: visible; fill: #fff; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(255,140,236,.8)); }
+.glints .g1 { left: 1.2%; top: 2.4%; } .glints .g2 { left: 98.6%; top: 1.6%; animation-delay: -1.3s; width: 42px; height: 42px; margin: -21px 0 0 -21px; }
+.glints .g3 { left: 99.2%; top: 97%; animation-delay: -2.6s; } .glints .g4 { left: 2%; top: 98%; animation-delay: -.7s; width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+.glints .g5 { left: 52%; top: .4%; animation-delay: -3.4s; width: 22px; height: 22px; margin: -11px 0 0 -11px; }
+@keyframes glint { 0%, 100% { opacity: .95; transform: scale(1) rotate(0deg); } 45% { opacity: .2; transform: scale(.45) rotate(25deg); } 60% { opacity: 1; transform: scale(1.1) rotate(10deg); } }
+@media (prefers-reduced-motion: reduce) { .glints .g { animation: none; } }
 .win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 26px; overflow: hidden;
   background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--h5) 14%, transparent), transparent 70%), radial-gradient(50% 60% at 85% 80%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
   box-shadow: 0 60px 110px -40px #000, 0 30px 80px -50px color-mix(in oklab, var(--glow) 55%, transparent), 0 0 0 1px rgba(0,0,0,.6); }
@@ -73,12 +84,12 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 /* hairline boxes */
 .hl { border: 1px solid color-mix(in oklab, #fff 55%, var(--plastic)); border-radius: 8px;
   /* translucent acid plastic: a tinted, slightly frosted shell with a glossy top highlight and a darker, thicker lower edge */
-  background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.05) 14%, rgba(255,255,255,0) 45%),
+  background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.05) 14%, rgba(255,255,255,0) 45%), var(--holo-sheen),
               linear-gradient(180deg, color-mix(in oklab, var(--plastic) 14%, transparent), color-mix(in oklab, var(--plastic) 24%, transparent)),
               color-mix(in oklab, var(--win2) 62%, transparent);
   -webkit-backdrop-filter: blur(7px) saturate(1.5); backdrop-filter: blur(7px) saturate(1.5);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 -3px 8px color-mix(in oklab, var(--plastic) 30%, transparent),
-              0 0 0 1px rgba(0,0,0,.35), 0 12px 28px -16px color-mix(in oklab, var(--plastic) 45%, #000); }
+              0 0 0 1px rgba(0,0,0,.35), 0 12px 28px -16px color-mix(in oklab, var(--plastic) 45%, #000), var(--holo-edge); }
 .btn { border: 1px solid color-mix(in oklab, #fff 45%, var(--plastic)); border-radius: 5px; background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0) 50%), color-mix(in oklab, var(--plastic) 16%, color-mix(in oklab, var(--win2) 60%, transparent)); box-shadow: inset 0 1px 0 rgba(255,255,255,.5); cursor: pointer;
   height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
 .btn:hover { border-color: var(--line-strong); }
@@ -117,7 +128,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .orb * { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 .hero { user-select: none; -webkit-user-select: none; }
 .orb .body { position: absolute; inset: 0; will-change: transform; }
-.orb canvas { position: absolute; inset: -52.5%; width: 205%; height: 205%; display: block; pointer-events: none; filter: drop-shadow(0 0 14px color-mix(in oklab, var(--plastic) 42%, transparent)) drop-shadow(0 0 34px color-mix(in oklab, var(--plastic) 18%, transparent)); }
+.orb canvas { position: absolute; inset: -52.5%; width: 205%; height: 205%; display: block; pointer-events: none; filter: drop-shadow(0 0 14px color-mix(in oklab, var(--h1) 38%, transparent)) drop-shadow(0 0 34px color-mix(in oklab, var(--h5) 22%, transparent)); }
 .orb .fallback { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, var(--ch1) 25%, transparent 60%), var(--foil); opacity: .9; }
 .orb svg { position: absolute; inset: -9%; width: 118%; height: 118%; pointer-events: none; overflow: visible; }
 .orb .ripple { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; padding: 1.2px; background: var(--foil);
@@ -263,7 +274,6 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
   .orb { width: min(176px, 44vw); margin: 22px 0 16px; }
 }
 @media (max-width: 620px) {
-  .slime { right: -40px; width: 150px; }
   .top { grid-template-columns: minmax(0, 1fr) auto; }
   .preset { grid-column: 1 / -1; order: 3; justify-self: stretch; }
   .panels { grid-template-columns: 1fr; }
@@ -285,7 +295,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 </div>
 
 <div class="case" id="case">
-<canvas class="slime" id="slime" aria-hidden="true"></canvas>
+<div class="glints" aria-hidden="true"><span class="g g1"><svg viewBox="-20 -20 40 40"><path d="M0 -20 C1.2 -3 3 -1.2 20 0 C3 1.2 1.2 3 0 20 C-1.2 3 -3 1.2 -20 0 C-3 -1.2 -1.2 -3 0 -20Z"/><circle r="2.6"/></svg></span><span class="g g2"><svg viewBox="-20 -20 40 40"><path d="M0 -20 C1.2 -3 3 -1.2 20 0 C3 1.2 1.2 3 0 20 C-1.2 3 -3 1.2 -20 0 C-3 -1.2 -1.2 -3 0 -20Z"/><circle r="2.6"/></svg></span><span class="g g3"><svg viewBox="-20 -20 40 40"><path d="M0 -20 C1.2 -3 3 -1.2 20 0 C3 1.2 1.2 3 0 20 C-1.2 3 -3 1.2 -20 0 C-3 -1.2 -1.2 -3 0 -20Z"/><circle r="2.6"/></svg></span><span class="g g4"><svg viewBox="-20 -20 40 40"><path d="M0 -20 C1.2 -3 3 -1.2 20 0 C3 1.2 1.2 3 0 20 C-1.2 3 -3 1.2 -20 0 C-3 -1.2 -1.2 -3 0 -20Z"/><circle r="2.6"/></svg></span><span class="g g5"><svg viewBox="-20 -20 40 40"><path d="M0 -20 C1.2 -3 3 -1.2 20 0 C3 1.2 1.2 3 0 20 C-1.2 3 -3 1.2 -20 0 C-3 -1.2 -1.2 -3 0 -20Z"/><circle r="2.6"/></svg></span></div>
 <div class="win" id="unit">
   <canvas class="stars" id="stars" aria-hidden="true"></canvas>
   <span class="frame-css" id="frameCss" hidden></span>
@@ -440,7 +450,7 @@ const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", 
                 ["rhythm", ["stutter", "gate", "reverse"]], ["pitch", ["pitch", "glide", "octave"]], ["grain & glue", ["granular", "glue"]]];
 const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
 const THEMES = {   // each theme: two studio lights reflected in the chrome (key + fill), an accent glow, and a six-colour foil spectrum
-  acid: { name: "Acid Lime", k: { night: "#06080c", tint: [1, 1, 1.02], glow: "#b4ff3a", plastic: "#a6ff1c", key: "#cfeeff", fill: "#c6b4ff", glass: [.03, .03, .04], iri: .5, h: ["#e9f4ff", "#9fe8ff", "#ffffff", "#c8b6ff", "#7fd0ff", "#ffd6f0"] } },
+  crystal: { name: "Crystal Holo", k: { night: "#06050a", tint: [1, 1, 1], glow: "#ff6fe0", plastic: "#f4dcff", holo: 1, key: "#ffd6f6", fill: "#7fefff", glass: [.03, .03, .04], iri: .9, h: ["#ff3fd0", "#ff9ae8", "#ffffff", "#8a5cff", "#3fe9ff", "#ffd36b"] } },
   silver: { name: "Silver Chrome", k: { night: "#06080c", tint: [1, 1, 1.02], glow: "#8fe3ff", key: "#cfeeff", fill: "#c6b4ff", glass: [.03, .03, .04], iri: .5, h: ["#e9f4ff", "#9fe8ff", "#ffffff", "#c8b6ff", "#7fd0ff", "#ffd6f0"] } },
   rose: { name: "Rose Chrome", k: { night: "#0d0409", tint: [1, 1, 1], glow: "#ff4fa8", key: "#ff4fa8", fill: "#4fe3ff", glass: [.03, .03, .04], iri: .55, h: ["#ff3d9a", "#ff8fd0", "#ffe1f2", "#8ff3ff", "#3fd2ff", "#c26bff"] } },
   gold: { name: "Gold Chrome", k: { night: "#0c0703", tint: [1.03, 1, .92], glow: "#ffb547", key: "#ffb547", fill: "#ff6fb0", glass: [.03, .03, .04], iri: .45, h: ["#ffcf7a", "#fff1c9", "#ff9a5c", "#ffd6a0", "#ff79b4", "#ffe9b0"] } },
@@ -553,7 +563,7 @@ const CR = (() => {
   let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false }); } catch (e) { gl = null; }
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
   const theme = {}; let from = null, target = null, t0 = 0;
-  function conv(k) { return { tint: k.tint, glow: hex(k.glow), plastic: hex(k.plastic || k.glow), keyc: hex(k.key), fillc: hex(k.fill), glass: k.glass, iri: [k.iri], hh: k.h.flatMap(hex) }; }
+  function conv(k) { return { tint: k.tint, glow: hex(k.glow), plastic: hex(k.plastic || k.glow), holo: [k.holo || 0], keyc: hex(k.key), fillc: hex(k.fill), glass: k.glass, iri: [k.iri], hh: k.h.flatMap(hex) }; }
   function setTheme(k, animate) {
     const tgt = conv(k);
     if (!animate || !target) { for (const key in tgt) theme[key] = tgt[key].slice(); target = tgt; from = null; return; }
@@ -684,7 +694,7 @@ const FRAME = (() => {
   if (gl) {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
-      uniform vec2 res, light; uniform float rad, bw, time, iri; uniform vec3 tint, keyc, fillc, gcol, plastic; uniform vec3 hh[6];
+      uniform vec2 res, light; uniform float rad, bw, time, iri; uniform vec3 tint, keyc, fillc, gcol, plastic; uniform vec3 hh[6]; uniform float holo;
 ` + ENV_GLSL + `
       vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
       float sdr(vec2 p) { vec2 b = res * .5 - .5; vec2 q = abs(p) - b + rad; return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - rad; }
@@ -709,7 +719,8 @@ const FRAME = (() => {
         chrome += film(dot(n.xy, light) * 1.2 + t * .7 + time * .01) * iri * pow(1. - n.z, 2.2) * .7;
         // translucent plastic body: light scatters inside (brighter where the tube is thicker), glossy white reflections on top
         float thick = sqrt(max(0., 1. - s * s));
-        vec3 body = plastic * (.18 + .85 * thick) + plastic * pow(thick, 6.) * .35 + E * (.1 + .9 * pow(1. - n.z, 3.)) + vec3(1.) * pow(max(dot(reflect(-normalize(vec3(light, .8)), n), V), 0.), 40.) * .9;
+        vec3 tintc = mix(plastic, film(t * .9 + dot(c / res.y, vec2(.8, .45)) * 1.6 + dot(n.xy, light) * .9 + time * .02) * 1.05, holo);
+        vec3 body = tintc * (.18 + .85 * thick) + tintc * pow(thick, 6.) * .35 + E * (.1 + .9 * pow(1. - n.z, 3.)) + vec3(1.) * pow(max(dot(reflect(-normalize(vec3(light, .8)), n), V), 0.), 40.) * .9;
         float bodyA = .5 + .38 * thick;
         float cm = max(1. - smoothstep(.09, .15, t), smoothstep(.85, .91, t));   // chrome bands along both edges
         col = mix(body, chrome, cm);
@@ -722,7 +733,7 @@ const FRAME = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["res", "light", "rad", "bw", "time", "iri", "tint", "keyc", "fillc", "gcol", "hh", "plastic"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["res", "light", "rad", "bw", "time", "iri", "tint", "keyc", "fillc", "gcol", "hh", "plastic", "holo"]) U[u] = gl.getUniformLocation(prog, u);
     } catch (e) { console.warn("frame shader unavailable:", e); gl = null; }
   }
   if (!gl) { cv.hidden = true; $("#frameCss").hidden = false; }
@@ -737,104 +748,7 @@ const FRAME = (() => {
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(U.res, w, h); gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.rad, 26 * d); gl.uniform1f(U.bw, 16 * d);
       gl.uniform1f(U.time, reduceMotion ? 0 : now / 1000); gl.uniform1f(U.iri, CR.theme.iri[0]);
-      gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.plastic, CR.theme.plastic);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    }
-  };
-})();
-
-// ================================================================ acid jelly slime dripping down the right side
-// 2-D signed-distance metaballs (a pool over the top-right corner, tapered drips with bulbous tips, one drop that
-// stretches, detaches and falls, then re-forms) shaded as thick translucent jelly: thickness from the distance field,
-// light scattered inside (brighter in thick parts), a darker refracted rim, sharp specular highlights, studio
-// reflections, a soft glow and twinkling sparkles. Coordinates are CSS pixels of the canvas, origin top-left.
-const SLIME = (() => {
-  const cv = $("#slime");
-  let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false }); } catch (e) {}
-  const U = {};
-  if (gl) {
-    const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
-    const fs = `precision highp float; varying vec2 v;
-      uniform vec2 res, light; uniform float time, dpr, edgeX; uniform vec3 slime, tint, keyc, fillc;
-` + ENV_GLSL + `
-      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-      float smin(float a, float b, float k) { float h = clamp(.5 + .5 * (b - a) / k, 0., 1.); return mix(b, a, h) - k * h * (1. - h); }
-      float cap(vec2 p, vec2 a, vec2 b, float ra, float rb) {   // capsule that tapers from ra to rb
-        vec2 pa = p - a, ba = b - a; float h = clamp(dot(pa, ba) / dot(ba, ba), 0., 1.);
-        return length(pa - ba * h) - mix(ra, rb, h); }
-      float drip(vec2 p, float x, float top, float len, float w, float tip) {
-        float d = cap(p, vec2(x, top), vec2(x, top + len), w, w * .55);
-        return smin(d, length(p - vec2(x, top + len + tip * .35)) - tip, 10.); }
-      float field(vec2 p) {
-        float X = edgeX;
-        float d = cap(p, vec2(X - 74., 17.), vec2(X + 18., 20.), 8., 15.);                  // pool along the top edge
-        d = smin(d, length((p - vec2(X + 4., 26.)) * vec2(1., .8)) - 24., 14.);             // bulge over the corner
-        d = smin(d, cap(p, vec2(X + 6., 28.), vec2(X + 9., 86.), 18., 13.), 14.);           // sheet running down the side
-        float t = time;
-        d = smin(d, drip(p, X - 4., 40., 230. + 26. * sin(t * .41), 12., 17.), 12.);
-        d = smin(d, drip(p, X - 22., 18., 70. + 12. * sin(t * .53 + 1.), 7., 10.), 10.);
-        d = smin(d, drip(p, X - 52., 15., 24. + 6. * sin(t * .7 + 2.), 5., 7.), 8.);
-        // the long drip that lets go of a drop every few seconds
-        float per = 4.2, ph = mod(t, per) / per;
-        float grow = smoothstep(0., .62, ph), len = 330. + 70. * grow;
-        float tipR = 13. + 4. * grow;
-        float ds = (ph < .62) ? drip(p, X + 22., 60., len, 9., tipR) : drip(p, X + 22., 60., 330. + 70. * (1. - smoothstep(.62, 1., ph)) * .2, 9., 12.);
-        d = smin(d, ds, 10.);
-        if (ph > .6) {
-          float tt = (ph - .6) * per, y = 60. + 400. + tipR * .35 + 420. * tt * tt + 30. * tt;
-          float stretch = 1. + min(.6, tt * 1.2);
-          d = smin(d, length((p - vec2(X + 22., y)) * vec2(1., 1. / stretch)) - 12., 4. * max(0., .2 - tt) * 5. + .01);
-        }
-        return d;
-      }
-      void main() {
-        vec2 px = vec2((v.x * .5 + .5) * res.x, (1. - (v.y * .5 + .5)) * res.y) / dpr;
-        float d = field(px);
-        if (d > 26.) { gl_FragColor = vec4(0.); return; }
-        float e = .9;
-        float T = clamp(-d / 9., 0., 1.);
-        float hgt = sqrt(T);
-        float hx = sqrt(clamp(-field(px + vec2(e, 0.)) / 9., 0., 1.)), hy = sqrt(clamp(-field(px + vec2(0., e)) / 9., 0., 1.));
-        vec3 n = normalize(vec3(-(hx - hgt) / e * 5.5, (hy - hgt) / e * 5.5, 1.));   // y flipped: screen down = -y
-        vec3 V = vec3(0., 0., 1.), L = normalize(vec3(light, .8));
-        vec3 E = env(reflect(-V, n));
-        vec3 col = slime * (.28 + 1.0 * T) + slime * pow(T, 2.) * .5 + vec3(.9, 1., .6) * pow(T, 4.) * .3;     // light scattered inside: the core glows
-        col *= mix(.68, 1., smoothstep(.0, .35, T));                                                         // slightly darker refracted rim
-        col += E * (.12 + .7 * pow(1. - n.z, 2.));                                                          // glossy reflections
-        col += vec3(1.) * pow(max(dot(reflect(-L, n), V), 0.), 70.) * 1.6;                                 // sharp specular
-        col += vec3(1.) * pow(max(dot(reflect(-normalize(vec3(-.6, .2, .7)), n), V), 0.), 40.) * .5;      // second light
-        vec2 sc = floor(px / 7.); float sp = step(.975, hash(sc)) * T;
-        float tw = .5 + .5 * sin(time * 3.5 + hash(sc + 3.) * 30.);
-        col += vec3(1.) * sp * tw * smoothstep(1.6, .0, length(fract(px / 7.) * 7. - 3.5)) * 1.4;          // sparkles
-        float a = smoothstep(.9, -.9, d) * (.74 + .24 * T);
-        float glow = (1. - smoothstep(-1., 22., d)) * .22 * step(0., d);
-        vec3 outc = col * a + slime * glow;
-        gl_FragColor = vec4(outc, min(1., a + glow * .8));
-      }`;
-    const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
-    try {
-      const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
-      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["res", "light", "time", "dpr", "edgeX", "slime", "tint", "keyc", "fillc"]) U[u] = gl.getUniformLocation(prog, u);
-    } catch (e) { console.warn("slime shader unavailable:", e); gl = null; }
-  }
-  if (!gl) cv.hidden = true;
-  let on = true, last = 0;
-  const SLIME_RGB = [.62, 1, .08];
-  return {
-    show(v) { on = v; cv.hidden = !v || !gl; },
-    draw(now) {
-      if (!gl || !on || now - last < 33) return;
-      last = now;
-      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
-      const w = Math.max(2, Math.round(r.width * d)), h = Math.max(2, Math.round(r.height * d));
-      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
-      const win = $("#unit").getBoundingClientRect();
-      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(U.res, w, h); gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, reduceMotion ? 3 : now / 1000);
-      gl.uniform1f(U.dpr, d); gl.uniform1f(U.edgeX, win.right - r.left - 8);
-      gl.uniform3fv(U.slime, SLIME_RGB); gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc);
+      gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.plastic, CR.theme.plastic); gl.uniform1f(U.holo, CR.theme.holo[0]);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
   };
@@ -1007,7 +921,7 @@ const BG = (() => {
   if (gl) {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
-      uniform vec2 res, light, moon; uniform float iri; uniform vec3 tint, keyc, fillc, gcol, plastic; uniform vec3 hh[6];
+      uniform vec2 res, light, moon; uniform float iri, holo; uniform vec3 tint, keyc, fillc, gcol, plastic; uniform vec3 hh[6];
 ` + ENV_GLSL + `
       vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
       float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
@@ -1018,6 +932,7 @@ const BG = (() => {
       void main() {
         vec2 uv = v * .5 + .5; float asp = res.x / res.y; vec2 c = uv - .5;
         vec3 V = vec3(0., 0., 1.);
+        vec3 plastic = mix(plastic, film(uv.x * .9 + uv.y * .7 + light.x * .25) * .9, holo);   // crystal shell: the tint shifts across the spectrum
         // the inside of the device: dark board with faint traces, pads and chips
         vec2 g = vec2(uv.x * asp, uv.y) * 34.; vec2 cell = floor(g), f = fract(g); float r = hash(cell);
         float tr = 0.;
@@ -1047,7 +962,7 @@ const BG = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["res", "light", "moon", "iri", "tint", "keyc", "fillc", "gcol", "hh", "plastic"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["res", "light", "moon", "iri", "tint", "keyc", "fillc", "gcol", "hh", "plastic", "holo"]) U[u] = gl.getUniformLocation(prog, u);
     } catch (e) { console.warn("background shader unavailable:", e); gl = null; }
   }
   let lastKey = "";
@@ -1063,7 +978,7 @@ const BG = (() => {
       lastKey = key;
       if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
       gl.uniform2f(U.res, w, h); gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform2f(U.moon, mx, my); gl.uniform1f(U.iri, CR.theme.iri[0]);
-      gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.plastic, CR.theme.plastic);
+      gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.plastic, CR.theme.plastic); gl.uniform1f(U.holo, CR.theme.holo[0]);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
   };
@@ -1190,7 +1105,6 @@ function frame(now) {
   dirty.clear();
   stepLights(now);
   FRAME.draw(now);
-  SLIME.draw(now);
   if (now - (frame.bgT || 0) > 70) { frame.bgT = now; BG.draw(false); }
   if (now - orbT > 15) {   // the moon follows the notes being played: total key light, softly limited
     const dt = Math.min(.1, (now - (orbT || now)) / 1000); orbT = now;
@@ -1426,10 +1340,9 @@ function setTheme(id, animate) {
   if (!THEMES[id]) id = "silver";
   curTheme = id;
   if (id === "silver") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
-  SLIME.show(id === "acid");
   swEls.forEach(s => s.setAttribute("aria-pressed", s.dataset.id === id ? "true" : "false"));
   CR.setTheme(THEMES[id].k, animate); ambientUntil = performance.now() + 900; spillDirty = true; drawStars();
-  store.set("lumi-theme5", id);
+  store.set("lumi-theme6", id);
 }
 
 // ================================================================ sound picker sheet, marks, demos
@@ -1518,7 +1431,7 @@ async function startFromGesture() {
   try { await startAudio(); } catch (err) { toast("Audio could not start: " + (err && err.message || err)); }
 }
 $("#startBtn").onclick = startFromGesture;
-setTheme(store.get("lumi-theme5", "acid"), false);
+setTheme(store.get("lumi-theme6", "crystal"), false);
 buildRack(); buildDetail(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
 const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e) { return null; } })();
 const li = PRESETS.findIndex(p => p.id === last);

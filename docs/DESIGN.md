@@ -39,16 +39,14 @@
   release; a tap spins it, flares the light, sends out foil ripples and loads a random sound, whose name fades in
   out of a blur. Keys press with a quick tilt and spring back with a small overshoot; their light rises from the
   front edge on the strike and sinks as it fades.
-- **Acid Lime theme (default):** translucent acid-lime plastic like a Y2K pager. Panels and buttons are tinted,
-  frosted plastic shells with a glossy top highlight and a thicker, darker lower edge; the window background shows
-  the inside of the device (faint board traces, pads, chips) through the tinted shell with glossy reflections; the
-  border keeps its exact tube shape but is translucent lime plastic (light scattering inside, white gloss) with
-  polished chrome bands along both edges; the moon and ring keep their rendering and get a soft lime glow. Thick
-  lime jelly slime runs over the top-right corner and down the right side (WebGL metaballs: pool, sheet, tapered
-  drips with bulbous tips, one drip that stretches, lets go of a drop and re-forms), shaded as translucent jelly with
-  a glowing core, a slightly darker refracted rim, sharp highlights, studio reflections, a glow and sparkles.
-  Real-time approximation, not an offline (Octane) render. The other themes keep their chrome look; slime is off.
-- **Themes:** Acid Lime (default), Silver, Rose, Gold, Violet, Prism. Each defines window tones, hairline tint, accent and a
+- **Crystal Holo theme (default):** clear crystal plastic like a holographic cassette shell, colours magenta,
+  pink, white, violet, cyan and gold. Panels and buttons are clear glossy shells with a holographic sheen and an
+  iridescent edge glow; the window background shows the device's insides through a shell whose tint shifts across
+  the spectrum; the border keeps its exact tube shape, rendered as clear crystal refracting the spectrum, with
+  chrome bands along both edges; the moon and ring keep their rendering, coloured by the theme's foil spectrum,
+  with a soft magenta + cyan glow; four-point star glints twinkle on the corners. (The earlier Acid Lime theme and
+  its slime were removed.)
+- **Themes:** Crystal Holo (default), Silver, Rose, Gold, Violet, Prism. Each defines window tones, hairline tint, accent and a
   six-colour foil spectrum (registered CSS colours, 0.8 s morph); the WebGL moon and knobs lerp the same palette.
 - **Knobs:** brushed-metal caps (concentric brushing, anisotropic highlight) carrying holographic film, a polished
   chrome rim, a domed chrome bead indicator ringed with light when the effect is on, and an LED ring of glass beads
