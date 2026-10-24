@@ -46,6 +46,18 @@ class LumiProcessor extends AudioWorkletProcessor {
       case "alloff": X.lumi_all_off(); break;
       case "tempo": X.lumi_tempo(m.bpm); break;
       case "bend": X.lumi_bend(m.value); break;
+      // sampler: the decoded file (copied into the engine), its settings, and the piano/sampler layer mix
+      case "sample": {
+        const n = m.L.length, pl = X.lumi_alloc(n), pr = X.lumi_alloc(n);
+        new Float32Array(X.memory.buffer, pl, n).set(m.L); new Float32Array(X.memory.buffer, pr, n).set(m.R || m.L);
+        X.lumi_sample_set(pl, pr, n, m.sr, m.channels || 2); X.lumi_free(pl); X.lumi_free(pr);
+        if (m.settings) { this.writeText(m.settings); X.lumi_sampler_settings(1); }
+        this.port.postMessage({ type: "sampleok", id: m.id, frames: n });
+        break;
+      }
+      case "sampler": this.writeText(m.bytes); X.lumi_sampler_settings(m.rebuild ? 1 : 0); break;
+      case "sampleClear": X.lumi_sample_clear(); break;
+      case "layer": X.lumi_layer(m.mode, m.piano, m.sampler); break;
       // offline rendering (audio export): a note list with sample positions, played inside process()
       case "seq": this.seq = m.events; this.seqPos = 0; this.frame = 0; this.port.postMessage({ type: "seqok" }); break;
     }

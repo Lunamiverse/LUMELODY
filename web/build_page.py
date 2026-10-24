@@ -29,7 +29,7 @@ def template():
     """The instrument page source with the LUMI tools (Chord Progression Finder, library, export) inlined."""
     html = open(os.path.join(ROOT, "web", "instrument_template.html")).read()
     assert "/*__PROGRESSIONS__*/" in html
-    tools = "\n".join(open(os.path.join(ROOT, "web", f)).read() for f in ("tools_core.js", "tools_ui.js", "tools_pads.js"))
+    tools = "\n".join(open(os.path.join(ROOT, "web", f)).read() for f in ("tools_core.js", "tools_ui.js", "tools_pads.js", "tools_sampler.js"))
     return html.replace("/*__PROGRESSIONS__*/", tools)
 
 def schema_json():

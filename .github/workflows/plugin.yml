@@ -43,7 +43,10 @@ jobs:
           cmake -S plugin -B build $GEN -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
-        run: cmake --build build --config Release --parallel 4
+        shell: bash
+        run: |
+          set -o pipefail
+          cmake --build build --config Release --parallel 4 2>&1 | tee build.log || { grep -E "error|Error|undefined reference" build.log | head -40 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; }
 
       - name: Headless tests (notes, every sound, automation, save/reopen, audio export)
         shell: bash

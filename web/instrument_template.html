@@ -394,6 +394,41 @@ html.calm .finder *, html.calm .libpane * { transition: none !important; animati
 .nempty { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 16px; text-align: center; font-size: 11px; color: var(--muted); pointer-events: none; }
 html.calm .npad { transition: none; }
 
+/* ------------------------------------------------ sampler */
+.main > #smp { grid-column: 2; grid-row: 1; }
+.smp .smbody { position: relative; display: grid; min-height: 0; overflow-y: auto; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 6px; padding-right: 2px; }
+.smp.drop { outline: 2px dashed #fff; outline-offset: -6px; }
+.smp .frow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
+.smp .btn { padding: 3px 10px; font-size: 11px; } .smp .btn:disabled { opacity: .35; cursor: default; }
+.smp .btn.hot { border-color: #fff; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 14px -6px #fff; }
+.smp .btn.big { font-size: 12px; padding: 4px 13px; }
+.smp .chip { font-size: 10.5px; padding: 2px 9px; } .smp .chip[aria-pressed="true"] { color: #fff; border-color: #fff; background: rgba(255,255,255,.08); }
+.smp .field { padding: 3px 6px; font-size: 11px; } .smp .bpm { width: 58px; } .smp .sp { flex: 1; }
+.smp .seg-mini button { font-size: 11px; padding: 3px 8px; }
+.smlvl { display: inline-flex; gap: 4px; } .smlvl input { width: 54px; accent-color: #fff; }
+.smpane { display: grid; gap: 6px; min-width: 0; }
+.smlist { display: grid; gap: 4px; max-height: 270px; overflow-y: auto; }
+.smrow { display: grid; grid-template-columns: auto minmax(0, 1fr) 160px auto auto auto; gap: 6px; align-items: center; border: 1px solid rgba(255,255,255,.22); border-radius: 6px; padding: 4px 6px; }
+.smrow.f { grid-template-columns: minmax(0, 1fr) auto auto; }
+.smrow.cur { border-color: #fff; background: rgba(255,255,255,.05); }
+.smname { display: grid; min-width: 0; } .smname b { font: 500 12px var(--pixel); color: #fff; text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.smname small { font-size: 10px; color: var(--muted); text-transform: none; }
+.smwave { width: 160px; height: 26px; opacity: .9; }
+.smstar { border: 0; background: none; color: #fff; cursor: pointer; font-size: 14px; padding: 0 2px; } .smstar:not(.on) { opacity: .45; }
+.smempty { margin: 14px 0; text-align: center; color: var(--muted); font-size: 11px; }
+.smhint { margin: 0; font-size: 10px; text-transform: none; }
+.smtitle { font: 500 13px var(--pixel); color: #fff; text-transform: none; } .smi { font-size: 10.5px; text-transform: none; }
+.smwavebig { width: 100%; height: 120px; border: 1px solid rgba(255,255,255,.3); border-radius: 7px; background: rgba(255,255,255,.02); cursor: crosshair; touch-action: none; }
+.smprog { position: relative; height: 18px; border: 1px solid rgba(255,255,255,.4); border-radius: 5px; overflow: hidden; }
+.smprog i { position: absolute; left: 0; top: 0; bottom: 0; background: rgba(255,255,255,.18); transition: width .15s; }
+.smprog span { position: relative; display: block; font-size: 10.5px; padding: 1px 8px; text-transform: none; }
+.smnote { margin: 0; min-height: 15px; font-size: 11px; color: #fff; text-transform: none; } .smnote.err { color: #ffb3d9; }
+.ytin { flex: 1 1 260px; }
+.ytmeta { display: flex; gap: 10px; align-items: center; } .ytmeta img { width: 120px; border-radius: 5px; border: 1px solid rgba(255,255,255,.3); }
+.ytmeta b { display: block; font-size: 12px; color: #fff; text-transform: none; } .ytmeta small { font-size: 10.5px; color: var(--muted); text-transform: none; }
+.ytwhy { margin: 4px 0; font-size: 11px; text-transform: none; color: color-mix(in oklab, var(--ink) 85%, transparent); line-height: 1.45; }
+.yterr { color: #ffb3d9; font-size: 11px; text-transform: none; }
+
 /* ------------------------------------------------ browser sheet */
 .sheet { position: absolute; inset: 78px 30px 30px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
   border: 1px solid var(--line-strong); border-radius: 8px; background: color-mix(in oklab, var(--win2) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 60px -20px #000; }
@@ -565,6 +600,7 @@ html.calm .npad { transition: none; }
             <button class="btn" type="button" id="fMidi">save midi</button>
             <button class="btn" type="button" id="fWav" title="Render with the current sound and effects">save audio</button>
             <button class="btn drag adv-only" type="button" id="fDragWav" title="Drag the rendered audio into FL Studio">drag audio ↗</button>
+            <button class="btn adv-only" type="button" id="fReverse" title="Reverse the order of the chords (lengths stay)">reverse</button>
             <button class="btn adv-only" type="button" id="fClear">clear</button>
           </div>
         </div>
@@ -601,6 +637,7 @@ html.calm .npad { transition: none; }
             <button class="btn" type="button" id="npDel">delete note</button>
             <button class="btn" type="button" id="npQuant" title="Snap every note to the grid">tighten timing</button>
             <button class="btn adv-only" type="button" id="npToBlocks" title="Turn what you played into chord blocks">to chord blocks</button>
+            <button class="btn" type="button" id="npReverse" title="Play the phrase backwards: note order flips, lengths and velocities stay">reverse</button>
             <button class="btn adv-only" type="button" id="npClear">clear</button>
             <span class="sp"></span>
             <button class="btn drag big" type="button" id="npDrag" title="Drag the MIDI into FL Studio. Click to save the file.">drag to daw ↗</button>
@@ -624,6 +661,83 @@ html.calm .npad { transition: none; }
           <div class="pgrid" id="pgList"></div>
         </div>
       </section>
+      <section class="prog smp hl" id="smp" aria-label="Sampler" hidden>
+        <div class="ws-top">
+          <div class="ws-tabs" id="smTabs" role="tablist">
+            <button class="chip" type="button" data-t="lib">my samples</button>
+            <button class="chip" type="button" data-t="edit">edit</button>
+            <button class="chip" type="button" data-t="yt">import from youtube</button>
+          </div>
+          <span class="seg-mini" id="smLayer" role="group" aria-label="What the keys play"><button type="button" data-m="0">piano</button><button type="button" data-m="1">sampler</button><button type="button" data-m="2">layer</button></span>
+          <span class="smlvl" title="Piano / sampler levels in layer mode"><input type="range" id="smPianoLvl" min="0" max="1.5" step=".01" aria-label="Piano level"><input type="range" id="smSampLvl" min="0" max="1.5" step=".01" aria-label="Sampler level"></span>
+          <button class="btn" type="button" id="smClose">close</button>
+        </div>
+        <div class="smbody">
+          <div class="smprog" id="smProg" hidden><i></i><span></span></div>
+          <div class="smpane" id="smLibPane">
+            <div class="frow">
+              <button class="btn hot" type="button" id="smImport">import file…</button>
+              <button class="btn" type="button" id="smFolder">open folder…</button>
+              <input class="field" type="search" id="smSearch" placeholder="search samples" aria-label="Search samples">
+              <button class="chip" type="button" id="smFav" aria-pressed="false">★ favourites</button>
+              <span class="dim" id="smCount"></span>
+            </div>
+            <div class="smlist" id="smList"></div>
+            <p class="smhint dim">drag audio files onto this panel to import them. wav, aiff, flac, mp3, ogg and m4a (what your system can decode). files stay on this device.</p>
+          </div>
+          <div class="smpane" id="smEditPane" hidden>
+            <p class="smempty" id="smEditEmpty">no sample loaded: pick one in my samples and press use.</p>
+            <div id="smEditor" hidden>
+              <div class="frow"><b class="smtitle" id="smTitle"></b><span class="dim smi" id="smInfo"></span></div>
+              <div class="frow" id="smTools">
+                <span class="dim">drag on the waveform to set</span>
+                <span class="seg-mini"><button type="button" data-tool="trim">start / end</button><button type="button" data-tool="loop">loop</button><button type="button" data-tool="region">reverse region</button><button type="button" data-tool="slice">slices</button></span>
+                <span class="sp"></span><button class="btn" type="button" id="smUndo">undo</button><button class="btn" type="button" id="smRedo">redo</button>
+              </div>
+              <canvas class="smwavebig" id="smWave" aria-label="Waveform of the loaded sample"></canvas>
+              <div class="frow">
+                <label class="dim" for="smMode">keys play</label><select class="field" id="smMode"><option value="0">the sample at every pitch</option><option value="1">one slice per key</option><option value="2">the sample, same pitch</option></select>
+                <label class="dim" for="smRoot">root</label><input class="bpm" id="smRoot" type="number" min="0" max="127"><span class="dim" id="smRootName"></span><button class="chip" type="button" id="smRootAuto" title="Use the detected pitch">detect</button>
+                <label class="dim" for="smTune">tune</label><input class="bpm" id="smTune" type="number" min="-24" max="24" step=".01" title="semitones">
+              </div>
+              <div class="frow">
+                <label class="dim" for="smRev">reverse</label><select class="field" id="smRev"><option value="0">off</option><option value="1">whole sample</option><option value="2">selected region</option></select>
+                <button class="chip" type="button" id="smAB" title="Compare with the other version (does not change your edit)">a/b</button>
+                <button class="chip" type="button" id="smLoop">loop</button>
+                <button class="chip" type="button" id="smOne" title="Plays to the end even when you let go">one-shot</button>
+                <label class="dim" for="smStretch">stretch</label><input type="range" id="smStretch" min=".5" max="2" step=".01" aria-label="Time stretch"><span class="dim" id="smStretchV"></span>
+                <button class="chip" type="button" id="smFit" title="Stretch the detected tempo to the project tempo">fit to tempo</button>
+              </div>
+              <div class="frow">
+                <span class="dim">slices</span><button class="chip" type="button" id="smSliceAuto" title="Cut at the detected hits">at the hits</button>
+                <button class="chip" type="button" data-div="4">÷4</button><button class="chip" type="button" data-div="8">÷8</button><button class="chip" type="button" data-div="16">÷16</button>
+                <button class="chip" type="button" id="smSliceClear">clear</button><span class="dim" id="smSliceInfo"></span>
+                <button class="btn" type="button" id="smToPads" title="Play the slices on Neon Pads">slices to pads</button>
+              </div>
+              <div class="frow">
+                <label class="dim" for="smAtk">attack</label><input class="bpm" id="smAtk" type="number" min="0.0005" max="4" step=".001">
+                <label class="dim" for="smRel">release</label><input class="bpm" id="smRel" type="number" min="0.002" max="8" step=".01">
+                <label class="dim" for="smGain">gain dB</label><input class="bpm" id="smGain" type="number" min="-36" max="12" step=".5">
+                <span class="sp"></span>
+                <input class="field" id="smPresetName" placeholder="preset name" aria-label="Preset name"><button class="btn" type="button" id="smSavePreset">save preset</button>
+                <select class="field" id="smPresets" aria-label="Load a preset"></select>
+              </div>
+              <div class="frow">
+                <button class="btn drag big" type="button" id="smDrag" title="Drag the edited sample (WAV) into FL Studio. Click to save it.">drag to daw ↗</button>
+                <button class="btn" type="button" id="smExport">save edited wav</button>
+                <span class="sp"></span><button class="btn" type="button" id="smEject" title="Unload (your file and library are kept)">unload</button>
+              </div>
+            </div>
+          </div>
+          <div class="smpane" id="smYtPane" hidden>
+            <div class="frow"><input class="field ytin" id="ytUrl" placeholder="https://www.youtube.com/watch?v=…" aria-label="YouTube link"><button class="btn hot" type="button" id="ytCheck">check link</button></div>
+            <div id="ytResult"><p class="dim">LUMELODY checks the link and shows which video it is. It does not download audio from YouTube.</p></div>
+          </div>
+          <p class="smnote" id="smNote" role="status" aria-live="polite"></p>
+        </div>
+        <input type="file" id="smFileIn" accept="audio/*,.wav,.aif,.aiff,.flac,.mp3,.ogg,.m4a,.aac,.opus" multiple hidden>
+        <input type="file" id="smFolderIn" webkitdirectory multiple hidden>
+      </section>
     </div>
 
     <section class="detail hl" id="detail" aria-live="polite"></section>
@@ -634,6 +748,7 @@ html.calm .npad { transition: none; }
         <span class="oct" id="octLabel"></span>
         <button class="btn" type="button" id="octUp" aria-label="Octave up">+</button>
       </div>
+      <button class="btn" type="button" id="smpBtn" aria-pressed="false" title="Sampler: your own samples, played from MIDI, layered with the piano">sampler</button>
       <button class="btn" type="button" id="chordsBtn" aria-pressed="false" title="Chord Progression Finder: build chords without playing piano">chord progression finder</button>
       <button class="btn" type="button" id="demoSolo">demo</button>
       <button class="btn" type="button" id="demoBeat">+ beat</button>
@@ -1755,6 +1870,7 @@ function startPlugin() {
     B.emitEvent("lumi", o);
   } } };
   B.addEventListener("lumi", m => {
+    if (typeof SAMPLER !== "undefined" && SAMPLER.onPluginEvent(m)) return;
     if (m.type === "note") { hostNote(m.note, m.vel, m.on); return; }
     if (m.type === "saved") { toast(m.ok ? "Saved in Documents/LUMELODY: drag it into the piano roll or playlist" : "Could not save or drag the file"); return; }
     if (m.type === "preset") { const i = PRESETS.findIndex(p => p.id === m.id); if (i >= 0 && i !== cur) loadPreset(i, true, true); if (m.values) applyValues(m.values); return; }

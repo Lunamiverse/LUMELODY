@@ -179,6 +179,7 @@ const LUMI_EXPORT = (() => {
     const seq = [];
     for (const e of score.ev) { if (tracks && !tracks.has(e.track)) continue; seq.push({ f: Math.round(e.t * spb * sr), on: 1, note: e.n, vel: e.vel }, { f: Math.round((e.t + e.d) * spb * sr), on: 0, note: e.n }); }
     seq.sort((a, b) => a.f - b.f || a.on - b.on);
+    if (typeof SAMPLER !== "undefined") await SAMPLER.applyToNode(node, wait);   // the sampler / layer mode takes part in the render
     const ok = wait("seqok"); node.port.postMessage({ type: "seq", events: seq }); await ok;
     const buf = await oc.startRendering();
     return wav(buf.getChannelData(0), buf.getChannelData(1), sr);
@@ -193,6 +194,7 @@ const LUMI_EXPORT = (() => {
     for (let i = 0; i < n; i++) for (const x of [L[i], R[i]]) { let v = Math.round(Math.max(-1, Math.min(.9999999, x * g)) * 8388607); if (v < 0) v += 16777216; b.setUint8(o++, v & 255); b.setUint8(o++, (v >> 8) & 255); b.setUint8(o++, (v >> 16) & 255); }
     return new Uint8Array(b.buffer);
   }
+  function saveWav(name, bytes) { name = safe(name) + ".wav"; if (PLUGIN) { send({ type: "saveFile", name, b64: b64(bytes) }); return; } toast(download(name, bytes, "audio/wav") ? "Audio saved (WAV)" : "This page can't save files here; the plugin can."); }
   async function saveAudio(name, score, bpm, tracks) {
     name = safe(name) + ".wav";
     if (PLUGIN) { send({ type: "renderAudio", name, bpm, ev: score.ev.filter(e => !tracks || tracks.has(e.track)).map(e => [e.t, e.d, e.n, e.vel]), beats: score.beats, drag: false }); return; }
@@ -210,13 +212,14 @@ const LUMI_EXPORT = (() => {
       if (PLUGIN) {
         const it = getItem(); if (!it) return;
         e.preventDefault();
-        if (it.audio) send({ type: "renderAudio", name: safe(it.name) + ".wav", bpm: it.bpm, ev: it.score.ev.filter(x => !it.tracks || it.tracks.has(x.track)).map(x => [x.t, x.d, x.n, x.vel]), beats: it.score.beats, drag: true });
+        if (it.native) send(it.native);
+        else if (it.audio) send({ type: "renderAudio", name: safe(it.name) + ".wav", bpm: it.bpm, ev: it.score.ev.filter(x => !it.tracks || it.tracks.has(x.track)).map(x => [x.t, x.d, x.n, x.vel]), beats: it.score.beats, drag: true });
         else send({ type: "dragFile", name: safe(it.name) + ".mid", b64: b64(it.bytes) });
       }
     });
     node.addEventListener("pointermove", e => { if (downAt && Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) moved = true; });
     node.addEventListener("dragstart", e => {
-      const it = getItem(); if (!it || it.audio) { e.preventDefault(); return; }
+      const it = getItem(); if (!it || it.audio || it.lazy) { e.preventDefault(); return; }
       if (url) URL.revokeObjectURL(url);
       url = URL.createObjectURL(new Blob([it.bytes], { type: "audio/midi" }));
       try { e.dataTransfer.setData("DownloadURL", `audio/midi:${safe(it.name)}.mid:${url}`); e.dataTransfer.setData("text/plain", safe(it.name) + ".mid"); e.dataTransfer.effectAllowed = "copy"; } catch (_) {}
@@ -225,8 +228,9 @@ const LUMI_EXPORT = (() => {
       downAt = null; if (moved) return;
       const it = getItem(); if (!it) return;
       if (PLUGIN) return;   // the plugin already handled the press
-      if (it.audio) saveAudio(it.name, it.score, it.bpm, it.tracks); else saveMidi(it.name, it.bytes);
+      if (it.lazy) it.get().then(r => r && r.bytes && saveWav(r.name, r.bytes));
+      else if (it.audio) saveAudio(it.name, it.score, it.bpm, it.tracks); else saveMidi(it.name, it.bytes);
     });
   }
-  return { midi, saveMidi, saveAudio, renderWav, dragHandle, fxString, b64 };
+  return { midi, saveMidi, saveAudio, saveWav, wavBytes: wav, renderWav, dragHandle, fxString, b64 };
 })();

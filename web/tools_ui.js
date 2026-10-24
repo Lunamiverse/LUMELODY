@@ -432,6 +432,7 @@ const FINDER = (() => {
     $f("#fPlay").onclick = playAll;
     $f("#fUndo").onclick = doUndo; $f("#fRedo").onclick = doRedo;
     $f("#fClear").onclick = () => { if (S.blocks.length) commit(() => { S.blocks = []; S.sel = -1; }); };
+    $f("#fReverse").onclick = () => { if (S.blocks.length > 1) commit(() => { S.blocks = S.blocks.slice().reverse(); S.sel = S.sel >= 0 ? S.blocks.length - 1 - S.sel : -1; }); };
     $f("#fBass").onclick = () => { S.bass = !S.bass; save(); render(); };
     $f("#fMove").onclick = () => { S.move = !S.move; save(); render(); };
     $f("#fSpread").onclick = () => { S.spread = !S.spread; save(); render(); };
@@ -521,6 +522,7 @@ const WORKSPACE = (() => {
   const fit = () => { const det = $("#detail"); $("#prog").style.height = Math.max(420, $("#rack").offsetHeight + det.offsetHeight + 14) + "px"; };
   function open(on) {
     const ws = $("#prog");
+    if (on && !$("#smp").hidden) SAMPLER.open(false);
     if (on) fit();
     ws.hidden = !on; $("#rack").style.visibility = on ? "hidden" : ""; $("#detail").style.display = on ? "none" : "";
     $("#chordsBtn").setAttribute("aria-pressed", on ? "true" : "false");
@@ -552,7 +554,7 @@ const WORKSPACE = (() => {
   }
   function useSound(id) { const i = PRESETS.findIndex(p => p.id === id); if (i >= 0) { loadPreset(i); toast("Sound: " + PRESETS[i].name); } }
   function init() {
-    PROG.init(); FINDER.init(); PADS.init();
+    PROG.init(); FINDER.init(); PADS.init(); SAMPLER.init();
     document.querySelectorAll("#wsTabs [data-t]").forEach(b => b.onclick = () => tab(b.dataset.t));
     $("#wsClose").onclick = () => open(false);
     $("#chordsBtn").onclick = () => open($("#prog").hidden);

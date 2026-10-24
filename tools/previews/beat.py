@@ -111,6 +111,15 @@ def _pattern(groove, bar):
         for b in range(4): p.append((b + .5, "openhat", .45))
         for i in range(16):
             if i % 4: p.append((i * .25, "shaker", .4 if i % 2 else .3))
+    elif groove == "disco":
+        for b in range(4): p.append((b, "kick", 1))
+        p += [(1, "clap", .85), (3, "clap", .9)]
+        for b in range(4): p.append((b + .5, "openhat", .5))
+        for i in range(16): p.append((i * .25, "shaker", .34 if i % 2 else .26))
+    elif groove == "newjazz":
+        p += [(0, "kick", .95), (1.75, "kick", .7), (2.5, "kick", .8)]
+        p += [(1, "clap", .7), (3, "clap", .75), (3.75, "rim", .4)]
+        for i in range(8): p.append((i * .5, "hat", .38 if i % 2 else .5))
     elif groove == "phonk":
         p += [(0, "kick", 1), (.75, "kick", .7), (2, "kick", .9), (2.5, "kick", .7)]
         p += [(1, "clap", .95), (3, "clap", .95)]

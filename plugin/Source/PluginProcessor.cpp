@@ -37,6 +37,10 @@ AudioProcessorValueTreeState::ParameterLayout LumiProcessor::createLayout()
                                                        NormalisableRange<float> (-24.0f, 12.0f, 0.01f), 0.0f,
                                                        AudioParameterFloatAttributes().withLabel ("dB")));
 
+    layout.add (std::make_unique<AudioParameterChoice> (ParameterID { kLayerId, 1 }, "Keys Play", StringArray { "Piano", "Sampler", "Layer" }, 0));
+    layout.add (std::make_unique<AudioParameterFloat> (ParameterID { kPianoLvlId, 1 }, "Piano Level", NormalisableRange<float> (0.0f, 1.5f, 0.001f), 1.0f));
+    layout.add (std::make_unique<AudioParameterFloat> (ParameterID { kSamplerLvlId, 1 }, "Sampler Level", NormalisableRange<float> (0.0f, 1.5f, 0.001f), 0.7f));
+
     const auto& schema = lumi::fxSchema();
     for (int e = 0; e < lumi::FX_COUNT; ++e)
     {
@@ -92,6 +96,7 @@ LumiProcessor::LumiProcessor()
     }
     for (auto& r : fxRefs) jassert (r.raw != nullptr && r.p != nullptr);
     volumeRaw = apvts.getRawParameterValue (kVolumeId);
+    layerRaw = apvts.getRawParameterValue (kLayerId); pianoLvlRaw = apvts.getRawParameterValue (kPianoLvlId); samplerLvlRaw = apvts.getRawParameterValue (kSamplerLvlId);
     soundParam = apvts.getParameter (kSoundId);
     apvts.addParameterListener (kSoundId, this);
 
@@ -167,6 +172,11 @@ AudioBuffer<float> LumiProcessor::renderOffline (const std::vector<RenderNote>& 
     eng->loadPreset (presetParams (currentPresetIndex()), (float) bpm);
     eng->setTempo ((float) bpm);
     eng->rack.setState (fxStateString().toStdString());
+    {
+        const ScopedLock sl (engineLock);
+        if (engine->sampler.hasSample()) eng->sampler.setPlayback (engine->sampler.playback(), engine->sampler.settings());
+    }
+    eng->setLayer (roundToInt (layerRaw->load()), pianoLvlRaw->load(), samplerLvlRaw->load());
 
     struct Ev { int64 at; bool on; int note; float vel; };
     std::vector<Ev> evs;
@@ -197,6 +207,14 @@ AudioBuffer<float> LumiProcessor::renderOffline (const std::vector<RenderNote>& 
 
 void LumiProcessor::pushParamsToEngine (bool force)
 {
+    {
+        const float m = layerRaw->load(), pl = pianoLvlRaw->load(), sl = samplerLvlRaw->load();
+        if (force || m != layerCache[0] || pl != layerCache[1] || sl != layerCache[2])
+        {
+            layerCache[0] = m; layerCache[1] = pl; layerCache[2] = sl;
+            engine->setLayer (roundToInt (m), pl, sl);
+        }
+    }
     for (auto& r : fxRefs)
     {
         const float v = r.raw->load (std::memory_order_relaxed);
@@ -447,6 +465,20 @@ void LumiProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midi)
     }
     render (buffer, pos, numSamples);
 
+    if (previewOn.load (std::memory_order_relaxed) && previewBuf != nullptr)   // library preview (one voice, independent of the sampler)
+    {
+        const auto& pb = *previewBuf; const double inc = pb.sr / sampleRate; const auto n = (double) pb.frames();
+        for (int i = 0; i < numSamples; ++i)
+        {
+            if (previewPos >= n - 1) { previewOn = false; break; }
+            const int k = (int) previewPos; const float t = (float) (previewPos - k);
+            const float l = pb.L[(size_t) k] + (pb.L[(size_t) k + 1] - pb.L[(size_t) k]) * t, r = pb.R[(size_t) k] + (pb.R[(size_t) k + 1] - pb.R[(size_t) k]) * t;
+            buffer.addSample (0, i, l * 0.7f);
+            if (buffer.getNumChannels() > 1) buffer.addSample (1, i, r * 0.7f);
+            previewPos += inc;
+        }
+    }
+
     outGain.setTargetValue (Decibels::decibelsToGain (volumeRaw->load()));
     if (outGain.isSmoothing() || std::abs (outGain.getTargetValue() - 1.0f) > 1e-6f)
     {
@@ -464,6 +496,10 @@ void LumiProcessor::getStateInformation (MemoryBlock& destData)
     auto state = apvts.copyState();
     state.setProperty ("soundId", lumi::kPresets[currentPresetIndex()].id, nullptr);
     state.setProperty ("stateVersion", 1, nullptr);
+    state.setProperty ("smpPath", smp.path, nullptr);
+    state.setProperty ("smpId", smp.id, nullptr);
+    state.setProperty ("smpName", smp.name, nullptr);
+    state.setProperty ("smpSettings", samplerSettingsText(), nullptr);
     if (auto xml = state.createXml()) copyXmlToBinary (*xml, destData);
 }
 
@@ -487,7 +523,85 @@ void LumiProcessor::setStateInformation (const void* data, int sizeInBytes)
         pushParamsToEngine (true);   // the saved controls win over the sound's own space
     }
     ++presetChangeSerial;
+
+    // the sampler's file is referenced by path (never copied into the project): reload it, or report why not
+    const String path = tree.getProperty ("smpPath").toString();
+    smpError = {};
+    if (path.isNotEmpty())
+    {
+        auto d = lumifiles::decodeFile (File (path));
+        if (d.audio == nullptr) { smpError = "The sampler's file could not be loaded: " + d.error; clearSampler(); smp.path = path; smp.name = tree.getProperty ("smpName").toString(); }
+        else setSamplerSample (d.audio, tree.getProperty ("smpId").toString(), tree.getProperty ("smpName").toString(), path, tree.getProperty ("smpSettings").toString(), false);
+    }
+    else clearSampler();
 }
+
+// ------------------------------------------------------------------------------------------------ sampler
+String LumiProcessor::setSamplerSample (std::shared_ptr<const lumi::AudioData> audio, const String& id, const String& name, const String& path,
+                                        const String& settingsText, bool autoSettings)
+{
+    if (audio == nullptr || audio->frames() < 2) return "no audio";
+    if ((double) audio->frames() / audio->sr > lumifiles::kMaxSamplerSeconds) return name + ": the sampler plays up to 5 minutes; trim the file first";
+    smp.orig = audio; smp.id = id; smp.name = name; smp.path = path;
+    smp.an = lumi::analysis::analyse (*audio);
+    smpSet = lumi::SamplerSettings::fromString (settingsText.toStdString());
+    if (autoSettings && settingsText.isEmpty())
+    {
+        if (smp.an.rootNote > 0 && smp.an.rootConf > .5) smpSet.root = smp.an.rootNote;
+        if (smp.an.silenceStart > 0) smpSet.start = jmin (.5, (double) smp.an.silenceStart / (double) audio->frames());
+    }
+    smpError = {};
+    auto pb = lumi::buildPlayback (*audio, smpSet);   // built outside the audio lock
+    const ScopedLock sl (engineLock);
+    engine->sampler.setPlayback (pb, smpSet);
+    return {};
+}
+
+void LumiProcessor::applySamplerSettings (const String& settingsText, bool rebuild)
+{
+    smpSet = lumi::SamplerSettings::fromString (settingsText.toStdString());
+    if (smp.orig == nullptr) return;
+    if (rebuild)
+    {
+        auto pb = lumi::buildPlayback (*smp.orig, smpSet);
+        const ScopedLock sl (engineLock);
+        engine->sampler.setPlayback (pb, smpSet);
+    }
+    else
+    {
+        const ScopedLock sl (engineLock);
+        engine->sampler.setSettings (smpSet);
+    }
+}
+
+void LumiProcessor::clearSampler()
+{
+    smp = SampleInfo(); smpSet = lumi::SamplerSettings();
+    const ScopedLock sl (engineLock);
+    engine->sampler.setPlayback (nullptr, smpSet);
+}
+
+String LumiProcessor::samplerSettingsText() const { return smp.orig != nullptr ? String (smpSet.toString()) : String(); }
+
+std::shared_ptr<lumi::AudioData> LumiProcessor::samplerProcessed() const
+{
+    return smp.orig != nullptr ? lumi::buildPlayback (*smp.orig, smpSet) : nullptr;
+}
+
+void LumiProcessor::setLayerFromUi (int mode, float piano, float samp)
+{
+    setParamFromUi (apvts.getParameter (kLayerId), (float) jlimit (0, 2, mode));
+    setParamFromUi (apvts.getParameter (kPianoLvlId), piano);
+    setParamFromUi (apvts.getParameter (kSamplerLvlId), samp);
+}
+
+void LumiProcessor::previewStart (std::shared_ptr<const lumi::AudioData> audio)
+{
+    const ScopedLock sl (engineLock);
+    previewBuf = std::move (audio); previewPos = 0; previewOn = previewBuf != nullptr;
+}
+
+void LumiProcessor::previewStop() { previewOn = false; }
 
 AudioProcessorEditor* LumiProcessor::createEditor() { return new LumiEditor (*this); }
 

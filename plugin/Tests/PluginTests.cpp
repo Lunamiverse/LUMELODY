@@ -73,8 +73,6 @@ int main()
         std::vector<float> L (o.L.size()), R (o.L.size());
         e.noteOn (60, 0.8f); e.process (L.data(), R.data(), 30000); e.noteOff (60); e.process (L.data() + 30000, R.data() + 30000, (int) L.size() - 30000);
         float md = 0; for (size_t i = 0; i < L.size(); ++i) md = jmax (md, std::abs (L[i] - o.L[i]), std::abs (R[i] - o.R[i]));
-        { size_t first = 0, at = 0; float best = 0; for (size_t i = 0; i < L.size(); ++i) { float d = std::abs (L[i] - o.L[i]); if (d > 1e-6f && ! first) first = i; if (d > best) { best = d; at = i; } }
-          std::printf ("  first diff at %zu, max at %zu (engine %g plugin %g)\n", first, at, L[at], o.L[at]); }
         // a sound's own reverb/delay values can sit slightly outside the knob ranges; as host parameters they are kept
         // inside them, which changes the tail by a hair (well under -50 dBFS) -- anything bigger is a real mismatch
         CHECK (md < 3e-3f, "plugin vs engine max difference %g", md);
@@ -159,6 +157,92 @@ int main()
         const float pk = a.getMagnitude (0, a.getNumSamples());
         CHECK (pk > 1e-3f && pk <= 0.981f, "render peak %g", pk);
         std::printf ("offline render: %d samples, peak %.3f\n", a.getNumSamples(), pk);
+    }
+
+    {   // ================= SAMPLER inside the plugin: real files on disk, MIDI at the right time and pitch, reverse, project reload
+        auto tmp = File::getSpecialLocation (File::tempDirectory).getChildFile ("lumi-sampler-test"); tmp.deleteRecursively(); tmp.createDirectory();
+        auto writeWav = [&] (const File& f, std::function<float (int, int)> gen, int n, double sr = 44100.0)
+        {
+            AudioBuffer<float> b (2, n); for (int c = 0; c < 2; ++c) for (int i = 0; i < n; ++i) b.setSample (c, i, gen (c, i));
+            WavAudioFormat wav; std::unique_ptr<OutputStream> os (f.createOutputStream().release());
+            std::unique_ptr<AudioFormatWriter> w (wav.createWriterFor (os.get(), sr, 2, 24, {}, 0)); os.release(); w->writeFromAudioSampleBuffer (b, 0, n);
+        };
+        const File sine = tmp.getChildFile ("sine440.wav"), sweep = tmp.getChildFile ("sweep.wav");
+        writeWav (sine, [] (int c, int i) { return (c ? .4f : .5f) * (float) std::sin (2 * MathConstants<double>::pi * 440 * i / 44100.0); }, 88200);
+        double ph = 0; std::vector<float> sw (88200); for (int i = 0; i < 88200; ++i) { ph += 2 * MathConstants<double>::pi * (200 + 600.0 * i / 88200) / 44100; sw[(size_t) i] = .5f * (float) std::sin (ph); }
+        writeWav (sweep, [&] (int c, int i) { return sw[(size_t) i] * (c ? .5f : 1.f); }, 88200);
+        tmp.getChildFile ("empty.wav").create();
+        tmp.getChildFile ("corrupt.wav").replaceWithText ("RIFF....WAVEfmt this is not audio at all");
+
+        auto d = lumifiles::decodeFile (sine);
+        CHECK (d.audio != nullptr && d.audio->frames() == 88200 && d.audio->channels == 2, "decode wav: %s", d.error.toRawUTF8());
+        CHECK (lumifiles::decodeFile (tmp.getChildFile ("empty.wav")).error.contains ("empty"), "empty file message");
+        CHECK (lumifiles::decodeFile (tmp.getChildFile ("corrupt.wav")).error.contains ("decode"), "corrupt file message");
+        CHECK (lumifiles::decodeFile (tmp.getChildFile ("missing.wav")).error.contains ("not found"), "missing file message");
+
+        auto freq = [] (const std::vector<float>& x, size_t a, size_t b) { std::vector<double> z; for (size_t i = a + 1; i < b; ++i) if (x[i - 1] < 0 && x[i] >= 0) z.push_back ((double) (i - 1) + x[i - 1] / (x[i - 1] - x[i])); return z.size() < 3 ? 0.0 : 44100.0 * (double) (z.size() - 1) / (z.back() - z.front()); };
+        {
+            LumiProcessor p; p.prepareToPlay (44100, 512);
+            CHECK (p.setSamplerSample (d.audio, "id1", "sine440", sine.getFullPathName(), "root=69;release=0.01;", false).isEmpty(), "load sample");
+            p.apvts.getParameter (LumiProcessor::kLayerId)->setValueNotifyingHost (p.apvts.getParameter (LumiProcessor::kLayerId)->convertTo0to1 (1));
+            p.applyFxState ("reverb.on=0;delay.on=0;");
+            auto o = run (p, { { 300, MidiMessage::noteOn (1, 81, (uint8) 110) }, { 300 + 30000, MidiMessage::noteOff (1, 81) } }, 1.0);
+            float before = 0; for (int i = 0; i < 300; ++i) before = jmax (before, std::abs (o.L[(size_t) i]));
+            const double f = freq (o.L, 2000, 28000);
+            CHECK (before == 0.0f, "sampler sounded before its note");
+            CHECK (std::abs (f - 880) < 2, "MIDI note 81 on a 440 Hz sample with root 69: %.2f Hz", f);
+            std::printf ("plugin sampler: note 81 -> %.2f Hz, starts exactly at its sample offset\n", f);
+            // layer: piano + sampler both sound; sampler-only has no piano
+            auto rmsOf = [&] (int mode) { p.apvts.getParameter (LumiProcessor::kLayerId)->setValueNotifyingHost (p.apvts.getParameter (LumiProcessor::kLayerId)->convertTo0to1 ((float) mode));
+                                          auto x = run (p, { { 0, MidiMessage::noteOn (1, 69, (uint8) 110) }, { 30000, MidiMessage::noteOff (1, 69) } }, 1.5); MidiBuffer m; m.addEvent (MidiMessage::allNotesOff (1), 0); AudioBuffer<float> b (2, 512); p.processBlock (b, m);
+                                          for (int k = 0; k < 200; ++k) { AudioBuffer<float> t (2, 512); MidiBuffer e; p.processBlock (t, e); } return x.rms (2000, 28000); };
+            const float rp = rmsOf (0), rs = rmsOf (1), rl = rmsOf (2);
+            CHECK (rp > 1e-3f && rs > 1e-3f && rl > jmax (rp, rs), "layer modes: piano %.4f sampler %.4f layer %.4f", rp, rs, rl);
+            std::printf ("plugin layer: piano %.3f, sampler %.3f, both %.3f\n", rp, rs, rl);
+            // reverse: the processed audio is an exact mirror; original untouched
+            p.applySamplerSettings ("root=69;reverse=1;", true);
+            auto pb = p.samplerProcessed(); bool exact = pb && pb->frames() == d.audio->frames();
+            for (size_t i = 0; exact && i < pb->frames(); ++i) exact = pb->L[i] == d.audio->L[pb->frames() - 1 - i] && pb->R[i] == d.audio->R[pb->frames() - 1 - i];
+            CHECK (exact, "plugin reverse is not an exact stereo mirror");
+            CHECK (p.samplerInfo().orig->L[10] == d.audio->L[10], "original audio changed");
+            // offline audio export includes the sampler
+            p.applySamplerSettings ("root=69;", true);
+            p.apvts.getParameter (LumiProcessor::kLayerId)->setValueNotifyingHost (p.apvts.getParameter (LumiProcessor::kLayerId)->convertTo0to1 (1));
+            run (p, {}, 0.02);
+            auto a = p.renderOffline ({ { 0.0, 2.0, 69, 0.9f } }, 120.0, 2.0);
+            std::vector<float> L (a.getReadPointer (0), a.getReadPointer (0) + a.getNumSamples());
+            CHECK (std::abs (freq (L, 2000, 30000) - 440) < 2, "offline render of the sampler: %.2f Hz", freq (L, 2000, 30000));
+            // project save / reopen reloads the file and its edits
+            p.applySamplerSettings ("root=64;reverse=1;slices=0.25,0.5;gainDb=-3;", true);
+            MemoryBlock mb; p.getStateInformation (mb);
+            LumiProcessor q; q.prepareToPlay (44100, 512); q.setStateInformation (mb.getData(), (int) mb.getSize());
+            CHECK (q.samplerInfo().orig != nullptr && q.samplerInfo().path == sine.getFullPathName(), "sample not reloaded with the project");
+            CHECK (q.samplerSettingsText() == p.samplerSettingsText(), "sampler settings differ after reopen:\n %s\n %s", p.samplerSettingsText().toRawUTF8(), q.samplerSettingsText().toRawUTF8());
+            CHECK (roundToInt (q.apvts.getRawParameterValue (LumiProcessor::kLayerId)->load()) == 1, "layer mode not restored");
+            // the file disappears: the project still opens, says why, and keeps the path
+            const File moved = tmp.getChildFile ("moved.wav"); sine.moveFileTo (moved);
+            LumiProcessor r; r.prepareToPlay (44100, 512); r.setStateInformation (mb.getData(), (int) mb.getSize());
+            CHECK (r.samplerInfo().orig == nullptr && r.samplerError().contains ("not found") && r.samplerInfo().path == sine.getFullPathName(), "missing file handling: %s", r.samplerError().toRawUTF8());
+            auto silent = run (r, { { 0, MidiMessage::noteOn (1, 60, (uint8) 100) } }, 0.2);
+            CHECK (silent.finite(), "processor with a missing sample must keep running");
+            moved.moveFileTo (sine);
+        }
+        {   // WAV export of an edited sample reopens with the right content
+            LumiProcessor p; p.prepareToPlay (44100, 512);
+            auto ds = lumifiles::decodeFile (sweep);
+            p.setSamplerSample (ds.audio, "id2", "sweep", sweep.getFullPathName(), "reverse=1;start=0;end=0.5;", false);
+            auto pb = p.samplerProcessed(); const int a = 0, b = (int) std::ceil (.5 * (double) pb->frames());
+            AudioBuffer<float> out (2, b - a); for (int i = a; i < b; ++i) { out.setSample (0, i, pb->L[(size_t) i]); out.setSample (1, i, pb->R[(size_t) i]); }
+            const File f = tmp.getChildFile ("export.wav");
+            { WavAudioFormat wav; std::unique_ptr<OutputStream> os (f.createOutputStream().release()); std::unique_ptr<AudioFormatWriter> w (wav.createWriterFor (os.get(), 44100, 2, 24, {}, 0)); os.release(); w->writeFromAudioSampleBuffer (out, 0, out.getNumSamples()); }
+            auto back = lumifiles::decodeFile (f);
+            CHECK (back.audio && back.audio->frames() == (size_t) (b - a), "exported length");
+            const double f0 = freq (back.audio->L, 1000, 6000);
+            CHECK (f0 > 700, "exported file should start with the end of the sweep (reversed): %.0f Hz", f0);
+            double ratio = 0; for (int i = 1000; i < 20000; ++i) ratio += back.audio->L[(size_t) i] != 0 ? back.audio->R[(size_t) i] / back.audio->L[(size_t) i] : .5; ratio /= 19000;
+            CHECK (std::abs (ratio - .5) < .01, "stereo alignment in the exported reverse: R/L = %.3f", ratio);
+        }
+        tmp.deleteRecursively();
     }
 
     std::printf (failures ? "\n%d FAILED\n" : "\nALL PASSED\n", failures);

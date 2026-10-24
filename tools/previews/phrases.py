@@ -232,4 +232,99 @@ def build():
              (8, 1.6, 33), (9.5, .9, 36), (10.3, 1.5, 33), (12, 1.4, 35), (13.3, .8, 38), (14, 2, 28)], .9, r)
     ph["psych_808"] = P(150, n, "Long E-minor 808 line with big slides, 150 BPM", "trap",
                         [(0, 28), (4, 24), (8, 21), (12, 23)])
+    # ================= LIBRARY phrases (original): NEW JAZZ, DISCO + EDM + CLUB, REGGAETON, DEMBOW DOMINICANO
+    # --- new jazz keys: Dm9 - G13 - Cmaj9 - A7(#9), swung, laid back, 84 BPM
+    n = []
+    n += chord(0, 3.5, [50, 60, 64, 65, 69], .55, .03, r); n += chord(3.5, .5, [50, 60, 64, 65, 69], .4, .02, r)
+    n += chord(4, 4, [43, 59, 64, 65, 69], .56, .03, r)
+    n += chord(8, 4, [48, 59, 62, 64, 67], .55, .03, r)
+    n += chord(12, 2, [45, 61, 64, 67, 72], .6, .03, r); n += chord(14, 2, [45, 61, 65, 67, 72], .52, .02, r)
+    n += seq([(2.5, .5, 76), (3, .75, 77), (6.5, .5, 74), (7, 1, 76), (10.5, .5, 71), (11, 1, 72), (15, .75, 73)], .58, r)
+    ph["nj_keys"] = P(84, n, "Swung Dm9 - G13 - Cmaj9 - A7(#9) with a lazy top line, 84 BPM", "newjazz",
+                      [(0, 38), (4, 31), (8, 36), (12, 33)], swing=.3)
+    # --- new jazz pad: long, dark Ebmaj9 - Dm11 - Cm9 - Bbmaj7(#11), 78 BPM
+    n = []
+    for b, ch in enumerate([[39, 55, 58, 62, 65], [38, 53, 57, 60, 64], [36, 51, 55, 58, 62], [34, 53, 57, 62, 64]]):
+        n += chord(b * 4, 4, ch, .5, .05, r)
+    ph["nj_pad"] = P(78, n, "Floating Ebmaj9 - Dm11 - Cm9 - Bbmaj7(#11), 78 BPM", "newjazz", [(0, 39), (4, 38), (8, 36), (12, 34)], swing=.25)
+    # --- new jazz bass: melodic, walking a little, swung 84
+    n = seq([(0, 1.5, 38), (1.5, .5, 41), (2, 1, 45), (3, .75, 43), (4, 1.5, 31), (5.5, .5, 35), (6, 1, 38), (7, .75, 41),
+             (8, 2, 36), (10, .5, 40), (10.5, 1, 43), (12, 1.5, 33), (13.5, .5, 37), (14, 1, 40), (15, .75, 39)], .78, r)
+    ph["nj_bass"] = P(84, n, "Melodic, slightly walking bass under Dm9 - G13 - Cmaj9 - A7, 84 BPM", "newjazz_no808", [], swing=.3)
+    # --- new jazz strings: a slow cinematic line over sustained low voices, 76 BPM
+    n = chord(0, 8, [50, 57, 62], .45, .04, r) + chord(8, 8, [46, 53, 58], .45, .04, r)
+    n += seq([(0, 3, 69), (3, 1, 72), (4, 3, 74), (7, 1, 72), (8, 2, 70), (10, 2, 69), (12, 4, 65)], .6, r)
+    ph["nj_strings"] = P(76, n, "Slow, dark string line over Dm and Bb, 76 BPM", "newjazz", [(0, 38), (8, 34)], swing=.2)
+
+    # --- disco keys: Am7 - Dm7 - G7 - Cmaj7, offbeat stabs and a funky push, 122 BPM
+    n = []
+    for b, ch in enumerate([[57, 60, 64, 67], [57, 60, 62, 65], [55, 59, 62, 65], [55, 59, 64, 67]]):
+        for s in (.5, 1.5, 2.25, 2.5, 3.5):
+            n += chord(b * 4 + s, .32 if s != 2.25 else .2, ch, .72 if s in (.5, 2.5) else .6, .005, r)
+    ph["disco_keys"] = P(122, n, "Offbeat disco chord stabs, Am7 - Dm7 - G7 - Cmaj7, 122 BPM", "disco", [(0, 33), (4, 38), (8, 31), (12, 36)])
+    # --- disco pad: euphoric sustained Fmaj7 - G6 - Em7 - Am9, 124 BPM
+    n = []
+    for b, ch in enumerate([[53, 60, 64, 69, 72], [55, 59, 64, 67, 71], [52, 59, 62, 67, 71], [57, 60, 64, 67, 71]]):
+        n += chord(b * 4, 4, ch, .55, .02, r)
+    ph["disco_pad"] = P(124, n, "Euphoric Fmaj7 - G6 - Em7 - Am9 pad, 124 BPM", "disco", [(0, 29), (4, 31), (8, 28), (12, 33)])
+    # --- disco bass: octave bass with funky pickups, 122 BPM
+    n = []
+    for b, root in enumerate([33, 38, 31, 36]):
+        n += seq([(b * 4 + i * .5, .38, root + (12 if i % 2 else 0), .85 if i % 2 == 0 else .72) for i in range(8)], rng=r)
+        n += seq([(b * 4 + 3.75, .2, root + 10, .6)], rng=r)
+    ph["disco_bass"] = P(122, n, "Octave disco bass with pickups, Am7 - Dm7 - G7 - Cmaj7, 122 BPM", "disco_no808", [])
+    # --- disco strings: a rising run into stabs, then a held swell, 122 BPM
+    n = seq([(0, .25, 69), (.25, .25, 71), (.5, .25, 72), (.75, .25, 74), (1, .5, 76)], .7, r)
+    n += chord(2, .4, [64, 69, 72, 76], .78, .005, r) + chord(2.75, .4, [64, 69, 72, 76], .7, .005, r)
+    n += chord(4, .4, [65, 69, 74, 77], .78, .005, r) + chord(4.75, .4, [65, 69, 74, 77], .7, .005, r)
+    n += chord(6, 2, [67, 71, 74, 79], .7, .01, r)
+    n += chord(8, 8, [60, 64, 67, 72, 76], .6, .03, r)
+    ph["disco_strings"] = P(122, n, "Disco string run, stabs and a held swell, 122 BPM", "disco", [(0, 33), (4, 38), (8, 36)])
+
+    # --- reggaeton keys: sensual Bm - G - D - A(sus) melody over chords, 94 BPM
+    n = []
+    for b, ch in enumerate([[59, 62, 66], [55, 59, 62], [57, 62, 66], [57, 61, 64]]):
+        n += chord(b * 4, 1.4, ch, .55, .02, r) + chord(b * 4 + 1.5, 1.4, ch, .5, .02, r) + chord(b * 4 + 3, .9, ch, .5, .02, r)
+    n += seq([(0, .75, 74), (.75, .75, 73), (1.5, 1, 71), (4, .75, 71), (4.75, .75, 69), (5.5, 1, 67), (8, 1.5, 69), (12, .75, 69), (12.75, 1.25, 73)], .66, r)
+    ph["rg_keys"] = P(94, n, "Sensual 3-3-2 chords with a topline, Bm - G - D - A, 94 BPM", "reggaeton", [(0, 35), (4, 31), (8, 38), (12, 33)])
+    # --- reggaeton pad: dark Bm - G - Em - F#, 94 BPM
+    n = []
+    for b, ch in enumerate([[47, 59, 62, 66], [43, 59, 62, 67], [40, 59, 64, 67], [42, 58, 61, 66]]):
+        n += chord(b * 4, 4, ch, .52, .04, r)
+    ph["rg_pad"] = P(94, n, "Dark Bm - G - Em - F# pad, 94 BPM", "reggaeton", [(0, 35), (4, 31), (8, 28), (12, 30)])
+    # --- reggaeton bass: dembow-locked sub/808 line, 94 BPM
+    n = []
+    for b, root in enumerate([35, 31, 28, 30]):
+        n += seq([(b * 4, .7, root, .9), (b * 4 + .75, .6, root, .75), (b * 4 + 1.5, .45, root + 12, .7), (b * 4 + 2, .7, root, .88), (b * 4 + 2.75, .6, root, .74), (b * 4 + 3.5, .45, root + 7, .7)], rng=r)
+    ph["rg_bass"] = P(94, n, "Bass locked to the dembow 3-3-2, Bm - G - Em - F#, 94 BPM", "reggaeton_no808", [])
+    # --- reggaeton strings: emotional held line over chords, 94 BPM
+    n = chord(0, 8, [47, 54, 59], .45, .03, r) + chord(8, 8, [43, 50, 55], .45, .03, r)
+    n += seq([(0, 2, 74), (2, 2, 73), (4, 3, 71), (7, 1, 69), (8, 2, 71), (10, 2, 69), (12, 4, 67)], .6, r)
+    ph["rg_strings"] = P(94, n, "Emotional string line over Bm and G, 94 BPM", "reggaeton", [(0, 35), (8, 31)])
+
+    # --- dembow dominicano keys: bright, playful call-and-answer in A minor, 122 BPM
+    n = []
+    call = [(0, .25, 69), (.5, .25, 72), (.75, .25, 76), (1.5, .25, 74), (2, .5, 72), (3, .25, 71), (3.5, .25, 69)]
+    for b in range(4):
+        sh = [0, 0, -2, 2][b]
+        n += seq([(b * 4 + s, d, k + sh, .82 if s in (0, 1.5) else .68) for s, d, k in call], rng=r)
+    ph["dd_keys"] = P(122, n, "Playful dembow call-and-answer riff in A minor, 122 BPM", "dembow", [(0, 33), (4, 33), (8, 31), (12, 35)])
+    # --- dembow pad: Am - F - C - G long chords, 122 BPM
+    n = []
+    for b, ch in enumerate([[57, 60, 64, 69], [53, 57, 60, 65], [55, 60, 64, 67], [55, 59, 62, 67]]):
+        n += chord(b * 4, 4, ch, .5, .03, r)
+    ph["dd_pad"] = P(122, n, "Am - F - C - G pad, 122 BPM", "dembow", [(0, 33), (4, 29), (8, 36), (12, 31)])
+    # --- dembow bass: short, punchy notes on the dembow accents, 122 BPM
+    n = []
+    for b, root in enumerate([33, 29, 36, 31]):
+        n += seq([(b * 4, .45, root, .95), (b * 4 + .75, .3, root, .8), (b * 4 + 1.5, .3, root + 12, .78), (b * 4 + 2, .45, root, .92),
+                  (b * 4 + 2.75, .3, root, .8), (b * 4 + 3.5, .25, root + 12, .76), (b * 4 + 3.75, .2, root + 10, .7)], rng=r)
+    ph["dd_bass"] = P(122, n, "Punchy dembow bass on the accents, Am - F - C - G, 122 BPM", "dembow_no808", [])
+    # --- dembow strings: staccato stabs on the off-beats with a fill, 122 BPM
+    n = []
+    for b, ch in enumerate([[57, 60, 64], [53, 57, 60], [55, 60, 64], [55, 59, 62]]):
+        for s in (0, .75, 1.5, 2.5, 3.25):
+            n += chord(b * 4 + s, .22, [x + 12 for x in ch], .75 if s in (0, 1.5) else .62, .004, r)
+    ph["dd_strings"] = P(122, n, "Staccato dembow string stabs, Am - F - C - G, 122 BPM", "dembow", [(0, 33), (4, 29), (8, 36), (12, 31)])
+
     return ph

@@ -1,5 +1,6 @@
 // WebAssembly bridge: exposes the LUMI engine (instrument + 20-effect rack) to the browser's AudioWorklet.
 #include "../engine/LumiEngine.h"
+#include "../engine/LumiAnalysis.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -8,6 +9,10 @@ static float g_l[256], g_r[256];
 static char g_text[16384];
 static float g_vals[lumi::FX_COUNT * (lumi::kMaxParams + 1)];
 static std::string g_schema, g_state;
+// sampler: the original audio stays here untouched; edits rebuild the playback buffer from it
+static lumi::AudioData g_orig;
+static lumi::SamplerSettings g_sset;
+static std::vector<float> g_out;   // results returned to JavaScript (peaks, analysis)
 
 extern "C" {
 __attribute__((export_name("lumi_text"))) char* lumi_text() { return g_text; }
@@ -55,5 +60,43 @@ __attribute__((export_name("lumi_bend"))) void lumi_bend(float v) { if (g_eng) g
 __attribute__((export_name("lumi_process"))) void lumi_process(int n) {
     if (!g_eng) { std::memset(g_l, 0, sizeof g_l); std::memset(g_r, 0, sizeof g_r); return; }
     g_eng->process(g_l, g_r, n > 256 ? 256 : n);
+}
+
+// ---------------------------------------------------------------- sampler + analysis
+__attribute__((export_name("lumi_alloc"))) float* lumi_alloc(int floats) { return (float*) std::malloc(sizeof(float) * (size_t) (floats > 0 ? floats : 1)); }
+__attribute__((export_name("lumi_free"))) void lumi_free(float* p) { std::free(p); }
+// copy a decoded file in (R may equal L for mono); returns frames kept
+__attribute__((export_name("lumi_sample_set"))) int lumi_sample_set(const float* L, const float* R, int n, float sr, int channels) {
+    g_orig.L.assign(L, L + n); g_orig.R.assign(R, R + n); g_orig.sr = sr; g_orig.channels = channels;
+    return n;
+}
+__attribute__((export_name("lumi_sample_clear"))) void lumi_sample_clear() { g_orig = lumi::AudioData(); if (g_eng) g_eng->sampler.setPlayback(nullptr, g_sset); }
+// settings text in g_text ("key=value;..."); rebuild = 1 when stretch / reverse changed (the audio itself changes)
+__attribute__((export_name("lumi_sampler_settings"))) void lumi_sampler_settings(int rebuild) {
+    g_sset = lumi::SamplerSettings::fromString(g_text);
+    if (!g_eng) return;
+    if (rebuild || !g_eng->sampler.hasSample()) g_eng->sampler.setPlayback(g_orig.frames() ? lumi::buildPlayback(g_orig, g_sset) : nullptr, g_sset);
+    else g_eng->sampler.setSettings(g_sset);
+}
+__attribute__((export_name("lumi_layer"))) void lumi_layer(int mode, float piano, float samp) { if (g_eng) g_eng->setLayer(mode, piano, samp); }
+// analysis / waveform helpers (used on the page's main thread by a second instance, never inside the audio thread)
+__attribute__((export_name("lumi_out"))) float* lumi_out() { return g_out.data(); }
+__attribute__((export_name("lumi_peaks"))) int lumi_peaks(int bins, int processed) {
+    auto pb = processed ? lumi::buildPlayback(g_orig, lumi::SamplerSettings::fromString(g_text)) : nullptr;
+    g_out = lumi::analysis::peaks(processed ? *pb : g_orig, bins);
+    return (int) g_out.size();
+}
+__attribute__((export_name("lumi_analyse"))) int lumi_analyse() {
+    auto a = lumi::analysis::analyse(g_orig);
+    g_out = { (float) a.bpm, (float) a.bpmConf, (float) a.keyTonic, a.keyMinor ? 1.f : 0.f, (float) a.keyConf, (float) a.rootNote, (float) a.rootCents,
+              (float) a.rootConf, (float) a.silenceStart, (float) a.silenceEnd, (float) a.seconds, (float) a.onsets.size() };
+    for (size_t f : a.onsets) g_out.push_back((float) f);
+    return (int) g_out.size();
+}
+// the processed buffer itself (for exporting the edited sample as audio): channel 0 = L, 1 = R
+__attribute__((export_name("lumi_processed"))) int lumi_processed(int channel) {
+    auto pb = lumi::buildPlayback(g_orig, lumi::SamplerSettings::fromString(g_text));
+    g_out = channel ? pb->R : pb->L;
+    return (int) g_out.size();
 }
 }

@@ -28,6 +28,18 @@ private:
     static juce::File exportFolder();
     static juce::File dragFolder();
     void dragOut (const juce::File&);
+    // sampler / library / youtube (replies carry the page's request id)
+    bool onSamplerMessage (const juce::String& type, const juce::var& m);
+    void replyTo (const juce::var& m, juce::DynamicObject::Ptr o);
+    void replyError (const juce::var& m, const juce::String& error);
+    void sendSamplerState();
+    juce::var libraryEntry (const juce::File& f, const lumi::AudioData& a, const lumi::analysis::Analysis& an);
+    juce::Array<juce::var> readLibrary();
+    void writeLibrary (const juce::Array<juce::var>& entries);
+    void addToLibrary (const juce::var& m, const juce::File& f, std::shared_ptr<lumi::AudioData> audio);
+    void runAsync (std::function<juce::var()> work, std::function<void (const juce::var&)> done);
+    std::unique_ptr<juce::FileChooser> chooser;
+    bool previewWasOn = false;
 
     LumiProcessor& proc;
     juce::WebBrowserComponent web;

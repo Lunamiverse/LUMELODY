@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include "LumiFx.h"
+#include "LumiSampler.h"
 
 namespace lumi {
 
@@ -754,9 +755,15 @@ class Engine {
 public:
     static constexpr int kVoices = 32;
     Rack rack;
+    // Sampler + layer mode: 0 = piano (the synth) only, 1 = sampler only, 2 = layer (both play every note)
+    Sampler sampler;
+    int layerMode = 0;
+    float pianoLevel = 1.f, samplerLevel = .7f;
+    void setLayer(int mode, float piano, float samp) { if (mode != layerMode) { allNotesOff(); sampler.allNotesOff(); } layerMode = std::max(0, std::min(2, mode)); pianoLevel = clampf(piano, 0.f, 2.f); samplerLevel = clampf(samp, 0.f, 2.f); }
 
     void prepare(float sampleRate) {
         sr = sampleRate;
+        sampler.prepare(sampleRate);
         fx.prepare(sr);
         rack.prepare(sr);
         layerLevel.setTime(.02f, sr); balance.setTime(.02f, sr);
@@ -792,6 +799,8 @@ public:
 
     void noteOn(int note, float velocity) {
         velocity = clampf(velocity, 0.f, 1.f);
+        if (layerMode != 0) sampler.noteOn(note, velocity);
+        if (layerMode == 1) return;
         rack.noteOnEvent();
         const bool layerOn = rack.on[FX_OCTAVE];
         static const int offs[4] = {-24, -12, 12, 24};
@@ -812,6 +821,8 @@ public:
     }
 
     void noteOff(int note) {
+        if (layerMode != 0) sampler.noteOff(note);
+        if (layerMode == 1) return;
         if (isMono()) {
             stack.erase(std::remove(stack.begin(), stack.end(), note), stack.end());
             for (int i = 0; i < 2; ++i) {
@@ -828,7 +839,7 @@ public:
         for (auto& v : voices) if (v.srcNote == note && v.held) release(v);
     }
 
-    void allNotesOff() { for (auto& v : voices) release(v); stack.clear(); }
+    void allNotesOff() { for (auto& v : voices) release(v); stack.clear(); sampler.allNotesOff(); }
 
     void process(float* outL, float* outR, int n) {
         for (int i = 0; i < n; ++i) {
@@ -849,10 +860,16 @@ public:
                 lL = layerTone[0].lp(lL); lR = layerTone[1].lp(lR);
             }
             L = L * bal + lL * ll; R = R * bal + lR * ll;
-            L *= 0.35f; R *= 0.35f;
+            L *= 0.35f * pianoLevel; R *= 0.35f * pianoLevel;
 
             rack.pos = fx.samplePos;
             fx.pre(L, R);
+            if (layerMode != 0 && sampler.hasSample()) {
+                // one sample at a time keeps the inner loop simple; the sampler goes through the effects rack like the piano
+                float sl = 0, sr2 = 0; sampler.process(&sl, &sr2, 1);
+                const float k = samplerLevel / std::max(fx.gain, 1e-3f);
+                L += sl * k; R += sr2 * k;
+            }
             rack.filter(L, R); rack.resonator(L, R); rack.saturation(L, R); rack.tape(L, R); rack.glue(L, R);
             rack.chorus(L, R); rack.phaser(L, R); rack.flanger(L, R);
             rack.stutter(L, R); rack.gate(L, R); rack.reverse(L, R);

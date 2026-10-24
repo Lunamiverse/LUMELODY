@@ -25,7 +25,10 @@ const PADS = (() => {
     const sc = SCALES[S.scale] || SCALES.minor, base = 12 * (S.oct + 1) + S.tonic, pads = [];
     for (let i = 0; i < N; i++) {
       const row = Math.floor(i / COLS), col = i % COLS;   // row 0 is the bottom row
-      if (S.layout === "chromatic") {
+      if (S.layout === "slices") {   // the sampler's slices: one pad per slice, played on the sampler's slice keys
+        const k = i;
+        pads.push(k < sliceCount ? { notes: [sliceBase + k], label: "slice " + (k + 1), sub: nn(sliceBase + k), role: k === 0 ? 4 : [0, 1, 2][k % 3] } : { notes: [], label: "", sub: "", role: 3, dim: true });
+      } else if (S.layout === "chromatic") {
         const n = base - 12 + row * 5 + col;   // rows a fourth apart, like a guitar: shapes stay the same everywhere
         const deg = sc.indexOf(((n - S.tonic) % 12 + 12) % 12);
         pads.push({ notes: [n], label: nn(n), sub: deg >= 0 ? (deg === 0 ? "root" : "in key") : "", role: deg === 0 ? 4 : deg >= 0 ? 1 : 3, dim: deg < 0 });
@@ -51,6 +54,7 @@ const PADS = (() => {
     }
     return pads;
   }
+  let sliceBase = 60, sliceCount = 0;
   let map = padMap();
 
   // ---------------------------------------------------------------- playing
@@ -69,7 +73,8 @@ const PADS = (() => {
     // polyphony: the oldest pad gives way
     const voices = [...active.values()].reduce((a, v) => a + v.notes.length, 0) + [...held].length;
     if (S.poly > 0 && voices >= S.poly) { const oldest = [...active.entries()].sort((a, b) => a[1].order - b[1].order)[0]; if (oldest) { releaseVoice(oldest[0]); active.delete(oldest[0]); } }
-    const pad = map[i], ids = pad.notes.map(() => "np" + (++ctr));
+    const pad = map[i]; if (!pad.notes.length) return;
+    const ids = pad.notes.map(() => "np" + (++ctr));
     pad.notes.forEach((n, k) => setTimeout(() => noteOn(ids[k], n, vel), pad.chord ? k * 9 : 0));
     const ck = LUMI_PLAY.clock();
     active.set(i, { ids, notes: pad.notes, vel, order: ++order, rec: REC.on && ck && ck.key === "pads" && ck.beat >= 0 ? ck.beat : null });
@@ -128,6 +133,8 @@ const PADS = (() => {
 
   // ---------------------------------------------------------------- the pads' look: WebGL transparent moulded polymer
   let gl = null, U = {}, cv = null, raf = 0, lastT = 0;
+  // MIDI reverse (mirror in time inside [0, length)): note order flips, durations and velocities are kept
+  function reverseNotes(notes, length) { return notes.map(x => Object.assign({}, x, { t: +Math.max(0, length - (x.t + x.d)).toFixed(6) })).sort((a, b) => a.t - b.t || a.n - b.n); }
   const PAL = [[1, .27, .66], [.95, .22, 1], [.56, .27, 1], [.4, .14, .74], [.42, .9, 1]];   // hot pink, magenta, ultraviolet, deep purple, icy cyan
   function initGL() {
     cv = $("#npCanvas");
@@ -403,6 +410,8 @@ const PADS = (() => {
     $("#npDel").onclick = () => { if (sel >= 0 && S.pattern[sel]) commit(() => { S.pattern.splice(sel, 1); sel = -1; }); };
     $("#npQuant").onclick = () => { const gq = grid() || .25; commit(() => S.pattern.forEach(x => { x.t = Math.min(loopBeats() - gq, Math.round(x.t / gq) * gq); x.d = Math.max(gq, Math.round(x.d / gq) * gq); })); };
     $("#npClear").onclick = () => { if (S.pattern.length) commit(() => { S.pattern = []; sel = -1; }); };
+    // reverse the phrase in time (mirror): each note keeps its length and velocity and ends where the original started
+    $("#npReverse").onclick = () => { if (S.pattern.length) commit(() => { S.pattern = reverseNotes(S.pattern, loopBeats()); sel = -1; }); };
     $("#npToBlocks").onclick = () => {   // what you played becomes chord blocks (one block per bar, by its lowest notes)
       if (!S.pattern.length) return;
       const blocks = [];
@@ -424,6 +433,7 @@ const PADS = (() => {
     rollSetup();
     window.addEventListener("resize", kick);
   }
+  function useSlices(base, count) { sliceBase = base; sliceCount = Math.min(N, count); allOff(); S.layout = "slices"; save(); render(); }
   function show(on) { window.LUMI_PADS_ON = on; if (on) { render(); kick(); } else allOff(); }
-  return { init, show, render, padDown, padUp, state: S, map: () => map, score, midiOf, undo: doUndo, redo: doRedo, REC };
+  return { init, show, render, padDown, padUp, useSlices, reverseNotes, state: S, map: () => map, score, midiOf, undo: doUndo, redo: doRedo, REC };
 })();
