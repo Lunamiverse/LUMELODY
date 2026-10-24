@@ -441,3 +441,140 @@ preset("Granular Dust", "Textures & FX", ["Experimental", "Lo-fi", "Ambient"],
        [L(7, grate=35, glen=.06, goct=.2, gfifth=.3, gjit=30, gfm=1.2, a=.5, d=2, s=.8, r=1.5)],
        {"f_type": 0, "f_cut": 2800, "lfo_rate": .3, "lfo_cut": .7},
        fx(crush_sr=11000, crush_bits=7, eq_lc=150, rv_mix=.38, rv_size=.85, rv_decay=4.5))
+
+
+# ======================================================== TRIPPY (round 3)
+# Producer direction: trippy, psychedelic, dark and heavy, in the spirit of psychedelic trap / rage / cloud rap records.
+# Style reference only: no artist names in presets, nothing copied from songs. Each sound is original synthesis.
+PSYCH_SPACE = {"dly_beats": .75, "dly_fb": .45, "dly_mix": .2, "dly_damp": .55, "rv_mix": .38, "rv_size": .92, "rv_decay": 6.5, "rv_damp": .55}
+
+preset("Astro Haze", "Trippy", ["Psychedelic trap", "Cloud rap", "Ambient trap"],
+       "Wide detuned saw haze whose pitch drifts and wobbles like a tape left in the sun, under a slow breathing filter.",
+       "Intros and chord beds for psychedelic trap; play long chords and let it swim.", "psych_pad",
+       [L(1, wave=2, uni=7, det=24, spread=1, drift=14, a=.9, d=2, s=.9, r=2.4),
+        L(1, wave=0, oct=-1, drift=8, a=.8, d=2, s=.9, r=2.4, level=.3, filt=0),
+        L(7, grate=14, glen=.35, goct=.12, gjit=14, a=1.4, d=2, s=.8, r=2.4, level=.25)],
+       {"f_type": 0, "f_cut": 1200, "f_res": .22, "f_poles": 4, "f_key": .3, "lfo_rate": .11, "lfo_cut": 1.1, "lfo_pan": .25,
+        "vib_rate": .35, "vib_depth": 22, "vib_delay": 0},
+       fx(TAPE, PSYCH_SPACE, eq_lc=60, ch_mix=.45, ch_depth=3.5, ch_rate=.25, width=1.5))
+
+preset("Mirage Lead", "Trippy", ["Psychedelic trap", "Rage", "Cloud rap"],
+       "Warbling detuned lead that bends into every note, smeared by dotted delays: the hazy, hypnotic topline sound.",
+       "Hooks and counter-melodies; overlap notes for long slides.", "psych_lead",
+       [L(1, wave=2, uni=5, det=18, spread=.8, drift=10, a=.02, d=1, s=.85, r=.4),
+        L(1, wave=3, pw=.35, oct=-1, a=.02, d=1, s=.85, r=.4, level=.3)],
+       {"mono": 1, "glide": .14, "f_type": 0, "f_cut": 1900, "f_res": .25, "f_key": .4, "f_drive": 1.4,
+        "vib_rate": 4.6, "vib_depth": 30, "vib_delay": .3, "lfo_rate": .2, "lfo_cut": .3},
+       fx(TAPE, PSYCH_SPACE, sat_drive=.45, sat_mix=.6, eq_lc=160, ch_mix=.3, ch_depth=2.5, width=1.35))
+
+preset("Night Siren", "Trippy", ["Psychedelic trap", "Rage", "Hyperpop"],
+       "A pure, eerie siren tone that swoops between notes with a wide, slow vibrato, like a distant alarm in the fog.",
+       "Haunting single-note lines and swoops; long glides between far-apart notes.", "psych_lead",
+       [L(1, wave=0, a=.06, d=1, s=1, r=.6),
+        L(1, wave=1, oct=1, a=.06, d=1, s=1, r=.6, level=.18),
+        L(6, vowel=1, vmod=.6, tilt=1.4, breath=.25, a=.08, d=1, s=.8, r=.6, level=.18)],
+       {"mono": 1, "glide": .22, "f_type": 0, "f_cut": 3200, "vib_rate": 3.4, "vib_depth": 45, "vib_delay": .4},
+       fx(PSYCH_SPACE, eq_lc=250, eq_hc=9000, sat_drive=.2, rv_mix=.42, width=1.3))
+
+preset("Desert Fever", "Trippy", ["Psychedelic trap", "Dark R&B", "Cloud rap"],
+       "Detuned FM electric keys with a slow tremolo and a seasick pitch wobble, dark and dreamy, like a memory.",
+       "Dark chord loops and melodic samples for psychedelic trap and R&B.", "psych_pad",
+       [L(2, cr=1, mr=1, idx=1.3, idx_dec=.9, idx_sus=.2, fb=.06, fm_spread=14, a=.004, d=3.6, s=.15, r=1, keydecay=.35),
+        L(2, cr=1, mr=7, idx=.7, idx_dec=.05, idx_sus=0, a=.001, d=.4, s=0, r=.2, level=.15),
+        L(1, wave=2, uni=3, det=14, drift=10, a=.05, d=3, s=.2, r=1, level=.18)],
+       {"f_type": 0, "f_cut": 1700, "f_res": .1, "f_key": .3, "lfo_rate": 4.2, "lfo_amp": .35, "lfo_pan": .3,
+        "vib_rate": .45, "vib_depth": 18, "vib_delay": 0},
+       fx(TAPE, PSYCH_SPACE, eq_lc=70, pump=.12, ch_mix=.35, ch_depth=3, width=1.35))
+
+preset("Vapor Choir", "Trippy", ["Psychedelic trap", "Ambient trap", "Dark R&B"],
+       "A ghostly choir of formant voices that slowly change vowel and float in and out of tune, washed in a huge space.",
+       "Background choirs, intros and atmospheres behind a vocal.", "psych_pad",
+       [L(6, vowel=2, vmod=1.4, tilt=1.2, breath=.35, a=1, d=2, s=.85, r=2.4),
+        L(6, vowel=4, vmod=1, tilt=1.4, breath=.3, semi=12, a=1.2, d=2, s=.8, r=2.4, level=.45),
+        L(1, wave=2, uni=4, det=16, drift=10, a=1.2, d=2, s=.8, r=2.4, level=.2)],
+       {"f_type": 0, "f_cut": 2600, "lfo_rate": .17, "lfo_pan": .35, "vib_rate": .5, "vib_depth": 16, "vib_delay": 0},
+       fx(PSYCH_SPACE, eq_lc=150, rv_mix=.5, rv_decay=7, width=1.5))
+
+preset("Lucid Arp", "Trippy", ["Psychedelic trap", "Rage", "Plugg"],
+       "Glassy pluck built for hypnotic arpeggios: a bright attack that melts into ping-pong echoes and a dark tail.",
+       "Repeating arps and broken chords that loop forever.", "psych_arp",
+       [L(1, wave=2, uni=3, det=10, spread=.8, a=.001, d=.45, s=.05, r=.35),
+        L(2, cr=2, mr=3, idx=1.1, idx_dec=.1, idx_sus=0, a=.001, d=.35, s=0, r=.3, level=.35)],
+       {"f_type": 0, "f_cut": 900, "f_res": .3, "f_env": 2.2, "fd": .25, "fs": 0, "f_key": .4, "f_vel": 1.2,
+        "vib_rate": .3, "vib_depth": 8, "vib_delay": 0},
+       fx(TAPE, eq_lc=160, dly_beats=.75, dly_fb=.5, dly_mix=.28, dly_damp=.5, rv_mix=.32, rv_size=.85, rv_decay=4.5, width=1.4))
+
+preset("Melt Bell", "Trippy", ["Psychedelic trap", "Cloud rap", "Dark pop"],
+       "A dark bell that starts slightly sharp and droops into tune as it rings, as if the note is melting, with tape flutter on the tail.",
+       "Eerie melodies and ear-candy; sparse notes ring out best.", "psych_lead",
+       [L(4, mat=2, hard=.4, bright=.45, decay=3.5, damp=.4, a=.001, d=3.5, s=0, r=1.2),
+        L(2, cr=1, mr=3.5, idx=1.4, idx_dec=.6, idx_sus=0, a=.001, d=2.5, s=0, r=1, level=.35)],
+       {"f_type": 0, "f_cut": 3200, "p_env": 1.4, "p_dec": 1.1, "vib_rate": 5.5, "vib_depth": 9, "vib_delay": .5},
+       fx(TAPE, PSYCH_SPACE, eq_lc=200, width=1.3))
+
+preset("Purple Smoke", "Trippy", ["Psychedelic trap", "Cloud rap", "Dark R&B"],
+       "Thick, smoky pad that swirls slowly from side to side as its filter opens and closes; deep and woozy.",
+       "Dark beds and drones under 808s.", "psych_pad",
+       [L(1, wave=2, uni=6, det=20, spread=1, drift=12, a=1.4, d=2, s=.9, r=2.6),
+        L(1, wave=3, pw=.3, oct=-1, a=1.2, d=2, s=.9, r=2.6, level=.3),
+        L(5, ncut=1.2, ntrack=1, nq=2, nmode=1, a=1.5, d=2, s=.7, r=2.6, level=.15)],
+       {"f_type": 0, "f_cut": 650, "f_res": .35, "f_poles": 4, "f_key": .25, "lfo_rate": .07, "lfo_cut": 1.5, "lfo_pan": .5,
+        "lfo_shape": 1, "vib_rate": .3, "vib_depth": 12, "vib_delay": 0},
+       fx(TAPE, PSYCH_SPACE, eq_lc=45, ch_mix=.4, ch_depth=3, width=1.5))
+
+preset("Reverse Dream", "Trippy", ["Psychedelic trap", "Ambient trap", "Cloud rap"],
+       "Notes that swell up backwards out of a grainy haze and stop dead, like a tape played in reverse.",
+       "Transitions, intros and dreamy reversed-sounding chords.", "psych_pad",
+       [L(1, wave=2, uni=5, det=16, spread=1, drift=10, a=2.4, d=1, s=1, r=.05),
+        L(7, grate=24, glen=.18, goct=.2, gfifth=.25, gjit=18, a=2.4, d=1, s=1, r=.05, level=.5)],
+       {"f_type": 0, "f_cut": 900, "f_env": 1.6, "fa": 2.4, "fd": 1, "fs": 1, "vib_rate": .4, "vib_depth": 14, "vib_delay": 0},
+       fx(TAPE, eq_lc=100, rv_mix=.35, rv_size=.9, rv_decay=4, width=1.45))
+
+preset("Hyper Glass", "Trippy", ["Hyperpop", "Rage", "Plugg"],
+       "Shiny, detuned glass lead with a fast vibrato and a bit of crunch, bright but still dark underneath.",
+       "Hyperpop and rage hooks, fast melodic runs.", "psych_arp",
+       [L(1, wave=2, uni=7, det=20, spread=1, a=.002, d=.6, s=.6, r=.25),
+        L(2, cr=2, mr=1, idx=.9, idx_dec=.15, idx_sus=.2, a=.001, d=.5, s=.4, r=.25, level=.35)],
+       {"f_type": 0, "f_cut": 3800, "f_res": .2, "f_key": .4, "vib_rate": 6.5, "vib_depth": 14, "vib_delay": .12},
+       fx(sat_drive=.45, sat_mix=.5, crush_bits=12, eq_lc=220, eq_hc=11000, dly_beats=.375, dly_fb=.35, dly_mix=.18, rv_mix=.25, rv_size=.75, width=1.4))
+
+# --- Trippy basses
+preset("Rage 808", "Trippy", ["Rage", "Psychedelic trap", "Phonk"],
+       "Blown-out 808: a deep sub with a hard knock, pushed into saturation so the harmonics scream on top. Long tail, long slides.",
+       "Rage and hard psychedelic trap low end; overlap notes to slide.", "psych_808",
+       [L(1, wave=0, a=.001, d=4.5, s=.75, r=.25),
+        L(1, wave=1, a=.001, d=.25, s=.15, r=.15, level=.35)],
+       {"mono": 1, "glide": .12, "f_type": 0, "f_cut": 3000, "f_drive": 3.5, "p_env": 12, "p_dec": .025},
+       fx(sat_drive=.95, sat_mix=.8, eq_lc=25, eq_hc=6000, eq_pk_f=1000, eq_pk_g=-3), rng=(24, 48))
+
+preset("Astro 808", "Trippy", ["Psychedelic trap", "Cloud rap", "Trap"],
+       "Deep, round 808 with a long tail that slowly wavers, and smooth, wide slides between notes.",
+       "Psychedelic trap 808 lines with big glides.", "psych_808",
+       [L(1, wave=0, a=.001, d=5, s=.8, r=.3),
+        L(1, wave=0, oct=1, a=.001, d=.3, s=.05, r=.2, level=.12)],
+       {"mono": 1, "glide": .16, "f_type": -1, "p_env": 7, "p_dec": .03, "vib_rate": .25, "vib_depth": 6, "vib_delay": .8},
+       fx(sat_drive=.45, sat_mix=.55, eq_lc=24, eq_hc=7000), rng=(24, 48))
+
+preset("Warp Bass", "Trippy", ["Psychedelic trap", "Drill", "Experimental"],
+       "A wobbling, phasing reese whose filter breathes slowly, heavy underneath and woozy on top.",
+       "Dark basslines and drops; long held notes.", "psych_808",
+       [L(1, wave=2, uni=4, det=20, spread=.4, drift=6, a=.005, d=1, s=1, r=.2),
+        L(1, wave=0, a=.005, d=1, s=1, r=.2, level=.55, filt=0)],
+       {"mono": 1, "glide": .1, "f_type": 0, "f_cut": 520, "f_res": .3, "f_drive": 2.4, "lfo_rate": .25, "lfo_cut": .7},
+       fx(sat_drive=.55, eq_lc=26, eq_hc=6000, ch_mix=.2, ch_depth=2), rng=(24, 52))
+
+preset("Fever Sub", "Trippy", ["Psychedelic trap", "Ambient trap", "Dark R&B"],
+       "A clean, deep sub that very slowly wavers in pitch, felt more than heard; trippy without getting muddy.",
+       "Under pads and slow beats; doubling an 808.", "psych_808",
+       [L(1, wave=0, a=.01, d=1, s=1, r=.25),
+        L(1, wave=0, oct=1, a=.01, d=1, s=1, r=.25, level=.08)],
+       {"mono": 1, "glide": .12, "f_type": -1, "vib_rate": .6, "vib_depth": 9, "vib_delay": .3},
+       fx(eq_lc=22, sat_drive=.15), rng=(24, 52))
+
+preset("Smoke 808", "Trippy", ["Cloud rap", "Plugg", "Dark R&B"],
+       "Warm, filtered 808 with a soft knock and a chorus-smeared top, mellow and hazy rather than aggressive.",
+       "Cloud rap and plugg low end, dark R&B.", "psych_808",
+       [L(1, wave=0, a=.002, d=3.5, s=.7, r=.25),
+        L(1, wave=2, uni=2, det=8, a=.002, d=.8, s=.2, r=.2, level=.2)],
+       {"mono": 1, "glide": .1, "f_type": 0, "f_cut": 900, "f_key": .3, "p_env": 6, "p_dec": .03},
+       fx(sat_drive=.4, sat_mix=.6, eq_lc=24, eq_hc=5500, ch_mix=.3, ch_depth=2.5), rng=(24, 48))

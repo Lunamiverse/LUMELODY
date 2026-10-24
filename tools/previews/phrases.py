@@ -205,4 +205,31 @@ def build():
             n += seq([(b * 4 + i * .5, .45, k + [0, 0, -4, -1][b], .72)], rng=r)
     ph["glitch"] = P(140, n, "Minor arpeggio so stutter/glitch effects are audible, 140 BPM", "trap", [(0, 36), (8, 32), (12, 35)])
 
+
+    # ================= TRIPPY section phrases (original; dark, hypnotic, psychedelic trap / rage / cloud rap)
+    # --- psych lead: E minor with a Phrygian flat-2, long notes that slide into each other, 150 BPM half-time
+    n = seq([(0, 2.2, 76), (2, 1.2, 77), (3, 1.1, 76), (4, 2.6, 71), (6.5, 1.6, 74), (8, 2.2, 79), (10, 1.1, 77),
+             (11, 1.1, 76), (12, 1.6, 74), (13.5, 2.5, 71)], .7, r)
+    ph["psych_lead"] = P(150, n, "Hypnotic E-minor lead with a flat-2 and long slides, 150 BPM (half-time)",
+                         "trap", [(0, 28), (4, 24), (8, 21), (12, 23)])
+    # --- psych chords: Em(add9) - Cmaj7(#11) - Am9 - B7(b9), long and washed, 72 BPM feel
+    n = []
+    n += chord(0, 4, [40, 52, 55, 59, 66], .55, .03, r)
+    n += chord(4, 4, [36, 52, 55, 59, 66], .55, .03, r)
+    n += chord(8, 4, [33, 52, 55, 59, 60], .55, .03, r)
+    n += chord(12, 4, [35, 51, 54, 57, 60], .58, .03, r)
+    ph["psych_pad"] = P(75, n, "Washed Em(add9) - Cmaj7(#11) - Am9 - B7(b9) progression, 75 BPM",
+                        "trapsoul", [(0, 28), (4, 24), (8, 21), (12, 23)])
+    # --- psych arp: a hypnotic broken-chord pattern over Em - C - Am - B, 150 BPM
+    n = []
+    for b, ch in enumerate([[64, 67, 71, 74], [64, 67, 71, 72], [64, 69, 72, 76], [63, 66, 71, 75]]):
+        for i, k in enumerate([0, 2, 1, 3, 2, 1, 3, 2]):
+            n += seq([(b * 4 + i * .5, .42, ch[k], .72 if i % 4 == 0 else .58)], rng=r)
+    ph["psych_arp"] = P(150, n, "Hypnotic broken-chord arp, Em - C - Am - B, 150 BPM (half-time)",
+                        "trap", [(0, 28), (4, 24), (8, 21), (12, 23)])
+    # --- psych 808: long notes, big overlapping slides down and up, E minor, 150 BPM
+    n = seq([(0, 1.6, 28), (1.5, 1, 40), (2.4, 1.2, 28), (4, 1.4, 24), (5.25, 1, 31), (6.2, 1.6, 26),
+             (8, 1.6, 33), (9.5, .9, 36), (10.3, 1.5, 33), (12, 1.4, 35), (13.3, .8, 38), (14, 2, 28)], .9, r)
+    ph["psych_808"] = P(150, n, "Long E-minor 808 line with big slides, 150 BPM", "trap",
+                        [(0, 28), (4, 24), (8, 21), (12, 23)])
     return ph

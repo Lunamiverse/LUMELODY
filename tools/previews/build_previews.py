@@ -27,6 +27,9 @@ def flatten(p):
             flat[f"l{i+1}_{k}"] = v
     flat.update(p["voice"])
     flat.update(p["fx"])
+    # render with 12 dB of headroom inside the engine so its output safety stage never engages; the loudness
+    # match below (and the calibrated out_gain_db) bring every preset back to the same playing level
+    flat.setdefault("gain_db", -12.0)
     return flat
 
 def read_wav(path):
