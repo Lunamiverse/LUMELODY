@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen&display=swap">
 <style>
+[hidden] { display: none !important; }
 /* LUMELODY: a night-sky instrument. One hero object (the holographic moon), hairline panels, lowercase mono labels.
    Holographic foil is used sparingly, as a precious material: the moon, the wordmark, the knob caps, lit keys. */
 @property --bg { syntax: "<color>"; inherits: true; initial-value: #060609; }
@@ -256,6 +257,143 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .bk::before { inset: 0; }
 .bk.down { transform: perspective(420px) rotateX(-7deg) scaleY(.98); }
 
+/* ------------------------------------------------ chord progressions (beside the moon, over the effects) */
+.main > #rack, .main > #prog { grid-column: 2; grid-row: 1; }
+.prog { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 9px; padding: 11px 12px; min-height: 0; align-self: stretch; }
+.pg-top { display: grid; gap: 7px; }
+.pg-ctl { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pg-ctl .btn { padding: 3px 10px; font-size: 11px; }
+.seg-mini { display: inline-flex; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+.seg-mini button { border: 0; background: none; padding: 2px 8px; cursor: pointer; color: var(--muted); font-family: var(--pixel); }
+.seg-mini button[aria-pressed="true"] { color: #fff; background: rgba(255,255,255,.12); }
+.pgrid { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 7px; align-content: start; min-height: 0; padding-right: 2px; }
+.pcard { border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; display: grid; gap: 5px; align-content: start; position: relative; }
+.pcard[aria-current="true"] { border-color: rgba(255,255,255,.75); background: linear-gradient(90deg, rgba(255,255,255,.07), transparent 70%); box-shadow: 0 0 14px -6px #fff; }
+.pcard .pt { display: flex; height: 15px; color: #fff; }
+.pcard .pt .pxt { height: 13px; }
+.pcard small { font-size: 10.5px; color: var(--muted); }
+.pcard .pd { margin: 0; font-size: 10.5px; color: color-mix(in oklab, var(--ink) 74%, transparent); line-height: 1.4; }
+.chd { display: flex; flex-wrap: wrap; gap: 4px; }
+.chd button { text-transform: none; font-family: var(--pixel); font-size: 12px; letter-spacing: .03em; border: 1px solid rgba(255,255,255,.4); border-radius: 5px; background: rgba(255,255,255,.03); color: #fff; padding: 2px 8px; cursor: pointer; }
+.chd button:hover { border-color: #fff; box-shadow: 0 0 10px -4px #fff; }
+.pcard .acts { display: flex; flex-wrap: wrap; gap: 5px; }
+.pcard .acts .btn { padding: 2px 9px; font-size: 11px; }
+.pnotes { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; align-content: start; min-height: 0; }
+.pnotes section { padding: 9px 12px; }
+.pnotes h3 { margin: 0 0 4px; font: 400 12px var(--pixel); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+.pnotes ul { margin: 0; padding-left: 15px; display: grid; gap: 2px; }
+.pnotes li { font-size: 11px; color: color-mix(in oklab, var(--ink) 82%, transparent); text-transform: none; line-height: 1.45; }
+
+.prog { grid-template-rows: auto minmax(0, 1fr); }
+.ws-top { display: flex; align-items: center; gap: 8px; }
+.ws-tabs { display: flex; gap: 5px; }
+.ws-title { flex: 1; text-align: center; font: 400 11px var(--pixel); letter-spacing: .16em; text-transform: uppercase; color: #fff; opacity: .9; }
+.ws-top .btn { padding: 3px 10px; font-size: 11px; }
+.finder, .libpane { display: grid; gap: 6px; align-content: start; min-height: 0; overflow-y: auto; padding-right: 2px; }
+.libpane { grid-template-rows: auto minmax(0, 1fr); overflow: hidden; }
+.finder .frow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
+.finder, .libpane, .prog { grid-template-columns: minmax(0, 1fr); }
+.finder > * { min-width: 0; }
+.finder .frow > .chips { flex: 1 1 0; min-width: 0; }
+.fsteps .frow { flex-wrap: nowrap; align-items: flex-start; }
+.fsteps .fl { padding-top: 3px; }
+.finder .fl { flex: none; width: 66px; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+.chips.wrap { flex-wrap: wrap; overflow: visible; }
+.finder .chip { font-size: 10.5px; padding: 2px 9px; }
+.finder .chip[aria-pressed="true"] { color: #fff; border-color: #fff; background: rgba(255,255,255,.08); }
+.finder .ctl .btn, .finder .ftools .btn { padding: 3px 10px; font-size: 11px; }
+.finder .btn:disabled { opacity: .35; cursor: default; }
+.finder .btn.hot { border-color: #fff; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 14px -6px #fff; }
+.finder .btn.big { font-size: 12px; padding: 4px 13px; }
+.finder .field { padding: 3px 6px; font-size: 11px; }
+.finder .bpm { width: 52px; }
+.finder .sp { flex: 1; }
+.finder:not(.adv) .adv-only { display: none !important; }
+.fguide, .fprefs, .fcompare { border: 1px solid rgba(255,255,255,.35); border-radius: 7px; background: rgba(255,255,255,.03); }
+.fguide { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; padding: 4px 8px; font-size: 11px; }
+.fguide b { display: inline-grid; place-items: center; width: 15px; height: 15px; border: 1px solid #fff; border-radius: 50%; font: 400 9px var(--pixel); margin-right: 4px; }
+.fguide .chip { margin-left: auto; }
+.fprefs { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 7px 10px; font-size: 11px; }
+.fprefs label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
+.fprefs input { accent-color: #fff; }
+.fcompare { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 6px 10px; font-size: 11px; }
+.ftimeline { position: relative; display: flex; gap: 5px; min-height: 74px; padding: 6px; border: 1px dashed rgba(255,255,255,.28); border-radius: 8px; overflow-x: auto; }
+.fempty { margin: auto; color: var(--muted); font-size: 11px; text-align: center; max-width: 42ch; }
+.fblock { position: relative; min-width: 62px; display: grid; align-content: center; gap: 1px; padding: 6px 8px 6px; border: 1px solid rgba(255,255,255,.55); border-radius: 7px; cursor: grab; touch-action: none; user-select: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02) 55%, rgba(255,255,255,.05)); box-shadow: inset 0 1px 0 rgba(255,255,255,.7); }
+.fblock b { font: 500 14px var(--pixel); text-transform: none; color: #fff; letter-spacing: .02em; white-space: nowrap; }
+.fblock .ff { font-size: 10.5px; color: color-mix(in oklab, var(--ink) 80%, transparent); }
+.fblock small { font-size: 9.5px; color: var(--muted); }
+.fblock.sel { border-color: #fff; box-shadow: inset 0 1px 0 #fff, 0 0 0 1px #fff, 0 0 16px -6px #fff; }
+.fblock.now { background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,.08)); }
+.fblock.pass { border-style: dashed; }
+.fblock:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.fbplay { position: absolute; right: 4px; top: 4px; width: 20px; height: 20px; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: none; color: #fff; font-size: 8px; cursor: pointer; padding: 0; }
+.fmark { position: absolute; top: 6px; bottom: 6px; width: 2px; background: #fff; box-shadow: 0 0 8px #fff; border-radius: 2px; pointer-events: none; }
+.fghost { position: fixed; left: 0; top: 0; z-index: 50; pointer-events: none; padding: 4px 10px; border: 1px solid #fff; border-radius: 6px; background: rgba(0,0,0,.85); color: #fff; font: 500 13px var(--pixel); text-transform: none; }
+.ftools { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.ftools .fsel { font-size: 11px; color: #fff; text-transform: none; margin-right: 4px; }
+.fdrawer-wrap { display: flex; gap: 6px; align-items: flex-start; }
+.fdrawer-wrap.pick .fdrawer { outline: 1px dashed #fff; outline-offset: 3px; border-radius: 6px; }
+.fdrawer { display: flex; gap: 4px; min-width: 0; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+.fchip { flex: none; }
+.fsteps { display: grid; gap: 6px; }
+.fsummary b { font: 400 12px var(--pixel); color: #fff; text-transform: none; letter-spacing: .04em; }
+.pcard .pd.cs { text-transform: none; }
+.fchip { display: grid; gap: 0; padding: 3px 8px; border: 1px solid rgba(255,255,255,.38); border-radius: 6px; background: rgba(255,255,255,.03); cursor: grab; touch-action: none; text-align: left; }
+.fchip b { font: 500 12px var(--pixel); text-transform: none; color: #fff; }
+.fchip span { font-size: 9.5px; color: var(--muted); }
+.fchip:hover { border-color: #fff; }
+.finder.large { font-size: 13px; }
+.finder.large .chip, .finder.large .btn, .finder.large .fprefs, .finder.large .fguide { font-size: 13px !important; }
+.finder.large .fblock b { font-size: 17px; } .finder.large .fblock .ff { font-size: 12px; } .finder.large .fchip b { font-size: 14px; }
+.btn.drag { border-style: solid; letter-spacing: .04em; }
+html.calm .finder *, html.calm .libpane * { transition: none !important; animation: none !important; }
+
+/* ------------------------------------------------ neon pads */
+.nppane { display: grid; gap: 6px; align-content: start; min-height: 0; overflow-y: auto; grid-template-columns: minmax(0, 1fr); padding-right: 2px; }
+.nppane > * { min-width: 0; }
+.nppane .frow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.nppane .btn { padding: 3px 10px; font-size: 11px; }
+.nppane .btn:disabled { opacity: .35; cursor: default; }
+.nppane .btn.hot { border-color: #fff; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 14px -6px #fff; }
+.nppane .btn.rec[aria-pressed="true"] { border-color: #ff5fb8; color: #fff; box-shadow: 0 0 14px -4px #ff5fb8, inset 0 0 10px -4px #ff5fb8; }
+.nppane .btn.big { font-size: 12px; padding: 4px 13px; }
+.nppane .chip { font-size: 10.5px; padding: 2px 9px; }
+.nppane .chip[aria-pressed="true"] { color: #fff; border-color: #fff; background: rgba(255,255,255,.08); }
+.nppane .field { padding: 3px 6px; font-size: 11px; }
+.nppane .nsound { max-width: 190px; }
+.nppane .bpm { width: 52px; }
+.nppane .sp { flex: 1; }
+.nppane:not(.adv) .adv-only { display: none !important; }
+.nppane .seg-mini button { font-size: 11px; padding: 3px 9px; }
+.npgrid { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 8px;
+  height: clamp(168px, 30vh, 236px); padding: 0; border-radius: 10px; background: #000; touch-action: none; user-select: none; -webkit-user-select: none; }
+.npgrid canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; }
+.npad { position: relative; z-index: 1; display: grid; place-content: center; gap: 1px; border: 0; background: none; cursor: pointer; padding: 0; color: #fff; text-align: center;
+  border-radius: 12px; transition: transform .09s cubic-bezier(.2,.7,.2,1); -webkit-tap-highlight-color: transparent; }
+.npad b { font: 500 13px var(--pixel); letter-spacing: .03em; text-transform: none; text-shadow: 0 1px 0 rgba(0,0,0,.6), 0 0 10px rgba(255,255,255,.25); }
+.npad small { font-size: 9px; color: rgba(255,255,255,.7); text-transform: lowercase; text-shadow: 0 1px 0 rgba(0,0,0,.7); }
+.npad.dim b { opacity: .55; }
+.npad.on { transform: translateY(1px) scale(.985); }
+.npad:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.npgrid.nogl .npad { border: 2px solid rgba(255,255,255,.55); background: radial-gradient(circle at 50% 50%, rgba(255,80,190,.35), rgba(60,20,110,.5) 70%); }
+.npgrid.nogl .npad.on { background: radial-gradient(circle at 50% 50%, #fff, #ff4fc0 40%, #3a1470); }
+.nppane.large .npad b { font-size: 16px; } .nppane.large .npad small { font-size: 11px; }
+.nbeats { display: inline-flex; gap: 4px; }
+.nbeats i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); }
+.nbeats i.on { background: #fff; box-shadow: 0 0 8px #fff; }
+.nbeats i.ci { background: #ff5fb8; box-shadow: 0 0 8px #ff5fb8; border-color: #ff5fb8; }
+.nproll { position: relative; height: 86px; border: 1px solid rgba(255,255,255,.3); border-radius: 7px; overflow: hidden; cursor: crosshair; touch-action: none;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: calc(100% / var(--beats, 8) * 4) 100%, calc(100% / var(--grid, 32)) 100%; }
+.nnote { position: absolute; box-sizing: border-box; border-radius: 3px; background: linear-gradient(180deg, #ff7fd0, #b04dff); border: 1px solid rgba(255,255,255,.75); box-shadow: 0 0 8px -2px #ff5fc8; cursor: grab; min-height: 3px; }
+.nnote.sel { background: linear-gradient(180deg, #fff, #9fe9ff); box-shadow: 0 0 10px #9fe9ff; }
+.nnote::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 5px; cursor: ew-resize; }
+.nhead { position: absolute; top: 0; bottom: 0; width: 1.5px; background: #fff; box-shadow: 0 0 6px #fff; pointer-events: none; }
+.nempty { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 16px; text-align: center; font-size: 11px; color: var(--muted); pointer-events: none; }
+html.calm .npad { transition: none; }
+
 /* ------------------------------------------------ browser sheet */
 .sheet { position: absolute; inset: 78px 30px 30px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
   border: 1px solid var(--line-strong); border-radius: 8px; background: color-mix(in oklab, var(--win2) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 60px -20px #000; }
@@ -299,6 +437,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 @media (max-width: 860px) {
   .main { grid-template-columns: 1fr; }
+  .main > #rack, .main > #prog { grid-column: 1; grid-row: 2; }
   .orb { width: min(176px, 44vw); margin: 22px 0 16px; }
 }
 @media (max-width: 620px) {
@@ -355,6 +494,136 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
         <div class="hint">tap the moon for a new sound</div>
       </div>
       <section class="panels" id="rack" aria-label="Effects"></section>
+      <section class="prog hl" id="prog" aria-label="Chord Progression Finder" hidden>
+        <div class="ws-top">
+          <div class="ws-tabs" id="wsTabs" role="tablist">
+            <button class="chip" type="button" data-t="create">chord blocks</button>
+            <button class="chip" type="button" data-t="pads">neon pads</button>
+            <button class="chip" type="button" data-t="library">library</button>
+          </div>
+          <span class="ws-title">chord progression finder</span>
+          <button class="btn" type="button" id="wsClose">close</button>
+        </div>
+
+        <div class="finder" id="finder">
+          <div class="fguide" role="note">
+            <span><b>1</b> pick a style</span><span><b>2</b> pick a mood</span><span><b>3</b> pick how rich</span><span><b>4</b> press generate</span>
+            <button class="chip" type="button" id="fGuideClose" aria-label="Hide the guide">hide</button>
+          </div>
+          <div class="fsteps" id="fSteps">
+            <div class="frow"><span class="fl">1 style</span><div class="chips wrap" id="fStyle" role="group" aria-label="Style"></div></div>
+            <div class="frow"><span class="fl">2 mood</span><div class="chips wrap" id="fMood" role="group" aria-label="Mood"></div></div>
+            <div class="frow"><span class="fl">3 richness</span><div class="chips" id="fLevel" role="group" aria-label="Complexity"></div><span class="dim" id="fLevelHint"></span></div>
+          </div>
+          <div class="frow fsummary" id="fSummary" hidden><span class="fl">vibe</span><b id="fSumTxt"></b><button class="chip" type="button" id="fSumEdit">change</button><button class="chip" type="button" id="fSumGen">new chords</button></div>
+          <div class="frow ctl">
+            <button class="btn hot" type="button" id="fGen">generate</button>
+            <button class="btn" type="button" id="fSurprise" title="Random style, mood and richness">surprise me</button>
+            <label class="dim" for="fKey">key</label><select class="field" id="fKey" aria-label="Key"></select>
+            <select class="field adv-only" id="fMode" aria-label="Major or minor"><option value="auto">from mood</option><option value="major">major</option><option value="minor">minor</option></select>
+            <label class="dim" for="fBpm">tempo</label><input class="bpm" id="fBpm" type="number" min="40" max="240" aria-label="Tempo (BPM)">
+            <label class="dim" for="fLen">chords</label><select class="field" id="fLen" aria-label="Number of chords"><option>2</option><option>3</option><option selected>4</option><option>6</option><option>8</option></select>
+            <label class="dim adv-only" for="fBars">bars each</label><select class="field adv-only" id="fBars" aria-label="Bars per chord"><option value="0.5">½</option><option value="1">1</option><option value="2">2</option><option value="4">4</option></select>
+            <span class="sp"></span>
+            <button class="btn" type="button" id="fUndo" aria-label="Undo">undo</button><button class="btn" type="button" id="fRedo" aria-label="Redo">redo</button>
+            <button class="btn" type="button" id="fPrefsBtn" aria-expanded="false" aria-controls="fPrefs">settings</button>
+          </div>
+          <div class="fprefs" id="fPrefs" hidden>
+            <label><input type="checkbox" id="fpAdv"> advanced mode</label>
+            <label><input type="checkbox" id="fpPreview"> play chords when tapped</label>
+            <label><input type="checkbox" id="fpMotion"> animations</label>
+            <label><input type="checkbox" id="fpExplain"> explanations</label>
+            <label><input type="checkbox" id="fpLarge"> larger text</label>
+            <label><input type="checkbox" id="fpGuide"> show the guide</label>
+            <span class="dim">your work is saved automatically on this device</span>
+          </div>
+          <div class="fcompare" id="fCompare" hidden>
+            <span>compare</span>
+            <span class="seg-mini"><button type="button" data-v="orig">original</button><button type="button" data-v="exp">expensive</button></span>
+            <button class="btn" type="button" id="fKeepExp">keep expensive</button>
+            <button class="btn" type="button" id="fKeepOrig">keep original</button>
+          </div>
+          <div class="ftimeline" id="fTimeline" aria-label="Your progression"></div>
+          <div class="ftools" id="fTools" hidden>
+            <span class="fsel" id="fSelName"></span>
+            <button class="btn" type="button" id="fLeft" aria-label="Move left">◀</button><button class="btn" type="button" id="fRight" aria-label="Move right">▶</button>
+            <button class="btn" type="button" id="fDup">duplicate</button>
+            <button class="btn" type="button" id="fRegen" title="A different chord that fits">new chord</button>
+            <button class="btn" type="button" id="fReplace" title="Choose from the drawer">replace</button>
+            <select class="field" id="fDur" aria-label="Length"><option value="2">½ bar</option><option value="4">1 bar</option><option value="8">2 bars</option><option value="16">4 bars</option></select>
+            <button class="btn" type="button" id="fDel">remove</button>
+            <button class="btn drag" type="button" id="fDragOne" title="Drag this chord as MIDI. Click to save it.">drag chord ↗</button>
+          </div>
+          <div class="fdrawer-wrap" id="fDrawerWrap"><span class="fl">chord drawer</span><div class="fdrawer" id="fDrawer"></div></div>
+          <div class="frow ctl fexport">
+            <button class="btn hot" type="button" id="fPlay">play all</button>
+            <button class="btn" type="button" id="fExp" title="Richer chords, passing chords and smoother voicing. You can compare and go back.">make it sound expensive</button>
+            <span class="adv-only"><button class="chip" type="button" id="fBass" title="808 / bass line">bass</button><button class="chip" type="button" id="fMove" title="Change one note while a long chord is held">move</button><button class="chip" type="button" id="fSpread" title="Open, spread voicing">spread</button></span>
+            <span class="sp"></span>
+            <span class="dim" id="fKeyLbl"></span>
+            <button class="btn drag big" type="button" id="fDrag" title="Drag the MIDI (chords + bass) into FL Studio. Click to save the file.">drag to daw ↗</button>
+            <button class="btn" type="button" id="fMidi">save midi</button>
+            <button class="btn" type="button" id="fWav" title="Render with the current sound and effects">save audio</button>
+            <button class="btn drag adv-only" type="button" id="fDragWav" title="Drag the rendered audio into FL Studio">drag audio ↗</button>
+            <button class="btn adv-only" type="button" id="fClear">clear</button>
+          </div>
+        </div>
+
+        <div class="nppane" id="npPane" hidden>
+          <div class="frow ctl">
+            <span class="seg-mini" id="npLayout" role="group" aria-label="Pad layout"><button type="button" data-l="scale">notes in key</button><button type="button" data-l="chords">chords</button><button type="button" data-l="chromatic" class="adv-only">all notes</button></span>
+            <label class="dim" for="npKey">key</label><select class="field" id="npKey" aria-label="Key"></select><select class="field" id="npScale" aria-label="Scale"></select>
+            <button class="btn" type="button" id="npOctDn" aria-label="Octave down">−</button><span class="dim" id="npOct"></span><button class="btn" type="button" id="npOctUp" aria-label="Octave up">+</button>
+            <select class="field nsound" id="npSound" aria-label="Sound"></select>
+          </div>
+          <div class="frow ctl adv-only">
+            <label class="dim" for="npVel">velocity</label><select class="field" id="npVel"><option value="position">by where you tap</option><option value="pressure">by pressure</option><option value="fixed">fixed</option></select>
+            <label class="dim" for="npPoly">voices</label><select class="field" id="npPoly"><option value="1">1 (mono)</option><option value="4">4</option><option value="8">8</option><option value="16">16</option><option value="0">all</option></select>
+            <button class="chip" type="button" id="npSus" title="Notes keep ringing after you let go (space bar)">sustain</button>
+            <label class="dim" for="npQ">snap</label><select class="field" id="npQ"><option value="0">off</option><option value="4">1/4</option><option value="8">1/8</option><option value="16">1/16</option></select>
+            <button class="chip" type="button" id="npCount" title="One bar of clicks before recording starts">count-in</button>
+            <button class="chip" type="button" id="npMetro" title="Click while recording">metronome</button>
+          </div>
+          <div class="npgrid" id="npGrid"><canvas id="npCanvas" aria-hidden="true"></canvas></div>
+          <div class="frow ctl">
+            <button class="btn rec" type="button" id="npRec" aria-pressed="false">record</button>
+            <button class="btn hot" type="button" id="npPlay">play</button>
+            <button class="btn" type="button" id="npStop">stop</button>
+            <span class="nbeats" id="npBeats" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <label class="dim" for="npBpm">tempo</label><input class="bpm" id="npBpm" type="number" min="40" max="240" aria-label="Tempo (BPM)">
+            <label class="dim" for="npBars">loop</label><select class="field" id="npBars" aria-label="Loop length"><option value="1">1 bar</option><option value="2">2 bars</option><option value="4">4 bars</option><option value="8">8 bars</option></select>
+            <span class="dim" id="npHint"></span><span class="sp"></span>
+            <button class="btn" type="button" id="npUndo">undo</button><button class="btn" type="button" id="npRedo">redo</button>
+          </div>
+          <div class="nproll" id="npRoll" aria-label="Recorded pattern"></div>
+          <div class="frow ctl">
+            <span class="dim" id="npSelInfo"></span>
+            <button class="btn" type="button" id="npDel">delete note</button>
+            <button class="btn" type="button" id="npQuant" title="Snap every note to the grid">tighten timing</button>
+            <button class="btn adv-only" type="button" id="npToBlocks" title="Turn what you played into chord blocks">to chord blocks</button>
+            <button class="btn adv-only" type="button" id="npClear">clear</button>
+            <span class="sp"></span>
+            <button class="btn drag big" type="button" id="npDrag" title="Drag the MIDI into FL Studio. Click to save the file.">drag to daw ↗</button>
+            <button class="btn" type="button" id="npMidi">save midi</button>
+            <button class="btn" type="button" id="npWav" title="Render with the current sound and effects">save audio</button>
+            <button class="btn drag adv-only" type="button" id="npDragWav">drag audio ↗</button>
+          </div>
+        </div>
+
+        <div class="libpane" id="libPane" hidden>
+          <div class="pg-top">
+            <div class="chips" id="libTabs" role="group" aria-label="Progression style"></div>
+            <div class="pg-ctl">
+              <span class="dim">bars</span><span class="seg-mini" id="pgBars"><button type="button" data-b="1">1</button><button type="button" data-b="2">2</button><button type="button" data-b="4">4</button></span>
+              <button class="chip" type="button" id="pgMove" title="Change one note while a chord is held">move</button>
+              <button class="chip" type="button" id="pgBass" title="Play the bass line (808 roots or the written pattern)">bass</button>
+              <label class="dim" for="pgBpm">bpm</label><input class="bpm" id="pgBpm" type="number" min="40" max="240" value="120">
+              <button class="btn" type="button" id="pgStop" onclick="LUMI_PLAY.stop()">stop</button>
+            </div>
+          </div>
+          <div class="pgrid" id="pgList"></div>
+        </div>
+      </section>
     </div>
 
     <section class="detail hl" id="detail" aria-live="polite"></section>
@@ -365,6 +634,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
         <span class="oct" id="octLabel"></span>
         <button class="btn" type="button" id="octUp" aria-label="Octave up">+</button>
       </div>
+      <button class="btn" type="button" id="chordsBtn" aria-pressed="false" title="Chord Progression Finder: build chords without playing piano">chord progression finder</button>
       <button class="btn" type="button" id="demoSolo">demo</button>
       <button class="btn" type="button" id="demoBeat">+ beat</button>
       <label class="dim" for="bpm">bpm</label><input class="bpm" id="bpm" type="number" min="40" max="240" value="120">
@@ -561,6 +831,10 @@ const LUMI_TYPE = (() => {
 const reduceMotion = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
 let ctx = null, node = null, ready = false;
+// inside the VST3/AU plugin the page runs in the host's web view: the native engine plays the sound and the
+// piano roll's notes arrive as events; the same messages the AudioWorklet understands go to the plugin instead
+const PLUGIN = !!(window.__JUCE__ && window.__JUCE__.backend);
+if (PLUGIN) document.documentElement.classList.add("plugin");
 let cur = 0, baseNote = 48, selFx = fxIndex("reverb");
 let fxState = SCHEMA.map(f => ({ on: false, v: f.params.map(p => p.def) }));   // mirrors the engine
 const held = new Map();   // input id -> note
@@ -952,7 +1226,7 @@ const ORB = (() => {
   if (gl) {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
-      uniform vec2 light; uniform float time, act, spin; uniform vec3 hh[6]; uniform vec3 gcol, tint;
+      uniform vec2 light; uniform float time, act, spin, disco, burst, pix; uniform vec3 hh[6]; uniform vec3 gcol, tint;
       float hash3(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
       float noise3(vec3 p) { vec3 i = floor(p), f = fract(p); vec3 u = f * f * (3. - 2. * f);
         return mix(mix(mix(hash3(i), hash3(i + vec3(1., 0., 0.)), u.x), mix(hash3(i + vec3(0., 1., 0.)), hash3(i + vec3(1., 1., 0.)), u.x), u.y),
@@ -960,8 +1234,10 @@ const ORB = (() => {
       float fbm3(vec3 p) { float s = 0., a = .5; for (int i = 0; i < 4; i++) { s += a * noise3(p); p = p * 2.03 + vec3(1.7, 9.2, 3.1); a *= .5; } return s; }
       vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
       // object space: a slight axial tilt, then the spin
-      vec3 obj(vec3 n) { float ct = cos(.38), st = sin(.38); n = vec3(n.x, ct * n.y - st * n.z, st * n.y + ct * n.z);
+      vec3 obj(vec3 n) { float ta = .38 + .3 * disco, ct = cos(ta), st = sin(ta); n = vec3(n.x, ct * n.y - st * n.z, st * n.y + ct * n.z);
         float c = cos(spin), s = sin(spin); return vec3(c * n.x + s * n.z, n.y, -s * n.x + c * n.z); }
+      vec3 objInv(vec3 d) { float c = cos(spin), s = sin(spin); vec3 n = vec3(c * d.x - s * d.z, d.y, s * d.x + c * d.z);
+        float ta = .38 + .3 * disco, ct = cos(ta), st = sin(ta); return vec3(n.x, ct * n.y + st * n.z, -st * n.y + ct * n.z); }
       // impact craters: bowl + raised rim, sized and placed from a fixed seed
       float craters(vec3 d) { float h = 0.;
         for (int i = 0; i < 18; i++) { float fi = float(i) + 1.;
@@ -986,6 +1262,56 @@ const ORB = (() => {
         d *= smoothstep(.0, .008, abs(x - .87));
         return clamp(d, 0., 1.);
       }
+      // ---------------- DISCO & CLUB: the moon as a mirror ball (only in that section)
+      vec3 spotCol(float h) { return h < .3 ? vec3(1., .36, .76) : h < .5 ? vec3(.95, .28, .95) : h < .66 ? vec3(.62, .38, 1.) : h < .86 ? vec3(1., .97, 1.) : vec3(.52, .8, 1.); }
+      // the club around it, as the mirrors see it: the moon's own key light (pink/magenta/white) plus icy, warm and violet lights
+      vec3 clubEnv(vec3 R, vec3 Ld) {
+        float pat = smoothstep(.28, .74, noise3(R * 3.3 + vec3(time * .05, 0., -time * .04)));   // fixtures and the dark gaps between them
+        float pat2 = noise3(R * 6.5 - time * .03);
+        vec3 c = vec3(.012, .007, .018) + vec3(.05, .02, .08) * max(R.y, 0.);
+        c += vec3(1., .32, .74) * pow(max(dot(R, normalize(vec3(.12, .05, 1.))), 0.), 2.2) * 1.15;          // big pink wash in front
+        c += vec3(1., .55, .18) * pow(max(dot(R, normalize(vec3(-.4, -.3, .86))), 0.), 6.) * 1.4 * (.4 + pat2);  // warm orange
+        c += vec3(1., .86, .48) * pow(max(dot(R, normalize(vec3(-.3, -.12, .95))), 0.), 30.) * 1.7;         // a hot yellow fixture
+        c += vec3(.25, .45, 1.) * pow(max(dot(R, normalize(vec3(-.85, .05, .5))), 0.), 5.) * 1.35;          // blue from the left
+        c += vec3(.95, .25, .95) * pow(max(dot(R, normalize(vec3(.55, .15, .8))), 0.), 4.) * .95;           // magenta from the right
+        c += vec3(.55, .3, 1.) * pow(max(dot(R, normalize(vec3(0., .7, .7))), 0.), 4.) * .7;                // violet overhead
+        c += vec3(1., .42, .3) * pow(max(dot(R, normalize(vec3(-.1, -.8, .6))), 0.), 3.) * .75;             // warm floor lights below
+        c += vec3(.62, .9, 1.) * pow(max(dot(R, normalize(vec3(.15, .3, .94))), 0.), 120.) * 2.6;           // icy white glint
+        float k = max(dot(R, Ld), 0.);
+        c += vec3(1., .96, 1.) * pow(k, 60.) * 3. + vec3(1., .4, .8) * pow(k, 6.) * .8;                     // the moon's own key light
+        c *= .3 + .95 * pat;
+        return c * (1. + .5 * act + .6 * burst);
+      }
+      // one sample of the mirror-tiled sphere: rgb + how far this tile has turned into a mirror (the entry animation)
+      vec4 discoAt(vec2 q, vec3 Ld) {
+        vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
+        vec3 d = obj(n);
+        const float ROWS = 48.;
+        float lat = asin(clamp(d.y, -1., 1.));
+        float fr = (lat / 3.14159265 + .5) * ROWS, row = floor(fr), vv = fract(fr);
+        float latc = ((row + .5) / ROWS - .5) * 3.14159265;
+        float cnt = max(3., floor(cos(latc) * ROWS * 2. + .5));
+        float off = h1(row * 7.13);
+        float fc = (atan(d.z, d.x) / 6.2831853 + .5) * cnt + off, col = floor(fc), uu = fract(fc);
+        float lonc = ((col + .5 - off) / cnt - .5) * 6.2831853;
+        vec3 dc = vec3(cos(latc) * cos(lonc), sin(latc), cos(latc) * sin(lonc));
+        vec3 east = vec3(-sin(lonc), 0., cos(lonc)), north = vec3(-sin(latc) * cos(lonc), cos(latc), -sin(latc) * sin(lonc));
+        float id = h1(row * 131.7 + col * 17.31 + 3.), id2 = h1(row * 71.9 + col * 3.71 + 11.), id3 = h1(id * 913.1 + id2 * 37.);
+        vec3 tn = normalize(dc + (east * (id - .5) + north * (id2 - .5)) * .07);   // every mirror is glued slightly crooked
+        float du = uu - .5, dv = vv - .5, e = .5 - max(abs(du), abs(dv));
+        float bev = 1. - smoothstep(0., .17, e);                                     // the glass edge rounds off
+        vec3 bn = normalize(tn + (abs(du) > abs(dv) ? east * sign(du) : north * sign(dv)) * bev * .6);
+        vec3 nv = normalize(objInv(bn));
+        vec3 c = clubEnv(reflect(vec3(0., 0., -1.), nv), Ld) * (.62 + .6 * id3) * mix(vec3(1.), spotCol(id2), .22);
+        if (id3 < .05) c *= .3;                                                      // a few dull mirrors
+        float facing = dot(normalize(objInv(tn)), Ld);
+        c *= mix(.45, 1.1, smoothstep(-.3, .4, facing));                             // the moon's crescent still shows in the light
+        float grout = smoothstep(.022, .055, e), ao = mix(.5, 1., smoothstep(0., .24, e));
+        c = mix(vec3(.007, .005, .009), c * ao, grout);
+        if (d.y < -.982) c = clubEnv(reflect(vec3(0., 0., -1.), n), Ld) * vec3(.55, .38, .3) * .55;   // the hanging cap
+        float th = .58 * id + .42 * (1. - smoothstep(-.45, .6, facing));            // mirrors catch the light from the lit edge inward
+        return vec4(c, smoothstep(th, th + .12, disco * 1.16));
+      }
       void main() {
         vec2 p = v * 2.05; float r = length(p); const float R = 1.;
         vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.36 + act * 1.25));   // side light: a crescent that widens as you play
@@ -994,6 +1320,39 @@ const ORB = (() => {
         float halo = exp(-max(r - R, 0.) * 6.) * smoothstep(R - .02, R + .03, r) * (.08 + .5 * act);
         vec3 hc = mix(gcol, film(atan(p.y, p.x) * .16 + time * .03), .45);
         vec4 H = vec4(hc * halo, halo);
+        vec3 fl = vec3(0.);
+        if (disco > .01) {
+          float edge = smoothstep(2.05, 1.55, max(abs(p.x), abs(p.y)));
+          vec3 spots = vec3(0.), beams = vec3(0.);
+          for (int i = 0; i < 72; i++) {   // light thrown by individual mirrors onto the club around (moves as the ball turns)
+            float fi = float(i), y = 1. - (fi + .5) / 36., rr = sqrt(max(0., 1. - y * y)), ph = fi * 2.39996;
+            vec3 nv = objInv(vec3(cos(ph) * rr, y, sin(ph) * rr));
+            float lit = dot(nv, Ld);
+            if (lit <= .02) continue;
+            vec3 rd = reflect(-Ld, nv);
+            float b = dot(nv, rd), t = -b + sqrt(max(0., b * b - 1. + 5.29));
+            vec2 sp = (nv + rd * t).xy;
+            float sz = .022 + .02 * h1(fi * 3.3), dd = length(p - sp);
+            vec3 col = spotCol(h1(fi * 7.7));
+            spots += col * smoothstep(sz, sz * .3, dd) * lit * (.35 + .65 * h1(fi * 1.9));
+            if (i < 12) { vec2 ab = sp - nv.xy; float hh2 = clamp(dot(p - nv.xy, ab) / dot(ab, ab), 0., 1.); float bd = length(p - nv.xy - ab * hh2);
+              beams += col * exp(-bd * bd * 1400.) * (1. - hh2) * lit; }
+          }
+          float haze = exp(-max(r - R, 0.) * 2.4) * smoothstep(R - .02, R + .05, r) * (.07 + .18 * burst);
+          vec3 add = (spots * (1. + 1.8 * burst) * .85 + beams * (.08 + .3 * burst)) * edge * disco + vec3(1., .42, .82) * haze * disco;
+          H += vec4(add, clamp(max(add.r, max(add.g, add.b)), 0., 1.));
+          // a few elegant glints where the key light hits the mirrors head-on
+          vec3 ns = normalize(Ld + vec3(0., 0., 1.));
+          if (ns.z > 0.) for (int k = 0; k < 3; k++) {
+            float fk = float(k);
+            vec2 pk = ns.xy + .2 * vec2(sin(time * .31 + fk * 2.), cos(time * .27 + fk * 1.3));
+            if (dot(pk, pk) > .96) continue;
+            float tw = time == 0. ? .25 : pow(max(0., sin(time * 1.9 + fk * 2.1)), 16.);
+            vec2 dv = p - pk;
+            fl += vec3(1., .93, .98) * (exp(-dot(dv, dv) * 1600.) * 1.4 + exp(-abs(dv.y) * 280.) * exp(-abs(dv.x) * 5.5) * .5 + exp(-abs(dv.x) * 280.) * exp(-abs(dv.y) * 9.) * .3) * tw;
+          }
+          fl *= disco * (1. + burst);
+        }
         vec4 S = vec4(0.); float zs = -9.;
         if (r < R) {
           vec3 V = vec3(0., 0., 1.);
@@ -1013,15 +1372,27 @@ const ORB = (() => {
           float spec = pow(max(dot(reflect(-Ld, nn), V), 0.), 48.) * .3 * (1. - .5 * mar);
           vec3 cl = base + (vec3(1.) + f * .4) * spec + f * term * .3;
           // the rings cast their shadow across the lit crescent
-          float dn = dot(N, Ld);
-          if (abs(dn) > 1e-3) { float t = -dot(N, n) / dn; if (t > 0.) cl *= 1. - .7 * ringDen(length(n + t * Ld)); }
+          float dn = dot(N, Ld), rsh = 1.;
+          if (abs(dn) > 1e-3) { float t = -dot(N, n) / dn; if (t > 0.) rsh = 1. - .7 * ringDen(length(n + t * Ld)); }
+          cl *= rsh;
           float shine = clamp(dot(nn, normalize(vec3(.55, .15, 1.))), 0., 1.);   // earthshine shows the relief on the night side
           vec3 cd = (f * .045 + vec3(.012, .013, .02)) * (.45 + .9 * shine) * mix(1., .7, mar);
           vec3 c = mix(cd, cl, lit);
           c += f * pow(1. - n.z, 4.) * (.06 + .4 * act) * (.3 + .7 * lit);   // thin holographic limb
           c *= 1. - .22 * pow(1. - n.z, 3.) * (1. - lit);                     // limb darkening on the night side
+          c *= tint;
+          if (disco > .001) {   // 4 samples per pixel keep the tiny mirrors and seams crisp
+            vec4 acc = vec4(0.);
+            for (int k = 0; k < 4; k++) { vec2 o = vec2(k == 1 || k == 3 ? .25 : -.25, k >= 2 ? .25 : -.25) * pix; vec2 qq = (p + o) / R; acc += dot(qq, qq) < 1. ? discoAt(qq, Ld) : vec4(0.); }
+            acc *= .25;
+            vec3 dcol = acc.rgb * rsh;
+            dcol *= 1.75;                                                     // exposure for a lit club
+            dcol = dcol / (1. + .33 * dcol);                                  // soft tone mapping: hot glints stay white, colours stay rich
+            dcol = max(mix(vec3(dot(dcol, vec3(.299, .587, .114))), dcol, 1.22), 0.);   // a little extra saturation
+            c = mix(c, dcol, acc.a);
+          }
           float sa = smoothstep(R, R - .008, r);
-          S = vec4(c * tint * sa, sa); zs = n.z;
+          S = vec4(c * sa, sa); zs = n.z;
         }
         // rings: intersect the view ray with the ring plane
         float zr = -(N.x * p.x + N.y * p.y) / N.z; vec3 P = vec3(p, zr); float rho = length(P);
@@ -1041,6 +1412,7 @@ const ORB = (() => {
         bool front = zr > zs;
         if (front) { o = S + o * (1. - S.a); o = Rg + o * (1. - Rg.a); }
         else { o = Rg + o * (1. - Rg.a); o = S + o * (1. - S.a); }
+        o.rgb += fl; o.a = max(o.a, clamp(max(fl.r, max(fl.g, fl.b)), 0., 1.));
         gl_FragColor = vec4(min(o.rgb, vec3(o.a)), o.a);
       }`;
     const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
@@ -1048,13 +1420,15 @@ const ORB = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["light", "time", "act", "spin", "hh", "gcol", "tint"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["light", "time", "act", "spin", "hh", "gcol", "tint", "disco", "burst", "pix"]) U[u] = gl.getUniformLocation(prog, u);
     } catch (e) { console.warn("moon shader unavailable:", e); gl = null; }
   }
   if (!gl) $("#orbFallback").hidden = false;
   let act = 0, kick = 0, spin = 0, spinV = 0, sc = 1, scV = 0, scT = 1, res = 1, slow = 0;
+  let disco = 0, discoT = 0, burst = 0, burstDone = false, still = false;   // Disco & Club: the moon becomes a mirror ball
   const body = $("#orbBody");
   return {
+    setDisco(on, instant) { discoT = on ? 1 : 0; still = !!instant; if (!on) burstDone = false; },
     kick() { kick = 1; spinV = 2.6; },
     press(v) { scT = v; },
     draw(now, target, dt) {
@@ -1062,7 +1436,10 @@ const ORB = (() => {
       const steps = Math.max(1, Math.ceil(dt / .008)), h = dt / steps;
       for (let i = 0; i < steps; i++) { scV += ((scT - sc) * 420 - scV * 15) * h; sc += scV * h; }
       body.style.transform = Math.abs(sc - 1) > 1e-4 ? `scale(${sc.toFixed(4)})` : "";
-      spinV *= Math.exp(-dt / .7); spin += (.035 + spinV) * dt;
+      if (still) disco = discoT; else disco += (discoT - disco) * (1 - Math.exp(-dt / (discoT > disco ? .6 : .32)));
+      if (discoT === 1 && !burstDone && disco > .72) { burstDone = true; if (!still) { burst = 1; spinV += .9; } }
+      burst *= Math.exp(-dt / 1.1);
+      spinV *= Math.exp(-dt / .7); spin += (.035 + spinV + (still ? 0 : .2 * disco)) * dt;
       if (!gl) return;
       // adaptive quality: a slow machine renders the moon at a lower resolution instead of slowing everything down
       slow += ((dt > .028 ? 1 : 0) - slow) * .05; if (slow > .6 && res > .5) { res -= .1; slow = 0; }
@@ -1075,6 +1452,7 @@ const ORB = (() => {
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, now / 1000); gl.uniform1f(U.act, act); gl.uniform1f(U.spin, spin);
       gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.tint, CR.theme.tint);
+      gl.uniform1f(U.disco, disco < .002 ? 0 : disco); gl.uniform1f(U.burst, burst); gl.uniform1f(U.pix, 4.1 / w);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
   };
@@ -1366,8 +1744,41 @@ function applyValues(vals) {
 function toast(t) { const n = $("#toast"); n.textContent = t; n.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => n.hidden = true, 2400); }
 
 // ================================================================ audio
+function startPlugin() {
+  const B = window.__JUCE__.backend, td = new TextDecoder(), te = new TextEncoder();
+  const str = b => b == null ? null : typeof b === "string" ? b : td.decode(b).replace(/\0+$/, "");
+  ctx = { plugin: true };
+  node = { port: { postMessage(m) {
+    const o = Object.assign({}, m);
+    if (o.bytes != null) o.bytes = str(o.bytes);
+    if (o.state != null) o.state = str(o.state);
+    B.emitEvent("lumi", o);
+  } } };
+  B.addEventListener("lumi", m => {
+    if (m.type === "note") { hostNote(m.note, m.vel, m.on); return; }
+    if (m.type === "saved") { toast(m.ok ? "Saved in Documents/LUMELODY: drag it into the piano roll or playlist" : "Could not save or drag the file"); return; }
+    if (m.type === "preset") { const i = PRESETS.findIndex(p => p.id === m.id); if (i >= 0 && i !== cur) loadPreset(i, true, true); if (m.values) applyValues(m.values); return; }
+    if (m.type === "ready") {
+      ready = true;
+      const i = PRESETS.findIndex(p => p.id === m.id);
+      if (i >= 0) loadPreset(i, true, true);
+      applyValues(m.values); setStatus(true); return;
+    }
+    if (m.bytes != null) m.bytes = te.encode(m.bytes);
+    onEngine(m);
+  });
+  B.emitEvent("lumi", { type: "hello" });
+}
+// notes played by the host (piano roll, MIDI keyboard): light the keys and the moon, the plugin already plays them
+const hostHeld = new Set();
+function hostNote(note, vel, on) {
+  const k = keyEl(note);
+  if (on) { hostHeld.add(note); if (k) k.classList.add("down"); lightOn(note, vel); }
+  else { hostHeld.delete(note); if (![...held.values()].includes(note)) { if (k) k.classList.remove("down"); lightOff(note); } }
+}
 async function startAudio() {
   if (ctx) return;
+  if (PLUGIN) { startPlugin(); return; }
   ctx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: "interactive" });
   const [bytes] = await Promise.all([fetch("lumi.wasm").then(r => { if (!r.ok) throw new Error("engine file missing"); return r.arrayBuffer(); }), ctx.audioWorklet.addModule("lumi-worklet.js")]);
   node = new AudioWorkletNode(ctx, "lumi-engine", { numberOfInputs: 0, outputChannelCount: [2] });
@@ -1384,12 +1795,12 @@ function onEngine(m) {
   if (m.type === "stateOut") { savedFx[m.id] = dec.decode(m.bytes); store.set("lumi-fx-v2", savedFx); toast("Effects saved with " + PRESETS.find(p => p.id === m.id).name); }
 }
 function setStatus(live) { const s = $("#status"); s.classList.toggle("live", live); s.lastElementChild.textContent = live ? "live" : "off"; }
-function loadPreset(i, skipSaved) {
+function loadPreset(i, skipSaved, fromHost) {
   cur = (i + PRESETS.length) % PRESETS.length;
   const p = PRESETS[cur];
   releaseAll(); baseNote = p.baseNote;
   renderSound(); renderKeyboard(); renderList();
-  if (!ready) return;
+  if (!ready || fromHost) return;
   const st = !skipSaved && savedFx[p.id] ? enc.encode(savedFx[p.id] + "\0") : null;
   send({ type: "load", id: p.id, bytes: enc.encode(p.params + "\0"), bpm: +$("#bpm").value || 120, state: st });
   send({ type: "tempo", bpm: +$("#bpm").value || 120 });
@@ -1462,7 +1873,7 @@ function noteOff(id) {
   held.delete(id);
   if (![...held.values()].includes(note)) { send({ type: "off", note }); const k = keyEl(note); if (k) k.classList.remove("down"); lightOff(note); }
 }
-function releaseAll() { for (const id of [...held.keys()]) noteOff(id); send({ type: "alloff" }); document.querySelectorAll("#kb .down").forEach(k => k.classList.remove("down")); for (const L of lights.values()) L.target = 0; }
+function releaseAll(panic) { for (const id of [...held.keys()]) noteOff(id); if (!PLUGIN || panic === true) send({ type: "alloff" }); document.querySelectorAll("#kb .down").forEach(k => k.classList.remove("down")); for (const L of lights.values()) L.target = 0; }
 function velFrom(e, k) { const r = k.getBoundingClientRect(); return Math.max(.25, Math.min(1, .3 + .75 * (e.clientY - r.top) / r.height)); }
 const kbEl = $("#kb");
 kbEl.addEventListener("pointerdown", e => {
@@ -1479,9 +1890,10 @@ kbEl.addEventListener("pointermove", e => {
 for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) kbEl.addEventListener(t, e => noteOff("p" + e.pointerId));
 function shiftOct(dlt) { releaseAll(); baseNote = Math.max(12, Math.min(108 - OCTAVES * 12, baseNote + dlt)); renderKeyboard(); }
 $("#octDown").onclick = () => shiftOct(-12); $("#octUp").onclick = () => shiftOct(12);
-$("#panic").onclick = releaseAll;
+$("#panic").onclick = () => releaseAll(true);
 const KEYMAP = { a: 0, w: 1, s: 2, e: 3, d: 4, f: 5, t: 6, g: 7, y: 8, h: 9, u: 10, j: 11, k: 12, o: 13, l: 14, p: 15, ";": 16 };
 document.addEventListener("keydown", e => {
+  if (window.LUMI_PADS_ON) return;   // Neon Pads uses the computer keyboard for its own pads
   if (e.target.closest && e.target.closest("input, textarea, select") || e.metaKey || e.ctrlKey || e.altKey) return;
   const key = e.key.toLowerCase();
   if (key === "z") { shiftOct(-12); return; } if (key === "x") { shiftOct(12); return; }
@@ -1489,7 +1901,7 @@ document.addEventListener("keydown", e => {
   if (!ctx) startFromGesture();
   noteOn("k" + key, baseNote + KEYMAP[key], .8);
 });
-document.addEventListener("keyup", e => { const key = e.key.toLowerCase(); if (key in KEYMAP) noteOff("k" + key); });
+document.addEventListener("keyup", e => { if (window.LUMI_PADS_ON) return; const key = e.key.toLowerCase(); if (key in KEYMAP) noteOff("k" + key); });
 window.addEventListener("blur", releaseAll);
 window.addEventListener("resize", () => { clearTimeout(starsT); starsT = setTimeout(drawStars, 150); const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
 $("#midiBtn").onclick = async () => {
@@ -1608,19 +2020,23 @@ function renderList() {
   }) : [el("p", { className: "empty", textContent: "No sounds match. Clear the search or pick another category." })]));
 }
 
+/*__PROGRESSIONS__*/
+
 // ================================================================ boot
 async function startFromGesture() {
   $("#start").hidden = true;
   try { await startAudio(); } catch (err) { toast("Audio could not start: " + (err && err.message || err)); }
 }
 $("#startBtn").onclick = startFromGesture;
+if (PLUGIN) { $("#start").hidden = true; for (const id of ["demoSolo", "demoBeat", "bpm", "midiBtn"]) $("#" + id).hidden = true; $('label[for="bpm"]').hidden = true; }
 setTheme("crystal", false);
-buildRack(); buildDetail(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
+buildRack(); buildDetail(); WORKSPACE.init(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
 const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e) { return null; } })();
 const li = PRESETS.findIndex(p => p.id === last);
 loadPreset(li >= 0 ? li : 0);
 requestAnimationFrame(frame);
 requestAnimationFrame(drawStars);
+if (PLUGIN) startAudio();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawStars(); setName(PRESETS[cur].name); });
 (async () => {
   try { db = window.claude && await window.claude.use("db"); } catch (e) { db = null; }

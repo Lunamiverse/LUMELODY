@@ -46,12 +46,22 @@ class LumiProcessor extends AudioWorkletProcessor {
       case "alloff": X.lumi_all_off(); break;
       case "tempo": X.lumi_tempo(m.bpm); break;
       case "bend": X.lumi_bend(m.value); break;
+      // offline rendering (audio export): a note list with sample positions, played inside process()
+      case "seq": this.seq = m.events; this.seqPos = 0; this.frame = 0; this.port.postMessage({ type: "seqok" }); break;
     }
   }
   process(inputs, outputs) {
     const out = outputs[0], X = this.X;
     if (!X) return true;
     const n = out[0].length;
+    if (this.seq) {
+      const end = this.frame + n;
+      while (this.seqPos < this.seq.length && this.seq[this.seqPos].f < end) {
+        const e = this.seq[this.seqPos++];
+        if (e.on) X.lumi_note_on(e.note, e.vel); else X.lumi_note_off(e.note);
+      }
+      this.frame = end;
+    }
     X.lumi_process(n);
     const mem = X.memory.buffer;
     out[0].set(new Float32Array(mem, X.lumi_out_l(), n));
