@@ -49,10 +49,10 @@
   front edge on the strike and sinks as it fades.
 - **Clear-plastic look (the only theme), after the CD jewel case and the clear cassette:** pure black, no background
   art. Panels and buttons are colourless clear moulded plastic: bright rims, an inner moulded rim line, a gloss streak,
-  a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is polished silver like a
-  silver vinyl record: monochrome, high contrast, fine grooves running along the border, long anisotropic sheen bands,
-  a thin rainbow fringe on the outer edge, two large blown-out light blooms and a small one, with horizontal rainbow
-  lens flares that spill softly just inside the frame. Knobs are real 3-D objects ray-marched per knob: a fluted
+  a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is colourless clear plastic with the
+  shine of the silver-vinyl reference: see-through in the middle, reflections and bright edges where it curves away,
+  crisp bright lines along both edges, long sheen bands, sharp speculars, two large blown-out light blooms and a
+  small one with white horizontal lens streaks spilling softly just inside the frame. No rainbow. Knobs are real 3-D objects ray-marched per knob: a fluted
   clear-acrylic cylinder (n = 1.49) on a polished turned-metal ring, seen from above at an angle, with a small metal dot
   on the top as the indicator. Rays refract into the plastic, travel to the back face, refract out (or reflect
   internally) and show the metal ring and panel behind, mixed with Fresnel reflections, edge highlights and a soft

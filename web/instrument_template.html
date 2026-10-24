@@ -793,7 +793,7 @@ const FRAME = (() => {
           vec2 q = c - hot(i); float k = i == 2 ? .45 : 1.;
           float bloom = exp(-dot(q, q) / (900. * uu * uu * k)) * 1.1 * k;
           float streak = exp(-pow(q.y / (2.4 * uu), 2.)) * exp(-abs(q.x) / (150. * uu * k)) * .55 * k;
-          fl += vec3(1.) * bloom + mix(vec3(1.), spectrum(q.x / (260. * uu) + .15), .85) * streak;
+          fl += vec3(1.) * bloom + vec3(1.) * streak;                 // white light only, no rainbow
           fa += bloom * .9 + streak * .7;
         }
         if (d > .5) { gl_FragColor = vec4(0.); return; }
@@ -805,24 +805,19 @@ const FRAME = (() => {
         vec2 tg = vec2(-g.y, g.x);
         float t = clamp(-d / bw, 0., 1.), s = t * 2. - 1.;
         float slope = -s / sqrt(max(.02, 1. - s * s * .97));                       // rounded bevel across the border
-        // fine grooves running along the border, like the rings of a record
-        float grooves = sin(-d * 3.1) * .5 + .5, grooves2 = sin(-d * 9.7 + sin(dot(c, tg) * .004) * 2.) * .5 + .5;
-        vec3 n = normalize(vec3(g * (slope * .9 + (grooves2 - .5) * .12), 1.));
+        vec3 n = normalize(vec3(g * slope * .9, 1.));
         vec3 V = vec3(0., 0., 1.), L = normalize(vec3(light, .9));
         vec3 E = env(reflect(-V, n));
-        float fr = .6 + .4 * pow(1. - n.z, 3.);
-        // polished silver: mostly monochrome, high contrast
-        vec3 col = vec3(dot(E, vec3(.333))) * 1.5 * fr + vec3(.12) * (.5 + .5 * n.y);
-        col *= .78 + .22 * grooves * (.6 + .4 * grooves2);
-        // anisotropic sheen: the grooves throw long bright bands where the border runs toward the light
-        float an = pow(abs(dot(tg, normalize(light))), 10.) * (.5 + .5 * grooves2);
-        col += vec3(.95) * an * .8;
-        col += vec3(1.) * pow(max(dot(reflect(-L, n), V), 0.), 60.) * .9;
-        // a thin rainbow fringe on the outer edge (soft neon hues)
-        col += spectrum(dot(c, tg) / (420. * uu) + time * .01) * (1. - smoothstep(.0, .14, t)) * .45;
-        col *= mix(.4, 1., smoothstep(0., .08, t)) * mix(.35, 1., smoothstep(1., .9, t));        // crisp dark lines at both edges
+        float ndv = n.z, Fp = .04 + .96 * pow(1. - ndv, 5.);
+        // clear plastic tube: colourless, see-through in the middle, reflections and bright edges where it curves away
+        vec3 col = vec3(dot(E, vec3(.333))) * (.4 + .9 * Fp) + vec3(.92) * pow(1. - ndv, 2.4) * .4;
+        float an = pow(abs(dot(tg, normalize(light))), 10.);
+        col += vec3(.95) * an * .75;                                                         // long sheen bands
+        col += vec3(1.) * pow(max(dot(reflect(-L, n), V), 0.), 60.) * 1.;                     // sharp specular
+        col += vec3(1.) * (exp(-pow(t / .07, 2.)) * .55 + exp(-pow((1. - t) / .07, 2.)) * .45);   // crisp bright lines at both edges of the plastic
+        float bodyA = .42 + .5 * Fp + .25 * an;
         col += fl;                                                                          // blown-out highlights
-        float a = smoothstep(.5, -.8, d) * smoothstep(-bw - .5, -bw + .8, d);
+        float a = smoothstep(.5, -.8, d) * smoothstep(-bw - .5, -bw + .8, d) * clamp(max(bodyA, max(exp(-pow(t / .07, 2.)), exp(-pow((1. - t) / .07, 2.)))), 0., 1.);
         a = max(a, clamp(fa * .55, 0., 1.) * step(d, 0.));
         gl_FragColor = vec4(min(col * a, vec3(a)), a);
       }`;
