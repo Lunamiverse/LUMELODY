@@ -2022,6 +2022,7 @@ function loadPreset(i, skipSaved, fromHost) {
   const p = PRESETS[cur];
   releaseAll(); baseNote = p.baseNote;
   renderSound(); renderKeyboard(); renderList();
+  if (typeof WORKSPACE !== "undefined") WORKSPACE.mood();   // a Disco + EDM + Club Bangers sound turns the moon into the disco ball
   if (!ready || fromHost) return;
   const st = !skipSaved && savedFx[p.id] ? enc.encode(savedFx[p.id] + "\0") : null;
   send({ type: "load", id: p.id, bytes: enc.encode(p.params + "\0"), bpm: +$("#bpm").value || 120, state: st });

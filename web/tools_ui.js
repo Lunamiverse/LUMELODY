@@ -539,7 +539,14 @@ const WORKSPACE = (() => {
     mood();
   }
   // the moon becomes a disco ball only in the Disco & Club section
-  function mood() { if (typeof ORB !== "undefined" && ORB.setDisco) ORB.setDisco((!$("#prog").hidden && tabNow === "library" && PROG.isDisco()) || (typeof LIBS !== "undefined" && LIBS.discoActive()), !FINDER.prefs.motion || reduceMotion); }
+  // disco-ball moon: the Sounds panel decides while it is open (its library); otherwise the Finder's disco & club library,
+  // or a sound from the Disco + EDM + Club Bangers library being the one loaded on the keys
+  function mood() {
+    if (typeof ORB === "undefined" || !ORB.setDisco) return;
+    const libsOpen = typeof LIBS !== "undefined" && !$("#libs").hidden;
+    const on = libsOpen ? LIBS.discoActive() : (!$("#prog").hidden && tabNow === "library" && PROG.isDisco()) || (PRESETS[cur] && PRESETS[cur].cat === "Disco + EDM + Club");
+    ORB.setDisco(on, !FINDER.prefs.motion || reduceMotion);
+  }
   function applyFx(v) {
     for (const [fx, ps] of Object.entries(v)) {
       const f = fxIndex(fx); if (f < 0) continue;
