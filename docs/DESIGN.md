@@ -1,8 +1,21 @@
 # LUMELODY visual design (web instrument; the plugin UI will follow the same system)
 
-- **Direction:** a night-sky instrument with one hero object. Hairline panels, lowercase labels in Martian Mono
-  (light, semi-condensed; OFL), the logo and sound names in Bodoni Moda italic (high-contrast fashion serif; OFL). Holographic foil is
-  used sparingly as a precious material: the moon, the wordmark, the knob caps, lit keys, one foil hairline on the frame.
+- **Direction:** restrained silver chrome on near-black obsidian, with a hint of rose, violet and icy cyan coming from
+  the lighting and the material, not painted on. One hero object (the moon), a liquid-chrome frame, dark-glass panels.
+- **Typography system:**
+  - *Logo:* a custom vector wordmark (drawn as SVG paths, not a font): monoline geometric capitals, cap height 100,
+    stroke 7.5, wide tracking. Signatures: the M's middle is a draped crescent swoop; the E's middle bar floats free;
+    the O is a moon, with a crescent of light inside its ring; the Y's arms form a crescent cup on a stem. Polished
+    silver chrome stroke with faint rose/cyan in the lower reflections, a light sweep on open. Reads in plain black.
+  - *Sound and preset names, titles:* Federo (OFL, Google Fonts), capitals, wide tracking; art-deco geometry that
+    feels otherworldly but stays readable small. The selected sound has a silver finish and a fine luminous line;
+    in the browser the selected item gets a slim chrome indicator and a silver highlight. Long names step down in
+    size to stay on one line.
+  - *Labels, values, technical text:* Martian Mono (OFL), light, semi-condensed, lowercase.
+  - Evaluated and not chosen for names: Italiana and Gruppo (too thin small), Julius Sans One and Syne (elegant
+    but generic), Poiret One (too decorative), Tenor Sans (too plain), Montserrat Alternates (playful).
+  - Fallbacks: Federo → Josefin Sans/Avenir Next/Futura; Martian Mono → SF Mono/Menlo/Consolas. The plugin build
+    must embed both font files (they are OFL) so it never depends on the network.
 - **Layout:** wordmark + sound picker + themes on top; the moon on the left with the sound name; all 20 effect knobs
   in six hairline panels (space, motion, tone, rhythm, pitch, grain & glue) to its right, above the keys; a detail
   panel for the selected effect's extra controls; a deck row (octave, demo, bpm, midi, stop, live tip text); the
@@ -29,7 +42,5 @@
   lit to the current value (bipolar controls light from centre). Bypassed effects keep their LEDs dimly lit.
 - **Keyboard:** line-art keys: hairline separators, outlined black keys. A key fills with foil light while its note
   sounds (brightness from velocity), spills light onto neighbours and fades after release, from the real note events.
-- **Logo:** "lumel·dy" in Bodoni Moda italic where the "o" is a small ringed moon (foil sphere, chrome ring
-  passing behind and in front), chrome fill tinted by the foil spectrum, a soft glow and a light sweep on open.
 - **Limits:** CSS + WebGL approximation of foil and chrome, not physically based rendering. Without WebGL the
   foil falls back to a still gradient and knobs to a flat drawing.

@@ -1,7 +1,7 @@
 <title>LUMELODY</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Martian+Mono:wdth,wght@75..112.5,300..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Federo&family=Martian+Mono:wdth,wght@75..112.5,300..500&display=swap">
 <style>
 /* LUMELODY: a night-sky instrument. One hero object (the holographic moon), hairline panels, lowercase mono labels.
    Holographic foil is used sparingly, as a precious material: the moon, the wordmark, the knob caps, lit keys. */
@@ -23,11 +23,10 @@
 @property --h6 { syntax: "<color>"; inherits: true; initial-value: #cf8bff; }
 :root {
   color-scheme: dark;
-  --serif: "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --serif: "Federo", "Josefin Sans", "Avenir Next", "Futura", sans-serif;
   --mono: "Martian Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-  --bg: #060609; --win1: #11111c; --win2: #07070c; --ink: #eceef6; --muted: #8d93a3; --hair: #d9def0; --glow: #d6e4ff;
-  --ch1: #dfe3e9; --ch2: #8a9099; --obs2: #07070c;
-  --h1: #ff7ab8; --h2: #ffd877; --h3: #8dffb8; --h4: #6fe3ff; --h5: #8a96ff; --h6: #cf8bff;
+  --bg: #040507; --win1: #0a0c10; --win2: #040507; --ink: #eef4fb; --muted: #8e98a6; --hair: #d8ecff; --glow: #8fe3ff; --ch1: #e6eef6; --ch2: #7d8794; --obs2: #040507;
+  --h1: #e9f4ff; --h2: #9fe8ff; --h3: #ffffff; --h4: #c8b6ff; --h5: #7fd0ff; --h6: #ffd6f0;
   --line: color-mix(in oklab, var(--hair) 20%, transparent);
   --line-strong: color-mix(in oklab, var(--hair) 42%, transparent);
   --foil: linear-gradient(100deg, var(--h1), var(--h2), var(--h3), var(--h4), var(--h5), var(--h6), var(--h1));
@@ -35,36 +34,39 @@
   transition: --bg .8s, --win1 .8s, --win2 .8s, --ink .8s, --muted .8s, --hair .8s, --glow .8s, --ch1 .8s, --ch2 .8s, --obs2 .8s,
               --h1 .8s, --h2 .8s, --h3 .8s, --h4 .8s, --h5 .8s, --h6 .8s;
 }
-:root[data-theme="rose"]   { --bg: #09060a; --win1: #1a0f17; --win2: #0a060a; --ink: #f8eef3; --muted: #ad94a0; --hair: #f6d6e4; --glow: #ffb7d2; --ch1: #f0dde3; --ch2: #a8858f; --obs2: #0a060a;
-  --h1: #ff8fc4; --h2: #ffc7da; --h3: #ffd6b8; --h4: #f4b4ff; --h5: #c8a8ff; --h6: #ffa3cf; }
-:root[data-theme="gold"]   { --bg: #080705; --win1: #18130b; --win2: #090705; --ink: #f6efe2; --muted: #ab9c82; --hair: #f2e2c0; --glow: #ffd99e; --ch1: #ece2cc; --ch2: #a59573; --obs2: #090705;
-  --h1: #ffd27a; --h2: #fff0b8; --h3: #ffbf94; --h4: #f2f6bf; --h5: #ffb0a0; --h6: #e8d4ff; }
-:root[data-theme="violet"] { --bg: #07050c; --win1: #150e24; --win2: #07050d; --ink: #f0ecfc; --muted: #9e94ba; --hair: #ded4ff; --glow: #c9a8ff; --ch1: #e2dcf2; --ch2: #8f87a8; --obs2: #07050d;
-  --h1: #b07dff; --h2: #ff8fe0; --h3: #7fd8ff; --h4: #9f9bff; --h5: #e7a8ff; --h6: #74e8ff; }
-:root[data-theme="prism"]  { --bg: #060609; --win1: #121019; --win2: #06060a; --ink: #f4f3f8; --muted: #9b99ab; --hair: #ece8ff; --glow: #f0d2ff; --ch1: #e6e6ee; --ch2: #8e8e9c; --obs2: #06060a;
-  --h1: #ff4f9a; --h2: #ffd24f; --h3: #5cff9a; --h4: #3fd8ff; --h5: #6a6bff; --h6: #c34fff; }
+:root[data-theme="rose"] { --bg: #050305; --win1: #0e060b; --win2: #050305; --ink: #fff0f7; --muted: #a8909d; --hair: #ffd1ea; --glow: #ff4fa8; --ch1: #f6e9f0; --ch2: #8e7c87; --obs2: #050305;
+  --h1: #ff3d9a; --h2: #ff8fd0; --h3: #ffe1f2; --h4: #8ff3ff; --h5: #3fd2ff; --h6: #c26bff; }
+:root[data-theme="gold"] { --bg: #060403; --win1: #0f0a05; --win2: #060403; --ink: #fff6e6; --muted: #ab9b80; --hair: #ffe2b0; --glow: #ffb547; --ch1: #f3e6cc; --ch2: #8f7c5c; --obs2: #060403;
+  --h1: #ffcf7a; --h2: #fff1c9; --h3: #ff9a5c; --h4: #ffd6a0; --h5: #ff79b4; --h6: #ffe9b0; }
+:root[data-theme="violet"] { --bg: #050309; --win1: #0c0716; --win2: #050309; --ink: #f3eeff; --muted: #9b91b5; --hair: #dccbff; --glow: #9b5cff; --ch1: #e6defa; --ch2: #82779e; --obs2: #050309;
+  --h1: #8a4dff; --h2: #c39bff; --h3: #ff6fe0; --h4: #3ff0ff; --h5: #6a7dff; --h6: #e6d3ff; }
+:root[data-theme="prism"] { --bg: #040405; --win1: #0b0a0e; --win2: #040405; --ink: #f6f5fa; --muted: #9a98a8; --hair: #f0e6ff; --glow: #ff5ad1; --ch1: #ececf2; --ch2: #858592; --obs2: #040405;
+  --h1: #ff2e88; --h2: #ffd23f; --h3: #3dff8f; --h4: #29d6ff; --h5: #5b5cff; --h6: #c13dff; }
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--ink); font: 300 11px/1.55 var(--mono); font-stretch: 87.5%; letter-spacing: .01em; -webkit-font-smoothing: antialiased; text-transform: lowercase;
   background:
     radial-gradient(45% 40% at 22% 30%, color-mix(in oklab, var(--h5) 13%, transparent), transparent 70%),
     radial-gradient(40% 40% at 82% 65%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%),
     radial-gradient(60% 45% at 50% 105%, color-mix(in oklab, var(--h4) 8%, transparent), transparent 70%), var(--bg);
+  background-blend-mode: normal;
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
 button, select, input, textarea { font: inherit; color: inherit; text-transform: inherit; }
 :focus-visible { outline: 1px solid var(--glow); outline-offset: 2px; }
 .cap { text-transform: none; }
 
 /* ------------------------------------------------ window */
-.win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 10px; overflow: hidden;
+.win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 26px; overflow: hidden;
   background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--h5) 14%, transparent), transparent 70%), radial-gradient(50% 60% at 85% 80%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
-  box-shadow: 0 0 0 1px var(--line), 0 40px 90px -40px #000; }
-.win::before { /* a single hairline of foil along the top edge: the only foil on the frame */
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--foil); opacity: .8; z-index: 3; }
+  box-shadow: 0 60px 110px -40px #000, 0 30px 80px -50px color-mix(in oklab, var(--glow) 55%, transparent), 0 0 0 1px rgba(0,0,0,.6); }
+.frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 6; display: block; }
+.frame-css { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 5; border: 16px solid transparent; background: linear-gradient(160deg, #fff, var(--ch2) 20%, #111 40%, var(--ch1) 55%, #222 75%, #fff) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.win::after { content: ""; position: absolute; inset: 16px; border-radius: 12px; pointer-events: none; z-index: 4; box-shadow: inset 0 0 0 1px rgba(0,0,0,.9), inset 0 10px 24px -8px rgba(0,0,0,.85), inset 0 -8px 20px -10px rgba(0,0,0,.7); }
+
 .stars { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-.inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 14px 18px 18px; }
+.inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 30px 34px 34px; }
 
 /* hairline boxes */
-.hl { border: 1px solid var(--line); border-radius: 6px; background: color-mix(in oklab, var(--win2) 52%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.hl { border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 40%), color-mix(in oklab, var(--win2) 58%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 10px 30px -18px #000; }
 .btn { border: 1px solid var(--line); border-radius: 5px; background: color-mix(in oklab, var(--win2) 50%, transparent); cursor: pointer;
   height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
 .btn:hover { border-color: var(--line-strong); }
@@ -74,18 +76,14 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 /* ------------------------------------------------ top bar */
 .top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
-.wm { margin: 0; display: inline-flex; align-items: baseline; font: italic 500 34px/1 var(--serif); font-optical-sizing: auto; letter-spacing: -.012em; text-transform: lowercase; white-space: nowrap;
-  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%), var(--foil), linear-gradient(180deg, #fff 0%, var(--ch1) 38%, var(--ch2) 52%, #fff 58%, var(--ch1) 100%);
-  background-size: 260% 100%, 220% 100%, 100% 100%; background-blend-mode: normal, soft-light, normal;
-  -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 2.6s .3s cubic-bezier(.3,.6,.2,1) both, drift 18s linear infinite; padding: 2px 4px 6px 0;
-  filter: drop-shadow(0 0 14px color-mix(in oklab, var(--glow) 28%, transparent)); }
-.wm .o { width: .74em; height: .5em; margin: 0 .01em 0 .02em; overflow: visible; align-self: center; transform: translateY(.1em); flex: none; }
+.wm { margin: 0; line-height: 0; }
+.wm svg { height: 27px; width: auto; display: block; overflow: visible; filter: drop-shadow(0 1px 0 rgba(0,0,0,.9)) drop-shadow(0 0 14px rgba(255,255,255,.07)); }
 @keyframes sheen { from { background-position: 140% 0, 0% 0, 0 0; } to { background-position: -40% 0, 30% 0, 0 0; } }
 @keyframes drift { to { background-position: -40% 0, 230% 0, 0 0; } }
 .preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
 .preset .btn { border: 0; background: none; height: 100%; }
 .preset .pick { flex: 1; justify-content: flex-start; min-width: 0; overflow: hidden; }
-.preset .pick b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+.preset .pick b { font: 400 12.5px var(--serif); letter-spacing: .16em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; }
 .tools { display: flex; align-items: center; gap: 8px; }
 .swatches { display: flex; gap: 6px; padding: 0 4px; }
 .sw { width: 14px; height: 14px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 -1px 2px rgba(0,0,0,.4); }
@@ -116,19 +114,31 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .hero .name.swap { animation: nameIn .7s cubic-bezier(.2,.7,.2,1); }
 .hero .meta.swap { animation: nameIn .7s .08s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes nameIn { from { opacity: 0; filter: blur(8px); transform: translateY(8px); letter-spacing: .08em; } to { opacity: 1; filter: blur(0); transform: none; } }
-.hero .name { font: italic 500 30px/1.1 var(--serif); font-optical-sizing: auto; text-transform: none; text-align: center; letter-spacing: -.01em; }
+.hero .name { margin: 4px 0 0; width: 100%; display: grid; justify-items: center; gap: 10px; font-weight: 400; }
+.hero .ntxt { font: 400 30px/1.15 var(--serif); letter-spacing: .2em; text-transform: uppercase; text-align: center; white-space: nowrap; padding-left: .2em;
+  background: linear-gradient(180deg, #ffffff 0%, #e7ebf2 42%, #9aa2ae 50%, #d9dee7 62%, color-mix(in oklab, var(--h6) 18%, #fff) 82%, #fff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,.85)); }
+.hero .name::after { /* a fine luminous line under the selected sound */
+  content: ""; width: 96px; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--hair) 70%, transparent), transparent); box-shadow: 0 0 8px color-mix(in oklab, var(--glow) 50%, transparent); }
 .hero .meta { color: var(--muted); font-size: 11px; text-align: center; }
 .hero .hint { color: var(--muted); font-size: 10.5px; opacity: .8; }
 .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .panel { padding: 7px 10px 6px; display: grid; gap: 2px; }
-.panel h3 { margin: 0; display: flex; justify-content: space-between; font: 400 10.5px var(--mono); font-stretch: 100%; color: var(--ink); letter-spacing: .14em; }
+.panel h3 { margin: 0; display: flex; justify-content: space-between; align-items: baseline; font: 400 11px var(--serif); color: var(--ink); letter-spacing: .26em; text-transform: uppercase; }
+.panel h3 span { font: 300 10px var(--mono); letter-spacing: .04em; text-transform: lowercase; }
 .panel h3 span { color: var(--muted); font-weight: 400; }
 .panel .knobs { display: flex; justify-content: space-around; gap: 2px; }
 .knob { position: relative; display: grid; justify-items: center; gap: 0; width: 62px; touch-action: none; user-select: none; -webkit-user-select: none; }
-.knob .face { position: relative; width: 38px; height: 38px; margin: 8px 0 4px; cursor: grab; border-radius: 50%; }
+.knob .face { position: relative; width: 40px; height: 40px; margin: 9px 0 5px; cursor: grab; border-radius: 50%; }
 .knob .face:active { cursor: grabbing; }
 .knob canvas { width: 100%; height: 100%; display: block; }
 .knob svg.ring { position: absolute; inset: -22%; width: 144%; height: 144%; pointer-events: none; overflow: visible; }
+.knob svg.ring path { fill: none; stroke-linecap: round; }
+.knob .trk { stroke: color-mix(in oklab, var(--hair) 12%, transparent); stroke-width: 3.2; }
+.knob .nglow { stroke: url(#neonGrad); stroke-width: 9; }
+.knob .narc { stroke: url(#neonGrad); stroke-width: 3; }
+.knob .ncore { stroke: #fff; stroke-width: 1; }
+.knob .ntip { fill: #fff; filter: drop-shadow(0 0 3px var(--glow)); }
 .knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font-size: 10px; font-stretch: 80%; white-space: nowrap; }
 .knob .name .led { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex: none; }
 .knob.on .name { color: var(--ink); }
@@ -142,7 +152,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 /* selected effect: all its controls */
 .detail { display: grid; grid-template-columns: minmax(170px, 260px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 9px 12px; min-height: 68px; }
 .detail .ttl { display: grid; gap: 2px; min-width: 0; }
-.detail .ttl b { font: italic 500 21px/1.1 var(--serif); text-transform: none; letter-spacing: -.01em; }
+.detail .ttl b { font: 400 15px/1.2 var(--serif); text-transform: uppercase; letter-spacing: .2em; }
 .detail .ttl span { color: var(--muted); font-size: 10.5px; line-height: 1.4; }
 .detail .ctrls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
 .power { border: 1px solid var(--line); border-radius: 5px; background: none; cursor: pointer; height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; }
@@ -188,7 +198,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .bk.down { transform: perspective(420px) rotateX(-7deg) scaleY(.98); }
 
 /* ------------------------------------------------ browser sheet */
-.sheet { position: absolute; inset: 56px 18px 18px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
+.sheet { position: absolute; inset: 78px 30px 30px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
   border: 1px solid var(--line-strong); border-radius: 8px; background: color-mix(in oklab, var(--win2) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 60px -20px #000; }
 .sheet-top { display: flex; gap: 8px; flex-wrap: wrap; }
 .field { border: 1px solid var(--line); border-radius: 5px; padding: 6px 9px; background: none; min-width: 0; }
@@ -199,8 +209,11 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .chip[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
 .list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; align-content: start; }
 .item { text-align: left; border: 1px solid var(--line); border-radius: 6px; background: none; cursor: pointer; padding: 7px 10px; display: grid; gap: 1px; min-width: 0; }
-.item[aria-current="true"] { border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
-.item b { font: italic 500 17px/1.2 var(--serif); text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item { position: relative; }
+.item[aria-current="true"] { border-color: color-mix(in oklab, var(--hair) 45%, transparent); background: linear-gradient(90deg, rgba(255,255,255,.06), transparent 70%); }
+.item[aria-current="true"]::before { content: ""; position: absolute; left: -1px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #fff, var(--h4)); box-shadow: 0 0 8px var(--glow); }
+.item[aria-current="true"] b { background: linear-gradient(180deg, #fff, #c9cfd9 55%, #fff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.item b { font: 400 13px/1.35 var(--serif); letter-spacing: .14em; text-transform: uppercase;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .item small { font-size: 10.5px; color: var(--muted); }
 .mk { font-size: 10.5px; } .mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
 .sound-card { display: grid; gap: 6px; padding: 10px; }
@@ -212,14 +225,15 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .mark[data-k=improve][aria-pressed=true] { color: #ffd88a; border-color: #ffd88a; }
 .mark[data-k=drop][aria-pressed=true] { color: #ff97a2; border-color: #ff97a2; }
 #fav[aria-pressed=true] { color: var(--glow); border-color: var(--glow); }
-.toast { position: absolute; right: 18px; bottom: 18px; z-index: 12; font-size: 11px; color: var(--win2); background: var(--ink); border-radius: 5px; padding: 6px 10px; }
+.toast { position: absolute; right: 34px; bottom: 34px; z-index: 12; font-size: 11px; color: var(--win2); background: var(--ink); border-radius: 5px; padding: 6px 10px; }
 
 .start { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: color-mix(in oklab, var(--bg) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .start > div { display: grid; justify-items: center; gap: 14px; text-align: center; max-width: 36ch; }
-.start .wm { font-size: 58px; }
+.start .wm svg { height: 54px; }
 .start button { border: 1px solid var(--line-strong); border-radius: 6px; background: none; cursor: pointer; padding: 9px 22px; font-size: 12px; color: var(--ink); }
 .start button:hover { border-color: var(--glow); box-shadow: 0 0 18px -6px var(--glow); }
 .start p { margin: 0; color: var(--muted); font-size: 11px; }
+.grainbg { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .07; background-image: var(--grain, none); }
 .foot { max-width: 1120px; margin: 14px auto 0; font-size: 10.5px; color: var(--muted); text-transform: none; line-height: 1.6; }
 
 @media (max-width: 860px) {
@@ -234,14 +248,15 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
   .detail .ctrls { grid-column: 1 / -1; order: 3; }
   .tip { display: none; }
   .sheet { inset: 8px; }
-  .inner { padding: 12px; }
+  .inner { padding: 24px 22px 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .wm { animation: none; } .key { transition: none; } .orb svg animateMotion { display: none; } }
 </style>
 
+<div class="grainbg" aria-hidden="true"></div>
 <div class="start" id="start">
   <div>
-    <h1 class="wm" aria-label="lumelody"><span aria-hidden="true">lumel</span><svg class="o" viewBox="-15 -10 30 20" aria-hidden="true"><use href="#oPlanet"/></svg><span aria-hidden="true">dy</span></h1>
+    <h1 class="wm" aria-label="LUMELODY"><svg viewBox="-6 -14 766 128" aria-hidden="true"><use href="#lmWord" stroke="url(#lmChrome)"/><use href="#lmMoon" fill="url(#lmMoonG)"/><use href="#lmWord" stroke="url(#lmSweep)"/></svg></h1>
     <button type="button" id="startBtn">tap to begin</button>
     <p>switches on the sound engine. play the keys, your computer keyboard (a–k, w e t y u), or a midi keyboard where the browser allows it.</p>
   </div>
@@ -249,9 +264,11 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 <div class="win" id="unit">
   <canvas class="stars" id="stars" aria-hidden="true"></canvas>
+  <span class="frame-css" id="frameCss" hidden></span>
+  <canvas class="frame" id="frame" aria-hidden="true"></canvas>
   <div class="inner">
     <header class="top">
-      <h1 class="wm" aria-label="lumelody"><span aria-hidden="true">lumel</span><svg class="o" viewBox="-15 -10 30 20" aria-hidden="true"><use href="#oPlanet"/></svg><span aria-hidden="true">dy</span></h1>
+      <h1 class="wm" aria-label="LUMELODY"><svg viewBox="-6 -14 766 128" aria-hidden="true"><use href="#lmWord" stroke="url(#lmChrome)"/><use href="#lmMoon" fill="url(#lmMoonG)"/><use href="#lmWord" stroke="url(#lmSweep)"/></svg></h1>
       <div class="preset hl">
         <button class="btn icon" type="button" id="prev" aria-label="Previous sound">‹</button>
         <button class="btn pick" type="button" id="picker" aria-haspopup="dialog" aria-expanded="false"><span class="dim">⌄</span><b class="cap" id="sPick">—</b></button>
@@ -271,7 +288,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
             <canvas id="orbCv" aria-hidden="true"></canvas>
           </span>
         </button>
-        <div class="name" id="sName">—</div>
+        <h2 class="name" id="sName" aria-live="polite"><span class="ntxt" id="sNameTxt">—</span></h2>
         <div class="meta" id="sCat"></div>
         <div class="hint">tap the moon for a new sound</div>
       </div>
@@ -331,6 +348,33 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
     <radialGradient id="lumiBead" cx="38%" cy="32%" r="70%">
       <stop offset="0" style="stop-color:color-mix(in oklab, var(--hair) 55%, transparent)"/><stop offset="1" style="stop-color:color-mix(in oklab, var(--hair) 12%, transparent)"/>
     </radialGradient>
+    <linearGradient id="neonGrad" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" style="stop-color:var(--h1)"/><stop offset=".55" style="stop-color:var(--h2)"/><stop offset="1" style="stop-color:var(--h4)"/>
+    </linearGradient>
+    <filter id="neonBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+    <!-- LUMELODY wordmark (custom vector letterforms, not a font) -->
+    <linearGradient id="lmChrome" x1="0" y1="-4" x2="0" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#e2e6ee"/><stop offset=".47" stop-color="#a9b0bc"/><stop offset=".53" stop-color="#6d7480"/>
+      <stop offset=".64" stop-color="#cdd3dd"/><stop offset=".78" style="stop-color:color-mix(in oklab, var(--h6) 22%, #f6f6f8)"/><stop offset=".9" style="stop-color:color-mix(in oklab, var(--h2) 22%, #f6f8fa)"/><stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="lmMoonG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".45" style="stop-color:color-mix(in oklab, var(--h6) 30%, #fff)"/><stop offset=".72" style="stop-color:color-mix(in oklab, var(--h4) 30%, #fff)"/><stop offset="1" style="stop-color:color-mix(in oklab, var(--h2) 35%, #fff)"/>
+    </linearGradient>
+    <linearGradient id="lmSweep" x1="-260" y1="0" x2="-60" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="skewX(-20)">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="1100 0" begin=".35s" dur="2.4s" fill="freeze" calcMode="spline" keySplines=".3 .6 .2 1" keyTimes="0;1"/>
+    </linearGradient>
+<g id="lmWord" fill="none" stroke-width="7.5" stroke-linecap="butt" stroke-linejoin="miter">
+  <path d="M3.75 0 V96.25 H54"/>
+  <path transform="translate(82 0)" d="M3.75 0 V58 A30 38.25 0 0 0 63.75 58 V0"/>
+  <path transform="translate(177.5 0)" d="M3.75 100 V3.75 C24 3.75 36 34 40 70 C44 34 56 3.75 76.25 3.75 V100"/>
+  <path transform="translate(285.5 0)" d="M50 3.75 H3.75 V96.25 H50 M16 50 H44"/>
+  <path transform="translate(363.5 0)" d="M3.75 0 V96.25 H54"/>
+  <circle cx="495.5" cy="50" r="46.25"/>
+  <path transform="translate(573.5 0)" d="M3.75 0 V100 M3.75 3.75 H32 A44 46.25 0 0 1 32 96.25 H3.75"/>
+  <path transform="translate(681.5 0)" d="M0 0 C0 30 16 50 36 50 C56 50 72 30 72 0 M36 50 V100"/>
+</g>
+<path id="lmMoon" d="M495.5 13 A37 37 0 0 0 495.5 87 A27 37 0 0 1 495.5 13 Z"/>
     <linearGradient id="oFoil" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" style="stop-color:#fff"/><stop offset=".25" style="stop-color:var(--h4)"/><stop offset=".5" style="stop-color:var(--h6)"/><stop offset=".72" style="stop-color:var(--h1)"/><stop offset="1" style="stop-color:#1a1a24"/>
     </linearGradient>
@@ -356,12 +400,12 @@ const CATS = ["Keys", "Bells & Plucks", "Synths & Leads", "Pads & Atmospheres", 
 const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", ["chorus", "phaser", "flanger", "width"]], ["tone", ["filter", "saturation", "tape", "resonator"]],
                 ["rhythm", ["stutter", "gate", "reverse"]], ["pitch", ["pitch", "glide", "octave"]], ["grain & glue", ["granular", "glue"]]];
 const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
-const THEMES = {
-  silver: { name: "Silver Chrome", k: { night: "#0a0a12", tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .32, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
-  rose:   { name: "Rose Chrome",   k: { night: "#120a10", tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .32, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
-  gold:   { name: "Gold Chrome",   k: { night: "#0f0c08", tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .26, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
-  violet: { name: "Violet Chrome", k: { night: "#0c0818", tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .32, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
-  prism:  { name: "Prism Chrome",  k: { night: "#0b0a12", tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: .55, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
+const THEMES = {   // each theme: two studio lights reflected in the chrome (key + fill), an accent glow, and a six-colour foil spectrum
+  silver: { name: "Silver Chrome", k: { night: "#06080c", tint: [1, 1, 1.02], glow: "#8fe3ff", key: "#cfeeff", fill: "#c6b4ff", glass: [.03, .03, .04], iri: .5, h: ["#e9f4ff", "#9fe8ff", "#ffffff", "#c8b6ff", "#7fd0ff", "#ffd6f0"] } },
+  rose: { name: "Rose Chrome", k: { night: "#0d0409", tint: [1, 1, 1], glow: "#ff4fa8", key: "#ff4fa8", fill: "#4fe3ff", glass: [.03, .03, .04], iri: .55, h: ["#ff3d9a", "#ff8fd0", "#ffe1f2", "#8ff3ff", "#3fd2ff", "#c26bff"] } },
+  gold: { name: "Gold Chrome", k: { night: "#0c0703", tint: [1.03, 1, .92], glow: "#ffb547", key: "#ffb547", fill: "#ff6fb0", glass: [.03, .03, .04], iri: .45, h: ["#ffcf7a", "#fff1c9", "#ff9a5c", "#ffd6a0", "#ff79b4", "#ffe9b0"] } },
+  violet: { name: "Violet Chrome", k: { night: "#090514", tint: [1, 1, 1], glow: "#b07dff", key: "#9b5cff", fill: "#3ff0ff", glass: [.03, .03, .04], iri: .55, h: ["#8a4dff", "#c39bff", "#ff6fe0", "#3ff0ff", "#6a7dff", "#e6d3ff"] } },
+  prism: { name: "Prism Chrome", k: { night: "#07060a", tint: [1, 1, 1], glow: "#ff5ad1", key: "#ff3d8e", fill: "#36e7ff", glass: [.03, .03, .04], iri: .8, h: ["#ff2e88", "#ffd23f", "#3dff8f", "#29d6ff", "#5b5cff", "#c13dff"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -379,6 +423,20 @@ let marks = store.get("lumi-marks-v2", {});
 const savedFx = store.get("lumi-fx-v2", {});
 let db = null;
 
+const ENV_GLSL = `
+      // photo studio reflected in the chrome: black room, a key softbox in the theme colour that follows the light,
+      // a fill softbox in the second colour opposite it, a white strip light overhead, a horizon line
+      vec3 env(vec3 d) {
+        float up = d.y;
+        vec3 c = mix(vec3(.004, .004, .006), vec3(.03, .03, .036), smoothstep(-.6, 1., up));
+        c += vec3(.22) * exp(-pow((up - .04) * 16., 2.)) * smoothstep(-.3, .4, d.z);                 // horizon
+        vec2 sb = light * .8; float k = length((d.xy - sb) * vec2(1., 1.4));
+        c += vec3(2.3) * smoothstep(.2, .07, k) + keyc * .42 * smoothstep(.5, .12, k);                // key softbox: white core, a hint of colour
+        float f = abs(d.x - .74); c += mix(vec3(1.), fillc, .6) * 1.1 * smoothstep(.06, .0, f) * smoothstep(.85, .0, abs(d.y + .05));   // thin fill strip, tinted
+        c += vec3(1.5) * smoothstep(.03, 0., abs(d.y - .6)) * smoothstep(.9, .2, abs(d.x));           // white strip overhead
+        c += vec3(.25) * smoothstep(.03, 0., abs(d.x + .86)) * smoothstep(-.4, .6, up);              // thin rim strip
+        return c * tint;
+      }`;
 // ================================================================ chrome renderer (one shared WebGL context)
 const CR = (() => {
   const size = 160;
@@ -386,7 +444,7 @@ const CR = (() => {
   let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false }); } catch (e) { gl = null; }
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
   const theme = {}; let from = null, target = null, t0 = 0;
-  function conv(k) { return { tint: k.tint, glow: hex(k.glow), glass: k.glass, iri: [k.iri], hh: k.h.flatMap(hex) }; }
+  function conv(k) { return { tint: k.tint, glow: hex(k.glow), keyc: hex(k.key), fillc: hex(k.fill), glass: k.glass, iri: [k.iri], hh: k.h.flatMap(hex) }; }
   function setTheme(k, animate) {
     const tgt = conv(k);
     if (!animate || !target) { for (const key in tgt) theme[key] = tgt[key].slice(); target = tgt; from = null; return; }
@@ -404,16 +462,18 @@ const CR = (() => {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
       uniform float rot, glow, on, mode, iri, time; uniform vec2 light;
-      uniform vec3 tint, gcol, glass; uniform vec3 hh[6];
-      // procedural photo studio: dark room, a big softbox that follows the light, a horizon line, two strip lights
+      uniform vec3 tint, gcol, glass, keyc, fillc; uniform vec3 hh[6];
+      // photo studio reflected in the chrome: black room, a key softbox in the theme colour that follows the light,
+      // a fill softbox in the second colour opposite it, a white strip light overhead, a horizon line
       vec3 env(vec3 d) {
         float up = d.y;
-        vec3 c = mix(vec3(.012, .013, .016), vec3(.16, .165, .18), smoothstep(-.7, .9, up));
-        c += vec3(.55) * exp(-pow((up - .06) * 10., 2.)) * smoothstep(-.2, .3, d.z);
-        vec2 sb = light * .85;
-        c += vec3(2.2) * smoothstep(.5, .18, length((d.xy - sb) * vec2(1., 1.7)));
-        c += vec3(.9) * smoothstep(.06, 0., abs(d.x + .78)) * smoothstep(-.3, .5, up);
-        c += vec3(.35) * smoothstep(.05, 0., abs(d.x - .62)) * smoothstep(0., .8, up);
+        vec3 c = mix(vec3(.004, .004, .006), vec3(.03, .03, .036), smoothstep(-.6, 1., up));
+        c += vec3(.22) * exp(-pow((up - .04) * 16., 2.)) * smoothstep(-.3, .4, d.z);                 // horizon
+        vec2 sb = light * .8; float k = length((d.xy - sb) * vec2(1., 1.4));
+        c += vec3(2.3) * smoothstep(.2, .07, k) + keyc * .42 * smoothstep(.5, .12, k);                // key softbox: white core, a hint of colour
+        float f = abs(d.x - .74); c += mix(vec3(1.), fillc, .6) * 1.1 * smoothstep(.06, .0, f) * smoothstep(.85, .0, abs(d.y + .05));   // thin fill strip, tinted
+        c += vec3(1.5) * smoothstep(.03, 0., abs(d.y - .6)) * smoothstep(.9, .2, abs(d.x));           // white strip overhead
+        c += vec3(.25) * smoothstep(.03, 0., abs(d.x + .86)) * smoothstep(-.4, .6, up);              // thin rim strip
         return c * tint;
       }
       vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
@@ -423,51 +483,36 @@ const CR = (() => {
         vec3 V = vec3(0., 0., 1.);
         vec4 col = vec4(0.);
         if (mode < 1.5) {
-          // soft contact shadow, thrown away from the light
-          col = vec4(0., 0., 0., smoothstep(1., .72, length(p + light * .1 + vec2(0., .08))) * .8);
-          float R = .86;
+          col = vec4(0., 0., 0., smoothstep(1., .7, length(p + light * .1 + vec2(0., .09))) * .85);   // contact shadow
+          const float R = .9;
           if (r < R + .01) {
             vec3 c; vec2 rad = p / max(r, 1e-4);
-            if (r > .765) {
-              // polished chrome rim: rounded profile, holographic film where it turns away from you
-              float u = clamp((r - .812) / .048, -1., 1.);
-              vec3 n = normalize(vec3(rad * u * 1.25, sqrt(max(0., 1. - u * u)) + .1));
+            if (r > .7) {
+              // knurled chrome skirt: rounded profile with fine grip ridges that catch the studio lights
+              float u = clamp((r - .8) / .1, -1., 1.);
+              vec3 n = normalize(vec3(rad * (u * 1.3 + .35), sqrt(max(0., 1. - u * u)) * .8 + .05));
+              vec3 tg = vec3(-rad.y, rad.x, 0.);
+              n = normalize(n + tg * sin(a * 64.) * .24 * smoothstep(.72, .76, r) * smoothstep(.88, .84, r));
               c = env(reflect(-V, n));
-              c = mix(c * .82, c, fres(n.z, .55));
-              c += film(a * .16 + u * .8 + time * .03 + dot(light, rad)) * iri * (1. - n.z) * 1.3;
-              c *= mix(.3, 1., smoothstep(.765, .785, r));   // shadowed seam against the cap
+              c = mix(c * .62, c, fres(n.z, .6));
+              c *= mix(.22, 1., smoothstep(.7, .726, r));   // machined seam
             } else {
-              // brushed aluminium cap: slight dome, fine concentric brushing, anisotropic "bow-tie" highlight
-              vec2 q = p / .765;
+              // dark glass face over fine machined rings, a chrome lip, one crisp glint
+              vec2 q = p / .7;
               vec3 n = normalize(vec3(q * .2, 1.));
-              float ring = floor(r * 190.);
-              float h1 = fract(sin(ring * 12.9898) * 43758.5453), h2 = fract(sin(ring * 78.233 + 1.3) * 24634.6345);
-              float brush = mix(h1, h2, .5);
-              float la = atan(light.y, light.x);
-              float ca = abs(cos(a - la));
-              float aniso = pow(ca, 5.) * smoothstep(.0, .25, r), streak = pow(ca, 36.) * smoothstep(.05, .4, r);
-              vec3 metal = vec3(.5, .52, .56) * tint;
-              vec3 e = env(reflect(-V, n));
-              c = metal * (.62 + .22 * dot(q, normalize(light)) - .18 * q.y) + e * .22;
-              c += vec3(.42) * tint * aniso * (.55 + .45 * brush) + vec3(.3) * streak;
-              c *= .9 + .14 * brush;
-              // holographic foil caught in the brushing: the spectrum sweeps around the cap and slides as the light moves
-              vec3 holo = film((a - la) * .32 + r * 1.3 + brush * .05 + time * .02);
-              float lv = dot(c, vec3(.333));
-              c = mix(c, holo * (lv * 1.3 + .08) + vec3(.3) * streak, clamp(iri, 0., 1.) * .78);
-              c *= mix(.62, 1., smoothstep(.765, .72, r));   // the cap falls off into the rim
-              // indicator: a small domed chrome bead set into the cap, ringed with light when the effect is on
-              vec2 dp = vec2(cos(rot), sin(rot)) * .56;
-              float dd = length(p - dp), br = .095;
-              float shadowRing = smoothstep(br + .045, br, length(p - dp + light * .03)) * (1. - smoothstep(br - .01, br, dd));
-              c *= 1. - .45 * shadowRing;
-              c += gcol * exp(-pow((dd - br - .012) * 34., 2.)) * on * (.55 + .5 * glow);
-              if (dd < br) {
-                vec2 s = (p - dp) / br; vec3 bn = normalize(vec3(s, sqrt(max(0., 1. - dot(s, s)))));
-                vec3 bc = env(reflect(-V, bn)) * .95 + film(dot(bn.xy, light) + time * .05) * iri * (1. - bn.z) * .8;
-                bc = mix(bc, bc + gcol * .35, on * .5);
-                c = mix(c, bc, smoothstep(br, br - .012, dd));
-              }
+              vec3 refl = env(reflect(-V, n));
+              c = vec3(.01, .01, .014) + refl * .5 * fres(n.z, .05) + vec3(.018) * (.5 + .5 * sin(r * 240.)) * smoothstep(.7, .12, r);
+              vec2 gd = normalize(vec2(1., -.75) + light * .3);
+              c += vec3(.42) * smoothstep(.1, .0, abs(dot(q, gd) - .38)) * smoothstep(1., .55, length(q)) * smoothstep(-.2, .5, dot(q, vec2(-gd.y, gd.x)) + .4);
+              c += film(dot(q, light) * .6 + time * .02) * iri * .05 * smoothstep(.3, 1., length(q));
+              c += vec3(.95) * exp(-pow((r - .698) / .012, 2.)) * (.55 + .45 * dot(rad, normalize(-light)));   // chrome lip catching the light
+              // indicator: a slit cut into the dome that glows in the accent colour
+              vec2 dv = vec2(cos(rot), sin(rot));
+              float along = dot(p, dv), across = abs(dot(p, vec2(-dv.y, dv.x)));
+              float slit = smoothstep(.045, .024, across) * smoothstep(.16, .22, along) * smoothstep(.66, .6, along);
+              float bloom = exp(-across * 24.) * smoothstep(.1, .28, along) * smoothstep(.72, .5, along);
+              c = mix(c, vec3(.008), slit * .9);
+              c += gcol * slit * (.3 + 1.7 * on) * (1. + glow * .4) + gcol * bloom * (.06 + .5 * on + .3 * glow);
             }
             float alpha = smoothstep(R + .006, R - .006, r);
             col = vec4(mix(col.rgb, c, alpha), max(col.a, alpha));
@@ -494,7 +539,7 @@ const CR = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["rot", "glow", "on", "mode", "iri", "time", "light", "tint", "hh", "gcol", "glass"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["rot", "glow", "on", "mode", "iri", "time", "light", "tint", "hh", "gcol", "glass", "keyc", "fillc"]) U[u] = gl.getUniformLocation(prog, u);
       gl.viewport(0, 0, size, size);
     } catch (e) { console.warn("chrome shader unavailable:", e); gl = null; }
   }
@@ -506,7 +551,7 @@ const CR = (() => {
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform1f(U.rot, rot); gl.uniform1f(U.glow, opts.glow || 0); gl.uniform1f(U.on, opts.on ? 1 : 0); gl.uniform1f(U.mode, opts.mode || 0);
       gl.uniform1f(U.iri, theme.iri[0]); gl.uniform1f(U.time, performance.now() / 1000); gl.uniform2f(U.light, light[0], light[1]);
-      gl.uniform3fv(U.tint, theme.tint); gl.uniform3fv(U.hh, theme.hh); gl.uniform3fv(U.gcol, theme.glow); gl.uniform3fv(U.glass, theme.glass);
+      gl.uniform3fv(U.tint, theme.tint); gl.uniform3fv(U.hh, theme.hh); gl.uniform3fv(U.gcol, theme.glow); gl.uniform3fv(U.glass, theme.glass); gl.uniform3fv(U.keyc, theme.keyc); gl.uniform3fv(U.fillc, theme.fillc);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       c2.drawImage(cv, 0, 0, w, h);
     } else {
@@ -517,6 +562,69 @@ const CR = (() => {
     }
   }
   return { draw, setTheme, step, light, theme, ok: () => !!gl };
+})();
+
+
+// ================================================================ the window frame: liquid chrome on all four sides
+// A rounded-rectangle bezel with a tube profile, rendered per pixel: its normal comes from the distance to the edge,
+// a slow liquid ripple disturbs it, and it reflects the same studio (theme key + fill lights, white strip) as the knobs.
+const FRAME = (() => {
+  const cv = $("#frame");
+  let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false }); } catch (e) {}
+  const U = {};
+  if (gl) {
+    const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
+    const fs = `precision highp float; varying vec2 v;
+      uniform vec2 res, light; uniform float rad, bw, time, iri; uniform vec3 tint, keyc, fillc, gcol; uniform vec3 hh[6];
+` + ENV_GLSL + `
+      vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
+      float sdr(vec2 p) { vec2 b = res * .5 - .5; vec2 q = abs(p) - b + rad; return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - rad; }
+      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
+        return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
+      void main() {
+        vec2 c = (v * .5) * res;
+        float d = sdr(c);
+        if (d > .5 || d < -bw - .5) { gl_FragColor = vec4(0.); return; }
+        vec2 g = normalize(vec2(sdr(c + vec2(1., 0.)) - sdr(c - vec2(1., 0.)), sdr(c + vec2(0., 1.)) - sdr(c - vec2(0., 1.))) + 1e-5);
+        float t = clamp(-d / bw, 0., 1.), s = t * 2. - 1.;
+        float slope = -s / sqrt(max(.02, 1. - s * s * .97));                       // rounded tube across the bezel
+        vec2 lq = c / max(res.y, 1.) * 9.;
+        vec2 wob = vec2(noise(lq + vec2(time * .05, 0.)), noise(lq + vec2(5.3, time * .04))) - .5;   // slow liquid ripple
+        vec3 n = normalize(vec3(g * slope * .95 + wob * .5, 1.));
+        vec3 V = vec3(0., 0., 1.);
+        vec3 col = env(reflect(-V, n));
+        float fr = .55 + .45 * pow(1. - n.z, 3.);
+        col = col * 1.45 * fr + vec3(.14, .14, .16) * (.55 + .45 * n.y) + vec3(.08) * pow(max(n.y, 0.), 3.);   // polished silver: the room shows in the metal
+        col += film(dot(n.xy, light) * 1.2 + t * .7 + time * .01) * iri * pow(1. - n.z, 2.2) * .7;   // spectral glints where the tube turns away
+        col *= mix(.35, 1., smoothstep(0., .1, t)) * mix(.25, 1., smoothstep(1., .86, t));      // dark seams at both edges
+        float a = smoothstep(.5, -.8, d) * smoothstep(-bw - .5, -bw + .8, d);
+        gl_FragColor = vec4(col * a, a);
+      }`;
+    const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    try {
+      const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
+      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      for (const u of ["res", "light", "rad", "bw", "time", "iri", "tint", "keyc", "fillc", "gcol", "hh"]) U[u] = gl.getUniformLocation(prog, u);
+    } catch (e) { console.warn("frame shader unavailable:", e); gl = null; }
+  }
+  if (!gl) { cv.hidden = true; $("#frameCss").hidden = false; }
+  let last = 0;
+  return {
+    draw(now) {
+      if (!gl || now - last < 66) return;   // ~15 fps is plenty for a slow liquid ripple
+      last = now;
+      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+      const w = Math.max(2, Math.round(r.width * d)), h = Math.max(2, Math.round(r.height * d));
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform2f(U.res, w, h); gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.rad, 26 * d); gl.uniform1f(U.bw, 16 * d);
+      gl.uniform1f(U.time, reduceMotion ? 0 : now / 1000); gl.uniform1f(U.iri, CR.theme.iri[0]);
+      gl.uniform3fv(U.tint, CR.theme.tint); gl.uniform3fv(U.keyc, CR.theme.keyc); gl.uniform3fv(U.fillc, CR.theme.fillc); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.hh, CR.theme.hh);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+  };
 })();
 
 // ================================================================ the moon (hero object) + night sky
@@ -670,10 +778,19 @@ const ORB = (() => {
     if (!reduceMotion) for (const [cls, delay] of [["ripple", 0], ["ripple soft", 90], ["ripple", 200]]) setTimeout(() => {
       const r = el("span", { className: cls }); r.addEventListener("animationend", () => r.remove()); orb.append(r);
     }, delay);
-    for (const n of [$("#sName"), $("#sCat")]) { n.classList.remove("swap"); void n.offsetWidth; n.classList.add("swap"); }
+    for (const n of [$("#sName"), $("#sCat")]) { n.classList.remove("swap"); void n.getBoundingClientRect(); n.classList.add("swap"); }
   };
 }
-let starsT = 0;
+let starsT = 0, grainCv = null;
+function grainTile() {   // a 192 px tile of film grain, made once
+  if (grainCv) return grainCv;
+  grainCv = document.createElement("canvas"); grainCv.width = grainCv.height = 192;
+  const g = grainCv.getContext("2d"), im = g.createImageData(192, 192);
+  for (let i = 0; i < im.data.length; i += 4) { const v = 128 + (Math.random() - .5) * 120; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+  g.putImageData(im, 0, 0);
+  try { document.body.style.setProperty("--grain", `url(${grainCv.toDataURL()})`); } catch (e) {}
+  return grainCv;
+}
 function drawStars() {   // the window background: a soft nebula painted from the theme's foil colours, a glow behind the moon, stars
   const cv = $("#stars"), r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
   if (r.width < 2) return;
@@ -681,7 +798,7 @@ function drawStars() {   // the window background: a soft nebula painted from th
   const c = cv.getContext("2d");
   const W = Math.max(2, Math.round(r.width / 5)), Hh = Math.max(2, Math.round(r.height / 5));
   const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-  const T = THEMES[curTheme].k, hs = T.h.map(rgb), night = rgb(T.night), glow = rgb(T.glow);
+  const T = THEMES[curTheme].k, hs = T.h.map(rgb), night = rgb(T.night), glow = rgb(T.glow), key = rgb(T.key), fill = rgb(T.fill);
   const hash = (x, y) => { const v = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return v - Math.floor(v); };
   const noise = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), w = yf * yf * (3 - 2 * yf);
     const a = hash(xi, yi), b = hash(xi + 1, yi), cc = hash(xi, yi + 1), d = hash(xi + 1, yi + 1); return a + (b - a) * u + (cc - a) * w + (a - b - cc + d) * u * w; };
@@ -696,13 +813,19 @@ function drawStars() {   // the window background: a soft nebula painted from th
     const A = Math.pow(sm(.42, .82, n1), 1.6), B = Math.pow(sm(.5, .86, n2), 2), dust = sm(.55, .72, n3) * .45;
     const dm = Math.hypot((u - mx) * asp, v - my), g = Math.exp(-dm * dm * 9), vig = 1 - .55 * Math.pow(Math.hypot(u - .5, (v - .5) * 1.2), 2.2);
     for (let k = 0; k < 3; k++) {
-      const col = (night[k] + hs[4][k] * A * .2 + hs[0][k] * B * .15 + hs[3][k] * A * B * .16 + glow[k] * g * .16) * (1 - dust * (A + B)) * vig;
+      const col = (night[k] + key[k] * A * .17 + fill[k] * B * .1 + hs[5][k] * A * B * .08 + key[k] * g * .13) * (1 - dust * (A + B)) * vig;
       D[(y * W + x) * 4 + k] = Math.min(255, col);
     }
     D[(y * W + x) * 4 + 3] = 255;
   }
   const small = document.createElement("canvas"); small.width = W; small.height = Hh; small.getContext("2d").putImageData(img, 0, 0);
   c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(small, 0, 0, cv.width, cv.height);
+  // film grain and a little dust, like a printed cover
+  c.save(); c.globalCompositeOperation = "overlay"; c.globalAlpha = .55; c.fillStyle = c.createPattern(grainTile(), "repeat"); c.fillRect(0, 0, cv.width, cv.height); c.restore();
+  { let q = 3; const rq = () => (q = (q * 16807) % 2147483647) / 2147483647;
+    c.save(); c.strokeStyle = "#fff"; c.lineCap = "round";
+    for (let i = 0; i < 26; i++) { const x = rq() * cv.width, y = rq() * cv.height, l = (4 + rq() * 26) * dpr, a = rq() * 6.3; c.globalAlpha = .025 + rq() * .05; c.lineWidth = (.4 + rq() * .8) * dpr; c.beginPath(); c.moveTo(x, y); c.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); c.stroke(); }
+    c.restore(); }
   let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
   const n = Math.round(r.width * r.height / 2200);
   for (let i = 0; i < n; i++) {   // stars, a few tinted, a few with a soft glow
@@ -743,13 +866,11 @@ function makeKnob(fx, pi, kind) {   // kind: "main" (rack) or "mini" (detail str
   const d = pdef(fx, pi), mini = kind === "mini";
   const face = el("div", { className: "face", tabIndex: 0 });
   const dpr = Math.min(2, window.devicePixelRatio || 1);
-  const cv = el("canvas"); cv.width = cv.height = Math.round((mini ? 30 : 38) * dpr * 1.25);
+  const cv = el("canvas"); cv.width = cv.height = Math.round((mini ? 30 : 40) * dpr * 1.25);
   const ring = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   ring.setAttribute("class", "ring"); ring.setAttribute("viewBox", "0 0 132 132");
-  // LED value ring: glass beads around the knob, lit in the theme colour up to the current value
-  const N = mini ? 11 : 13;
-  ring.innerHTML = Array.from({ length: N }, (_, i) => { const a = (-135 + i * 270 / (N - 1)) * Math.PI / 180, x = (66 + 60 * Math.sin(a)).toFixed(2), y = (66 - 60 * Math.cos(a)).toFixed(2);
-      return `<circle class="halo" cx="${x}" cy="${y}" r="6" style="fill:var(--glow)" opacity="0"/><circle cx="${x}" cy="${y}" r="2.6" fill="url(#lumiBead)"/><circle class="lit" cx="${x}" cy="${y}" r="2.8" fill="url(#lumiLit)" opacity="0"/>`; }).join("");
+  // value ring: an engraved track with a neon tube (accent to ice) lit from the zero point to the value
+  ring.innerHTML = `<path class="trk" d="${arcPath(-Math.PI * .75, Math.PI * .75, 58)}"/><path class="nglow" filter="url(#neonBlur)"/><path class="narc"/><path class="ncore"/><circle class="ntip" r="3.4"/>`;
   face.append(cv, ring);
   face.setAttribute("role", "slider"); face.setAttribute("aria-label", SCHEMA[fx].name + " " + d.name);
   const val = el("div", { className: "val" });
@@ -762,7 +883,7 @@ function makeKnob(fx, pi, kind) {   // kind: "main" (rack) or "mini" (detail str
   } else name = el("div", { className: "name" }, [d.name]);
   const wrapEl = el("div", { className: "knob" + (mini ? " mini" : "") }, [face, val, name]);
   wrapEl.addEventListener("pointerenter", () => setTip(SCHEMA[fx].name + (mini ? " · " + d.name.toLowerCase() : ""), mini ? "" : SCHEMA[fx].note));
-  const k = { fx, pi, el: wrapEl, face, cv, lit: [...ring.querySelectorAll(".lit")], halo: [...ring.querySelectorAll(".halo")], valEl: val, mini, glow: 0 };
+  const k = { fx, pi, el: wrapEl, face, cv, arcs: [".nglow", ".narc", ".ncore"].map(q => ring.querySelector(q)), tip: ring.querySelector(".ntip"), valEl: val, mini, glow: 0 };
   knobs.push(k);
   let start = null, lastTap = 0;
   face.addEventListener("pointerdown", e => {
@@ -803,8 +924,8 @@ function setValue(k, v, user) {
   if (user && k.pi === 0 && !fxState[k.fx].on) setOn(k.fx, true);   // turning a main knob up is heard at once
   refreshFx(k.fx);
 }
-function arcPath(a0, a1) {
-  const r = 63, P = a => [66 + r * Math.sin(a), 66 - r * Math.cos(a)];
+function arcPath(a0, a1, r = 58) {
+  const P = a => [66 + r * Math.sin(a), 66 - r * Math.cos(a)];
   if (Math.abs(a1 - a0) < .005) return "";
   const [x0, y0] = P(a0), [x1, y1] = P(a1);
   return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${Math.abs(a1 - a0) > Math.PI ? 1 : 0} ${a1 > a0 ? 1 : 0} ${x1.toFixed(2)} ${y1.toFixed(2)}`;
@@ -813,14 +934,14 @@ const dirty = new Set();
 function paintKnob(k) {
   const d = pdef(k.fx, k.pi), r = knobRange(k), v = fxState[k.fx].v[k.pi], on = fxState[k.fx].on;
   const t = toNorm(r, v), A = Math.PI * .75, ang = -A + 2 * A * t;
-  // LEDs from the zero point (minimum, or centre for +/- controls) to the value; the tip LED fades in between steps
-  const N = k.lit.length, x = t * (N - 1), z = d.min < 0 && d.max > 0 ? toNorm(r, 0) * (N - 1) : 0;
-  const lo = Math.min(x, z), hi = Math.max(x, z);
-  for (let i = 0; i < N; i++) {
-    const lvl = Math.max(0, Math.min(1, 1 - Math.max(lo - i, i - hi, 0)));
-    k.lit[i].setAttribute("opacity", (lvl * (on ? 1 : .28)).toFixed(3));   // bypassed: the setting stays visible, dimmed
-    k.halo[i].setAttribute("opacity", (lvl * (on ? .32 + .25 * k.glow : 0)).toFixed(3));
-  }
+  // neon tube from the zero point (minimum, or centre for +/- controls) to the value; bypassed effects keep it dim
+  const zero = d.min < 0 && d.max > 0 ? -A + 2 * A * toNorm(r, 0) : -A;
+  const path = arcPath(Math.min(zero, ang), Math.max(zero, ang));
+  for (const el2 of k.arcs) el2.setAttribute("d", path);
+  k.arcs[0].setAttribute("opacity", on ? (.55 + .3 * k.glow).toFixed(2) : "0");
+  k.arcs[1].setAttribute("opacity", on ? "1" : ".28"); k.arcs[2].setAttribute("opacity", on ? ".75" : "0");
+  k.tip.setAttribute("cx", (66 + 58 * Math.sin(ang)).toFixed(2)); k.tip.setAttribute("cy", (66 - 58 * Math.cos(ang)).toFixed(2));
+  k.tip.setAttribute("opacity", on ? "1" : ".35");
   k.valEl.textContent = fmt(d, v);
   k.face.setAttribute("aria-valuenow", String(v)); k.face.setAttribute("aria-valuetext", k.valEl.textContent);
   k.face.setAttribute("aria-valuemin", String(r.min)); k.face.setAttribute("aria-valuemax", String(r.max));
@@ -834,6 +955,7 @@ function frame(now) {
   for (const k of list) if (k.el.isConnected) paintKnob(k);
   dirty.clear();
   stepLights(now);
+  FRAME.draw(now);
   if (now - orbT > 15) {   // the moon follows the notes being played: total key light, softly limited
     const dt = Math.min(.1, (now - (orbT || now)) / 1000); orbT = now;
     let sum = 0; for (const L of lights.values()) sum += L.lum;
@@ -1068,7 +1190,7 @@ function setTheme(id, animate) {
   if (id === "silver") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
   swEls.forEach(s => s.setAttribute("aria-pressed", s.dataset.id === id ? "true" : "false"));
   CR.setTheme(THEMES[id].k, animate); ambientUntil = performance.now() + 900; spillDirty = true; drawStars();
-  store.set("lumi-theme2", id);
+  store.set("lumi-theme4", id);
 }
 
 // ================================================================ sound picker sheet, marks, demos
@@ -1076,10 +1198,16 @@ const sheet = $("#sheet");
 function openSheet(open) { sheet.hidden = !open; $("#picker").setAttribute("aria-expanded", open ? "true" : "false"); if (open) { renderList(); $("#q").focus({ preventScroll: true }); } }
 $("#picker").onclick = () => openSheet(sheet.hidden); $("#closeSheet").onclick = () => openSheet(false);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) openSheet(false); });
+function setName(t) {   // the selected sound's name; long names step the size down so they always fit on one line
+  const n = $("#sNameTxt"); n.textContent = t;
+  const box = $("#sName").clientWidth || 300;
+  let size = 30; n.style.fontSize = size + "px";
+  while (size > 16 && n.scrollWidth > box - 8) { size -= 1; n.style.fontSize = size + "px"; }
+}
 function renderSound() {
   const p = PRESETS[cur], m = marks[p.id] || {};
   $("#sCat").textContent = (p.cat + " · " + p.genres.slice(0, 2).join(" · ")).toLowerCase();
-  $("#sName").textContent = p.name; $("#sPick").textContent = p.name;
+  setName(p.name); $("#sPick").textContent = p.name;
   $("#sDesc").textContent = p.desc + " " + p.use;
   $("#sMeta").textContent = `${p.engine} · plays ${nn(p.range[0])}–${nn(p.range[1])}`;
   document.querySelectorAll(".mark[data-k]").forEach(b => b.setAttribute("aria-pressed", m.verdict === b.dataset.k ? "true" : "false"));
@@ -1145,14 +1273,14 @@ async function startFromGesture() {
   try { await startAudio(); } catch (err) { toast("Audio could not start: " + (err && err.message || err)); }
 }
 $("#startBtn").onclick = startFromGesture;
-setTheme(store.get("lumi-theme2", "silver"), false);
+setTheme(store.get("lumi-theme4", "silver"), false);
 buildRack(); buildDetail(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
 const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e) { return null; } })();
 const li = PRESETS.findIndex(p => p.id === last);
 loadPreset(li >= 0 ? li : 0);
 requestAnimationFrame(frame);
 requestAnimationFrame(drawStars);
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => drawStars());
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawStars(); setName(PRESETS[cur].name); });
 (async () => {
   try { db = window.claude && await window.claude.use("db"); } catch (e) { db = null; }
   if (!db) return;
