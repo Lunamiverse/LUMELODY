@@ -1,7 +1,7 @@
 <title>LUMELODY</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Martian+Mono:wdth,wght@75..112.5,300..500&display=swap">
 <style>
 /* LUMELODY: a night-sky instrument. One hero object (the holographic moon), hairline panels, lowercase mono labels.
    Holographic foil is used sparingly, as a precious material: the moon, the wordmark, the knob caps, lit keys. */
@@ -23,8 +23,8 @@
 @property --h6 { syntax: "<color>"; inherits: true; initial-value: #cf8bff; }
 :root {
   color-scheme: dark;
-  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
-  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --serif: "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --mono: "Martian Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   --bg: #060609; --win1: #11111c; --win2: #07070c; --ink: #eceef6; --muted: #8d93a3; --hair: #d9def0; --glow: #d6e4ff;
   --ch1: #dfe3e9; --ch2: #8a9099; --obs2: #07070c;
   --h1: #ff7ab8; --h2: #ffd877; --h3: #8dffb8; --h4: #6fe3ff; --h5: #8a96ff; --h6: #cf8bff;
@@ -44,8 +44,11 @@
 :root[data-theme="prism"]  { --bg: #060609; --win1: #121019; --win2: #06060a; --ink: #f4f3f8; --muted: #9b99ab; --hair: #ece8ff; --glow: #f0d2ff; --ch1: #e6e6ee; --ch2: #8e8e9c; --obs2: #06060a;
   --h1: #ff4f9a; --h2: #ffd24f; --h3: #5cff9a; --h4: #3fd8ff; --h5: #6a6bff; --h6: #c34fff; }
 * { box-sizing: border-box; }
-body { margin: 0; color: var(--ink); font: 12px/1.5 var(--mono); -webkit-font-smoothing: antialiased; text-transform: lowercase;
-  background: radial-gradient(70% 50% at 50% 0%, color-mix(in oklab, var(--win1) 80%, transparent), transparent 75%), var(--bg);
+body { margin: 0; color: var(--ink); font: 300 11px/1.55 var(--mono); font-stretch: 87.5%; letter-spacing: .01em; -webkit-font-smoothing: antialiased; text-transform: lowercase;
+  background:
+    radial-gradient(45% 40% at 22% 30%, color-mix(in oklab, var(--h5) 13%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 82% 65%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%),
+    radial-gradient(60% 45% at 50% 105%, color-mix(in oklab, var(--h4) 8%, transparent), transparent 70%), var(--bg);
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
 button, select, input, textarea { font: inherit; color: inherit; text-transform: inherit; }
 :focus-visible { outline: 1px solid var(--glow); outline-offset: 2px; }
@@ -53,7 +56,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 /* ------------------------------------------------ window */
 .win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 10px; overflow: hidden;
-  background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--glow) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
+  background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--h5) 14%, transparent), transparent 70%), radial-gradient(50% 60% at 85% 80%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
   box-shadow: 0 0 0 1px var(--line), 0 40px 90px -40px #000; }
 .win::before { /* a single hairline of foil along the top edge: the only foil on the frame */
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--foil); opacity: .8; z-index: 3; }
@@ -61,7 +64,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 14px 18px 18px; }
 
 /* hairline boxes */
-.hl { border: 1px solid var(--line); border-radius: 6px; background: color-mix(in oklab, var(--win2) 55%, transparent); }
+.hl { border: 1px solid var(--line); border-radius: 6px; background: color-mix(in oklab, var(--win2) 52%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .btn { border: 1px solid var(--line); border-radius: 5px; background: color-mix(in oklab, var(--win2) 50%, transparent); cursor: pointer;
   height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
 .btn:hover { border-color: var(--line-strong); }
@@ -71,10 +74,12 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 /* ------------------------------------------------ top bar */
 .top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
-.wm { margin: 0; font: italic 500 30px/1 var(--serif); letter-spacing: .01em; text-transform: lowercase; white-space: nowrap;
-  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%), var(--foil), linear-gradient(180deg, #fff, var(--ch1) 45%, var(--ch2) 55%, #fff);
+.wm { margin: 0; display: inline-flex; align-items: baseline; font: italic 500 34px/1 var(--serif); font-optical-sizing: auto; letter-spacing: -.012em; text-transform: lowercase; white-space: nowrap;
+  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%), var(--foil), linear-gradient(180deg, #fff 0%, var(--ch1) 38%, var(--ch2) 52%, #fff 58%, var(--ch1) 100%);
   background-size: 260% 100%, 220% 100%, 100% 100%; background-blend-mode: normal, soft-light, normal;
-  -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 2.6s .3s cubic-bezier(.3,.6,.2,1) both, drift 18s linear infinite; padding: 2px 4px 4px 0; }
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 2.6s .3s cubic-bezier(.3,.6,.2,1) both, drift 18s linear infinite; padding: 2px 4px 6px 0;
+  filter: drop-shadow(0 0 14px color-mix(in oklab, var(--glow) 28%, transparent)); }
+.wm .o { width: .74em; height: .5em; margin: 0 .01em 0 .02em; overflow: visible; align-self: center; transform: translateY(.1em); flex: none; }
 @keyframes sheen { from { background-position: 140% 0, 0% 0, 0 0; } to { background-position: -40% 0, 30% 0, 0 0; } }
 @keyframes drift { to { background-position: -40% 0, 230% 0, 0 0; } }
 .preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
@@ -90,11 +95,17 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .status.live i { background: var(--glow); box-shadow: 0 0 8px var(--glow); }
 
 /* ------------------------------------------------ hero moon + effect panels */
-.main { display: grid; grid-template-columns: minmax(250px, 330px) minmax(0, 1fr); gap: 22px; align-items: center; }
+.main { display: grid; grid-template-columns: minmax(300px, 440px) minmax(0, 1fr); gap: 22px; align-items: center; }
 .hero { display: grid; justify-items: center; gap: 12px; padding: 6px 0; }
-.orb { position: relative; width: min(280px, 100%); aspect-ratio: 1; cursor: pointer; border: 0; padding: 0; background: none; border-radius: 50%; -webkit-tap-highlight-color: transparent; }
+.orb { position: relative; width: min(212px, 48%); aspect-ratio: 1; margin: 30px 0 22px; cursor: pointer; border: 0; padding: 0; background: none; border-radius: 50%;
+  -webkit-appearance: none; appearance: none; outline: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; touch-action: manipulation;
+  user-select: none; -webkit-user-select: none; }
+.orb:focus { outline: none; }
+.orb:focus-visible .body { filter: drop-shadow(0 0 10px var(--glow)); }
+.orb * { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+.hero { user-select: none; -webkit-user-select: none; }
 .orb .body { position: absolute; inset: 0; will-change: transform; }
-.orb canvas { position: absolute; inset: -14%; width: 128%; height: 128%; display: block; pointer-events: none; }
+.orb canvas { position: absolute; inset: -52.5%; width: 205%; height: 205%; display: block; pointer-events: none; }
 .orb .fallback { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, var(--ch1) 25%, transparent 60%), var(--foil); opacity: .9; }
 .orb svg { position: absolute; inset: -9%; width: 118%; height: 118%; pointer-events: none; overflow: visible; }
 .orb .ripple { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; padding: 1.2px; background: var(--foil);
@@ -105,12 +116,12 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .hero .name.swap { animation: nameIn .7s cubic-bezier(.2,.7,.2,1); }
 .hero .meta.swap { animation: nameIn .7s .08s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes nameIn { from { opacity: 0; filter: blur(8px); transform: translateY(8px); letter-spacing: .08em; } to { opacity: 1; filter: blur(0); transform: none; } }
-.hero .name { font: italic 500 27px/1.1 var(--serif); text-transform: none; text-align: center; letter-spacing: .01em; }
+.hero .name { font: italic 500 30px/1.1 var(--serif); font-optical-sizing: auto; text-transform: none; text-align: center; letter-spacing: -.01em; }
 .hero .meta { color: var(--muted); font-size: 11px; text-align: center; }
 .hero .hint { color: var(--muted); font-size: 10.5px; opacity: .8; }
 .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .panel { padding: 7px 10px 6px; display: grid; gap: 2px; }
-.panel h3 { margin: 0; display: flex; justify-content: space-between; font: 500 11px var(--mono); color: var(--ink); letter-spacing: .02em; }
+.panel h3 { margin: 0; display: flex; justify-content: space-between; font: 400 10.5px var(--mono); font-stretch: 100%; color: var(--ink); letter-spacing: .14em; }
 .panel h3 span { color: var(--muted); font-weight: 400; }
 .panel .knobs { display: flex; justify-content: space-around; gap: 2px; }
 .knob { position: relative; display: grid; justify-items: center; gap: 0; width: 62px; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -118,20 +129,20 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .knob .face:active { cursor: grabbing; }
 .knob canvas { width: 100%; height: 100%; display: block; }
 .knob svg.ring { position: absolute; inset: -22%; width: 144%; height: 144%; pointer-events: none; overflow: visible; }
-.knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font-size: 10px; font-stretch: 80%; white-space: nowrap; }
 .knob .name .led { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex: none; }
 .knob.on .name { color: var(--ink); }
 .knob.on .name .led { background: var(--glow); box-shadow: 0 0 5px var(--glow); }
 .knob.sel .name { text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--glow) 80%, transparent); text-underline-offset: 3px; }
-.knob .val { font-size: 11px; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
+.knob .val { font-size: 10px; font-stretch: 80%; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
 .knob.on .val, .knob.dragging .val { color: var(--ink); }
 .knob.mini { width: 58px; }
 .knob.mini .face { width: 30px; height: 30px; margin: 6px 0 3px; }
 
 /* selected effect: all its controls */
-.detail { display: grid; grid-template-columns: minmax(150px, 230px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 6px 12px; min-height: 64px; }
+.detail { display: grid; grid-template-columns: minmax(170px, 260px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 9px 12px; min-height: 68px; }
 .detail .ttl { display: grid; gap: 2px; min-width: 0; }
-.detail .ttl b { font: italic 500 19px/1.1 var(--serif); text-transform: none; }
+.detail .ttl b { font: italic 500 21px/1.1 var(--serif); text-transform: none; letter-spacing: -.01em; }
 .detail .ttl span { color: var(--muted); font-size: 10.5px; line-height: 1.4; }
 .detail .ctrls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
 .power { border: 1px solid var(--line); border-radius: 5px; background: none; cursor: pointer; height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; }
@@ -189,7 +200,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; align-content: start; }
 .item { text-align: left; border: 1px solid var(--line); border-radius: 6px; background: none; cursor: pointer; padding: 7px 10px; display: grid; gap: 1px; min-width: 0; }
 .item[aria-current="true"] { border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
-.item b { font: italic 500 17px/1.15 var(--serif); text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item b { font: italic 500 17px/1.2 var(--serif); text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .item small { font-size: 10.5px; color: var(--muted); }
 .mk { font-size: 10.5px; } .mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
 .sound-card { display: grid; gap: 6px; padding: 10px; }
@@ -205,7 +216,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 .start { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: color-mix(in oklab, var(--bg) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .start > div { display: grid; justify-items: center; gap: 14px; text-align: center; max-width: 36ch; }
-.start .wm { font-size: 46px; }
+.start .wm { font-size: 58px; }
 .start button { border: 1px solid var(--line-strong); border-radius: 6px; background: none; cursor: pointer; padding: 9px 22px; font-size: 12px; color: var(--ink); }
 .start button:hover { border-color: var(--glow); box-shadow: 0 0 18px -6px var(--glow); }
 .start p { margin: 0; color: var(--muted); font-size: 11px; }
@@ -213,7 +224,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 @media (max-width: 860px) {
   .main { grid-template-columns: 1fr; }
-  .orb { width: min(220px, 70vw); }
+  .orb { width: min(176px, 44vw); margin: 22px 0 16px; }
 }
 @media (max-width: 620px) {
   .top { grid-template-columns: minmax(0, 1fr) auto; }
@@ -230,7 +241,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 
 <div class="start" id="start">
   <div>
-    <h1 class="wm">lumelody</h1>
+    <h1 class="wm" aria-label="lumelody"><span aria-hidden="true">lumel</span><svg class="o" viewBox="-15 -10 30 20" aria-hidden="true"><use href="#oPlanet"/></svg><span aria-hidden="true">dy</span></h1>
     <button type="button" id="startBtn">tap to begin</button>
     <p>switches on the sound engine. play the keys, your computer keyboard (a–k, w e t y u), or a midi keyboard where the browser allows it.</p>
   </div>
@@ -240,7 +251,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
   <canvas class="stars" id="stars" aria-hidden="true"></canvas>
   <div class="inner">
     <header class="top">
-      <h1 class="wm">lumelody</h1>
+      <h1 class="wm" aria-label="lumelody"><span aria-hidden="true">lumel</span><svg class="o" viewBox="-15 -10 30 20" aria-hidden="true"><use href="#oPlanet"/></svg><span aria-hidden="true">dy</span></h1>
       <div class="preset hl">
         <button class="btn icon" type="button" id="prev" aria-label="Previous sound">‹</button>
         <button class="btn pick" type="button" id="picker" aria-haspopup="dialog" aria-expanded="false"><span class="dim">⌄</span><b class="cap" id="sPick">—</b></button>
@@ -256,21 +267,8 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
       <div class="hero">
         <button class="orb" type="button" id="orb" aria-label="New sound: picks a random sound">
           <span class="body" id="orbBody">
-            <svg viewBox="-60 -60 120 120" aria-hidden="true">
-              <g transform="rotate(-18)"><ellipse rx="56" ry="15" fill="none" style="stroke:var(--line)" stroke-width=".35"/>
-                <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="34s" repeatCount="indefinite" path="M56 0 A56 15 0 1 1 -56 0 A56 15 0 1 1 56 0"/></circle></g>
-              <g transform="rotate(26)"><ellipse rx="53" ry="22" fill="none" style="stroke:var(--line)" stroke-width=".28" stroke-dasharray=".6 1.6"/>
-                <circle r=".9" style="fill:var(--glow)"><animateMotion dur="57s" repeatCount="indefinite" path="M-53 0 A53 22 0 1 1 53 0 A53 22 0 1 1 -53 0"/></circle></g>
-            </svg>
             <span class="fallback" id="orbFallback" hidden></span>
             <canvas id="orbCv" aria-hidden="true"></canvas>
-            <svg viewBox="-60 -60 120 120" aria-hidden="true">
-              <defs><clipPath id="frontHalf"><rect x="-70" y="0" width="140" height="70"/></clipPath></defs>
-              <g transform="rotate(-18)"><g clip-path="url(#frontHalf)"><ellipse rx="56" ry="15" fill="none" style="stroke:var(--line-strong)" stroke-width=".4"/>
-                <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="34s" repeatCount="indefinite" path="M56 0 A56 15 0 1 1 -56 0 A56 15 0 1 1 56 0"/></circle></g></g>
-              <g transform="rotate(26)"><g clip-path="url(#frontHalf)"><ellipse rx="53" ry="22" fill="none" style="stroke:var(--line-strong)" stroke-width=".3" stroke-dasharray=".6 1.6"/>
-                <circle r=".9" style="fill:var(--glow)"><animateMotion dur="57s" repeatCount="indefinite" path="M-53 0 A53 22 0 1 1 53 0 A53 22 0 1 1 -53 0"/></circle></g></g>
-            </svg>
           </span>
         </button>
         <div class="name" id="sName">—</div>
@@ -333,6 +331,17 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
     <radialGradient id="lumiBead" cx="38%" cy="32%" r="70%">
       <stop offset="0" style="stop-color:color-mix(in oklab, var(--hair) 55%, transparent)"/><stop offset="1" style="stop-color:color-mix(in oklab, var(--hair) 12%, transparent)"/>
     </radialGradient>
+    <linearGradient id="oFoil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:#fff"/><stop offset=".25" style="stop-color:var(--h4)"/><stop offset=".5" style="stop-color:var(--h6)"/><stop offset=".72" style="stop-color:var(--h1)"/><stop offset="1" style="stop-color:#1a1a24"/>
+    </linearGradient>
+    <linearGradient id="oChrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" style="stop-color:var(--ch2)"/><stop offset=".35" style="stop-color:#fff"/><stop offset=".6" style="stop-color:var(--h4)"/><stop offset="1" style="stop-color:var(--ch2)"/>
+    </linearGradient>
+    <g id="oPlanet">
+      <path d="M-13.5 1.8 A13.5 3.6 -12 0 1 13.5 -1.8" fill="none" stroke="url(#oChrome)" stroke-width="1.1" opacity=".75"/>
+      <circle r="6.4" fill="url(#oFoil)"/>
+      <path d="M13.5 -1.8 A13.5 3.6 -12 0 1 -13.5 1.8" fill="none" stroke="url(#oChrome)" stroke-width="1.3"/>
+    </g>
     <radialGradient id="lumiLit" cx="42%" cy="38%" r="65%">
       <stop offset="0" stop-color="#fff"/><stop offset=".45" style="stop-color:color-mix(in oklab, var(--glow) 70%, #fff)"/><stop offset="1" style="stop-color:var(--glow)"/>
     </radialGradient>
@@ -348,11 +357,11 @@ const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", 
                 ["rhythm", ["stutter", "gate", "reverse"]], ["pitch", ["pitch", "glide", "octave"]], ["grain & glue", ["granular", "glue"]]];
 const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
 const THEMES = {
-  silver: { name: "Silver Chrome", k: { tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .32, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
-  rose:   { name: "Rose Chrome",   k: { tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .32, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
-  gold:   { name: "Gold Chrome",   k: { tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .26, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
-  violet: { name: "Violet Chrome", k: { tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .32, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
-  prism:  { name: "Prism Chrome",  k: { tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: .55, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
+  silver: { name: "Silver Chrome", k: { night: "#0a0a12", tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .32, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
+  rose:   { name: "Rose Chrome",   k: { night: "#120a10", tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .32, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
+  gold:   { name: "Gold Chrome",   k: { night: "#0f0c08", tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .26, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
+  violet: { name: "Violet Chrome", k: { night: "#0c0818", tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .32, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
+  prism:  { name: "Prism Chrome",  k: { night: "#0b0a12", tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: .55, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -540,21 +549,38 @@ const ORB = (() => {
           h += (x < 1. ? (x * x - 1.) * .5 : 0.) + .3 * exp(-pow((x - 1.) * 4., 2.)); }
         return h; }
       float surf(vec3 d) { return craters(d) + (fbm3(d * 6.) - .5) * .22; }
+      float h1(float x) { return fract(sin(x * 127.1) * 43758.5453); }
+      float n1(float x) { float i = floor(x), f = fract(x); return mix(h1(i), h1(i + 1.), f * f * (3. - 2. * f)); }
+      // ring density by radius: thousands-of-ringlets look from layered 1D noise, a bright middle ring, a wide division and a fine gap
+      float ringDen(float rho) {
+        const float A = 1.26, Z = 1.96;
+        if (rho < A || rho > Z) return 0.;
+        float x = (rho - A) / (Z - A);
+        float fine = .5 * n1(rho * 78.) + .3 * n1(rho * 31.) + .2 * n1(rho * 9.);
+        float d = smoothstep(0., .05, x) * smoothstep(1., .93, x) * (.2 + .95 * fine);
+        d *= mix(.45, 1.2, smoothstep(.16, .3, x) * smoothstep(.62, .5, x));
+        d *= mix(.35, 1., smoothstep(.1, .16, x));
+        d *= smoothstep(.006, .03, abs(x - .64));
+        d *= smoothstep(.0, .008, abs(x - .87));
+        return clamp(d, 0., 1.);
+      }
       void main() {
-        vec2 p = v * 1.28; float r = length(p); const float R = 1.;
-        vec3 col = vec3(0.); float al = 0.;
+        vec2 p = v * 2.05; float r = length(p); const float R = 1.;
+        vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.36 + act * 1.25));   // side light: a crescent that widens as you play
+        vec3 N = normalize(vec3(-.2, .945, .26));   // ring plane, seen from slightly above
+        // halo (premultiplied)
         float halo = exp(-max(r - R, 0.) * 6.) * smoothstep(R - .02, R + .03, r) * (.08 + .5 * act);
         vec3 hc = mix(gcol, film(atan(p.y, p.x) * .16 + time * .03), .45);
-        col += hc * halo; al += halo;
+        vec4 H = vec4(hc * halo, halo);
+        vec4 S = vec4(0.); float zs = -9.;
         if (r < R) {
           vec3 V = vec3(0., 0., 1.);
           vec2 q = p / R; vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
           vec3 T = normalize(cross(vec3(0., 1., 0.), n) + vec3(1e-4, 0., 0.)), B = cross(n, T);
           vec3 d = obj(n);
-          float e = .012, h0 = surf(d), h1 = surf(obj(normalize(n + T * e))), h2 = surf(obj(normalize(n + B * e)));
-          vec3 nn = normalize(n - (T * (h1 - h0) + B * (h2 - h0)) / e * .028);   // sculpted relief
-          float mar = smoothstep(.47, .64, fbm3(d * 1.7 + 3.));                    // dark lunar seas: smoother, deeper colour
-          vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.36 + act * 1.25));   // side light: a crescent that widens as you play
+          float e = .012, h0 = surf(d), h1v = surf(obj(normalize(n + T * e))), h2 = surf(obj(normalize(n + B * e)));
+          vec3 nn = normalize(n - (T * (h1v - h0) + B * (h2 - h0)) / e * .028);   // sculpted relief
+          float mar = smoothstep(.47, .64, fbm3(d * 1.7 + 3.));                     // dark lunar seas: smoother, deeper colour
           float lam = dot(nn, Ld), lit = smoothstep(-.03, .2, lam);
           vec3 Hv = normalize(Ld + V);
           float grating = sin(dot(d, vec3(1., .55, .25)) * 150. + time * .6) * .5 + .5;   // holographic micro-lines that shimmer
@@ -564,15 +590,36 @@ const ORB = (() => {
           vec3 base = mix(vec3(bright), f * bright * 1.25, .42 + .33 * term + .15 * (1. - mar));
           float spec = pow(max(dot(reflect(-Ld, nn), V), 0.), 48.) * .3 * (1. - .5 * mar);
           vec3 cl = base + (vec3(1.) + f * .4) * spec + f * term * .3;
+          // the rings cast their shadow across the lit crescent
+          float dn = dot(N, Ld);
+          if (abs(dn) > 1e-3) { float t = -dot(N, n) / dn; if (t > 0.) cl *= 1. - .7 * ringDen(length(n + t * Ld)); }
           float shine = clamp(dot(nn, normalize(vec3(.55, .15, 1.))), 0., 1.);   // earthshine shows the relief on the night side
           vec3 cd = (f * .045 + vec3(.012, .013, .02)) * (.45 + .9 * shine) * mix(1., .7, mar);
           vec3 c = mix(cd, cl, lit);
           c += f * pow(1. - n.z, 4.) * (.06 + .4 * act) * (.3 + .7 * lit);   // thin holographic limb
           c *= 1. - .22 * pow(1. - n.z, 3.) * (1. - lit);                     // limb darkening on the night side
-          float edge = smoothstep(R, R - .008, r);
-          col = mix(col, c * tint, edge); al = max(al, edge);
+          float sa = smoothstep(R, R - .008, r);
+          S = vec4(c * tint * sa, sa); zs = n.z;
         }
-        gl_FragColor = vec4(col, al);
+        // rings: intersect the view ray with the ring plane
+        float zr = -(N.x * p.x + N.y * p.y) / N.z; vec3 P = vec3(p, zr); float rho = length(P);
+        vec4 Rg = vec4(0.);
+        float den = ringDen(rho);
+        if (den > .002) {
+          float b = dot(P, Ld), cc = dot(P, P) - 1., disc = b * b - cc;
+          float shad = (disc > 0. && -b - sqrt(max(disc, 0.)) > 0.) ? smoothstep(0., .06, disc) : 0.;   // the moon's shadow on the rings
+          vec3 f = film(rho * 2.4 + dot(p, light) * .25 + time * .008);
+          vec3 ice = mix(vec3(.88, .9, .95), f, .5);
+          float litr = (.5 + .5 * abs(dot(N, Ld))) * (1. - .88 * shad) * (1. + .35 * act);
+          float ra = den * .8;
+          Rg = vec4(ice * litr * tint * ra, ra);
+        }
+        // compose: rings in front of the moon only where they are nearer the viewer
+        vec4 o = H;
+        bool front = zr > zs;
+        if (front) { o = S + o * (1. - S.a); o = Rg + o * (1. - Rg.a); }
+        else { o = Rg + o * (1. - Rg.a); o = S + o * (1. - S.a); }
+        gl_FragColor = vec4(min(o.rgb, vec3(o.a)), o.a);
       }`;
     const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
     try {
@@ -600,7 +647,7 @@ const ORB = (() => {
       kick *= Math.exp(-dt / .5);
       const goal = Math.min(1, target + kick * .8);
       act += (goal - act) * (1 - Math.exp(-dt / (goal > act ? .06 : .5)));
-      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * res;
+      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * .85 * res;
       const w = Math.max(2, Math.round(r.width * d));
       if (cv.width !== w) { cv.width = cv.height = w; gl.viewport(0, 0, w, w); }
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
@@ -626,16 +673,42 @@ const ORB = (() => {
     for (const n of [$("#sName"), $("#sCat")]) { n.classList.remove("swap"); void n.offsetWidth; n.classList.add("swap"); }
   };
 }
-function drawStars() {   // a still night sky inside the window; a few stars carry the theme's foil colours
-  const cv = $("#stars"), r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
-  cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
-  const c = cv.getContext("2d"); c.clearRect(0, 0, cv.width, cv.height);
+let starsT = 0;
+function drawStars() {   // the window background: a soft nebula painted from the theme's foil colours, a glow behind the moon, stars
+  const cv = $("#stars"), r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+  if (r.width < 2) return;
+  cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+  const c = cv.getContext("2d");
+  const W = Math.max(2, Math.round(r.width / 5)), Hh = Math.max(2, Math.round(r.height / 5));
+  const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const T = THEMES[curTheme].k, hs = T.h.map(rgb), night = rgb(T.night), glow = rgb(T.glow);
+  const hash = (x, y) => { const v = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return v - Math.floor(v); };
+  const noise = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), w = yf * yf * (3 - 2 * yf);
+    const a = hash(xi, yi), b = hash(xi + 1, yi), cc = hash(xi, yi + 1), d = hash(xi + 1, yi + 1); return a + (b - a) * u + (cc - a) * w + (a - b - cc + d) * u * w; };
+  const fbm = (x, y) => { let s = 0, a = .5; for (let i = 0; i < 5; i++) { s += a * noise(x, y); x = x * 2.02 + 3.1; y = y * 2.02 + 1.7; a *= .5; } return s; };
+  const sm = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const ob = $("#orb").getBoundingClientRect(), mx = (ob.left + ob.width / 2 - r.left) / r.width, my = (ob.top + ob.height / 2 - r.top) / r.height;
+  const img = new ImageData(W, Hh), D = img.data, asp = r.width / r.height;
+  for (let y = 0; y < Hh; y++) for (let x = 0; x < W; x++) {
+    const u = x / W, v = y / Hh, px = u * 3 * asp, py = v * 3;
+    const wx = fbm(px * .6 + 7.3, py * .6 + 1.1), wy = fbm(px * .6 + 2.9, py * .6 + 8.4);   // domain warp: wispy, flowing clouds
+    const n1 = fbm(px + wx * 1.6, py + wy * 1.6), n2 = fbm(px * 1.8 + 11 + wy, py * 1.8 + 4 + wx), n3 = fbm(px * 3.1 + 5, py * 3.1 + 9);
+    const A = Math.pow(sm(.42, .82, n1), 1.6), B = Math.pow(sm(.5, .86, n2), 2), dust = sm(.55, .72, n3) * .45;
+    const dm = Math.hypot((u - mx) * asp, v - my), g = Math.exp(-dm * dm * 9), vig = 1 - .55 * Math.pow(Math.hypot(u - .5, (v - .5) * 1.2), 2.2);
+    for (let k = 0; k < 3; k++) {
+      const col = (night[k] + hs[4][k] * A * .2 + hs[0][k] * B * .15 + hs[3][k] * A * B * .16 + glow[k] * g * .16) * (1 - dust * (A + B)) * vig;
+      D[(y * W + x) * 4 + k] = Math.min(255, col);
+    }
+    D[(y * W + x) * 4 + 3] = 255;
+  }
+  const small = document.createElement("canvas"); small.width = W; small.height = Hh; small.getContext("2d").putImageData(img, 0, 0);
+  c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; c.drawImage(small, 0, 0, cv.width, cv.height);
   let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
-  const n = Math.round(r.width * r.height / 2600), hs = THEMES[curTheme].k.h;
-  for (let i = 0; i < n; i++) {
-    const x = rnd() * cv.width, y = rnd() * cv.height, big = rnd() > .965, a = .15 + rnd() * .55;
-    c.globalAlpha = big ? .85 : a; c.fillStyle = rnd() > .9 ? hs[Math.floor(rnd() * 6)] : "#fff";
-    c.beginPath(); c.arc(x, y, (big ? 1.1 : .5 + rnd() * .5) * d, 0, 7); c.fill();
+  const n = Math.round(r.width * r.height / 2200);
+  for (let i = 0; i < n; i++) {   // stars, a few tinted, a few with a soft glow
+    const x = rnd() * cv.width, y = rnd() * cv.height, big = rnd() > .97, a = .12 + rnd() * .55, tint = rnd() > .85 ? T.h[Math.floor(rnd() * 6)] : "#ffffff";
+    if (big) { const g = c.createRadialGradient(x, y, 0, x, y, 5 * dpr); g.addColorStop(0, tint + "aa"); g.addColorStop(1, tint + "00"); c.fillStyle = g; c.globalAlpha = .8; c.fillRect(x - 5 * dpr, y - 5 * dpr, 10 * dpr, 10 * dpr); }
+    c.globalAlpha = big ? .95 : a; c.fillStyle = tint; c.beginPath(); c.arc(x, y, (big ? 1 : .4 + rnd() * .55) * dpr, 0, 7); c.fill();
   }
   c.globalAlpha = 1;
 }
@@ -954,7 +1027,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("keyup", e => { const key = e.key.toLowerCase(); if (key in KEYMAP) noteOff("k" + key); });
 window.addEventListener("blur", releaseAll);
-window.addEventListener("resize", () => { drawStars(); const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
+window.addEventListener("resize", () => { clearTimeout(starsT); starsT = setTimeout(drawStars, 150); const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
 $("#midiBtn").onclick = async () => {
   if (!navigator.requestMIDIAccess) { toast("No MIDI in this browser here. Your MIDI keyboard works in the plugin."); return; }
   try {
@@ -1078,6 +1151,8 @@ const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e
 const li = PRESETS.findIndex(p => p.id === last);
 loadPreset(li >= 0 ? li : 0);
 requestAnimationFrame(frame);
+requestAnimationFrame(drawStars);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => drawStars());
 (async () => {
   try { db = window.claude && await window.claude.use("db"); } catch (e) { db = null; }
   if (!db) return;
