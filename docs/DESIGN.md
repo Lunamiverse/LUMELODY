@@ -4,13 +4,16 @@
   the lighting and the material, not painted on. One hero object (the moon), a liquid-chrome frame, dark-glass panels.
 - **Typography system:**
   - *Logo:* a custom vector wordmark (drawn as SVG paths, not a font): monoline geometric capitals, cap height 100,
-    stroke 7.5, wide tracking. Signatures: the M's middle is a draped crescent swoop; the E's middle bar floats free;
+    stroke 9, wide tracking, L with an upturned crescent flick. Liquid-chrome bevel (SVG lighting filter), a slow
+    holographic film in soft-light, and a light sweep every 8 s. Signatures: the M's middle is a draped crescent swoop; the E's middle bar floats free;
     the O is a moon, with a crescent of light inside its ring; the Y's arms form a crescent cup on a stem. Polished
     silver chrome stroke with faint rose/cyan in the lower reflections, a light sweep on open. Reads in plain black.
-  - *Sound and preset names, titles:* Federo (OFL, Google Fonts), capitals, wide tracking; art-deco geometry that
-    feels otherworldly but stays readable small. The selected sound has a silver finish and a fine luminous line;
-    in the browser the selected item gets a slim chrome indicator and a silver highlight. Long names step down in
-    size to stay on one line.
+  - *Sound and preset names, effect and panel titles:* LUMI TYPE, a custom alphabet drawn for LUMELODY (A-Z, 0-9,
+    space - / & . ') in the same monoline system as the wordmark: draped crescent M, floating E/F bars,
+    crescent-cup Y, round letters on true ellipses. Rendered as SVG strokes (thicker strokes at small sizes), so it
+    needs no font file. The selected sound gets the liquid-chrome finish, a light sweep on every change and a fine
+    luminous line; list items are drawn in ink, the selected one in chrome with a slim indicator. Long names scale
+    down to fit.
   - *Labels, values, technical text:* Martian Mono (OFL), light, semi-condensed, lowercase.
   - Evaluated and not chosen for names: Italiana and Gruppo (too thin small), Julius Sans One and Syne (elegant
     but generic), Poiret One (too decorative), Tenor Sans (too plain), Montserrat Alternates (playful).
@@ -29,8 +32,9 @@
   radius from layered ringlets with a bright middle ring, a wide division and a fine gap; translucent, foil-tinted
   ice lit by the same light. They are hidden behind the moon and cross in front of it, the moon casts its shadow
   on them and they cast theirs across the crescent.
-- **Background:** a nebula painted once per theme/size from the theme's foil colours (domain-warped clouds, dark
-  dust lanes, a glow behind the moon, vignette) with stars, some tinted, some glowing.
+- **Background:** sculpted obsidian glass (WebGL): a slow domain-warped height field reflecting the studio faintly
+  like black glass, turning into polished liquid-chrome folds toward the edges, with pearlescent sheen and faint
+  thin-film interference where it bends, the moon's light on the glass, a vignette and fine grain. No stars.
 - **Tap motion:** the moon is a spring: it lifts slightly on hover, squashes to 90% on press and bounces back on
   release; a tap spins it, flares the light, sends out foil ripples and loads a random sound, whose name fades in
   out of a blur. Keys press with a quick tilt and spring back with a small overshoot; their light rises from the
