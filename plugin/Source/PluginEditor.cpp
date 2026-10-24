@@ -211,6 +211,7 @@ void LumiEditor::reply (const String& type, bool ok, const String& detail)
 void LumiEditor::timerCallback()
 {
     if (! pageReady) return;
+    if (! warmQueue.isEmpty()) { proc.librarySample (warmQueue[0]); warmQueue.remove (0); }   // decode the samples on screen, one per tick
     if (libWasOn && ! proc.libraryPlaying()) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "libEnd"); send (o); }
     libWasOn = proc.libraryPlaying();
     if (previewWasOn && ! proc.previewPlaying()) { DynamicObject::Ptr o = new DynamicObject(); o->setProperty ("type", "smpPreviewEnd"); send (o); }
@@ -380,6 +381,7 @@ bool LumiEditor::onSamplerMessage (const String& type, const var& m)
         return true;
     }
     if (type == "libStop") { proc.libraryStop(); return true; }
+    if (type == "libWarm") { if (auto* a = m["ids"].getArray()) for (auto& v : *a) if (warmQueue.size() < 512) warmQueue.add (v.toString()); return true; }
     if (type == "libVol") { proc.libraryGain ((float) (double) m["vol"]); return true; }
     if (type == "libExport")
     {

@@ -163,7 +163,13 @@ const ARP = (() => {
   }
 
   // ---------------------------------------------------------------- actions
-  function remember() { before = snap(); showing = "now"; }
+  const hist = { undo: [], redo: [] };
+  function remember() { before = snap(); showing = "now"; hist.undo.push(before); if (hist.undo.length > 100) hist.undo.shift(); hist.redo = []; }
+  function undoArp(redo) {
+    const from = redo ? hist.redo : hist.undo, to = redo ? hist.undo : hist.redo;
+    if (!from.length) { toast(redo ? "nothing to redo" : "nothing to undo"); return; }
+    to.push(snap()); applySettings(from.pop()); save(); render(); if (LUMI_PLAY.playing() === "arp") play(true);
+  }
   function applySettings(o) { for (const k of SETTINGS) if (k in o) S[k] = JSON.parse(JSON.stringify(o[k])); }
   function useSound(ids) {
     const i = PRESETS.findIndex(p => ids.includes(p.id)); if (i >= 0 && i !== cur) loadPreset(i);
@@ -279,8 +285,12 @@ const ARP = (() => {
     LUMI_EXPORT.dragHandle($a("#arpWav"), () => { const sc = score(); if (!sc.ev.length) { toast("no notes to export yet"); return null; } return { audio: true, name: fileName(), score: sc, bpm: S.bpm }; });
     $a("#arpToBlocks").onclick = () => { const sc = score(); if (!sc.ev.length) { toast("no notes yet"); return; } PADS.loadNotes ? PADS.loadNotes(sc.ev, sc.beats, S.bpm) : toast("open neon pads to edit"); };
     LUMI_PLAY.onChange(() => { sync(); });
+    document.addEventListener("keydown", e => {
+      if ($("#arpPane").hidden || $("#prog").hidden || !(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== "z" || (e.target.closest && e.target.closest("input, select, textarea"))) return;
+      e.preventDefault(); undoArp(e.shiftKey);
+    });
     setInterval(() => { if (LUMI_PLAY.playing() === "arp" && !$("#arpPane").hidden) drawRoll(); }, 120);
     window.addEventListener("resize", drawRoll);
   }
-  return { init, render, show: on => { if (on) render(); }, capture, score, eventsIn, source, state: S, play, surprise, regenerate, compare, genre, midiBytes, live, GENRES, PATTERNS, RATES };
+  return { undo: () => undoArp(false), redo: () => undoArp(true), init, render, show: on => { if (on) render(); }, capture, score, eventsIn, source, state: S, play, surprise, regenerate, compare, genre, midiBytes, live, GENRES, PATTERNS, RATES };
 })();

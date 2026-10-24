@@ -42,5 +42,12 @@
   a groove, MIDI (GM drums, channel 10) and WAV export, drag to the DAW. While the Disco + EDM + Club Bangers library is
   open the moon is the disco ball; any other library, closing the panel or another tool restores the moon, and reopening
   comes back to the same library and moon.
+- **Feel (no new elements):** previews start on press; the samples on screen are decoded while you look at them;
+  preset changes skip rebuilding the keyboard when the range is the same. Suggestions appear in the existing tip line
+  (a sound that goes with the preset you picked, your new chords as an arpeggio, layering a sample with the piano) and
+  open where they point when tapped; nothing changes without a tap. Optional milestones (first export, first loop, first
+  sample, first groove) are a single toast each. Focus mode (Finder settings) slows the idle moon and quiets the hints;
+  every control stays. Buttons brighten for an instant when pressed (no movement with reduced motion). A failed save
+  is reported once instead of being hidden. The arpeggiator has undo / redo (ctrl+z / ctrl+shift+z).
 - **Limits:** WebGL approximations of optics, not physically based rendering; without WebGL the moon and pads fall back
   to still drawings.

@@ -40,6 +40,7 @@ private:
     void runAsync (std::function<juce::var()> work, std::function<void (const juce::var&)> done);
     std::unique_ptr<juce::FileChooser> chooser;
     bool previewWasOn = false, libWasOn = false;
+    juce::StringArray warmQueue;
 
     LumiProcessor& proc;
     juce::WebBrowserComponent web;

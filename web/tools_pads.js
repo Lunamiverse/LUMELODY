@@ -104,6 +104,7 @@ const PADS = (() => {
     let t = ((a.rec % L) + L) % L, d = Math.max(.05, ck.beat - a.rec);
     if (g) { t = Math.round(t / g) * g % L; d = Math.max(g, Math.round(d / g) * g); }
     d = Math.min(d, L - t);
+    if (!S.pattern.length) window.dispatchEvent(new CustomEvent("lumi:milestone", { detail: "recorded" }));
     commit(() => { for (const n of a.notes) S.pattern.push({ t: +t.toFixed(4), d: +d.toFixed(4), n, vel: +a.vel.toFixed(3) }); });
   }
   const score = () => ({ ev: S.pattern.map(x => ({ t: x.t, d: x.d, n: x.n, vel: x.vel, track: 0 })), beats: loopBeats() });

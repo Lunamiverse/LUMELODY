@@ -153,7 +153,9 @@ const LUMI_EXPORT = (() => {
       return true;
     } catch (e) { return false; }
   }
+  const exported = () => window.dispatchEvent(new CustomEvent("lumi:milestone", { detail: "exported" }));
   function saveMidi(name, bytes) {
+    exported();
     name = safe(name) + ".mid";
     if (PLUGIN) { send({ type: "saveFile", name, b64: b64(bytes) }); return; }
     toast(download(name, bytes, "audio/midi") ? "MIDI saved: drag it into FL Studio's piano roll" : "This page can't save files here; the plugin can.");
@@ -194,7 +196,7 @@ const LUMI_EXPORT = (() => {
     for (let i = 0; i < n; i++) for (const x of [L[i], R[i]]) { let v = Math.round(Math.max(-1, Math.min(.9999999, x * g)) * 8388607); if (v < 0) v += 16777216; b.setUint8(o++, v & 255); b.setUint8(o++, (v >> 8) & 255); b.setUint8(o++, (v >> 16) & 255); }
     return new Uint8Array(b.buffer);
   }
-  function saveWav(name, bytes) { name = safe(name) + ".wav"; if (PLUGIN) { send({ type: "saveFile", name, b64: b64(bytes) }); return; } toast(download(name, bytes, "audio/wav") ? "Audio saved (WAV)" : "This page can't save files here; the plugin can."); }
+  function saveWav(name, bytes) { exported(); name = safe(name) + ".wav"; if (PLUGIN) { send({ type: "saveFile", name, b64: b64(bytes) }); return; } toast(download(name, bytes, "audio/wav") ? "Audio saved (WAV)" : "This page can't save files here; the plugin can."); }
   async function saveAudio(name, score, bpm, tracks) {
     name = safe(name) + ".wav";
     if (PLUGIN) { send({ type: "renderAudio", name, bpm, ev: score.ev.filter(e => !tracks || tracks.has(e.track)).map(e => [e.t, e.d, e.n, e.vel]), beats: score.beats, drag: false }); return; }
@@ -211,7 +213,7 @@ const LUMI_EXPORT = (() => {
       moved = false; downAt = [e.clientX, e.clientY];
       if (PLUGIN) {
         const it = getItem(); if (!it) return;
-        e.preventDefault();
+        e.preventDefault(); exported();
         if (it.native) send(it.native);
         else if (it.audio) send({ type: "renderAudio", name: safe(it.name) + ".wav", bpm: it.bpm, ev: it.score.ev.filter(x => !it.tracks || it.tracks.has(x.track)).map(x => [x.t, x.d, x.n, x.vel]), beats: it.score.beats, drag: true });
         else send({ type: "dragFile", name: safe(it.name) + ".mid", b64: b64(it.bytes) });
@@ -222,7 +224,7 @@ const LUMI_EXPORT = (() => {
       const it = getItem(); if (!it || it.audio || it.lazy) { e.preventDefault(); return; }
       if (url) URL.revokeObjectURL(url);
       url = URL.createObjectURL(new Blob([it.bytes], { type: "audio/midi" }));
-      try { e.dataTransfer.setData("DownloadURL", `audio/midi:${safe(it.name)}.mid:${url}`); e.dataTransfer.setData("text/plain", safe(it.name) + ".mid"); e.dataTransfer.effectAllowed = "copy"; } catch (_) {}
+      exported(); try { e.dataTransfer.setData("DownloadURL", `audio/midi:${safe(it.name)}.mid:${url}`); e.dataTransfer.setData("text/plain", safe(it.name) + ".mid"); e.dataTransfer.effectAllowed = "copy"; } catch (_) {}
     });
     node.addEventListener("click", () => {
       downAt = null; if (moved) return;

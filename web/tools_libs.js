@@ -116,15 +116,30 @@ const LIBS = (() => {
     $("#libBpm").value = S.bpm || ""; $("#libBpm").placeholder = "auto"; $("#libVol").value = S.vol;
     const list = itemsFor();
     $("#libItems").replaceChildren(...(list.length ? list.map(card) : [el("p", { className: "smempty", textContent: S.favOnly ? "no favourites here yet: tap ☆ on a sound" : "nothing matches" })]));
-    renderGroove(); renderPlayState();
+    renderGroove(); renderPlayState(); warm(list);
   }
+  // decode what is on screen while the person looks at it, so the first preview starts at once (idle time, one at a time)
+  let warmQ = [];
+  function warm(list) {
+    const ids = [...new Set(list.flatMap(i => i.kind === "pattern" ? i.events.map(e => e.s) : i.kind === "instrument" ? [] : [i.id]))].filter(id => !buffers.has(id) && !warmed.has(id));
+    warmQ = ids;
+    if (PLUGIN) { if (ids.length) send({ type: "libWarm", ids }); ids.forEach(id => warmed.add(id)); return; }
+    const step = () => { const id = warmQ.shift(); if (!id || $("#libs").hidden || !ctx) return; buf(id).catch(() => {}).then(() => idle(step)); };
+    for (let k = 0; k < 4; k++) idle(step);   // four at a time: enough to hide the download, light on the CPU
+  }
+  const warmed = new Set();
+  const idle = f => (window.requestIdleCallback ? requestIdleCallback(f, { timeout: 300 }) : setTimeout(f, 30));
   const kindLabel = i => i.kind === "instrument" ? "instrument" : i.kind === "pattern" ? `pattern · ${i.bpm} bpm · MIDI + audio` : i.kind === "loop" ? "loop" : "one-shot";
   function card(i) {
     const star = el("button", { className: "smstar" + (favs.has(i.id) ? " on" : ""), type: "button", textContent: favs.has(i.id) ? "★" : "☆", title: "Favourite" });
     star.onclick = () => { favs.has(i.id) ? favs.delete(i.id) : favs.add(i.id); store.set("lumi-libs-favs-v1", [...favs]); render(); };
     const play = el("button", { className: "btn lplay", type: "button", textContent: "▶", title: i.kind === "instrument" ? "Hear the demo" : "Preview" });
     play.dataset.id = i.id;
-    play.onclick = () => togglePlay(i);
+    // starts on press (not on release) so the sound comes as soon as the finger lands; Enter / Space still use click
+    let pressed = false;
+    play.onpointerdown = e => { if (e.button) return; pressed = true; togglePlay(i); };
+    play.onclick = () => { if (pressed) { pressed = false; return; } togglePlay(i); };
+    if (i.kind === "instrument" && !PLUGIN) play.onpointerenter = () => { if (!demoCache.has(i.preset.id)) { const a = new Audio(); a.preload = "auto"; a.src = "audio/" + i.preset.id + ".mp3"; demoCache.set(i.preset.id, a); } };
     const acts = [play];
     if (i.kind === "instrument") {
       const use = el("button", { className: "btn hot", type: "button", textContent: PRESETS[cur] && "preset:" + PRESETS[cur].id === i.id ? "playing on keys" : "play it", title: "Load it on the keys, the pads and MIDI" });
@@ -134,7 +149,7 @@ const LIBS = (() => {
       if (i.kind === "pattern") {
         const inG = groove.some(g => g.id === i.id);
         const add = el("button", { className: "btn" + (inG ? " hot" : ""), type: "button", textContent: inG ? "in groove" : "+ groove", title: "Layer it with other patterns" });
-        add.onclick = () => { if (inG) groove = groove.filter(g => g.id !== i.id); else groove.push({ id: i.id, vol: .9 }); render(); if (playing && playing.key === "groove") playPatterns(groove, "groove"); };
+        add.onclick = () => { if (inG) groove = groove.filter(g => g.id !== i.id); else groove.push({ id: i.id, vol: .9 }); if (groove.length >= 2) window.dispatchEvent(new CustomEvent("lumi:milestone", { detail: "groove" })); render(); if (playing && playing.key === "groove") playPatterns(groove, "groove"); };
         acts.push(add);
         const dm = el("button", { className: "btn drag", type: "button", textContent: "midi ↗", title: "Drag the pattern as MIDI (GM drum notes). Click to save." });
         LUMI_EXPORT.dragHandle(dm, () => ({ name: `LUMELODY ${i.name} ${bpmOf([i.id])} bpm`, bytes: patternMidi([{ id: i.id, vol: 1 }]) }));
@@ -153,7 +168,7 @@ const LIBS = (() => {
     c.dataset.id = i.id;
     return c;
   }
-  let demo = null;
+  let demo = null; const demoCache = new Map();
   async function togglePlay(i) {
     if (playing && playing.id === i.id) { stopAll(); if (demo) { demo.pause(); demo = null; } return; }
     if (demo) { demo.pause(); demo = null; }
@@ -161,7 +176,7 @@ const LIBS = (() => {
       if (i.kind === "instrument") {
         stopAll();
         if (PLUGIN) { toast("Load it with “play it”, then play the keys or your piano roll"); return; }
-        demo = new Audio("audio/" + i.preset.id + ".mp3"); demo.volume = Math.min(1, S.vol); demo.play().catch(() => toast("the demo could not play here"));
+        demo = demoCache.get(i.preset.id) || new Audio("audio/" + i.preset.id + ".mp3"); demo.currentTime = 0; demo.volume = Math.min(1, S.vol); demo.play().catch(() => toast("the demo could not play here"));
         playing = { id: i.id }; demo.onended = () => { playing = null; renderPlayState(); }; renderPlayState(); return;
       }
       if (i.kind === "pattern") { await playPatterns([{ id: i.id, vol: 1 }], i.id); playing.id = i.id; renderPlayState(); return; }

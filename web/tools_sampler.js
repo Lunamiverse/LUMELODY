@@ -91,7 +91,7 @@ const SAMPLER = (() => {
       catch (e) { progress(null); note(`${f.name}: ${e.message}`, true); }
     }
     progress(null);
-    if (ok) { await loadLib(); renderLib(); if (files.length === 1 && last) note(last.dupe ? `${last.name} is already in your samples` : `${last.name} imported`); else note(`${ok} of ${files.length} files imported`); }
+    if (ok) { window.dispatchEvent(new CustomEvent("lumi:milestone", { detail: "imported" })); await loadLib(); renderLib(); if (files.length === 1 && last) note(last.dupe ? `${last.name} is already in your samples` : `${last.name} imported`); else note(`${ok} of ${files.length} files imported`); }
     return last;
   }
   async function importOne(f, prog) {
@@ -234,6 +234,7 @@ const SAMPLER = (() => {
       saveCurrent();
       tab("edit"); renderLib();
       note(`${e.name} is in the sampler: play the keys, the pads or your MIDI`);
+      if (typeof LUMI_FEEL !== "undefined") LUMI_FEEL.afterSample(e.name);
     } catch (err) { progress(null); note(err.message, true); }
   }
   async function pushToEngine(rebuild, withAudio) {
@@ -477,7 +478,7 @@ const SAMPLER = (() => {
   function init() {
     const smp = $("#smp");
     // import: file picker, folder, drag and drop anywhere on the panel
-    $s("#smImport").onclick = () => PLUGIN ? (async () => { try { progress("choose a file…"); const r = await req("smpImport"); progress(null); if (r.cancelled) return; await loadLib(); renderLib(); note(r.dupe ? `${r.name} is already in your samples` : `${r.name} imported`); } catch (e) { progress(null); note(e.message, true); } })() : $("#smFileIn").click();
+    $s("#smImport").onclick = () => PLUGIN ? (async () => { try { progress("choose a file…"); const r = await req("smpImport"); progress(null); if (r.cancelled) return; window.dispatchEvent(new CustomEvent("lumi:milestone", { detail: "imported" })); await loadLib(); renderLib(); note(r.dupe ? `${r.name} is already in your samples` : `${r.name} imported`); } catch (e) { progress(null); note(e.message, true); } })() : $("#smFileIn").click();
     $("#smFileIn").onchange = e => { const f = e.target.files; if (f && f.length) importFiles(f); e.target.value = ""; };
     $("#smFolderIn").onchange = e => { const f = [...(e.target.files || [])].filter(x => AUDIO_EXT.test(x.name)); folderFiles = f.map(x => ({ name: x.name, size: x.size, file: x })); renderLib(); note(f.length ? `${f.length} audio files: preview them, then import the ones you want` : "no audio files in that folder"); e.target.value = ""; };
     $s("#smFolder").onclick = openFolder;

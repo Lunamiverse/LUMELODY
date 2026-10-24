@@ -108,6 +108,11 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .btn:hover { border-color: var(--line-strong); }
 .btn[aria-pressed="true"] { border-color: color-mix(in oklab, var(--glow) 70%, transparent); box-shadow: 0 0 12px -5px var(--glow); }
 .btn.icon { width: 28px; padding: 0; justify-content: center; }
+.btn, .chip, .seg-mini button { transition: filter .12s ease-out, border-color .12s ease-out; }
+.btn:active, .chip:active, .seg-mini button:active { filter: brightness(1.35); transform: translateY(.5px); transition: none; }
+html.focus #tip, html.focus .foot { opacity: .35; transition: opacity .25s; } html.focus #tip:hover { opacity: 1; }
+.tip.sugg { cursor: pointer; } .tip.sugg b { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .btn:active, .chip:active, .seg-mini button:active { transform: none; } }
 .dim { color: var(--muted); }
 
 /* ------------------------------------------------ top bar */
@@ -203,7 +208,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .knob.on .name { color: var(--ink); }
 .knob.on .name .led { background: var(--glow); box-shadow: 0 0 5px var(--glow); }
 .knob.sel .name { text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--glow) 80%, transparent); text-underline-offset: 3px; }
-.knob .val { font: 400 8px/1.6 var(--micro); letter-spacing: .04em; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
+.knob .val { font: 400 8px/1.6 var(--micro); letter-spacing: .04em; color: color-mix(in oklab, var(--ink) 72%, var(--muted)); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
 .knob.on .val, .knob.dragging .val { color: var(--ink); }
 .knob.mini { width: 58px; }
 .knob.mini .face { width: 30px; height: 30px; margin: 6px 0 3px; }
@@ -406,6 +411,7 @@ html.calm .npad { transition: none; }
 .litems { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
 .lcard { border: 1px solid rgba(255,255,255,.16); border-radius: 10px; padding: 7px 9px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); display: grid; gap: 4px; min-width: 0; }
 .lcard.on { border-color: #fff; box-shadow: 0 0 14px -6px #fff; }
+.lcard.hint { border-color: #fff; }
 .lhead { display: flex; align-items: center; gap: 5px; min-width: 0; } .lhead b { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ltag { margin-left: auto; font-size: 9.5px; color: var(--muted); white-space: nowrap; }
 .ldesc { margin: 0; font-size: 10.5px; color: var(--muted); line-height: 1.35; }
@@ -590,6 +596,8 @@ html.calm .npad { transition: none; }
             <label><input type="checkbox" id="fpExplain"> explanations</label>
             <label><input type="checkbox" id="fpLarge"> larger text</label>
             <label><input type="checkbox" id="fpGuide"> show the guide</label>
+            <label title="A calmer moon and quieter hints; every control stays where it is"><input type="checkbox" id="fpFocus"> focus mode</label>
+            <label title="A short note the first time you export, record a loop or import a sample"><input type="checkbox" id="fpMile"> milestones</label>
             <span class="dim">your work is saved automatically on this device</span>
           </div>
           <div class="fcompare" id="fCompare" hidden>
@@ -960,7 +968,8 @@ const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", 
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
 const $ = s => document.querySelector(s);
 const el = (t, p = {}, k = []) => { const n = document.createElement(t); Object.assign(n, p); for (const c of [].concat(k)) if (c != null) n.append(c); return n; };
-const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { if (!store.warned) { store.warned = true; setTimeout(() => toast("This browser is not keeping your changes (private window or storage full)"), 0); } return false; } } };
 const fxIndex = id => SCHEMA.findIndex(f => f.id === id);
 // LUMI TYPE: the LUMELODY display alphabet. Monoline geometric capitals drawn as centre-line paths on a 100-unit cap
 // height, rendered as strokes, so one design serves every size (thicker strokes for small sizes). Same system as the
@@ -1064,7 +1073,7 @@ const ENV_GLSL = `
       }`;
 // ================================================================ chrome renderer (one shared WebGL context)
 const CR = (() => {
-  const size = 160;
+  const size = 256;   // rendered larger than the knob and filtered down: smooth flutes and rim highlights
   const cv = document.createElement("canvas"); cv.width = cv.height = size;
   let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false }); } catch (e) { gl = null; }
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
@@ -1226,7 +1235,7 @@ const CR = (() => {
       gl.uniform1f(U.iri, theme.iri[0]); gl.uniform1f(U.time, performance.now() / 1000); gl.uniform2f(U.light, light[0], light[1]);
       gl.uniform3fv(U.tint, theme.tint); gl.uniform3fv(U.hh, theme.hh); gl.uniform3fv(U.gcol, theme.glow); gl.uniform3fv(U.glass, theme.glass); gl.uniform3fv(U.keyc, theme.keyc); gl.uniform3fv(U.fillc, theme.fillc);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      c2.drawImage(cv, 0, 0, w, h);
+      c2.imageSmoothingEnabled = true; c2.imageSmoothingQuality = "high"; c2.drawImage(cv, 0, 0, w, h);
     } else {
       const g = c2.createLinearGradient(0, 0, 0, h); g.addColorStop(0, "#fff"); g.addColorStop(.48, "#8a9099"); g.addColorStop(.52, "#2a2d33"); g.addColorStop(1, "#dfe3e9");
       c2.fillStyle = g; c2.beginPath(); c2.arc(w / 2, h / 2, w * .42, 0, 7); c2.fill();
@@ -1425,6 +1434,7 @@ document.querySelectorAll(".wm").forEach((h, i) => { h.innerHTML = PIXEL_LOGO.re
 // A holographic-foil sphere lit as a crescent. The foil is a fine noise relief that rotates slowly with the sphere;
 // its tilt picks a colour from the theme's foil spectrum. Playing notes brightens it and widens the crescent
 // (driven by the same note on/off light envelopes as the keys). Tapping it loads a random sound.
+let orbClock = 0, orbLast = 0;
 const ORB = (() => {
   const cv = $("#orbCv");
   let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false }); } catch (e) { gl = null; }
@@ -1560,9 +1570,9 @@ const ORB = (() => {
           fl *= disco * (1. + burst);
         }
         vec4 S = vec4(0.); float zs = -9.;
-        if (r < R) {
+        if (r < R + pix) {
           vec3 V = vec3(0., 0., 1.);
-          vec2 q = p / R; vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
+          vec2 q = p / R; if (dot(q, q) > .9999) q = normalize(q) * .99995; vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
           vec3 T = normalize(cross(vec3(0., 1., 0.), n) + vec3(1e-4, 0., 0.)), B = cross(n, T);
           vec3 d = obj(n);
           float e = .012, h0 = surf(d), h1v = surf(obj(normalize(n + T * e))), h2 = surf(obj(normalize(n + B * e)));
@@ -1576,7 +1586,9 @@ const ORB = (() => {
           float bright = (.3 + .62 * max(lam, 0.)) * mix(1., .66, mar);
           vec3 base = mix(vec3(bright), f * bright * 1.25, .42 + .33 * term + .15 * (1. - mar));
           float spec = pow(max(dot(reflect(-Ld, nn), V), 0.), 48.) * .3 * (1. - .5 * mar);
-          vec3 cl = base + (vec3(1.) + f * .4) * spec + f * term * .3;
+          vec3 Ls = normalize(vec3(-.55, .62, .56));                                   // the softbox above-left
+          float soft = pow(max(dot(reflect(-Ls, nn), V), 0.), 7.) * .1 * (1. - .4 * mar) * smoothstep(-.1, .35, lam);
+          vec3 cl = base + (vec3(1.) + f * .4) * spec + f * term * .3 + mix(vec3(1.), f, .35) * soft;
           // the rings cast their shadow across the lit crescent
           float dn = dot(N, Ld), rsh = 1.;
           if (abs(dn) > 1e-3) { float t = -dot(N, n) / dn; if (t > 0.) rsh = 1. - .7 * ringDen(length(n + t * Ld)); }
@@ -1597,7 +1609,7 @@ const ORB = (() => {
             dcol = max(mix(vec3(dot(dcol, vec3(.299, .587, .114))), dcol, 1.22), 0.);   // a little extra saturation
             c = mix(c, dcol, acc.a);
           }
-          float sa = smoothstep(R, R - .008, r);
+          float sa = smoothstep(R + pix * .5, R - pix * .7, r);   // anti-aliased limb, one pixel wide at any size
           S = vec4(c * sa, sa); zs = n.z;
         }
         // rings: intersect the view ray with the ring plane
@@ -1614,10 +1626,9 @@ const ORB = (() => {
           Rg = vec4(ice * litr * tint * ra, ra);
         }
         // compose: rings in front of the moon only where they are nearer the viewer
-        vec4 o = H;
-        bool front = zr > zs;
-        if (front) { o = S + o * (1. - S.a); o = Rg + o * (1. - Rg.a); }
-        else { o = Rg + o * (1. - Rg.a); o = S + o * (1. - S.a); }
+        vec4 oF = S + H * (1. - S.a); oF = Rg + oF * (1. - Rg.a);   // ring nearer than the moon
+        vec4 oB = Rg + H * (1. - Rg.a); oB = S + oB * (1. - S.a);   // ring behind the moon
+        vec4 o = mix(oB, oF, clamp((zr - zs) / (5. * pix) + .5, 0., 1.));
         o.rgb += fl; o.a = max(o.a, clamp(max(fl.r, max(fl.g, fl.b)), 0., 1.));
         gl_FragColor = vec4(min(o.rgb, vec3(o.a)), o.a);
       }`;
@@ -1653,11 +1664,12 @@ const ORB = (() => {
       kick *= Math.exp(-dt / .5);
       const goal = Math.min(1, target + kick * .8);
       act += (goal - act) * (1 - Math.exp(-dt / (goal > act ? .06 : .5)));
-      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * .85 * res;
+      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * res;   // native resolution: crisp limb and ringlets
       const w = Math.max(2, Math.round(r.width * d));
       if (cv.width !== w) { cv.width = cv.height = w; gl.viewport(0, 0, w, w); }
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, now / 1000); gl.uniform1f(U.act, act); gl.uniform1f(U.spin, spin);
+      gl.uniform2f(U.light, CR.light[0], CR.light[1]); orbClock += Math.min(.1, (now - (orbLast || now)) / 1000) * (document.documentElement.classList.contains("focus") ? .3 : 1); orbLast = now;   // focus mode: a calmer idle moon
+      gl.uniform1f(U.time, orbClock); gl.uniform1f(U.act, act); gl.uniform1f(U.spin, spin);
       gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.tint, CR.theme.tint);
       gl.uniform1f(U.disco, disco < .002 ? 0 : disco); gl.uniform1f(U.burst, burst); gl.uniform1f(U.pix, 4.1 / w);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -2014,6 +2026,7 @@ function loadPreset(i, skipSaved, fromHost) {
   send({ type: "load", id: p.id, bytes: enc.encode(p.params + "\0"), bpm: +$("#bpm").value || 120, state: st });
   send({ type: "tempo", bpm: +$("#bpm").value || 120 });
   try { localStorage.setItem("lumi-last", p.id); } catch (e) {}
+  if (typeof LUMI_FEEL !== "undefined" && (loadPreset.n = (loadPreset.n || 0) + 1) > 1) LUMI_FEEL.afterPreset(p);
 }
 $("#bpm").onchange = e => { const v = Math.max(40, Math.min(240, +e.target.value || 120)); e.target.value = v; send({ type: "tempo", bpm: v }); };
 
@@ -2023,9 +2036,11 @@ const fitOctaves = () => innerWidth >= 900 ? 4 : innerWidth >= 560 ? 3 : 2;
 OCTAVES = fitOctaves();
 const lights = new Map();   // note -> {lum, target, el}
 function renderKeyboard() {
-  const kb = $("#kb"); for (const k of [...kb.querySelectorAll(".key")]) k.remove();
+  const kb = $("#kb"), lo = baseNote, hi = baseNote + OCTAVES * 12;
+  if (kb.dataset.range === lo + ":" + hi && kb.querySelector(".key")) return;   // same keys: nothing to rebuild (keeps preset changes instant)
+  kb.dataset.range = lo + ":" + hi;
+  for (const k of [...kb.querySelectorAll(".key")]) k.remove();
   for (const L of lights.values()) L.el = null;
-  const lo = baseNote, hi = baseNote + OCTAVES * 12;
   const whites = []; for (let n = lo; n <= hi; n++) if (![1, 3, 6, 8, 10].includes(n % 12)) whites.push(n);
   const w = 100 / whites.length;
   whites.forEach((n, i) => {

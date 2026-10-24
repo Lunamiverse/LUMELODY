@@ -210,7 +210,7 @@ const FINDER = (() => {
 
   const S = Object.assign({ style: "rnb", mood: "dreamy", level: "intermediate", key: "auto", mode: "auto", bpm: 82, bars: null, length: 4,
                             bass: true, move: false, spread: false, tonic: 9, kmode: "minor", blocks: [], sel: -1, compare: null }, store.get("lumi-finder-v1", {}));
-  const P = Object.assign({ advanced: false, motion: true, preview: true, explain: true, large: false, guide: true }, store.get("lumi-finder-prefs-v1", {}));
+  const P = Object.assign({ advanced: false, motion: true, preview: true, explain: true, large: false, guide: true, focus: false, milestones: true }, store.get("lumi-finder-prefs-v1", {}));
   let undo = [], redo = [];
   const styleOf = id => STYLES.find(s => s.id === id) || STYLES[0];
   const flats = () => H.flatsFor(S.tonic, S.kmode);
@@ -379,7 +379,7 @@ const FINDER = (() => {
       return b;
     }));
     // prefs
-    for (const [id, k] of [["#fpAdv", "advanced"], ["#fpMotion", "motion"], ["#fpPreview", "preview"], ["#fpExplain", "explain"], ["#fpLarge", "large"], ["#fpGuide", "guide"]]) $f(id).checked = !!P[k];
+    for (const [id, k] of [["#fpAdv", "advanced"], ["#fpMotion", "motion"], ["#fpPreview", "preview"], ["#fpExplain", "explain"], ["#fpLarge", "large"], ["#fpGuide", "guide"], ["#fpFocus", "focus"], ["#fpMile", "milestones"]]) $f(id).checked = !!P[k];
   }
 
   // pointer drag: reorder blocks, or drop drawer chords into the timeline
@@ -420,7 +420,7 @@ const FINDER = (() => {
     $f("#fBpm").onchange = e => { S.bpm = Math.max(40, Math.min(240, +e.target.value || 100)); e.target.value = S.bpm; save(); if (LUMI_PLAY.playing() === "finder") { LUMI_PLAY.stop(); playAll(); } };
     $f("#fLen").onchange = e => { S.length = +e.target.value; save(); };
     $f("#fBars").onchange = e => { S.bars = +e.target.value; const d = S.bars * 4; commit(() => S.blocks.forEach(b => { if (!b.passing) b.dur = d; })); };
-    $f("#fGen").onclick = () => { S.stepsOpen = false; commit(() => { S.blocks = generate(); S.sel = -1; }); };
+    $f("#fGen").onclick = () => { S.stepsOpen = false; commit(() => { S.blocks = generate(); S.sel = -1; }); if (typeof LUMI_FEEL !== "undefined") LUMI_FEEL.afterChords(S.style); };
     $f("#fSumEdit").onclick = () => { S.stepsOpen = true; render(); };
     $f("#fSumGen").onclick = () => $f("#fGen").click();
     $f("#fSurprise").onclick = () => {
@@ -463,7 +463,7 @@ const FINDER = (() => {
     $f("#fWav").onclick = () => LUMI_EXPORT.saveAudio(title(), score(cur().blocks, { spread: cur().spread }), S.bpm, tracks());
     LUMI_EXPORT.dragHandle($f("#fDragWav"), () => S.blocks.length ? { audio: true, name: title(), score: score(cur().blocks, { spread: cur().spread }), bpm: S.bpm, tracks: tracks() } : null);
     // prefs
-    for (const [id, k] of [["#fpAdv", "advanced"], ["#fpMotion", "motion"], ["#fpPreview", "preview"], ["#fpExplain", "explain"], ["#fpLarge", "large"], ["#fpGuide", "guide"]]) $f(id).onchange = e => { P[k] = e.target.checked; savePrefs(); render(); };
+    for (const [id, k] of [["#fpAdv", "advanced"], ["#fpMotion", "motion"], ["#fpPreview", "preview"], ["#fpExplain", "explain"], ["#fpLarge", "large"], ["#fpGuide", "guide"], ["#fpFocus", "focus"], ["#fpMile", "milestones"]]) $f(id).onchange = e => { P[k] = e.target.checked; savePrefs(); render(); if (typeof LUMI_FEEL !== "undefined") LUMI_FEEL.applyFocus(); };
     $f("#fPrefsBtn").onclick = () => { const p = $f("#fPrefs"); p.hidden = !p.hidden; $f("#fPrefsBtn").setAttribute("aria-expanded", p.hidden ? "false" : "true"); };
     $f("#fGuideClose").onclick = () => { P.guide = false; savePrefs(); render(); };
     // keyboard: only while focus is inside the workspace
@@ -555,7 +555,7 @@ const WORKSPACE = (() => {
   }
   function useSound(id) { const i = PRESETS.findIndex(p => p.id === id); if (i >= 0) { loadPreset(i); toast("Sound: " + PRESETS[i].name); } }
   function init() {
-    PROG.init(); FINDER.init(); PADS.init(); SAMPLER.init(); LIBS.init(); ARP.init();
+    PROG.init(); FINDER.init(); PADS.init(); SAMPLER.init(); LIBS.init(); ARP.init(); LUMI_FEEL.init();
     document.querySelectorAll("#wsTabs [data-t]").forEach(b => b.onclick = () => tab(b.dataset.t));
     $("#wsClose").onclick = () => open(false);
     $("#chordsBtn").onclick = () => open($("#prog").hidden);
