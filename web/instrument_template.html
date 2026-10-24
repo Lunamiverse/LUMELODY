@@ -1,7 +1,7 @@
 <title>LUMELODY</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen&display=swap">
 <style>
 /* LUMELODY: a night-sky instrument. One hero object (the holographic moon), hairline panels, lowercase mono labels.
    Holographic foil is used sparingly, as a precious material: the moon, the wordmark, the knob caps, lit keys. */
@@ -24,7 +24,9 @@
 :root {
   color-scheme: dark;
   --serif: "Federo", "Josefin Sans", "Avenir Next", "Futura", sans-serif;
-  --mono: "Martian Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --mono: "Pixelify Sans", "Silkscreen", ui-monospace, Menlo, monospace;
+  --micro: "Silkscreen", "Pixelify Sans", ui-monospace, monospace;
+  --pixel: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
   --bg: #040507; --win1: #0a0c10; --win2: #040507; --ink: #eef4fb; --muted: #8e98a6; --hair: #d8ecff; --glow: #8fe3ff; --ch1: #e6eef6; --ch2: #7d8794; --obs2: #040507;
   --h1: #e9f4ff; --h2: #9fe8ff; --h3: #ffffff; --h4: #c8b6ff; --h5: #7fd0ff; --h6: #ffd6f0;
   --plastic: var(--glow);
@@ -49,7 +51,7 @@
 :root[data-theme="prism"] { --bg: #040405; --win1: #0b0a0e; --win2: #040405; --ink: #f6f5fa; --muted: #9a98a8; --hair: #f0e6ff; --glow: #ff5ad1; --ch1: #ececf2; --ch2: #858592; --obs2: #040405;
   --h1: #ff2e88; --h2: #ffd23f; --h3: #3dff8f; --h4: #29d6ff; --h5: #5b5cff; --h6: #c13dff; }
 * { box-sizing: border-box; }
-body { margin: 0; color: var(--ink); font: 300 11px/1.55 var(--mono); font-stretch: 87.5%; letter-spacing: .01em; -webkit-font-smoothing: antialiased; text-transform: lowercase;
+body { margin: 0; color: var(--ink); font: 400 12px/1.5 var(--mono); letter-spacing: .01em; -webkit-font-smoothing: antialiased; text-transform: lowercase;
   background:
     radial-gradient(45% 40% at 22% 30%, color-mix(in oklab, var(--h5) 13%, transparent), transparent 70%),
     radial-gradient(40% 40% at 82% 65%, color-mix(in oklab, var(--h1) 9%, transparent), transparent 70%),
@@ -82,15 +84,25 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 30px 34px 34px; }
 
 /* hairline boxes */
-.hl { border: 1px solid color-mix(in oklab, #fff 55%, var(--plastic)); border-radius: 8px;
-  /* translucent acid plastic: a tinted, slightly frosted shell with a glossy top highlight and a darker, thicker lower edge */
-  background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.05) 14%, rgba(255,255,255,0) 45%), var(--holo-sheen),
-              linear-gradient(180deg, color-mix(in oklab, var(--plastic) 14%, transparent), color-mix(in oklab, var(--plastic) 24%, transparent)),
-              color-mix(in oklab, var(--win2) 62%, transparent);
-  -webkit-backdrop-filter: blur(7px) saturate(1.5); backdrop-filter: blur(7px) saturate(1.5);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 -3px 8px color-mix(in oklab, var(--plastic) 30%, transparent),
-              0 0 0 1px rgba(0,0,0,.35), 0 12px 28px -16px color-mix(in oklab, var(--plastic) 45%, #000), var(--holo-edge); }
-.btn { border: 1px solid color-mix(in oklab, #fff 45%, var(--plastic)); border-radius: 5px; background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0) 50%), color-mix(in oklab, var(--plastic) 16%, color-mix(in oklab, var(--win2) 60%, transparent)); box-shadow: inset 0 1px 0 rgba(255,255,255,.5); cursor: pointer;
+.hl { position: relative; border: 1.5px solid rgba(255,255,255,.78); border-radius: 9px; isolation: isolate;
+  /* thick clear acrylic: almost no tint in the middle, a gloss streak across the top, refraction gathering at the edges */
+  background:
+    linear-gradient(118deg, transparent 0 18%, rgba(255,255,255,.16) 22%, rgba(255,255,255,.03) 30%, transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.02) 22%, rgba(255,255,255,0) 60%, rgba(255,255,255,.05)),
+    radial-gradient(120% 90% at 85% 15%, rgba(255,63,208,.13), transparent 55%),
+    radial-gradient(110% 90% at 10% 95%, rgba(63,233,255,.11), transparent 55%),
+    color-mix(in oklab, var(--win2) 42%, transparent);
+  -webkit-backdrop-filter: blur(3px) saturate(1.6) brightness(1.08); backdrop-filter: blur(3px) saturate(1.6) brightness(1.08);
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,.035), inset 0 0 0 5px rgba(255,255,255,.4),           /* the inner moulded rim (double edge) */
+    inset 0 2px 0 rgba(255,255,255,.7), inset 0 -2px 6px rgba(255,255,255,.12),
+    inset 0 0 22px rgba(255,63,208,.22), inset 0 0 40px rgba(63,233,255,.12),               /* light refracting inside the edges */
+    0 0 0 1px rgba(0,0,0,.5), 0 0 18px -5px rgba(255,63,208,.5), 0 0 30px -10px rgba(63,233,255,.45), 0 14px 30px -18px #000; }
+.hl::before { /* rainbow refraction along the rim, strongest on the lit corners */
+  content: ""; position: absolute; inset: -1.5px; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: -1;
+  background: conic-gradient(from calc(210deg + var(--lx, 0) * 40deg), #ff3fd0, #ffd36b, #ffffff, #3fe9ff, #8a5cff, #ff9ae8, #ff3fd0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .9; filter: blur(.3px); }
+.btn { border: 1px solid rgba(255,255,255,.7); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.03) 50%, rgba(255,255,255,.08)), radial-gradient(90% 120% at 80% 0%, rgba(255,63,208,.18), transparent 60%), radial-gradient(90% 120% at 10% 100%, rgba(63,233,255,.16), transparent 60%), color-mix(in oklab, var(--win2) 45%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 0 0 3px rgba(255,255,255,.04), inset 0 0 10px rgba(255,63,208,.18), 0 0 12px -4px rgba(255,63,208,.4); font-family: var(--pixel); cursor: pointer;
   height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
 .btn:hover { border-color: var(--line-strong); }
 .btn[aria-pressed="true"] { border-color: color-mix(in oklab, var(--glow) 70%, transparent); box-shadow: 0 0 12px -5px var(--glow); }
@@ -107,10 +119,10 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
 .preset .btn { border: 0; background: none; height: 100%; }
 .preset .pick { flex: 1; justify-content: flex-start; min-width: 0; overflow: hidden; }
-.preset .pick b { display: block; min-width: 0; line-height: 0; color: var(--ink); }
-.preset .pick b svg { height: 10.5px; width: auto; max-width: 100%; display: block; }
+.preset .pick b { display: block; min-width: 0; color: var(--ink); }
+.preset .pick b .px { font-weight: 500; font-size: 13px; letter-spacing: .1em; }
 .tools { display: flex; align-items: center; gap: 8px; }
-.swatches { display: flex; gap: 6px; padding: 0 4px; }
+.swatches { display: none; }
 .sw { width: 14px; height: 14px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 -1px 2px rgba(0,0,0,.4); }
 .sw[aria-pressed="true"] { box-shadow: 0 0 0 1.5px var(--win2), 0 0 0 2.5px var(--ink); }
 .status { color: var(--muted); font-size: 11px; display: inline-flex; align-items: center; gap: 6px; }
@@ -140,8 +152,15 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .hero .meta.swap { animation: nameIn .7s .08s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes nameIn { from { opacity: 0; filter: blur(8px); transform: translateY(8px); letter-spacing: .08em; } to { opacity: 1; filter: blur(0); transform: none; } }
 .hero .name { margin: 4px 0 0; width: 100%; display: grid; justify-items: center; gap: 10px; font-weight: 400; }
-.hero .ntxt { display: flex; align-items: center; justify-content: center; height: 34.5px; max-width: 100%; line-height: 0; filter: drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 0 18px rgba(255,255,255,.06)); }
-.hero .ntxt svg { height: 30px; width: auto; max-width: 100%; display: block; overflow: visible; }
+.hero .ntxt { display: flex; align-items: center; justify-content: center; height: 34.5px; max-width: 100%; filter: drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 0 18px rgba(255,255,255,.06)); }
+.px { display: block; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; font-family: var(--pixel); }
+.hero .ntxt .nm { font-weight: 600; font-size: 32px; letter-spacing: .09em; padding-left: .09em; overflow: visible; text-overflow: clip;
+  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%),
+                    linear-gradient(180deg, #ffffff 0%, #ffe6f8 26%, #ff9ae8 46%, #c7a8ff 60%, #9ff4ff 76%, #fff1c4 100%);
+  background-size: 260% 100%, 100% 100%; background-position: -60% 0, 0 0; -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 1px rgba(255,255,255,.7)) drop-shadow(0 0 12px rgba(255,63,208,.4)) drop-shadow(0 0 22px rgba(63,233,255,.2));
+  animation: nsweep 1.7s .1s cubic-bezier(.3,.6,.2,1) both; }
+@keyframes nsweep { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 .hero .ntxt-old {
   background: linear-gradient(180deg, #ffffff 0%, #e7ebf2 42%, #9aa2ae 50%, #d9dee7 62%, color-mix(in oklab, var(--h6) 18%, #fff) 82%, #fff 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,.85)); }
@@ -155,8 +174,8 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .panel h3 span { font: 300 10px var(--mono); letter-spacing: .04em; text-transform: lowercase; }
 .panel h3 { min-height: 16.5px; align-items: center !important; }
 .panel h3 { min-height: 16.5px; align-items: center !important; }
-.panel h3 .pt { line-height: 0; color: var(--ink); }
-.panel h3 .pt svg { height: 8.5px; width: auto; display: block; }
+.panel h3 .pt { color: var(--ink); }
+.panel h3 .pt .px { font: 400 8px/1.6 var(--micro); letter-spacing: .22em; }
 .panel h3 span { color: var(--muted); font-weight: 400; }
 .panel .knobs { display: flex; justify-content: space-around; gap: 2px; }
 .knob { position: relative; display: grid; justify-items: center; gap: 0; width: 62px; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -170,12 +189,12 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .knob .narc { stroke: url(#neonGrad); stroke-width: 3; }
 .knob .ncore { stroke: #fff; stroke-width: 1; }
 .knob .ntip { fill: #fff; filter: drop-shadow(0 0 3px var(--glow)); }
-.knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font-size: 10px; font-stretch: 80%; white-space: nowrap; }
+.knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font: 400 8px/1.6 var(--micro); letter-spacing: .04em; white-space: nowrap; }
 .knob .name .led { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex: none; }
 .knob.on .name { color: var(--ink); }
 .knob.on .name .led { background: var(--glow); box-shadow: 0 0 5px var(--glow); }
 .knob.sel .name { text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--glow) 80%, transparent); text-underline-offset: 3px; }
-.knob .val { font-size: 10px; font-stretch: 80%; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
+.knob .val { font: 400 8px/1.6 var(--micro); letter-spacing: .04em; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
 .knob.on .val, .knob.dragging .val { color: var(--ink); }
 .knob.mini { width: 58px; }
 .knob.mini .face { width: 30px; height: 30px; margin: 6px 0 3px; }
@@ -183,8 +202,8 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 /* selected effect: all its controls */
 .detail { display: grid; grid-template-columns: minmax(170px, 260px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 9px 12px; min-height: 68px; }
 .detail .ttl { display: grid; gap: 2px; min-width: 0; }
-.detail .ttl b { display: flex; align-items: center; height: 18px; line-height: 0; color: var(--ink); }
-.detail .ttl b svg { height: 12px; width: auto; max-width: 100%; display: block; }
+.detail .ttl b { display: flex; align-items: center; height: 18px; color: var(--ink); }
+.detail .ttl b .px { font-weight: 600; font-size: 15px; letter-spacing: .09em; }
 .detail .ttl span { color: var(--muted); font-size: 10.5px; line-height: 1.4; }
 .detail .ctrls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
 .power { border: 1px solid var(--line); border-radius: 5px; background: none; cursor: pointer; height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; }
@@ -245,8 +264,9 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .item[aria-current="true"] { border-color: color-mix(in oklab, var(--hair) 45%, transparent); background: linear-gradient(90deg, rgba(255,255,255,.06), transparent 70%); }
 .item[aria-current="true"]::before { content: ""; position: absolute; left: -1px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #fff, var(--h4)); box-shadow: 0 0 8px var(--glow); }
 
-.item b { display: flex; align-items: center; gap: 8px; min-width: 0; line-height: 0; color: var(--ink); padding: 3px 0 2px; }
-.item b svg { height: 11px; width: auto; max-width: 100%; display: block; }
+.item b { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--ink); padding: 2px 0 1px; }
+.item b .px { font-weight: 500; font-size: 13px; letter-spacing: .08em; }
+.item[aria-current="true"] b .px { background: linear-gradient(180deg, #fff, #ff9ae8 55%, #9ff4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .item b .fav { font-size: 10px; line-height: 1; color: var(--glow); }
 .item small { font-size: 10.5px; color: var(--muted); }
 .mk { font-size: 10.5px; } .mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
@@ -451,11 +471,6 @@ const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", 
 const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
 const THEMES = {   // each theme: two studio lights reflected in the chrome (key + fill), an accent glow, and a six-colour foil spectrum
   crystal: { name: "Crystal Holo", k: { night: "#06050a", tint: [1, 1, 1], glow: "#ff6fe0", plastic: "#f4dcff", holo: 1, key: "#ffd6f6", fill: "#7fefff", glass: [.03, .03, .04], iri: .9, h: ["#ff3fd0", "#ff9ae8", "#ffffff", "#8a5cff", "#3fe9ff", "#ffd36b"] } },
-  silver: { name: "Silver Chrome", k: { night: "#06080c", tint: [1, 1, 1.02], glow: "#8fe3ff", key: "#cfeeff", fill: "#c6b4ff", glass: [.03, .03, .04], iri: .5, h: ["#e9f4ff", "#9fe8ff", "#ffffff", "#c8b6ff", "#7fd0ff", "#ffd6f0"] } },
-  rose: { name: "Rose Chrome", k: { night: "#0d0409", tint: [1, 1, 1], glow: "#ff4fa8", key: "#ff4fa8", fill: "#4fe3ff", glass: [.03, .03, .04], iri: .55, h: ["#ff3d9a", "#ff8fd0", "#ffe1f2", "#8ff3ff", "#3fd2ff", "#c26bff"] } },
-  gold: { name: "Gold Chrome", k: { night: "#0c0703", tint: [1.03, 1, .92], glow: "#ffb547", key: "#ffb547", fill: "#ff6fb0", glass: [.03, .03, .04], iri: .45, h: ["#ffcf7a", "#fff1c9", "#ff9a5c", "#ffd6a0", "#ff79b4", "#ffe9b0"] } },
-  violet: { name: "Violet Chrome", k: { night: "#090514", tint: [1, 1, 1], glow: "#b07dff", key: "#9b5cff", fill: "#3ff0ff", glass: [.03, .03, .04], iri: .55, h: ["#8a4dff", "#c39bff", "#ff6fe0", "#3ff0ff", "#6a7dff", "#e6d3ff"] } },
-  prism: { name: "Prism Chrome", k: { night: "#07060a", tint: [1, 1, 1], glow: "#ff5ad1", key: "#ff3d8e", fill: "#36e7ff", glass: [.03, .03, .04], iri: .8, h: ["#ff2e88", "#ffd23f", "#3dff8f", "#29d6ff", "#5b5cff", "#c13dff"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -529,7 +544,10 @@ const LUMI_TYPE = (() => {
     return `<svg class="${cls}" viewBox="${-pad} ${-pad - 4} ${(width + pad * 2).toFixed(1)} ${108 + pad * 2}" aria-hidden="true" focusable="false">` +
       `<g fill="none" stroke="${paint}" stroke-width="${stroke}" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4">${body}</g>${extra}</svg>`;
   }
-  return { set, svg, glyphs: G };
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  // pixel typography: every name and title is real text in the pixel faces (accessible, crisp)
+  function px(text, cls = "") { return `<span class="px ${cls}">${esc(text)}</span>`; }
+  return { set, svg: (t) => px(t), px, glyphs: G };
 })();
 
 const reduceMotion = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -948,6 +966,10 @@ const BG = (() => {
         col += plastic * (.035 + .08 * smoothstep(.3, .75, length(c * vec2(1., 1.25))));
         float dm = length((uv - moon) * vec2(asp, 1.));
         col += mix(plastic, gcol, .5) * .06 * exp(-dm * dm * 5.);
+        vec2 q = vec2(uv.x * asp, uv.y) * 1.6;
+        float sw = sin(q.x * 2.1 + sin(q.y * 3.1 + q.x) * 1.6) * .5 + .5;
+        vec3 smear = film(q.x * .35 + q.y * .5 + sw * .6 + light.x * .3);
+        col += smear * holo * (.07 + .06 * sw) * smoothstep(.05, .5, uv.y) * (1. - smoothstep(.55, 1., length(c * vec2(.9, 1.3))));
         // glossy reflections on the gently curved shell
         vec3 n = normalize(vec3(c * vec2(.3, .22), 1.)); vec3 E = env(reflect(-V, n));
         col += E * .05;
@@ -1337,9 +1359,9 @@ const swEls = Object.entries(THEMES).map(([id, t]) => {
   b.dataset.id = id; b.onclick = () => setTheme(id, true); $("#swatches").append(b); return b;
 });
 function setTheme(id, animate) {
-  if (!THEMES[id]) id = "silver";
+  if (!THEMES[id]) id = "crystal";
   curTheme = id;
-  if (id === "silver") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
+  document.documentElement.setAttribute("data-theme", id);
   swEls.forEach(s => s.setAttribute("aria-pressed", s.dataset.id === id ? "true" : "false"));
   CR.setTheme(THEMES[id].k, animate); ambientUntil = performance.now() + 900; spillDirty = true; drawStars();
   store.set("lumi-theme6", id);
@@ -1350,16 +1372,11 @@ const sheet = $("#sheet");
 function openSheet(open) { sheet.hidden = !open; $("#picker").setAttribute("aria-expanded", open ? "true" : "false"); if (open) { renderList(); $("#q").focus({ preventScroll: true }); } }
 $("#picker").onclick = () => openSheet(sheet.hidden); $("#closeSheet").onclick = () => openSheet(false);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) openSheet(false); });
-let nameSeq = 0;
-function setName(t) {   // the selected sound's name, drawn in LUMI TYPE with a liquid-chrome finish; a light sweep crosses each new name
-  const id = "nmSw" + (++nameSeq);
-  const sweep = `<defs><linearGradient id="${id}" x1="-300" y1="0" x2="-80" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>` +
-    `<animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="${Math.round(LUMI_TYPE.set(t).width + 500)} 0" begin="indefinite" dur="1.6s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".3 .6 .2 1"/></linearGradient></defs>`;
-  const base = LUMI_TYPE.svg(t, { stroke: 8.5, paint: "url(#lmChrome)" });
-  const n = $("#sNameTxt");
-  n.innerHTML = base.replace("<g ", `${sweep}<g filter="url(#lmLiquid)" `).replace("</svg>", `<g fill="none" stroke="url(#${id})" stroke-width="8.5" stroke-linecap="butt" stroke-linejoin="miter">${LUMI_TYPE.set(t).body}</g></svg>`);
-  n.setAttribute("aria-label", t);
-  const a = n.querySelector("animateTransform"); if (a && a.beginElement && !reduceMotion) setTimeout(() => { try { a.beginElement(); } catch (e) {} }, 60);
+function setName(t) {   // the selected sound's name in pixel capitals with a holographic glass finish; a light sweep crosses each new name
+  const n = $("#sNameTxt"); n.innerHTML = LUMI_TYPE.px(t, "nm"); n.setAttribute("aria-label", t);
+  const e = n.firstChild, box = $("#sName").clientWidth || 300;
+  let size = 32; e.style.fontSize = size + "px";
+  while (size > 16 && e.scrollWidth > box - 8) { size -= 1; e.style.fontSize = size + "px"; }
 }
 function renderSound() {
   const p = PRESETS[cur], m = marks[p.id] || {};
@@ -1431,7 +1448,7 @@ async function startFromGesture() {
   try { await startAudio(); } catch (err) { toast("Audio could not start: " + (err && err.message || err)); }
 }
 $("#startBtn").onclick = startFromGesture;
-setTheme(store.get("lumi-theme6", "crystal"), false);
+setTheme("crystal", false);
 buildRack(); buildDetail(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
 const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e) { return null; } })();
 const li = PRESETS.findIndex(p => p.id === last);

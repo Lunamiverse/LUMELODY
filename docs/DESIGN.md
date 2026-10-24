@@ -2,6 +2,11 @@
 
 - **Direction:** restrained silver chrome on near-black obsidian, with a hint of rose, violet and icy cyan coming from
   the lighting and the material, not painted on. One hero object (the moon), a liquid-chrome frame, dark-glass panels.
+- **Pixel typography (current):** Pixelify Sans (OFL; modern, clean pixel face) for sound names, titles, buttons and
+  readable text; Silkscreen (OFL; crisp micro-pixel, set at its native 8 px) for knob labels, values and panel titles.
+  The selected sound is set in Pixelify Sans 600 capitals with a holographic glass gradient, a soft magenta/cyan
+  glow and a light sweep on each change. The vector wordmark stays as the logo. Cliché arcade faces (Press Start 2P)
+  and terminal faces (VT323) were rejected. The plugin build must embed both font files.
 - **Typography system:**
   - *Logo:* a custom vector wordmark (drawn as SVG paths, not a font): monoline geometric capitals, cap height 100,
     stroke 9, wide tracking, L with an upturned crescent flick. Liquid-chrome bevel (SVG lighting filter), a slow
@@ -39,14 +44,14 @@
   release; a tap spins it, flares the light, sends out foil ripples and loads a random sound, whose name fades in
   out of a blur. Keys press with a quick tilt and spring back with a small overshoot; their light rises from the
   front edge on the strike and sinks as it fades.
-- **Crystal Holo theme (default):** clear crystal plastic like a holographic cassette shell, colours magenta,
+- **Crystal Holo (the only theme):** photoreal clear glass/acrylic like a holographic cassette shell. Panels are thick clear acrylic: a gloss streak, a double moulded rim (outer edge + inner rim line), pink/cyan light refracting inside the edges, a conic rainbow along the rim that turns with the pointer, a soft magenta/cyan outer glow; the casing interior shows a holographic smear like the cassette window, colours magenta,
   pink, white, violet, cyan and gold. Panels and buttons are clear glossy shells with a holographic sheen and an
   iridescent edge glow; the window background shows the device's insides through a shell whose tint shifts across
   the spectrum; the border keeps its exact tube shape, rendered as clear crystal refracting the spectrum, with
   chrome bands along both edges; the moon and ring keep their rendering, coloured by the theme's foil spectrum,
   with a soft magenta + cyan glow; four-point star glints twinkle on the corners. (The earlier Acid Lime theme and
   its slime were removed.)
-- **Themes:** Crystal Holo (default), Silver, Rose, Gold, Violet, Prism. Each defines window tones, hairline tint, accent and a
+- **Theme:** one only, Crystal Holo (the theme picker was removed). Each defines window tones, hairline tint, accent and a
   six-colour foil spectrum (registered CSS colours, 0.8 s morph); the WebGL moon and knobs lerp the same palette.
 - **Knobs:** brushed-metal caps (concentric brushing, anisotropic highlight) carrying holographic film, a polished
   chrome rim, a domed chrome bead indicator ringed with light when the effect is on, and an LED ring of glass beads
