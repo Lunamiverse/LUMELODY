@@ -51,9 +51,11 @@
   a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is polished silver like a
   silver vinyl record: monochrome, high contrast, fine grooves running along the border, long anisotropic sheen bands,
   a thin rainbow fringe on the outer edge, two large blown-out light blooms and a small one, with horizontal rainbow
-  lens flares that spill softly just inside the frame. Knobs are clear acrylic discs like tape-reel hubs (see-through
-  body, solid-looking edges with rim refraction, moulded rings, six hub teeth that turn with the value, a bright
-  indicator slit, a gloss streak) with a white value arc. All text is white (no coloured type). Colour lives only in
+  lens flares that spill softly just inside the frame. Knobs are real 3-D objects ray-marched per knob: a fluted
+  clear-acrylic cylinder (n = 1.49) on a polished turned-metal ring, seen from above at an angle, with a small metal dot
+  on the top as the indicator. Rays refract into the plastic, travel to the back face, refract out (or reflect
+  internally) and show the metal ring and panel behind, mixed with Fresnel reflections, edge highlights and a soft
+  shadow plus a caustic on the panel. The white value arc lies flat around the base in the same perspective. All text is white (no coloured type). Colour lives only in
   the moon and its ring, like the disc in the case.
 - **Theme:** one only, Crystal Holo (the theme picker was removed). Each defines window tones, hairline tint, accent and a
   six-colour foil spectrum (registered CSS colours, 0.8 s morph); the WebGL moon and knobs lerp the same palette.
