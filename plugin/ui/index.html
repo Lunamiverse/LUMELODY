@@ -467,6 +467,7 @@ html.calm .npad { transition: none; }
 .field option { background: var(--win2); }
 .sheet-top input { flex: 1 1 180px; }
 .chips { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; }
+#cats { flex-wrap: wrap; overflow: visible; }
 .chip { flex: none; border: 1px solid var(--line); border-radius: 999px; background: none; cursor: pointer; padding: 3px 10px; font-size: 11px; color: var(--muted); }
 .chip[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
 .list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; align-content: start; }
@@ -1028,7 +1029,7 @@ const LUMI_TYPE = (() => {
   // returns { body: SVG markup of positioned glyph paths, width } for a string, at cap height 100
   function set(text, track = 22) {
     let x = 0, body = "";
-    const chars = [...String(text).toUpperCase()];
+    const chars = [...String(text).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase()];   // accents drawn as their base letter (Ó → O)
     chars.forEach((ch, i) => {
       const [w, d] = G[ch] || fall;
       if (d) body += `<path transform="translate(${x.toFixed(1)} 0)" d="${d}"/>`;
@@ -1391,7 +1392,7 @@ const PIXEL_TYPE = (() => {
   let uid = 0;
   function svg(text, { track = 2, sweep = false, center = false } = {}) {
     let x = 0, rects = "";
-    const chars = [...String(text).toUpperCase()];
+    const chars = [...String(text).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase()];   // accents drawn as their base letter (Ó → O)
     chars.forEach((ch, i) => {
       if (ch === " ") { x += 3 + track; return; }
       const rows = G[ch] || G["-"];
@@ -2220,7 +2221,9 @@ $("#demoSolo").onclick = () => playDemo(false); $("#demoBeat").onclick = () => p
 const lib = { q: "", genre: "", cat: "", show: "all" };
 const genres = [...new Set(PRESETS.flatMap(p => p.genres))].sort();
 $("#genre").append(el("option", { value: "", textContent: "all genres" }), ...genres.map(g => el("option", { value: g, textContent: g })));
-const chipBtns = [["", "all"], ...CATS.map(c => [c, c])].map(([v, t]) => {
+// the four sound libraries' instruments (pads, bass, strings, keys) have their own chips, by genre
+const LIB_CATS = [["New Jazz", "New Jazz"], ["Disco + EDM + Club", "Disco + EDM + Club Bangers"], ["Reggaetón", "Reggaetón"], ["Dembow Dominicano", "Dembow Dominicano"]];
+const chipBtns = [["", "all"], ...CATS.map(c => [c, c]), ...LIB_CATS].map(([v, t]) => {
   const b = el("button", { className: "chip", type: "button", textContent: t }); b.setAttribute("aria-pressed", v === "" ? "true" : "false");
   b.onclick = () => { lib.cat = v; chipBtns.forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); renderList(); };
   return b;
@@ -2244,7 +2247,7 @@ function renderList() {
   $("#list").replaceChildren(...(items.length ? items.map(([p, i]) => {
     const m = marks[p.id] || {};
     const nb = el("b"); nb.innerHTML = PIXEL_TYPE.svg(p.name) + (m.fav ? '<span class="fav">♥</span>' : ""); nb.setAttribute("aria-label", p.name);
-    const b = el("button", { className: "item", type: "button" }, [nb, el("small", { textContent: p.cat + " · " + p.genres.slice(0, 2).join(", ") }), m.verdict ? el("span", { className: "mk " + m.verdict, textContent: m.verdict }) : null]);
+    const b = el("button", { className: "item", type: "button" }, [nb, el("small", { textContent: p.kind ? (LIB_CATS.find(x => x[0] === p.cat) || [0, p.cat])[1] + " · " + p.kind.toLowerCase() : p.cat + " · " + p.genres.slice(0, 2).join(", ") }), m.verdict ? el("span", { className: "mk " + m.verdict, textContent: m.verdict }) : null]);
     if (i === cur) b.setAttribute("aria-current", "true");
     b.onclick = () => loadPreset(i);
     return b;
