@@ -5,7 +5,9 @@
 - **Pixel typography (current):** Pixelify Sans (OFL; modern, clean pixel face) for sound names, titles, buttons and
   readable text; Silkscreen (OFL; crisp micro-pixel, set at its native 8 px) for knob labels, values and panel titles.
   The selected sound is set in Pixelify Sans 600 capitals with a holographic glass gradient, a soft magenta/cyan
-  glow and a light sweep on each change. The vector wordmark stays as the logo. Cliché arcade faces (Press Start 2P)
+  glow and a light sweep on each change. The logo is a hand-drawn pixel wordmark on a 9-row grid (one-pixel strokes, wide
+  tracking, crisp square pixels, white silver with a soft glow and a slow light sweep; floating E bar, crescent-cup
+  Y, moon O with its lit edge against the ring). Cliché arcade faces (Press Start 2P)
   and terminal faces (VT323) were rejected. The plugin build must embed both font files.
 - **Typography system:**
   - *Logo:* a custom vector wordmark (drawn as SVG paths, not a font): monoline geometric capitals, cap height 100,
@@ -46,9 +48,10 @@
   front edge on the strike and sinks as it fades.
 - **Clear-plastic look (the only theme), after the CD jewel case and the clear cassette:** pure black, no background
   art. Panels and buttons are colourless clear moulded plastic: bright rims, an inner moulded rim line, a gloss streak,
-  a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is the cassette rim: a
-  clear acrylic tube refracting the spectrum with chrome edge lines, plus a moulded ledge line and four screw bosses
-  just inside it, and white star glints on the corners. Knobs are clear acrylic discs like tape-reel hubs (see-through
+  a faint white-to-spectrum refraction along the rim, corner screw bosses. The window border is polished silver like a
+  silver vinyl record: monochrome, high contrast, fine grooves running along the border, long anisotropic sheen bands,
+  a thin rainbow fringe on the outer edge, two large blown-out light blooms and a small one, with horizontal rainbow
+  lens flares that spill softly just inside the frame. Knobs are clear acrylic discs like tape-reel hubs (see-through
   body, solid-looking edges with rim refraction, moulded rings, six hub teeth that turn with the value, a bright
   indicator slit, a gloss streak) with a white value arc. All text is white (no coloured type). Colour lives only in
   the moon and its ring, like the disc in the case.

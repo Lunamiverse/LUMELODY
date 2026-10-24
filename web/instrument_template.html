@@ -61,7 +61,7 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 /* ------------------------------------------------ window */
 .case { position: relative; max-width: 1120px; margin: 0 auto; }
 .glints { position: absolute; inset: 0; pointer-events: none; z-index: 20; display: none; }
-:root[data-theme="crystal"] .glints { display: block; }
+:root[data-theme="crystal"] .glints { display: none; }
 .glints .g { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; animation: glint 4.2s ease-in-out infinite; }
 .glints svg { width: 100%; height: 100%; overflow: visible; fill: #fff; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 9px rgba(255,255,255,.75)); }
 .glints .g1 { left: 1.2%; top: 2.4%; } .glints .g2 { left: 98.6%; top: 1.6%; animation-delay: -1.3s; width: 42px; height: 42px; margin: -21px 0 0 -21px; }
@@ -114,6 +114,8 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .wm { margin: 0; line-height: 0; }
 .wm svg { height: 30px; width: auto; display: block; overflow: visible; filter: drop-shadow(0 1px 0 rgba(0,0,0,.9)) drop-shadow(0 0 16px rgba(255,255,255,.08)); }
 .wm .holo { display: none; }
+.wm.pixel svg { height: 27px; filter: drop-shadow(0 0 1px rgba(255,255,255,.55)) drop-shadow(0 0 10px rgba(255,255,255,.22)); image-rendering: pixelated; }
+.start .wm.pixel svg { height: 54px; }
 @keyframes sheen { from { background-position: 140% 0, 0% 0, 0 0; } to { background-position: -40% 0, 30% 0, 0 0; } }
 @keyframes drift { to { background-position: -40% 0, 230% 0, 0 0; } }
 .preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
@@ -717,42 +719,56 @@ const FRAME = (() => {
       float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
       float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
         return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
+      vec3 spectrum(float x) { return clamp(abs(fract(x + vec3(0., .667, .333)) * 6. - 3.) - 1., 0., 1.); }
+      // bright light sources caught by the metal: two large blooms and a small one; they drift a little with the light
+      vec2 hot(int i) {
+        vec2 hs = res * .5 - vec2(bw * .5);
+        if (i == 0) return vec2(-hs.x, res.y * .16 + light.y * res.y * .06);
+        if (i == 1) return vec2(res.x * .3 + light.x * res.x * .06, -hs.y);
+        return vec2(hs.x, hs.y * .72);
+      }
       void main() {
         vec2 c = (v * .5) * res;
         float d = sdr(c);
+        float uu = bw / 16.;
+        // blooms and horizontal rainbow lens flares from the hot spots (also spill softly just inside the frame)
+        vec3 fl = vec3(0.); float fa = 0.;
+        for (int i = 0; i < 3; i++) {
+          vec2 q = c - hot(i); float k = i == 2 ? .45 : 1.;
+          float bloom = exp(-dot(q, q) / (900. * uu * uu * k)) * 1.1 * k;
+          float streak = exp(-pow(q.y / (2.4 * uu), 2.)) * exp(-abs(q.x) / (150. * uu * k)) * .55 * k;
+          fl += vec3(1.) * bloom + mix(vec3(1.), spectrum(q.x / (260. * uu) + .15), .85) * streak;
+          fa += bloom * .9 + streak * .7;
+        }
         if (d > .5) { gl_FragColor = vec4(0.); return; }
-        if (d < -bw - .5) {   // moulded details just inside the rim: a ledge line and four screw bosses
-          float uu = bw / 16.;
-          float ledge = exp(-pow((d + bw + 7. * uu) / (.8 * uu), 2.)) * .4;
-          vec2 cc = abs(c) - (res * .5 - vec2(bw + 16. * uu)); float lr = length(cc);
-          float screw = exp(-pow((lr - 5.6 * uu) / (1. * uu), 2.)) * .85 + exp(-pow((lr - 2.4 * uu) / (.8 * uu), 2.)) * .55;
-          float a2 = clamp(ledge + screw, 0., 1.);
-          if (a2 < .004) { gl_FragColor = vec4(0.); return; }
-          vec3 cl = vec3(.96) + film(atan(cc.y, cc.x) * .3 + lr * .05 + time * .02) * iri * .25;
-          gl_FragColor = vec4(cl * a2, a2); return;
+        if (d < -bw - .5) {
+          float a2 = clamp(fa * .55, 0., 1.);
+          gl_FragColor = vec4(min(fl * .55, vec3(a2)), a2); return;
         }
         vec2 g = normalize(vec2(sdr(c + vec2(1., 0.)) - sdr(c - vec2(1., 0.)), sdr(c + vec2(0., 1.)) - sdr(c - vec2(0., 1.))) + 1e-5);
+        vec2 tg = vec2(-g.y, g.x);
         float t = clamp(-d / bw, 0., 1.), s = t * 2. - 1.;
-        float slope = -s / sqrt(max(.02, 1. - s * s * .97));                       // rounded tube across the bezel
-        vec2 lq = c / max(res.y, 1.) * 9.;
-        vec2 wob = vec2(noise(lq + vec2(time * .05, 0.)), noise(lq + vec2(5.3, time * .04))) - .5;   // slow liquid ripple
-        vec3 n = normalize(vec3(g * slope * .95 + wob * .5, 1.));
-        vec3 V = vec3(0., 0., 1.);
-        vec3 col = env(reflect(-V, n));
-        float fr = .55 + .45 * pow(1. - n.z, 3.);
-        vec3 E = col;
-        vec3 chrome = E * 1.45 * fr + vec3(.14, .14, .16) * (.55 + .45 * n.y) + vec3(.08) * pow(max(n.y, 0.), 3.);   // polished chrome edges
-        chrome += film(dot(n.xy, light) * 1.2 + t * .7 + time * .01) * iri * pow(1. - n.z, 2.2) * .7;
-        // translucent plastic body: light scatters inside (brighter where the tube is thicker), glossy white reflections on top
-        float thick = sqrt(max(0., 1. - s * s));
-        vec3 tintc = mix(plastic, film(t * .9 + dot(c / res.y, vec2(.8, .45)) * 1.6 + dot(n.xy, light) * .9 + time * .02) * 1.05, holo);
-        vec3 body = tintc * (.18 + .85 * thick) + tintc * pow(thick, 6.) * .35 + E * (.1 + .9 * pow(1. - n.z, 3.)) + vec3(1.) * pow(max(dot(reflect(-normalize(vec3(light, .8)), n), V), 0.), 40.) * .9;
-        float bodyA = .5 + .38 * thick;
-        float cm = max(1. - smoothstep(.09, .15, t), smoothstep(.85, .91, t));   // chrome bands along both edges
-        col = mix(body, chrome, cm);
-        col *= mix(.35, 1., smoothstep(0., .1, t)) * mix(.25, 1., smoothstep(1., .86, t));      // dark seams at both edges
-        float a = smoothstep(.5, -.8, d) * smoothstep(-bw - .5, -bw + .8, d) * mix(bodyA, 1., cm);
-        gl_FragColor = vec4(col * a, a);
+        float slope = -s / sqrt(max(.02, 1. - s * s * .97));                       // rounded bevel across the border
+        // fine grooves running along the border, like the rings of a record
+        float grooves = sin(-d * 3.1) * .5 + .5, grooves2 = sin(-d * 9.7 + sin(dot(c, tg) * .004) * 2.) * .5 + .5;
+        vec3 n = normalize(vec3(g * (slope * .9 + (grooves2 - .5) * .12), 1.));
+        vec3 V = vec3(0., 0., 1.), L = normalize(vec3(light, .9));
+        vec3 E = env(reflect(-V, n));
+        float fr = .6 + .4 * pow(1. - n.z, 3.);
+        // polished silver: mostly monochrome, high contrast
+        vec3 col = vec3(dot(E, vec3(.333))) * 1.5 * fr + vec3(.12) * (.5 + .5 * n.y);
+        col *= .78 + .22 * grooves * (.6 + .4 * grooves2);
+        // anisotropic sheen: the grooves throw long bright bands where the border runs toward the light
+        float an = pow(abs(dot(tg, normalize(light))), 10.) * (.5 + .5 * grooves2);
+        col += vec3(.95) * an * .8;
+        col += vec3(1.) * pow(max(dot(reflect(-L, n), V), 0.), 60.) * .9;
+        // a thin rainbow fringe on the outer edge (soft neon hues)
+        col += spectrum(dot(c, tg) / (420. * uu) + time * .01) * (1. - smoothstep(.0, .14, t)) * .45;
+        col *= mix(.4, 1., smoothstep(0., .08, t)) * mix(.35, 1., smoothstep(1., .9, t));        // crisp dark lines at both edges
+        col += fl;                                                                          // blown-out highlights
+        float a = smoothstep(.5, -.8, d) * smoothstep(-bw - .5, -bw + .8, d);
+        a = max(a, clamp(fa * .55, 0., 1.) * step(d, 0.));
+        gl_FragColor = vec4(min(col * a, vec3(a)), a);
       }`;
     const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
     try {
@@ -779,6 +795,35 @@ const FRAME = (() => {
     }
   };
 })();
+
+// ================================================================ LUMELODY pixel wordmark
+// Drawn by hand on a 9-row pixel grid: one-pixel strokes, wide tracking, crisp square pixels. Signatures kept in
+// pixel form: the E's middle bar floats free, the O is a moon with a crescent inside its ring, the Y is a cup on a stem.
+const PIXEL_LOGO = (() => {
+  const G = {
+    L: ["#....", "#....", "#....", "#....", "#....", "#....", "#....", "#....", "#####"],
+    U: ["#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", ".####."],
+    M: ["#.....#", "##...##", "#.#.#.#", "#..#..#", "#.....#", "#.....#", "#.....#", "#.....#", "#.....#"],
+    E: ["#####", "#....", "#....", "#....", "#.###", "#....", "#....", "#....", "#####"],
+    O: ["..#####..", ".##....#.", "###.....#", "##......#", "##......#", "##......#", "###.....#", ".##....#.", "..#####.."],
+    D: ["#####..", "#....#.", "#.....#", "#.....#", "#.....#", "#.....#", "#.....#", "#....#.", "#####.."],
+    Y: ["#.....#", "#.....#", ".#...#.", "..###..", "...#...", "...#...", "...#...", "...#...", "...#..."],
+  };
+  const word = "LUMELODY", track = 3;
+  let x = 0, rects = "";
+  for (const ch of word) {
+    const rows = G[ch];
+    rows.forEach((row, y) => [...row].forEach((c, i) => { if (c === "#") rects += `<rect x="${x + i}" y="${y}" width="1" height="1"/>`; }));
+    x += rows[0].length + track;
+  }
+  const W = x - track;
+  return `<svg viewBox="-1 -1 ${W + 2} 11" shape-rendering="crispEdges" aria-hidden="true">` +
+    `<defs><linearGradient id="pxl" x1="0" y1="0" x2="0" y2="9" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e9ebf0"/><stop offset=".56" stop-color="#c3c7cf"/><stop offset="1" stop-color="#ffffff"/></linearGradient>` +
+    `<linearGradient id="pxs" x1="-30" y1="0" x2="-8" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>` +
+    `<animateTransform attributeName="gradientTransform" type="translate" values="0 0;${W + 40} 0;${W + 40} 0" keyTimes="0;.3;1" begin=".4s" dur="8s" repeatCount="indefinite"/></linearGradient></defs>` +
+    `<g fill="url(#pxl)">${rects}</g><g fill="url(#pxs)" opacity=".9">${rects}</g></svg>`;
+})();
+document.querySelectorAll(".wm").forEach((h, i) => { h.innerHTML = PIXEL_LOGO.replace(/pxl/g, "pxl" + i).replace(/pxs/g, "pxs" + i); h.classList.add("pixel"); });
 
 // ================================================================ the moon (hero object) + night sky
 // A holographic-foil sphere lit as a crescent. The foil is a fine noise relief that rotates slowly with the sphere;
