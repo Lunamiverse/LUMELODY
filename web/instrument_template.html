@@ -1,27 +1,20 @@
 <title>LUMELODY</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Manrope:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: one compact instrument. Top bar (logo, sound, themes) -> every effect knob in grouped rows ->
-   a slim detail strip for the selected effect -> a compact piano. Materials: mirror chrome, obsidian glass,
-   holographic film. Five chrome themes morph through registered colour tokens. */
-@property --bg { syntax: "<color>"; inherits: true; initial-value: #07080a; }
-@property --obs1 { syntax: "<color>"; inherits: true; initial-value: #15171b; }
-@property --obs2 { syntax: "<color>"; inherits: true; initial-value: #08090b; }
-@property --ch0 { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+/* LUMELODY: a night-sky instrument. One hero object (the holographic moon), hairline panels, lowercase mono labels.
+   Holographic foil is used sparingly, as a precious material: the moon, the wordmark, the knob caps, lit keys. */
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #060609; }
+@property --win1 { syntax: "<color>"; inherits: true; initial-value: #11111c; }
+@property --win2 { syntax: "<color>"; inherits: true; initial-value: #07070c; }
+@property --ink { syntax: "<color>"; inherits: true; initial-value: #eceef6; }
+@property --muted { syntax: "<color>"; inherits: true; initial-value: #8d93a3; }
+@property --hair { syntax: "<color>"; inherits: true; initial-value: #d9def0; }
+@property --glow { syntax: "<color>"; inherits: true; initial-value: #d6e4ff; }
 @property --ch1 { syntax: "<color>"; inherits: true; initial-value: #dfe3e9; }
 @property --ch2 { syntax: "<color>"; inherits: true; initial-value: #8a9099; }
-@property --ch3 { syntax: "<color>"; inherits: true; initial-value: #2a2d33; }
-@property --ir1 { syntax: "<color>"; inherits: true; initial-value: #ffb6d9; }
-@property --ir2 { syntax: "<color>"; inherits: true; initial-value: #b9a8ff; }
-@property --ir3 { syntax: "<color>"; inherits: true; initial-value: #9fe6ff; }
-@property --glow { syntax: "<color>"; inherits: true; initial-value: #cfe2ff; }
-@property --ink { syntax: "<color>"; inherits: true; initial-value: #eef1f5; }
-@property --muted { syntax: "<color>"; inherits: true; initial-value: #8c939d; }
-@property --pearl { syntax: "<color>"; inherits: true; initial-value: #f4f6f9; }
-@property --pearl2 { syntax: "<color>"; inherits: true; initial-value: #cfd4dc; }
-@property --line { syntax: "<color>"; inherits: true; initial-value: #23262c; }
+@property --obs2 { syntax: "<color>"; inherits: true; initial-value: #07070c; }
 @property --h1 { syntax: "<color>"; inherits: true; initial-value: #ff7ab8; }
 @property --h2 { syntax: "<color>"; inherits: true; initial-value: #ffd877; }
 @property --h3 { syntax: "<color>"; inherits: true; initial-value: #8dffb8; }
@@ -30,288 +23,282 @@
 @property --h6 { syntax: "<color>"; inherits: true; initial-value: #cf8bff; }
 :root {
   color-scheme: dark;
-  --display: "Jost", "Futura", "Avenir Next", "Segoe UI", sans-serif;
-  --ui: "Manrope", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  /* Silver Chrome (default) */
-  --bg: #07080a; --obs1: #15171b; --obs2: #08090b;
-  --ch0: #ffffff; --ch1: #dfe3e9; --ch2: #8a9099; --ch3: #2a2d33;
-  --ir1: #ffb6d9; --ir2: #b9a8ff; --ir3: #9fe6ff; --glow: #cfe2ff;
-  --ink: #eef1f5; --muted: #8c939d; --pearl: #f4f6f9; --pearl2: #cfd4dc; --line: #23262c;
-  --ir-op: .5;
+  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bg: #060609; --win1: #11111c; --win2: #07070c; --ink: #eceef6; --muted: #8d93a3; --hair: #d9def0; --glow: #d6e4ff;
+  --ch1: #dfe3e9; --ch2: #8a9099; --obs2: #07070c;
   --h1: #ff7ab8; --h2: #ffd877; --h3: #8dffb8; --h4: #6fe3ff; --h5: #8a96ff; --h6: #cf8bff;
-  /* holographic foil, as a reusable paint: streaky (like a foil can) and a softer sweep */
-  --holo: linear-gradient(100deg, var(--h1), var(--h2), var(--h3), var(--h4), var(--h5), var(--h6), var(--h1));
-  --holo-v: linear-gradient(180deg, var(--h4), var(--h5) 30%, var(--h6) 50%, var(--h1) 70%, var(--h2));
-  --panel: color-mix(in oklab, var(--obs2) 72%, transparent);
-  transition: --bg .8s, --obs1 .8s, --obs2 .8s, --ch0 .8s, --ch1 .8s, --ch2 .8s, --ch3 .8s, --ir1 .8s, --ir2 .8s, --ir3 .8s,
-              --glow .8s, --ink .8s, --muted .8s, --pearl .8s, --pearl2 .8s, --line .8s,
+  --line: color-mix(in oklab, var(--hair) 20%, transparent);
+  --line-strong: color-mix(in oklab, var(--hair) 42%, transparent);
+  --foil: linear-gradient(100deg, var(--h1), var(--h2), var(--h3), var(--h4), var(--h5), var(--h6), var(--h1));
+  --foil-v: linear-gradient(180deg, var(--h4), var(--h5) 30%, var(--h6) 50%, var(--h1) 70%, var(--h2));
+  transition: --bg .8s, --win1 .8s, --win2 .8s, --ink .8s, --muted .8s, --hair .8s, --glow .8s, --ch1 .8s, --ch2 .8s, --obs2 .8s,
               --h1 .8s, --h2 .8s, --h3 .8s, --h4 .8s, --h5 .8s, --h6 .8s;
 }
-:root[data-theme="rose"] { --bg: #0a0708; --obs1: #1a1316; --obs2: #0a0708; --ch0: #fff7f9; --ch1: #f0dde3; --ch2: #a8858f; --ch3: #3a2a30;
-  --ir1: #ffb3cf; --ir2: #e0b8ff; --ir3: #ffd3c4; --glow: #ffb7cf; --ink: #fbeff3; --muted: #a8919a; --pearl: #fdf4f6; --pearl2: #e6d0d7; --line: #2c2125; --ir-op: .55; --h1: #ff8fc4; --h2: #ffc7da; --h3: #ffd6b8; --h4: #f4b4ff; --h5: #c8a8ff; --h6: #ffa3cf; }
-:root[data-theme="gold"] { --bg: #090806; --obs1: #18150f; --obs2: #090806; --ch0: #fffaf0; --ch1: #ece2cc; --ch2: #a59573; --ch3: #3a3223;
-  --ir1: #ffe2a6; --ir2: #ffc9b0; --ir3: #e6efc6; --glow: #ffd79a; --ink: #f8f2e6; --muted: #a59a85; --pearl: #fdf8ee; --pearl2: #e5dac4; --line: #2b261c; --ir-op: .55; --h1: #ffd27a; --h2: #fff0b8; --h3: #ffbf94; --h4: #f2f6bf; --h5: #ffb0a0; --h6: #e8d4ff; }
-:root[data-theme="violet"] { --bg: #08070c; --obs1: #16131f; --obs2: #08070c; --ch0: #fbf9ff; --ch1: #e2dcf2; --ch2: #8f87a8; --ch3: #2c2840;
-  --ir1: #c4a8ff; --ir2: #ff9fe0; --ir3: #93d6ff; --glow: #c6a6ff; --ink: #f2eefc; --muted: #9a92b0; --pearl: #f8f5ff; --pearl2: #d8d0ec; --line: #262137; --ir-op: .55; --h1: #b07dff; --h2: #ff8fe0; --h3: #7fd8ff; --h4: #9f9bff; --h5: #e7a8ff; --h6: #74e8ff; }
-:root[data-theme="prism"] { --bg: #070709; --obs1: #16161b; --obs2: #07070a; --ch0: #ffffff; --ch1: #e6e6ee; --ch2: #8e8e9c; --ch3: #2b2b34;
-  --ir1: #ff9fd0; --ir2: #9fd8ff; --ir3: #ffe49f; --glow: #f0d2ff; --ink: #f4f3f8; --muted: #9795a3; --pearl: #fbfaff; --pearl2: #dedce8; --line: #26252e; --ir-op: .55; --h1: #ff4f9a; --h2: #ffd24f; --h3: #5cff9a; --h4: #3fd8ff; --h5: #6a6bff; --h6: #c34fff; }
+:root[data-theme="rose"]   { --bg: #09060a; --win1: #1a0f17; --win2: #0a060a; --ink: #f8eef3; --muted: #ad94a0; --hair: #f6d6e4; --glow: #ffb7d2; --ch1: #f0dde3; --ch2: #a8858f; --obs2: #0a060a;
+  --h1: #ff8fc4; --h2: #ffc7da; --h3: #ffd6b8; --h4: #f4b4ff; --h5: #c8a8ff; --h6: #ffa3cf; }
+:root[data-theme="gold"]   { --bg: #080705; --win1: #18130b; --win2: #090705; --ink: #f6efe2; --muted: #ab9c82; --hair: #f2e2c0; --glow: #ffd99e; --ch1: #ece2cc; --ch2: #a59573; --obs2: #090705;
+  --h1: #ffd27a; --h2: #fff0b8; --h3: #ffbf94; --h4: #f2f6bf; --h5: #ffb0a0; --h6: #e8d4ff; }
+:root[data-theme="violet"] { --bg: #07050c; --win1: #150e24; --win2: #07050d; --ink: #f0ecfc; --muted: #9e94ba; --hair: #ded4ff; --glow: #c9a8ff; --ch1: #e2dcf2; --ch2: #8f87a8; --obs2: #07050d;
+  --h1: #b07dff; --h2: #ff8fe0; --h3: #7fd8ff; --h4: #9f9bff; --h5: #e7a8ff; --h6: #74e8ff; }
+:root[data-theme="prism"]  { --bg: #060609; --win1: #121019; --win2: #06060a; --ink: #f4f3f8; --muted: #9b99ab; --hair: #ece8ff; --glow: #f0d2ff; --ch1: #e6e6ee; --ch2: #8e8e9c; --obs2: #06060a;
+  --h1: #ff4f9a; --h2: #ffd24f; --h3: #5cff9a; --h4: #3fd8ff; --h5: #6a6bff; --h6: #c34fff; }
 * { box-sizing: border-box; }
-body {
-  margin: 0; color: var(--ink); font: 13px/1.45 var(--ui); -webkit-font-smoothing: antialiased;
-  background: var(--holo), var(--bg); background-attachment: fixed;
-  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 18px 40px;
-}
-button, select, input, textarea { font: inherit; color: inherit; }
-:focus-visible { outline: 1.5px solid var(--glow); outline-offset: 2px; }
+body { margin: 0; color: var(--ink); font: 12px/1.5 var(--mono); -webkit-font-smoothing: antialiased; text-transform: lowercase;
+  background: radial-gradient(70% 50% at 50% 0%, color-mix(in oklab, var(--win1) 80%, transparent), transparent 75%), var(--bg);
+  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+button, select, input, textarea { font: inherit; color: inherit; text-transform: inherit; }
+:focus-visible { outline: 1px solid var(--glow); outline-offset: 2px; }
+.cap { text-transform: none; }
 
-/* ------------------------------------------------ the instrument object */
-.bgfoil { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
-.unit { max-width: 1060px; margin: 0 auto; position: relative; border-radius: 24px; padding: 3px;
-  /* holographic chrome bezel: foil streaks over polished metal, sliding with the light */
-  background:
-    repeating-linear-gradient(calc(96deg + var(--lx, 0) * 12deg),
-      color-mix(in oklab, var(--h1) 70%, transparent) 0, color-mix(in oklab, var(--h2) 70%, transparent) 11px, color-mix(in oklab, var(--h3) 70%, transparent) 23px,
-      color-mix(in oklab, var(--h4) 70%, transparent) 31px, color-mix(in oklab, var(--h5) 70%, transparent) 44px, color-mix(in oklab, var(--h6) 70%, transparent) 52px, color-mix(in oklab, var(--h1) 70%, transparent) 63px),
-    linear-gradient(calc(160deg + var(--lx, 0) * 25deg), var(--ch0), var(--ch2) 18%, var(--ch3) 34%, var(--ch1) 52%, var(--ch3) 70%, var(--ch2) 86%, var(--ch0));
-  box-shadow: 0 30px 70px -24px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.5); }
-.unit::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: soft-light; opacity: .6;
-  background: linear-gradient(calc(150deg + var(--lx, 0) * 30deg), rgba(255,255,255,.9), transparent 30%, transparent 60%, rgba(255,255,255,.7) 75%, transparent 90%); }
-.body { position: relative; border-radius: 21px; padding: 14px; display: grid; gap: 12px; overflow: hidden;
-  background: var(--holo), var(--obs2);   /* shown only if WebGL is unavailable; the live foil canvas covers it */
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.35); }
-.body > .foil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
-.body::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: linear-gradient(162deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.03) 22%, transparent 23%); }
-/* smoked glass over the foil: the foil glows through, text stays readable */
-.glass { position: relative; z-index: 2; border-radius: 16px; background: var(--panel); --muted: color-mix(in oklab, var(--ink) 74%, transparent);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.16), 0 10px 26px -14px rgba(0,0,0,.7); }
+/* ------------------------------------------------ window */
+.win { max-width: 1120px; margin: 0 auto; position: relative; border-radius: 10px; overflow: hidden;
+  background: radial-gradient(60% 70% at 18% 42%, color-mix(in oklab, var(--glow) 9%, transparent), transparent 70%), linear-gradient(180deg, var(--win1), var(--win2));
+  box-shadow: 0 0 0 1px var(--line), 0 40px 90px -40px #000; }
+.win::before { /* a single hairline of foil along the top edge: the only foil on the frame */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--foil); opacity: .8; z-index: 3; }
+.stars { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.inner { position: relative; z-index: 1; display: grid; gap: 14px; padding: 14px 18px 18px; }
+
+/* hairline boxes */
+.hl { border: 1px solid var(--line); border-radius: 6px; background: color-mix(in oklab, var(--win2) 55%, transparent); }
+.btn { border: 1px solid var(--line); border-radius: 5px; background: color-mix(in oklab, var(--win2) 50%, transparent); cursor: pointer;
+  height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11.5px; white-space: nowrap; }
+.btn:hover { border-color: var(--line-strong); }
+.btn[aria-pressed="true"] { border-color: color-mix(in oklab, var(--glow) 70%, transparent); box-shadow: 0 0 12px -5px var(--glow); }
+.btn.icon { width: 28px; padding: 0; justify-content: center; }
+.dim { color: var(--muted); }
 
 /* ------------------------------------------------ top bar */
-.top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 7px 10px; }
-.logo { display: flex; align-items: center; gap: 8px; }
-.logo canvas { width: 26px; height: 26px; display: block; }
-.wm { font: 400 17px/1 var(--display); letter-spacing: .34em; text-transform: uppercase; margin: 0; white-space: nowrap;
-  background-image:
-    linear-gradient(100deg, transparent 0 38%, rgba(255,255,255,.95) 48%, transparent 58% 100%),
-    linear-gradient(100deg, color-mix(in oklab, var(--h1) 60%, transparent) 10%, color-mix(in oklab, var(--h2) 55%, transparent) 26%, color-mix(in oklab, var(--h3) 55%, transparent) 42%, color-mix(in oklab, var(--h4) 55%, transparent) 58%, color-mix(in oklab, var(--h5) 55%, transparent) 74%, color-mix(in oklab, var(--h6) 60%, transparent) 90%),
-    linear-gradient(180deg, var(--ch0) 0%, var(--ch1) 32%, var(--ch2) 47%, var(--ch3) 51%, var(--ch1) 58%, var(--ch0) 78%, var(--ch2) 100%);
-  background-size: 250% 100%, 200% 100%, 100% 100%; background-position: 140% 0, calc(50% + var(--lx, 0) * 40%) 0, 0 0;
-  -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,.8)); animation: sheen 2.2s .3s cubic-bezier(.3,.6,.2,1) both; }
-@keyframes sheen { from { background-position: 140% 0, calc(50% + var(--lx, 0) * 40%) 0, 0 0; } to { background-position: -40% 0, calc(50% + var(--lx, 0) * 40%) 0, 0 0; } }
-.sound { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; align-items: center; min-width: 0; }
-.glass-pill { border: 0; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.25)), var(--obs2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), inset 0 0 0 1px var(--line), 0 1px 0 rgba(255,255,255,.03); }
-.navb { width: 30px; height: 30px; cursor: pointer; display: grid; place-items: center; font-size: 15px; color: var(--muted); padding: 0; }
-.picker { min-width: 0; cursor: pointer; text-align: left; padding: 5px 12px; display: grid; gap: 0; }
-.picker .n { font: 400 15px/1.2 var(--display); letter-spacing: .08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.picker .c { font: 600 9.5px var(--ui); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.right { display: flex; align-items: center; gap: 10px; }
-.swatches { display: flex; gap: 6px; }
-.sw { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 -2px 3px rgba(0,0,0,.35), 0 1px 3px rgba(0,0,0,.6); }
-.sw[aria-pressed="true"] { box-shadow: 0 0 0 1.5px var(--obs2), 0 0 0 2.5px var(--glow); }
-.icon-b { height: 30px; padding: 0 10px; cursor: pointer; font: 600 10.5px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.icon-b[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--glow) 70%, transparent), 0 0 12px -4px var(--glow); }
-.status { font: 600 10px var(--ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.status i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--line); margin-right: 6px; vertical-align: 1px; }
-.status.live i { background: var(--glow); box-shadow: 0 0 6px var(--glow); }
+.top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+.wm { margin: 0; font: italic 500 30px/1 var(--serif); letter-spacing: .01em; text-transform: lowercase; white-space: nowrap;
+  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%), var(--foil), linear-gradient(180deg, #fff, var(--ch1) 45%, var(--ch2) 55%, #fff);
+  background-size: 260% 100%, 220% 100%, 100% 100%; background-blend-mode: normal, soft-light, normal;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 2.6s .3s cubic-bezier(.3,.6,.2,1) both, drift 18s linear infinite; padding: 2px 4px 4px 0; }
+@keyframes sheen { from { background-position: 140% 0, 0% 0, 0 0; } to { background-position: -40% 0, 30% 0, 0 0; } }
+@keyframes drift { to { background-position: -40% 0, 230% 0, 0 0; } }
+.preset { justify-self: end; display: flex; align-items: center; gap: 0; height: 30px; min-width: min(360px, 100%); }
+.preset .btn { border: 0; background: none; height: 100%; }
+.preset .pick { flex: 1; justify-content: flex-start; min-width: 0; overflow: hidden; }
+.preset .pick b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+.tools { display: flex; align-items: center; gap: 8px; }
+.swatches { display: flex; gap: 6px; padding: 0 4px; }
+.sw { width: 14px; height: 14px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 -1px 2px rgba(0,0,0,.4); }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 1.5px var(--win2), 0 0 0 2.5px var(--ink); }
+.status { color: var(--muted); font-size: 11px; display: inline-flex; align-items: center; gap: 6px; }
+.status i { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); }
+.status.live i { background: var(--glow); box-shadow: 0 0 8px var(--glow); }
 
-/* ------------------------------------------------ effect rows */
-.rack { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(7, auto); justify-content: space-between; gap: 4px 6px;
-  padding: 10px 8px 8px; }
-.grp { display: grid; gap: 4px; justify-items: center; min-width: 0; align-content: start; }
-.grp > .gname { font: 600 9px var(--ui); letter-spacing: .26em; text-transform: uppercase; color: var(--muted); padding-bottom: 2px; width: 100%; text-align: center;
-  border-bottom: 1px solid var(--line); }
-.grp > .gknobs { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 4px 2px; }
-.knob { position: relative; display: grid; justify-items: center; gap: 1px; width: 64px; touch-action: none; user-select: none; -webkit-user-select: none; }
-.knob .face { position: relative; width: 44px; height: 44px; cursor: grab; border-radius: 50%; }
+/* ------------------------------------------------ hero moon + effect panels */
+.main { display: grid; grid-template-columns: minmax(250px, 330px) minmax(0, 1fr); gap: 22px; align-items: center; }
+.hero { display: grid; justify-items: center; gap: 12px; padding: 6px 0; }
+.orb { position: relative; width: min(280px, 100%); aspect-ratio: 1; cursor: pointer; border: 0; padding: 0; background: none; border-radius: 50%; -webkit-tap-highlight-color: transparent; }
+.orb canvas { position: absolute; inset: -14%; width: 128%; height: 128%; display: block; pointer-events: none; }
+.orb .fallback { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, var(--ch1) 25%, transparent 60%), var(--foil); opacity: .9; }
+.orb svg { position: absolute; inset: -9%; width: 118%; height: 118%; pointer-events: none; overflow: visible; }
+.orb:active { transform: scale(.985); }
+.hero .name { font: italic 500 27px/1.1 var(--serif); text-transform: none; text-align: center; letter-spacing: .01em; }
+.hero .meta { color: var(--muted); font-size: 11px; text-align: center; }
+.hero .hint { color: var(--muted); font-size: 10.5px; opacity: .8; }
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.panel { padding: 7px 10px 6px; display: grid; gap: 2px; }
+.panel h3 { margin: 0; display: flex; justify-content: space-between; font: 500 11px var(--mono); color: var(--ink); letter-spacing: .02em; }
+.panel h3 span { color: var(--muted); font-weight: 400; }
+.panel .knobs { display: flex; justify-content: space-around; gap: 2px; }
+.knob { position: relative; display: grid; justify-items: center; gap: 0; width: 62px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.knob .face { position: relative; width: 38px; height: 38px; margin: 8px 0 4px; cursor: grab; border-radius: 50%; }
 .knob .face:active { cursor: grabbing; }
 .knob canvas { width: 100%; height: 100%; display: block; }
-.knob svg.ring { position: absolute; inset: -16%; width: 132%; height: 132%; pointer-events: none; overflow: visible; }
-.knob .name { display: flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 1px 2px; border-radius: 6px;
-  font: 600 9.5px var(--ui); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.knob .name .led { width: 5px; height: 5px; border-radius: 50%; background: var(--line); box-shadow: inset 0 1px 1px rgba(0,0,0,.8); flex: none; }
+.knob svg.ring { position: absolute; inset: -22%; width: 144%; height: 144%; pointer-events: none; overflow: visible; }
+.knob .name { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 0 2px; border-radius: 3px; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.knob .name .led { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex: none; }
 .knob.on .name { color: var(--ink); }
-.knob.on .name .led { background: var(--glow); box-shadow: 0 0 6px var(--glow); }
-.knob.sel .name { box-shadow: inset 0 -1.5px 0 var(--glow); }
-.knob .val { font: 500 10.5px var(--ui); font-variant-numeric: tabular-nums; color: var(--muted); min-height: 1.3em; white-space: nowrap; }
+.knob.on .name .led { background: var(--glow); box-shadow: 0 0 5px var(--glow); }
+.knob.sel .name { text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--glow) 80%, transparent); text-underline-offset: 3px; }
+.knob .val { font-size: 11px; color: var(--muted); min-height: 1.5em; white-space: nowrap; font-variant-numeric: tabular-nums; order: 3; }
 .knob.on .val, .knob.dragging .val { color: var(--ink); }
-.knob.dragging .val { text-shadow: 0 0 8px color-mix(in oklab, var(--glow) 70%, transparent); }
 .knob.mini { width: 58px; }
-.knob.mini .face { width: 34px; height: 34px; }
+.knob.mini .face { width: 30px; height: 30px; margin: 6px 0 3px; }
 
-/* detail strip for the selected effect */
-.detail { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 12px; min-height: 56px; }
-.detail .ttl { display: grid; gap: 2px; min-width: 0; max-width: 220px; }
-.detail .ttl b { font: 400 13px var(--display); letter-spacing: .22em; text-transform: uppercase; }
-.detail .ttl span { font-size: 11px; color: var(--muted); line-height: 1.35; }
-.detail .ctrls { display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: center; min-width: 0; }
-.power { border: 0; cursor: pointer; border-radius: 999px; padding: 6px 12px; font: 700 10px var(--ui); letter-spacing: .2em; color: var(--muted);
-  background: var(--obs2); box-shadow: inset 0 0 0 1px var(--line); }
-.power[aria-pressed="true"] { color: var(--obs2); background: linear-gradient(180deg, var(--ch0), var(--ch1) 45%, var(--ch2) 52%, var(--ch1)); box-shadow: 0 0 12px -3px var(--glow); }
-.seg { display: grid; gap: 3px; }
-.seg .lbl { font: 600 9px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+/* selected effect: all its controls */
+.detail { display: grid; grid-template-columns: minmax(150px, 230px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 6px 12px; min-height: 64px; }
+.detail .ttl { display: grid; gap: 2px; min-width: 0; }
+.detail .ttl b { font: italic 500 19px/1.1 var(--serif); text-transform: none; }
+.detail .ttl span { color: var(--muted); font-size: 10.5px; line-height: 1.4; }
+.detail .ctrls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
+.power { border: 1px solid var(--line); border-radius: 5px; background: none; cursor: pointer; height: 28px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; }
+.power::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); }
+.power[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in oklab, var(--glow) 70%, transparent); }
+.power[aria-pressed="true"]::before { background: var(--glow); box-shadow: 0 0 6px var(--glow); }
+.seg { display: grid; gap: 3px; padding: 0 4px; }
+.seg .lbl { color: var(--muted); font-size: 10.5px; }
 .seg .opts { display: flex; flex-wrap: wrap; gap: 3px; }
-.seg button { border: 0; cursor: pointer; font: 600 10.5px var(--ui); padding: 4px 7px; border-radius: 7px; color: var(--muted); background: var(--obs2); box-shadow: inset 0 0 0 1px var(--line); }
-.seg button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 0 0 1px var(--glow), 0 0 10px -4px var(--glow); }
-.empty { color: var(--muted); font-size: 11.5px; }
+.seg button { border: 1px solid var(--line); border-radius: 4px; background: none; cursor: pointer; padding: 2px 7px; font-size: 11px; color: var(--muted); }
+.seg button[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
+.empty { color: var(--muted); font-size: 11px; }
 
-/* ------------------------------------------------ compact piano */
-.piano { display: grid; gap: 8px; padding: 8px; }
-.pbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.pbar .row { display: flex; align-items: center; gap: 6px; }
-.oct { font: 400 12px var(--display); letter-spacing: .16em; min-width: 7.4em; text-align: center; font-variant-numeric: tabular-nums; }
-.bpm { width: 58px; height: 30px; padding: 0 8px; text-align: center; font-variant-numeric: tabular-nums; }
-.keybed { position: relative; border-radius: 12px; padding: 6px; background: rgba(4,4,7,.72);
-  box-shadow: inset 0 8px 18px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06); }
-.keybed::before { /* foil frame around the keys */
-  content: ""; position: absolute; inset: 6px; border-radius: 3px; pointer-events: none; z-index: 5; padding: 1.2px;
-  background: var(--holo); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .95; }
-.keys { position: relative; height: clamp(84px, 10vw, 112px); touch-action: none; user-select: none; -webkit-user-select: none; }
-.spill { position: absolute; left: -6px; top: -6px; width: calc(100% + 12px); height: calc(100% + 12px); pointer-events: none; z-index: 4; mix-blend-mode: screen; }
-.key { position: absolute; top: 0; border: 0; padding: 0; margin: 0; cursor: pointer; background: none; --lum: 0;
-  transition: transform 150ms cubic-bezier(.2,.8,.3,1.15); -webkit-tap-highlight-color: transparent; }
-.key.down { transition-duration: 40ms; transition-timing-function: ease-out; }
-.wk { height: 100%; z-index: 1; background: linear-gradient(180deg, rgba(255,255,255,.012), rgba(255,255,255,.045)); }
-.wk::before { /* the key fills with foil light while its note sounds; brightness follows velocity */
+/* ------------------------------------------------ deck + keys */
+.deck { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.octbox { display: inline-flex; align-items: center; height: 28px; }
+.octbox .btn { border-radius: 0; border-right-width: 0; }
+.octbox .btn:first-child { border-radius: 5px 0 0 5px; }
+.octbox .btn:last-child { border-radius: 0 5px 5px 0; border-right-width: 1px; }
+.octbox .oct { border: 1px solid var(--line); border-right-width: 0; height: 28px; display: inline-flex; align-items: center; padding: 0 10px; color: var(--ink); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.bpm { width: 56px; height: 28px; border: 1px solid var(--line); border-radius: 5px; background: none; padding: 0 6px; text-align: center; font-variant-numeric: tabular-nums; }
+.tip { flex: 1 1 260px; min-width: 0; height: 28px; display: flex; align-items: center; padding: 0 10px; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tip b { color: var(--ink); font-weight: 500; margin-right: 8px; }
+.keybed { position: relative; padding: 0; }
+.keys { position: relative; height: clamp(86px, 10vw, 112px); touch-action: none; user-select: none; -webkit-user-select: none; border: 1px solid var(--line-strong); border-radius: 4px; overflow: hidden;
+  background: color-mix(in oklab, var(--win2) 70%, transparent); }
+.spill { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; mix-blend-mode: screen; }
+.key { position: absolute; top: 0; border: 0; padding: 0; margin: 0; cursor: pointer; background: none; --lum: 0; transition: transform 140ms cubic-bezier(.2,.8,.3,1.15); -webkit-tap-highlight-color: transparent; }
+.key.down { transition-duration: 40ms; }
+.wk { height: 100%; z-index: 1; }
+.wk::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; pointer-events: none; background: var(--line-strong); }
+.wk:last-of-type::after { display: none; }
+.wk::before, .bk::before { /* the key fills with foil light while its note sounds (velocity sets brightness) */
   content: ""; position: absolute; inset: 0 1px 0 0; pointer-events: none; opacity: var(--lum);
-  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.08) 35%, rgba(255,255,255,.55) 100%), var(--holo-v);
-  box-shadow: 0 0 calc(var(--lum) * 18px) color-mix(in oklab, var(--glow) 70%, transparent); }
-.wk::after { /* foil separator line */
-  content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1.2px; pointer-events: none; background: var(--holo-v); opacity: .85; }
-.wk:last-child::after { display: none; }
-.wk.down { transform: translateY(1.5px); }
-.wk span { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font: 600 8.5px var(--ui); letter-spacing: .08em; color: var(--muted); pointer-events: none; }
-.bk { height: 58%; z-index: 3; border: 1.3px solid transparent; border-top: 0; border-radius: 0 0 3px 3px;
-  /* outlined black key: dark glass inside, holographic foil outline */
-  background: linear-gradient(180deg, #050508, #0b0b10) padding-box, var(--holo-v) border-box;
-  box-shadow: 0 4px 8px -2px rgba(0,0,0,.8); }
-.bk::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--lum);
-  background: linear-gradient(180deg, transparent, rgba(255,255,255,.45)), var(--holo-v);
-  box-shadow: 0 0 calc(var(--lum) * 16px) color-mix(in oklab, var(--glow) 70%, transparent); }
-.bk.down { transform: translateY(1.5px); }
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.06) 40%, rgba(255,255,255,.5) 100%), var(--foil-v); }
+.wk.down { transform: translateY(1px); }
+.wk span { position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; font-size: 9.5px; color: var(--muted); pointer-events: none; }
+.bk { height: 60%; z-index: 3; border: 1px solid var(--line-strong); border-top: 0; border-radius: 0 0 2px 2px; background: var(--win2); }
+.bk::before { inset: 0; }
+.bk.down { transform: translateY(1px); }
 
 /* ------------------------------------------------ browser sheet */
-.sheet { position: absolute; inset: 52px 14px 14px; z-index: 10; border-radius: 16px; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 8px; padding: 12px;
-  background: color-mix(in oklab, var(--obs2) 94%, transparent); backdrop-filter: blur(14px); box-shadow: 0 0 0 1px var(--line), 0 20px 50px rgba(0,0,0,.7); }
+.sheet { position: absolute; inset: 56px 18px 18px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
+  border: 1px solid var(--line-strong); border-radius: 8px; background: color-mix(in oklab, var(--win2) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 60px -20px #000; }
 .sheet-top { display: flex; gap: 8px; flex-wrap: wrap; }
-.field { border: 0; border-radius: 10px; padding: 7px 10px; background: var(--obs1); box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
-.sheet-top input { flex: 1 1 160px; }
+.field { border: 1px solid var(--line); border-radius: 5px; padding: 6px 9px; background: none; min-width: 0; }
+.field option { background: var(--win2); }
+.sheet-top input { flex: 1 1 180px; }
 .chips { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; }
-.chip { flex: none; border: 0; cursor: pointer; border-radius: 999px; padding: 5px 10px; font: 600 10.5px var(--ui); color: var(--muted); background: var(--obs1); box-shadow: inset 0 0 0 1px var(--line); }
-.chip[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 0 0 1px var(--glow); }
-.list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; align-content: start; padding-right: 2px; }
-.item { text-align: left; border: 0; cursor: pointer; border-radius: 11px; padding: 8px 10px; display: grid; gap: 1px; min-width: 0; background: var(--obs1); box-shadow: inset 0 0 0 1px var(--line); }
-.item[aria-current="true"] { box-shadow: inset 0 0 0 1px var(--glow), 0 0 14px -6px var(--glow); }
-.item b { font: 400 13.5px var(--display); letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chip { flex: none; border: 1px solid var(--line); border-radius: 999px; background: none; cursor: pointer; padding: 3px 10px; font-size: 11px; color: var(--muted); }
+.chip[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
+.list { overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; align-content: start; }
+.item { text-align: left; border: 1px solid var(--line); border-radius: 6px; background: none; cursor: pointer; padding: 7px 10px; display: grid; gap: 1px; min-width: 0; }
+.item[aria-current="true"] { border-color: color-mix(in oklab, var(--glow) 75%, transparent); }
+.item b { font: italic 500 17px/1.15 var(--serif); text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .item small { font-size: 10.5px; color: var(--muted); }
-.mk { font: 700 9.5px var(--ui); letter-spacing: .1em; text-transform: uppercase; }
-.mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
-.sound-card { display: grid; gap: 6px; padding: 10px; border-radius: 12px; background: var(--obs1); box-shadow: inset 0 0 0 1px var(--line); }
-.sound-card .d { font-size: 12px; color: color-mix(in oklab, var(--ink) 80%, transparent); }
+.mk { font-size: 10.5px; } .mk.keep { color: #8be3bd; } .mk.improve { color: #ffd88a; } .mk.drop { color: #ff97a2; }
+.sound-card { display: grid; gap: 6px; padding: 10px; }
+.sound-card .d { font-size: 11.5px; color: color-mix(in oklab, var(--ink) 82%, transparent); text-transform: none; }
 .sound-card .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.sound-card textarea { width: 100%; min-height: 30px; resize: vertical; border: 0; border-radius: 8px; padding: 6px 8px; font-size: 12px; background: var(--obs2); box-shadow: inset 0 0 0 1px var(--line); }
-.mark { border: 0; cursor: pointer; border-radius: 999px; padding: 4px 10px; font: 600 10.5px var(--ui); color: var(--muted); background: var(--obs2); box-shadow: inset 0 0 0 1px var(--line); }
-.mark[data-k=keep][aria-pressed=true] { color: #8be3bd; box-shadow: inset 0 0 0 1px #8be3bd; }
-.mark[data-k=improve][aria-pressed=true] { color: #ffd88a; box-shadow: inset 0 0 0 1px #ffd88a; }
-.mark[data-k=drop][aria-pressed=true] { color: #ff97a2; box-shadow: inset 0 0 0 1px #ff97a2; }
-#fav[aria-pressed=true] { color: var(--glow); box-shadow: inset 0 0 0 1px var(--glow); }
-.toast { position: absolute; right: 18px; bottom: 16px; z-index: 12; font: 600 11px var(--ui); color: var(--obs2); background: var(--glow); border-radius: 999px; padding: 6px 12px; box-shadow: 0 6px 20px -6px var(--glow); }
+.sound-card textarea { width: 100%; min-height: 30px; resize: vertical; border: 1px solid var(--line); border-radius: 5px; padding: 6px 8px; background: none; text-transform: none; }
+.mark { border: 1px solid var(--line); border-radius: 999px; background: none; cursor: pointer; padding: 3px 10px; font-size: 11px; color: var(--muted); }
+.mark[data-k=keep][aria-pressed=true] { color: #8be3bd; border-color: #8be3bd; }
+.mark[data-k=improve][aria-pressed=true] { color: #ffd88a; border-color: #ffd88a; }
+.mark[data-k=drop][aria-pressed=true] { color: #ff97a2; border-color: #ff97a2; }
+#fav[aria-pressed=true] { color: var(--glow); border-color: var(--glow); }
+.toast { position: absolute; right: 18px; bottom: 18px; z-index: 12; font-size: 11px; color: var(--win2); background: var(--ink); border-radius: 5px; padding: 6px 10px; }
 
-.start { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: color-mix(in oklab, var(--bg) 78%, transparent); backdrop-filter: blur(8px); }
-.start > div { display: grid; justify-items: center; gap: 12px; text-align: center; max-width: 34ch; }
-.start button { border: 0; cursor: pointer; border-radius: 999px; padding: 13px 30px; font: 400 14px var(--display); letter-spacing: .34em; text-transform: uppercase; color: #0b0c0f;
-  background: linear-gradient(180deg, var(--ch0), var(--ch1) 40%, var(--ch2) 50%, var(--ch1) 62%, var(--ch0)); box-shadow: 0 0 26px -8px var(--glow), 0 2px 0 rgba(255,255,255,.4) inset; }
-.start p { margin: 0; color: var(--muted); font-size: 12.5px; }
-.foot { max-width: 1060px; margin: 14px auto 0; font-size: 11.5px; color: var(--ink); padding: 10px 14px; border-radius: 14px; background: var(--panel); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.start { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: color-mix(in oklab, var(--bg) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.start > div { display: grid; justify-items: center; gap: 14px; text-align: center; max-width: 36ch; }
+.start .wm { font-size: 46px; }
+.start button { border: 1px solid var(--line-strong); border-radius: 6px; background: none; cursor: pointer; padding: 9px 22px; font-size: 12px; color: var(--ink); }
+.start button:hover { border-color: var(--glow); box-shadow: 0 0 18px -6px var(--glow); }
+.start p { margin: 0; color: var(--muted); font-size: 11px; }
+.foot { max-width: 1120px; margin: 14px auto 0; font-size: 10.5px; color: var(--muted); text-transform: none; line-height: 1.6; }
 
-@media (max-width: 900px) {
-  .rack { grid-template-columns: repeat(4, auto); justify-content: space-around; }
+@media (max-width: 860px) {
+  .main { grid-template-columns: 1fr; }
+  .orb { width: min(220px, 70vw); }
 }
 @media (max-width: 620px) {
   .top { grid-template-columns: minmax(0, 1fr) auto; }
-  .top .sound { grid-column: 1 / -1; order: 3; }
-  .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 4px; }
-  .knob { width: 60px; }
+  .preset { grid-column: 1 / -1; order: 3; justify-self: stretch; }
+  .panels { grid-template-columns: 1fr; }
   .detail { grid-template-columns: minmax(0, 1fr) auto; }
   .detail .ctrls { grid-column: 1 / -1; order: 3; }
+  .tip { display: none; }
   .sheet { inset: 8px; }
+  .inner { padding: 12px; }
 }
-@media (prefers-reduced-motion: reduce) { .wm { animation: none; } .key { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .wm { animation: none; } .key { transition: none; } .orb svg animateMotion { display: none; } }
 </style>
 
-<canvas class="bgfoil" id="bgfoil" aria-hidden="true"></canvas>
 <div class="start" id="start">
   <div>
-    <button type="button" id="startBtn">Play</button>
-    <p>Switches on the sound engine. Play the keys, your computer keyboard (A–K, W E T Y U), or a MIDI keyboard where the browser allows it.</p>
+    <h1 class="wm">lumelody</h1>
+    <button type="button" id="startBtn">tap to begin</button>
+    <p>switches on the sound engine. play the keys, your computer keyboard (a–k, w e t y u), or a midi keyboard where the browser allows it.</p>
   </div>
 </div>
 
-<div class="unit" id="unit">
-  <div class="body" id="body">
-    <canvas class="foil" id="foil" aria-hidden="true"></canvas>
-    <header class="top glass">
-      <div class="logo">
-        <canvas id="moon" width="64" height="64" aria-hidden="true"></canvas>
-        <h1 class="wm">Lumelody</h1>
+<div class="win" id="unit">
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
+  <div class="inner">
+    <header class="top">
+      <h1 class="wm">lumelody</h1>
+      <div class="preset hl">
+        <button class="btn icon" type="button" id="prev" aria-label="Previous sound">‹</button>
+        <button class="btn pick" type="button" id="picker" aria-haspopup="dialog" aria-expanded="false"><span class="dim">⌄</span><b class="cap" id="sPick">—</b></button>
+        <button class="btn icon" type="button" id="next" aria-label="Next sound">›</button>
       </div>
-      <div class="sound">
-        <button class="glass-pill navb" type="button" id="prev" aria-label="Previous sound">‹</button>
-        <button class="glass-pill picker" type="button" id="picker" aria-haspopup="dialog" aria-expanded="false">
-          <span class="c" id="sCat"></span><span class="n" id="sName">—</span>
-        </button>
-        <button class="glass-pill navb" type="button" id="next" aria-label="Next sound">›</button>
-      </div>
-      <div class="right">
+      <div class="tools">
         <div class="swatches" id="swatches" role="group" aria-label="Theme"></div>
-        <div class="status" id="status"><i></i>Off</div>
+        <div class="status" id="status"><i></i><span>off</span></div>
       </div>
     </header>
 
-    <section class="rack glass" id="rack" aria-label="Effects"></section>
-    <section class="detail glass" id="detail" aria-live="polite"></section>
-
-    <section class="piano glass" aria-label="Keyboard">
-      <div class="pbar">
-        <div class="row">
-          <button class="glass-pill icon-b" type="button" id="octDown" aria-label="Octave down">Oct −</button>
-          <div class="oct" id="octLabel"></div>
-          <button class="glass-pill icon-b" type="button" id="octUp" aria-label="Octave up">Oct +</button>
-        </div>
-        <div class="row">
-          <button class="glass-pill icon-b" type="button" id="demoSolo">Demo</button>
-          <button class="glass-pill icon-b" type="button" id="demoBeat">+ Beat</button>
-          <label class="status" for="bpm">Bpm</label><input class="glass-pill bpm" id="bpm" type="number" min="40" max="240" value="120">
-          <button class="glass-pill icon-b" type="button" id="midiBtn">MIDI</button>
-          <button class="glass-pill icon-b" type="button" id="panic" aria-label="Stop all notes">Stop</button>
-        </div>
+    <div class="main">
+      <div class="hero">
+        <button class="orb" type="button" id="orb" aria-label="New sound: picks a random sound">
+          <span class="fallback" id="orbFallback" hidden></span>
+          <canvas id="orbCv" aria-hidden="true"></canvas>
+          <svg viewBox="-60 -60 120 120" aria-hidden="true">
+            <ellipse rx="56" ry="17" transform="rotate(-18)" fill="none" style="stroke:var(--line-strong)" stroke-width=".35"/>
+            <ellipse rx="54" ry="25" transform="rotate(28)" fill="none" style="stroke:var(--line)" stroke-width=".3"/>
+            <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="38s" repeatCount="indefinite" path="M56 0 A56 17 0 1 1 -56 0 A56 17 0 1 1 56 0" rotate="0" transform="rotate(-18)"/></circle>
+            <g transform="rotate(28)"><circle r="1" style="fill:var(--glow)"><animateMotion dur="61s" repeatCount="indefinite" path="M-54 0 A54 25 0 1 1 54 0 A54 25 0 1 1 -54 0"/></circle></g>
+          </svg>
+        </button>
+        <div class="name" id="sName">—</div>
+        <div class="meta" id="sCat"></div>
+        <div class="hint">tap the moon for a new sound</div>
       </div>
-      <div class="keybed"><div class="keys" id="kb"><canvas class="spill" id="spill" aria-hidden="true"></canvas></div></div>
-    </section>
+      <section class="panels" id="rack" aria-label="Effects"></section>
+    </div>
+
+    <section class="detail hl" id="detail" aria-live="polite"></section>
+
+    <div class="deck">
+      <div class="octbox">
+        <button class="btn" type="button" id="octDown" aria-label="Octave down">oct −</button>
+        <span class="oct" id="octLabel"></span>
+        <button class="btn" type="button" id="octUp" aria-label="Octave up">+</button>
+      </div>
+      <button class="btn" type="button" id="demoSolo">demo</button>
+      <button class="btn" type="button" id="demoBeat">+ beat</button>
+      <label class="dim" for="bpm">bpm</label><input class="bpm" id="bpm" type="number" min="40" max="240" value="120">
+      <button class="btn" type="button" id="midiBtn">midi</button>
+      <button class="btn" type="button" id="panic" aria-label="Stop all notes">stop</button>
+      <div class="tip hl" id="tip"></div>
+    </div>
+    <div class="keybed"><div class="keys" id="kb"><canvas class="spill" id="spill" aria-hidden="true"></canvas></div></div>
 
     <div class="sheet" id="sheet" role="dialog" aria-label="Sound browser" hidden>
       <div class="sheet-top">
-        <input class="field" type="search" id="q" placeholder="Search sounds: bell, 808, flute, dark…" aria-label="Search sounds">
+        <input class="field" type="search" id="q" placeholder="search: bell, 808, flute, dark…" aria-label="Search sounds">
         <select class="field" id="genre" aria-label="Genre"></select>
         <select class="field" id="show" aria-label="Show">
-          <option value="all">All</option><option value="fav">Favorites</option><option value="unmarked">Not marked</option>
-          <option value="keep">Keep</option><option value="improve">Improve</option><option value="drop">Drop</option>
+          <option value="all">all</option><option value="fav">favorites</option><option value="unmarked">not marked</option>
+          <option value="keep">keep</option><option value="improve">improve</option><option value="drop">drop</option>
         </select>
-        <button class="glass-pill icon-b" type="button" id="closeSheet">Close</button>
+        <button class="btn" type="button" id="closeSheet">close</button>
       </div>
-      <div class="sound-card" id="card">
+      <div class="sound-card hl" id="card">
         <div class="d" id="sDesc"></div>
         <div class="row">
-          <button class="mark" type="button" data-k="keep">Keep</button>
-          <button class="mark" type="button" data-k="improve">Improve</button>
-          <button class="mark" type="button" data-k="drop">Drop</button>
-          <button class="mark" type="button" id="fav" aria-label="Favorite">♥ Favorite</button>
+          <button class="mark" type="button" data-k="keep">keep</button>
+          <button class="mark" type="button" data-k="improve">improve</button>
+          <button class="mark" type="button" data-k="drop">drop</button>
+          <button class="mark" type="button" id="fav" aria-label="Favorite">♥ favorite</button>
           <span class="empty" id="sMeta"></span>
         </div>
-        <textarea id="note" rows="1" placeholder="Note for this sound: what to change"></textarea>
+        <textarea id="note" rows="1" placeholder="note for this sound: what to change"></textarea>
       </div>
-      <div style="display:grid;gap:6px;min-height:0;grid-template-rows:auto minmax(0,1fr)">
+      <div style="display:grid;gap:8px;min-height:0;grid-template-rows:auto minmax(0,1fr)">
         <div class="chips" id="cats" role="group" aria-label="Category"></div>
         <div class="list" id="list"></div>
       </div>
@@ -319,12 +306,12 @@ button, select, input, textarea { font: inherit; color: inherit; }
     <div class="toast" id="toast" hidden></div>
   </div>
 </div>
-<p class="foot">All sounds are original synthesis from the LUMELODY engine (the plugin's C++ code, compiled for the browser); every key is synthesized at its own pitch. All 20 effects run in that engine and pass 184 automated checks. The holographic foil, chrome knobs and logo are rendered live in WebGL and react to your pointer; they approximate real foil and fall back to a still gradient without WebGL. Recorded acoustic instruments are not included yet.</p>
+<p class="foot">All sounds are original synthesis from the LUMELODY engine (the plugin's C++ code, compiled for the browser); every key plays the selected sound at its own pitch. All 20 effects run in that engine and pass 184 automated checks. The moon, knobs and foil are rendered live in WebGL and react to the notes you play and to your pointer; without WebGL they fall back to still drawings. Recorded acoustic instruments are not included yet.</p>
 <audio id="demo" preload="none"></audio>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <radialGradient id="lumiBead" cx="38%" cy="32%" r="70%">
-      <stop offset="0" style="stop-color:var(--ch1)"/><stop offset=".35" style="stop-color:color-mix(in oklab, var(--ch2) 60%, var(--obs2))"/><stop offset="1" style="stop-color:var(--obs2)"/>
+      <stop offset="0" style="stop-color:color-mix(in oklab, var(--hair) 55%, transparent)"/><stop offset="1" style="stop-color:color-mix(in oklab, var(--hair) 12%, transparent)"/>
     </radialGradient>
     <radialGradient id="lumiLit" cx="42%" cy="38%" r="65%">
       <stop offset="0" stop-color="#fff"/><stop offset=".45" style="stop-color:color-mix(in oklab, var(--glow) 70%, #fff)"/><stop offset="1" style="stop-color:var(--glow)"/>
@@ -337,15 +324,15 @@ button, select, input, textarea { font: inherit; color: inherit; }
 const PRESETS = __PRESETS__;
 const SCHEMA = __SCHEMA__;
 const CATS = ["Keys", "Bells & Plucks", "Synths & Leads", "Pads & Atmospheres", "Guitars & Strings", "Bass", "Textures & FX"];
-const GROUPS = [["Space", ["reverb", "delay", "shimmer", "freeze"]], ["Motion", ["chorus", "phaser", "flanger", "width"]], ["Tone", ["filter", "saturation", "tape", "resonator"]],
-                ["Rhythm", ["stutter", "gate", "reverse"]], ["Pitch", ["pitch", "glide", "octave"]], ["Texture", ["granular"]], ["Dynamics", ["glue"]]];
-const SHORT = { reverse: "Reverse", gate: "Gate", octave: "Octave", resonator: "Resonator", glue: "Glue", saturation: "Saturate", granular: "Granular" };
+const GROUPS = [["space", ["reverb", "delay", "shimmer", "freeze"]], ["motion", ["chorus", "phaser", "flanger", "width"]], ["tone", ["filter", "saturation", "tape", "resonator"]],
+                ["rhythm", ["stutter", "gate", "reverse"]], ["pitch", ["pitch", "glide", "octave"]], ["grain & glue", ["granular", "glue"]]];
+const SHORT = { reverse: "reverse", gate: "gate", octave: "octave", resonator: "formant", glue: "glue", saturation: "saturate", granular: "cloud", width: "width", shimmer: "shimmer", freeze: "freeze", glide: "glide", tape: "tape" };
 const THEMES = {
-  silver: { name: "Silver Chrome", k: { tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .85, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
-  rose:   { name: "Rose Chrome",   k: { tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .8, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
-  gold:   { name: "Gold Chrome",   k: { tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .7, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
-  violet: { name: "Violet Chrome", k: { tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .85, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
-  prism:  { name: "Prism Chrome",  k: { tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: 1, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
+  silver: { name: "Silver Chrome", k: { tint: [1, 1, 1.02], ir1: "#ffb6d9", ir2: "#b9a8ff", ir3: "#9fe6ff", glow: "#cfe2ff", glass: [.035, .038, .045], iri: .32, h: ["#ff7ab8", "#ffd877", "#8dffb8", "#6fe3ff", "#8a96ff", "#cf8bff"] } },
+  rose:   { name: "Rose Chrome",   k: { tint: [1.03, .95, .97], ir1: "#ffb3cf", ir2: "#e0b8ff", ir3: "#ffd3c4", glow: "#ffb7cf", glass: [.05, .033, .04], iri: .32, h: ["#ff8fc4", "#ffc7da", "#ffd6b8", "#f4b4ff", "#c8a8ff", "#ffa3cf"] } },
+  gold:   { name: "Gold Chrome",   k: { tint: [1.04, .98, .87], ir1: "#ffe2a6", ir2: "#ffc9b0", ir3: "#e6efc6", glow: "#ffd79a", glass: [.05, .044, .03], iri: .26, h: ["#ffd27a", "#fff0b8", "#ffbf94", "#f2f6bf", "#ffb0a0", "#e8d4ff"] } },
+  violet: { name: "Violet Chrome", k: { tint: [.97, .95, 1.05], ir1: "#c4a8ff", ir2: "#ff9fe0", ir3: "#93d6ff", glow: "#c6a6ff", glass: [.04, .033, .065], iri: .32, h: ["#b07dff", "#ff8fe0", "#7fd8ff", "#9f9bff", "#e7a8ff", "#74e8ff"] } },
+  prism:  { name: "Prism Chrome",  k: { tint: [1, 1, 1], ir1: "#ff9fd0", ir2: "#9fd8ff", ir3: "#ffe49f", glow: "#f0d2ff", glass: [.04, .04, .05], iri: .55, h: ["#ff4f9a", "#ffd24f", "#5cff9a", "#3fd8ff", "#6a6bff", "#c34fff"] } },
 };
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const nn = m => NOTE_NAMES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
@@ -502,87 +489,94 @@ const CR = (() => {
   return { draw, setTheme, step, light, theme, ok: () => !!gl };
 })();
 
-// ================================================================ holographic foil (background + plugin body)
-// A crinkled metal sheet (domain-warped noise height field) lit by a moving light; its tilt picks a colour from the
-// theme's foil spectrum, like a diffraction foil. Rendered at reduced resolution and redrawn ~24 times a second.
-function makeFoil(cv, P) {
-  // Two passes: the crinkled surface (height + normal) is baked once into a texture whenever the size changes;
-  // every frame only re-lights it with the moving light, which is cheap enough for any GPU.
-  let gl = null; try { gl = cv.getContext("webgl", { antialias: false, alpha: false }); } catch (e) {}
-  if (!gl) return null;
-  const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
-  const bakeFs = `precision highp float; varying vec2 v; uniform vec2 res; uniform float scale;
-    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-    float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
-      return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
-    float fbm(vec2 p) { float s = 0., a = .5; for (int i = 0; i < 5; i++) { s += a * noise(p); p = mat2(1.6, 1.2, -1.2, 1.6) * p; a *= .5; } return s; }
-    float H(vec2 p) { vec2 q = vec2(fbm(p), fbm(p + vec2(5.2, 1.3))); return fbm(p + 1.7 * q); }
-    void main() {
-      vec2 uv = v * .5 + .5; vec2 p = vec2(uv.x * res.x / res.y, uv.y) * scale;
-      float e = .015, h0 = H(p), hx = H(p + vec2(e, 0.)), hy = H(p + vec2(0., e));
-      vec2 g = clamp(vec2(h0 - hx, h0 - hy) / e * .32, -1., 1.);
-      gl_FragColor = vec4(g * .5 + .5, h0, hash(floor(gl_FragCoord.xy)));
-    }`;
-  const litFs = `precision mediump float; varying vec2 v;
-    uniform sampler2D tex; uniform vec2 res, light; uniform float time, contrast, sat, grain, bright, streak; uniform vec3 hh[6]; uniform vec3 tint;
-    vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
-    void main() {
-      vec2 uv = v * .5 + .5; vec4 T = texture2D(tex, uv);
-      vec3 n = normalize(vec3(T.xy * 2. - 1., 1.)); float h0 = T.z;
-      vec3 L = normalize(vec3(light, .9));
-      float diff = max(0., dot(n, L)), spec = pow(max(0., reflect(-L, n).z), 16.);
-      float asp = res.x / res.y;
-      float st = sin(uv.x * asp * 38. + h0 * 6. + sin(uv.x * asp * 7.) * 2.) * .5 + .5;   // foil-can streaks
-      float phase = dot(n.xy, light) * 1.4 + h0 * 2.6 + st * .3 * streak + time * .012;
-      vec3 f = film(phase);
-      float silver = .42 + .55 * diff;
-      vec3 col = mix(vec3(silver), f * (.3 + .8 * silver), sat);
-      col *= mix(1., .3 + .95 * smoothstep(.15, .85, diff), contrast);
-      col += (vec3(.85) + f * .5) * spec * .75;
-      col += (T.w - .5) * grain;   // fine sparkle, like printed holographic film
-      gl_FragColor = vec4(col * bright * tint, 1.);
-    }`;
-  const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
-  const prog = fs => { const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr); return pr; };
-  let bake, lit, tex, fb; const UB = {}, UL = {};
-  try {
-    bake = prog(bakeFs); lit = prog(litFs);
-    const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-    for (const pr of [bake, lit]) { const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0); }
-    for (const u of ["res", "scale"]) UB[u] = gl.getUniformLocation(bake, u);
-    for (const u of ["tex", "res", "light", "time", "contrast", "sat", "grain", "bright", "streak", "hh", "tint"]) UL[u] = gl.getUniformLocation(lit, u);
-    tex = gl.createTexture(); fb = gl.createFramebuffer();
-  } catch (e) { console.warn("foil shader unavailable:", e); return null; }
-  let bw = 0, bh = 0;
-  function rebake(w, h) {
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
-    gl.viewport(0, 0, w, h); gl.useProgram(bake); gl.uniform2f(UB.res, w, h); gl.uniform1f(UB.scale, P.scale);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null); bw = w; bh = h;
+// ================================================================ the moon (hero object) + night sky
+// A holographic-foil sphere lit as a crescent. The foil is a fine noise relief that rotates slowly with the sphere;
+// its tilt picks a colour from the theme's foil spectrum. Playing notes brightens it and widens the crescent
+// (driven by the same note on/off light envelopes as the keys). Tapping it loads a random sound.
+const ORB = (() => {
+  const cv = $("#orbCv");
+  let gl = null; try { gl = cv.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false }); } catch (e) { gl = null; }
+  const U = {};
+  if (gl) {
+    const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
+    const fs = `precision highp float; varying vec2 v;
+      uniform vec2 light; uniform float time, act; uniform vec3 hh[6]; uniform vec3 gcol, tint;
+      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
+        return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
+      float fbm(vec2 p) { float s = 0., a = .5; for (int i = 0; i < 4; i++) { s += a * noise(p); p = mat2(1.6, 1.2, -1.2, 1.6) * p; a *= .5; } return s; }
+      vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
+      void main() {
+        vec2 p = v * 1.28; float r = length(p); const float R = 1.;
+        vec3 col = vec3(0.); float al = 0.;
+        float halo = exp(-max(r - R, 0.) * 7.) * smoothstep(R - .02, R + .03, r) * (.10 + .45 * act);
+        vec3 hc = mix(gcol, film(atan(p.y, p.x) * .16 + time * .03), .45);
+        col += hc * halo; al += halo;
+        if (r < R) {
+          vec2 q = p / R; vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
+          vec2 sc = vec2(atan(n.x, n.z) + time * .035, asin(clamp(n.y, -1., 1.))) * 3.;
+          float e = .02, h0 = fbm(sc), hx = fbm(sc + vec2(e, 0.)), hy = fbm(sc + vec2(0., e));
+          vec3 nn = normalize(n + vec3((h0 - hx) / e, (h0 - hy) / e, 0.) * .012);   // fine foil relief, not a lumpy surface
+          vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.38 + act * 1.25));   // side light: a crescent that widens as you play
+          float lam = dot(nn, Ld), lit = smoothstep(-.02, .24, lam);
+          float spec = pow(max(dot(reflect(-Ld, nn), vec3(0., 0., 1.)), 0.), 40.) * .6;
+          vec3 f = film(dot(nn.xy, light) * .6 + h0 * .45 + q.x * .4 + q.y * .75 + time * .012) * (.88 + .24 * hash(floor(q * 260.)));
+          float silver = .2 + .72 * max(lam, 0.);
+          vec3 cl = mix(vec3(silver), f * (.3 + .95 * silver), .72) + (vec3(.95) + f * .3) * spec;
+          float spark = step(.992, hash(floor(q * 170.))) * .22;
+          vec3 cd = f * (.035 + spark) + vec3(.01, .01, .016);   // night side: obsidian with a faint foil glimmer
+          vec3 c = mix(cd, cl, lit);
+          c += film(atan(q.y, q.x) * .2 + time * .03) * pow(1. - n.z, 4.) * (.1 + .4 * act);   // thin holographic limb
+          float edge = smoothstep(R, R - .01, r);
+          col = mix(col, c * tint, edge); al = max(al, edge);
+        }
+        gl_FragColor = vec4(col, al);
+      }`;
+    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    try {
+      const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
+      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      for (const u of ["light", "time", "act", "hh", "gcol", "tint"]) U[u] = gl.getUniformLocation(prog, u);
+    } catch (e) { console.warn("moon shader unavailable:", e); gl = null; }
   }
+  if (!gl) $("#orbFallback").hidden = false;
+  let act = 0, kick = 0;
   return {
-    draw(now) {
-      const r = cv.getBoundingClientRect(), d = Math.min(1.5, window.devicePixelRatio || 1) * P.res;
-      const w = Math.max(2, Math.round(r.width * d)), h = Math.max(2, Math.round(r.height * d));
-      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
-      if (bw !== w || bh !== h) rebake(w, h);
-      gl.viewport(0, 0, w, h); gl.useProgram(lit);
-      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(UL.tex, 0);
-      gl.uniform2f(UL.res, w, h); gl.uniform2f(UL.light, CR.light[0] + P.lx + Math.sin(now / 5200) * .12, CR.light[1] + Math.cos(now / 6100) * .08);
-      gl.uniform1f(UL.time, now / 1000); gl.uniform1f(UL.contrast, P.contrast); gl.uniform1f(UL.sat, P.sat); gl.uniform1f(UL.grain, P.grain);
-      gl.uniform1f(UL.bright, P.bright); gl.uniform1f(UL.streak, P.streak);
-      gl.uniform3fv(UL.hh, CR.theme.hh); gl.uniform3fv(UL.tint, CR.theme.tint);
+    kick() { kick = 1; },
+    draw(now, target, dt) {
+      if (!gl) return;
+      kick *= Math.exp(-dt / .5);
+      const goal = Math.min(1, target + kick * .8);
+      act += (goal - act) * (1 - Math.exp(-dt / (goal > act ? .06 : .5)));
+      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * .85;
+      const w = Math.max(2, Math.round(r.width * d));
+      if (cv.width !== w) { cv.width = cv.height = w; gl.viewport(0, 0, w, w); }
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, now / 1000); gl.uniform1f(U.act, act);
+      gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.tint, CR.theme.tint);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
   };
+})();
+$("#orb").onclick = () => {
+  if (!ctx) startFromGesture();
+  let i = cur; while (PRESETS.length > 1 && i === cur) i = Math.floor(Math.random() * PRESETS.length);
+  loadPreset(i); ORB.kick();
+};
+function drawStars() {   // a still night sky inside the window; a few stars carry the theme's foil colours
+  const cv = $("#stars"), r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+  cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
+  const c = cv.getContext("2d"); c.clearRect(0, 0, cv.width, cv.height);
+  let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const n = Math.round(r.width * r.height / 2600), hs = THEMES[curTheme].k.h;
+  for (let i = 0; i < n; i++) {
+    const x = rnd() * cv.width, y = rnd() * cv.height, big = rnd() > .965, a = .15 + rnd() * .55;
+    c.globalAlpha = big ? .85 : a; c.fillStyle = rnd() > .9 ? hs[Math.floor(rnd() * 6)] : "#fff";
+    c.beginPath(); c.arc(x, y, (big ? 1.1 : .5 + rnd() * .5) * d, 0, 7); c.fill();
+  }
+  c.globalAlpha = 1;
 }
-const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-const foils = [makeFoil($("#bgfoil"), { res: .35, scale: 1.3, contrast: .35, sat: .7, grain: .05, bright: .92, streak: .3, lx: .2 }),
-               makeFoil($("#foil"), { res: .7, scale: 2.4, contrast: .8, sat: .8, grain: .045, bright: 1.05, streak: .7, lx: 0 })].filter(Boolean);
-let foilT = 0, foilFrozen = 0;
 
 // ================================================================ knobs
 const knobs = [];
@@ -614,14 +608,13 @@ function makeKnob(fx, pi, kind) {   // kind: "main" (rack) or "mini" (detail str
   const d = pdef(fx, pi), mini = kind === "mini";
   const face = el("div", { className: "face", tabIndex: 0 });
   const dpr = Math.min(2, window.devicePixelRatio || 1);
-  const cv = el("canvas"); cv.width = cv.height = Math.round((mini ? 34 : 44) * dpr * 1.25);
+  const cv = el("canvas"); cv.width = cv.height = Math.round((mini ? 30 : 38) * dpr * 1.25);
   const ring = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   ring.setAttribute("class", "ring"); ring.setAttribute("viewBox", "0 0 132 132");
   // LED value ring: glass beads around the knob, lit in the theme colour up to the current value
   const N = mini ? 11 : 13;
-  ring.innerHTML = `<circle cx="66" cy="66" r="51.5" fill="none" style="stroke:color-mix(in oklab, var(--ch2) 22%, transparent)" stroke-width=".8"/>`
-    + Array.from({ length: N }, (_, i) => { const a = (-135 + i * 270 / (N - 1)) * Math.PI / 180, x = (66 + 60 * Math.sin(a)).toFixed(2), y = (66 - 60 * Math.cos(a)).toFixed(2);
-      return `<circle class="halo" cx="${x}" cy="${y}" r="7.5" style="fill:var(--glow)" opacity="0"/><circle cx="${x}" cy="${y}" r="3.6" fill="url(#lumiBead)"/><circle class="lit" cx="${x}" cy="${y}" r="3.6" fill="url(#lumiLit)" opacity="0"/>`; }).join("");
+  ring.innerHTML = Array.from({ length: N }, (_, i) => { const a = (-135 + i * 270 / (N - 1)) * Math.PI / 180, x = (66 + 60 * Math.sin(a)).toFixed(2), y = (66 - 60 * Math.cos(a)).toFixed(2);
+      return `<circle class="halo" cx="${x}" cy="${y}" r="6" style="fill:var(--glow)" opacity="0"/><circle cx="${x}" cy="${y}" r="2.6" fill="url(#lumiBead)"/><circle class="lit" cx="${x}" cy="${y}" r="2.8" fill="url(#lumiLit)" opacity="0"/>`; }).join("");
   face.append(cv, ring);
   face.setAttribute("role", "slider"); face.setAttribute("aria-label", SCHEMA[fx].name + " " + d.name);
   const val = el("div", { className: "val" });
@@ -633,6 +626,7 @@ function makeKnob(fx, pi, kind) {   // kind: "main" (rack) or "mini" (detail str
     name.onclick = () => { const now = performance.now(); if (now - tapT < 300) { setOn(fx, !fxState[fx].on); tapT = 0; return; } tapT = now; select(fx); };
   } else name = el("div", { className: "name" }, [d.name]);
   const wrapEl = el("div", { className: "knob" + (mini ? " mini" : "") }, [face, val, name]);
+  wrapEl.addEventListener("pointerenter", () => setTip(SCHEMA[fx].name + (mini ? " · " + d.name.toLowerCase() : ""), mini ? "" : SCHEMA[fx].note));
   const k = { fx, pi, el: wrapEl, face, cv, lit: [...ring.querySelectorAll(".lit")], halo: [...ring.querySelectorAll(".halo")], valEl: val, mini, glow: 0 };
   knobs.push(k);
   let start = null, lastTap = 0;
@@ -698,32 +692,40 @@ function paintKnob(k) {
   k.el.classList.toggle("on", on); k.el.classList.toggle("sel", !k.mini && k.fx === selFx);
   CR.draw(k.cv, Math.PI / 2 - ang, { on, glow: k.glow });
 }
-const moon = $("#moon");
-let ambientUntil = 0, moonDone = false;
+let ambientUntil = 0, orbT = 0;
+const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 function frame(now) {
   const moving = CR.step(now) || now < ambientUntil;
   const list = moving ? knobs : [...dirty];
   for (const k of list) if (k.el.isConnected) paintKnob(k);
-  if (moving || !moonDone) { CR.draw(moon, 0, { mode: 2 }); moonDone = true; }
   dirty.clear();
   stepLights(now);
-  if (foils.length && now - foilT > 41) { foilT = now; const t = reduceMotion ? foilFrozen : now; for (const f of foils) f.draw(t); }
+  if (now - orbT > 33) {   // the moon follows the notes being played: total key light, softly limited
+    const dt = Math.min(.1, (now - (orbT || now)) / 1000); orbT = now;
+    let sum = 0; for (const L of lights.values()) sum += L.lum;
+    ORB.draw(reduceMotion ? 0 : now, 1 - Math.exp(-sum / 1.6), dt);
+  }
   requestAnimationFrame(frame);
 }
+function setTip(title, text) { $("#tip").replaceChildren(el("b", { textContent: title.toLowerCase() }), text ? text.toLowerCase() : ""); }
 
 // ================================================================ rack + detail strip
 const segEls = [];
 function setOn(fx, on) { fxState[fx].on = on; send({ type: "fxon", e: fx, on }); refreshFx(fx); }
 function refreshFx(fx) {
   for (const k of knobs) if (k.fx === fx) dirty.add(k);
+  for (const p of panelEls) p.count.textContent = (n => n ? n + " on" : "")(p.ids.filter(i => fxState[i].on).length);
   document.querySelectorAll(`.power[data-fx="${fx}"]`).forEach(b => b.setAttribute("aria-pressed", fxState[fx].on ? "true" : "false"));
   for (const s of segEls) if (s.fx === fx) s.buttons.forEach((b, i) => b.setAttribute("aria-pressed", Math.round(fxState[fx].v[s.pi]) === i ? "true" : "false"));
 }
+const panelEls = [];
 function buildRack() {
-  const rack = $("#rack"); rack.replaceChildren();
+  const rack = $("#rack"); rack.replaceChildren(); panelEls.length = 0;
   for (const [g, ids] of GROUPS) {
-    const kn = el("div", { className: "gknobs" }, ids.map(id => makeKnob(fxIndex(id), 0, "main")));
-    rack.append(el("div", { className: "grp" }, [el("div", { className: "gname", textContent: g }), kn]));
+    const count = el("span");
+    panelEls.push({ ids: ids.map(fxIndex), count });
+    const kn = el("div", { className: "knobs" }, ids.map(id => makeKnob(fxIndex(id), 0, "main")));
+    rack.append(el("div", { className: "panel hl" }, [el("h3", {}, [g, count]), kn]));
   }
 }
 function segment(fx, pi) {
@@ -753,7 +755,7 @@ function buildDetail() {
   const ctrls = el("div", { className: "ctrls" });
   fx.params.forEach((p, pi) => { if (pi === 0) return; ctrls.append(p.kind === 0 ? makeKnob(selFx, pi, "mini") : segment(selFx, pi)); });
   if (fx.params.length === 1) ctrls.append(el("span", { className: "empty", textContent: "No extra controls." }));
-  const pw = el("button", { className: "power", type: "button", textContent: "ON" }); pw.dataset.fx = selFx;
+  const pw = el("button", { className: "power", type: "button", textContent: "on" }); pw.dataset.fx = selFx;
   pw.setAttribute("aria-label", fx.name + " on/off");
   pw.onclick = () => setOn(selFx, !fxState[selFx].on);
   det.replaceChildren(el("div", { className: "ttl" }, [el("b", { textContent: fx.name }), el("span", { textContent: fx.note })]), ctrls, pw);
@@ -783,7 +785,7 @@ function onEngine(m) {
   if (m.type === "loaded" || m.type === "values") { applyValues(m.values); if (m.type === "loaded") setStatus(true); }
   if (m.type === "stateOut") { savedFx[m.id] = dec.decode(m.bytes); store.set("lumi-fx-v2", savedFx); toast("Effects saved with " + PRESETS.find(p => p.id === m.id).name); }
 }
-function setStatus(live) { const s = $("#status"); s.classList.toggle("live", live); s.lastChild.textContent = live ? "Live" : "Off"; }
+function setStatus(live) { const s = $("#status"); s.classList.toggle("live", live); s.lastElementChild.textContent = live ? "live" : "off"; }
 function loadPreset(i, skipSaved) {
   cur = (i + PRESETS.length) % PRESETS.length;
   const p = PRESETS[cur];
@@ -807,19 +809,19 @@ function renderKeyboard() {
   for (const L of lights.values()) L.el = null;
   const lo = baseNote, hi = baseNote + OCTAVES * 12;
   const whites = []; for (let n = lo; n <= hi; n++) if (![1, 3, 6, 8, 10].includes(n % 12)) whites.push(n);
-  const w = 100 / whites.length, gap = .16;
+  const w = 100 / whites.length;
   whites.forEach((n, i) => {
     const k = el("button", { className: "key wk", type: "button", tabIndex: -1 }, n % 12 === 0 ? el("span", { textContent: nn(n) }) : null);
-    k.style.left = `calc(${i * w}% + ${gap}%)`; k.style.width = `calc(${w}% - ${gap * 2}%)`;
+    k.style.left = (i * w) + "%"; k.style.width = w + "%";
     k.dataset.note = n; k.setAttribute("aria-label", nn(n)); kb.append(k);
   });
   for (let n = lo; n < hi; n++) if ([1, 3, 6, 8, 10].includes(n % 12)) {
     const left = whites.indexOf(n - 1);
     const k = el("button", { className: "key bk", type: "button", tabIndex: -1 });
-    k.style.left = ((left + 1) * w - w * .3) + "%"; k.style.width = (w * .6) + "%"; k.dataset.note = n;
+    k.style.left = ((left + 1) * w - w * .29) + "%"; k.style.width = (w * .58) + "%"; k.dataset.note = n;
     k.setAttribute("aria-label", nn(n)); kb.append(k);
   }
-  $("#octLabel").textContent = nn(lo) + " – " + nn(hi);
+  $("#octLabel").textContent = (nn(lo) + "–" + nn(hi)).toLowerCase();
   sizeSpill();
 }
 const keyEl = n => $(`#kb [data-note="${n}"]`);
@@ -891,7 +893,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("keyup", e => { const key = e.key.toLowerCase(); if (key in KEYMAP) noteOff("k" + key); });
 window.addEventListener("blur", releaseAll);
-window.addEventListener("resize", () => { const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
+window.addEventListener("resize", () => { drawStars(); const o = fitOctaves(); if (o !== OCTAVES) { OCTAVES = o; releaseAll(); baseNote = Math.min(baseNote, 108 - OCTAVES * 12); renderKeyboard(); } else sizeSpill(); });
 $("#midiBtn").onclick = async () => {
   if (!navigator.requestMIDIAccess) { toast("No MIDI in this browser here. Your MIDI keyboard works in the plugin."); return; }
   try {
@@ -931,7 +933,7 @@ function setTheme(id, animate) {
   curTheme = id;
   if (id === "silver") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
   swEls.forEach(s => s.setAttribute("aria-pressed", s.dataset.id === id ? "true" : "false"));
-  CR.setTheme(THEMES[id].k, animate); ambientUntil = performance.now() + 900; spillDirty = true;
+  CR.setTheme(THEMES[id].k, animate); ambientUntil = performance.now() + 900; spillDirty = true; drawStars();
   store.set("lumi-theme2", id);
 }
 
@@ -942,8 +944,8 @@ $("#picker").onclick = () => openSheet(sheet.hidden); $("#closeSheet").onclick =
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) openSheet(false); });
 function renderSound() {
   const p = PRESETS[cur], m = marks[p.id] || {};
-  $("#sCat").textContent = p.cat + " · " + p.genres.slice(0, 2).join(" · ");
-  $("#sName").textContent = p.name;
+  $("#sCat").textContent = (p.cat + " · " + p.genres.slice(0, 2).join(" · ")).toLowerCase();
+  $("#sName").textContent = p.name; $("#sPick").textContent = p.name;
   $("#sDesc").textContent = p.desc + " " + p.use;
   $("#sMeta").textContent = `${p.engine} · plays ${nn(p.range[0])}–${nn(p.range[1])}`;
   document.querySelectorAll(".mark[data-k]").forEach(b => b.setAttribute("aria-pressed", m.verdict === b.dataset.k ? "true" : "false"));
@@ -972,8 +974,8 @@ demo.onpause = demo.onended = () => [$("#demoSolo"), $("#demoBeat")].forEach(b =
 $("#demoSolo").onclick = () => playDemo(false); $("#demoBeat").onclick = () => playDemo(true);
 const lib = { q: "", genre: "", cat: "", show: "all" };
 const genres = [...new Set(PRESETS.flatMap(p => p.genres))].sort();
-$("#genre").append(el("option", { value: "", textContent: "All genres" }), ...genres.map(g => el("option", { value: g, textContent: g })));
-const chipBtns = [["", "All"], ...CATS.map(c => [c, c])].map(([v, t]) => {
+$("#genre").append(el("option", { value: "", textContent: "all genres" }), ...genres.map(g => el("option", { value: g, textContent: g })));
+const chipBtns = [["", "all"], ...CATS.map(c => [c, c])].map(([v, t]) => {
   const b = el("button", { className: "chip", type: "button", textContent: t }); b.setAttribute("aria-pressed", v === "" ? "true" : "false");
   b.onclick = () => { lib.cat = v; chipBtns.forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); renderList(); };
   return b;
@@ -1010,7 +1012,7 @@ async function startFromGesture() {
 }
 $("#startBtn").onclick = startFromGesture;
 setTheme(store.get("lumi-theme2", "silver"), false);
-buildRack(); buildDetail();
+buildRack(); buildDetail(); setTip("tip", "tap an effect name for all its controls · double-tap to switch it on or off · drag a knob, double-click to reset");
 const last = (() => { try { return localStorage.getItem("lumi-last"); } catch (e) { return null; } })();
 const li = PRESETS.findIndex(p => p.id === last);
 loadPreset(li >= 0 ? li : 0);
