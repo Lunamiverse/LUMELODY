@@ -156,7 +156,13 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .hero .name { margin: 4px 0 0; width: 100%; display: grid; justify-items: center; gap: 10px; font-weight: 400; }
 .hero .ntxt { display: flex; align-items: center; justify-content: center; height: 34.5px; max-width: 100%; filter: drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 0 18px rgba(255,255,255,.06)); }
 .px { display: block; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; font-family: var(--pixel); }
-.hero .ntxt .nm { font-weight: 600; font-size: 32px; letter-spacing: .09em; padding-left: .09em; overflow: visible; text-overflow: clip;
+.pxt { display: block; height: 18px; width: auto; max-width: 100%; overflow: visible; }
+.hero .ntxt { color: #fff; }
+.hero .ntxt .pxt { height: 36px; filter: drop-shadow(0 0 1px rgba(255,255,255,.55)) drop-shadow(0 0 12px rgba(255,255,255,.18)); }
+.preset .pick b .pxt { height: 14px; }
+.item b .pxt { height: 14px; color: #c9cbd2; }
+.item[aria-current="true"] b .pxt { color: #fff; filter: drop-shadow(0 0 5px rgba(255,255,255,.45)); }
+.hero .ntxt .nm-old { font-weight: 600; font-size: 32px; letter-spacing: .09em; padding-left: .09em; overflow: visible; text-overflow: clip;
   background-image: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.95) 50%, transparent 60% 100%),
                     linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #d9dbe0 70%, #ffffff 100%);
   background-size: 260% 100%, 100% 100%; background-position: -60% 0, 0 0; -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -846,6 +852,71 @@ const FRAME = (() => {
   };
 })();
 
+// ================================================================ LUMELODY pixel alphabet (sound names)
+// The logo's thin one-pixel-stroke system extended to A-Z and 0-9 on a 9-row grid, drawn by hand. Rendered as crisp
+// square pixels; long names scale down to fit.
+const PIXEL_TYPE = (() => {
+  const G = {
+    A: ["..##..", ".#..#.", "#....#", "#....#", "#....#", "######", "#....#", "#....#", "#....#"],
+    B: ["#####.", "#....#", "#....#", "#....#", "#####.", "#....#", "#....#", "#....#", "#####."],
+    C: [".####.", "#....#", "#.....", "#.....", "#.....", "#.....", "#.....", "#....#", ".####."],
+    D: ["#####.", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#####."],
+    E: ["#####", "#....", "#....", "#....", "#.###", "#....", "#....", "#....", "#####"],
+    F: ["#####", "#....", "#....", "#....", "#.###", "#....", "#....", "#....", "#...."],
+    G: [".####.", "#....#", "#.....", "#.....", "#..###", "#....#", "#....#", "#....#", ".####."],
+    H: ["#....#", "#....#", "#....#", "#....#", "######", "#....#", "#....#", "#....#", "#....#"],
+    I: ["#", "#", "#", "#", "#", "#", "#", "#", "#"],
+    J: ["....#", "....#", "....#", "....#", "....#", "....#", "....#", "#...#", ".###."],
+    K: ["#....#", "#...#.", "#..#..", "#.#...", "##....", "#.#...", "#..#..", "#...#.", "#....#"],
+    L: ["#....", "#....", "#....", "#....", "#....", "#....", "#....", "#....", "#####"],
+    M: ["#.....#", "##...##", "#.#.#.#", "#..#..#", "#.....#", "#.....#", "#.....#", "#.....#", "#.....#"],
+    N: ["#....#", "##...#", "##...#", "#.#..#", "#..#.#", "#...##", "#...##", "#....#", "#....#"],
+    O: [".####.", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", ".####."],
+    P: ["#####.", "#....#", "#....#", "#....#", "#####.", "#.....", "#.....", "#.....", "#....."],
+    Q: [".####.", "#....#", "#....#", "#....#", "#....#", "#....#", "#..#.#", "#...#.", ".###.#"],
+    R: ["#####.", "#....#", "#....#", "#....#", "#####.", "#..#..", "#...#.", "#....#", "#....#"],
+    S: [".####.", "#....#", "#.....", "#.....", ".####.", ".....#", ".....#", "#....#", ".####."],
+    T: ["#######", "...#...", "...#...", "...#...", "...#...", "...#...", "...#...", "...#...", "...#..."],
+    U: ["#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", "#....#", ".####."],
+    V: ["#.....#", "#.....#", "#.....#", ".#...#.", ".#...#.", ".#...#.", "..#.#..", "..#.#..", "...#..."],
+    W: ["#.....#", "#.....#", "#.....#", "#..#..#", "#..#..#", "#..#..#", "#.#.#.#", "##...##", "#.....#"],
+    X: ["#.....#", ".#...#.", ".#...#.", "..#.#..", "...#...", "..#.#..", ".#...#.", ".#...#.", "#.....#"],
+    Y: ["#.....#", "#.....#", ".#...#.", "..###..", "...#...", "...#...", "...#...", "...#...", "...#..."],
+    Z: ["######", ".....#", "....#.", "....#.", "...#..", "..#...", ".#....", "#.....", "######"],
+    "0": [".####.", "#....#", "#...##", "#..#.#", "#.#..#", "##...#", "#....#", "#....#", ".####."],
+    "1": [".#.", "##.", ".#.", ".#.", ".#.", ".#.", ".#.", ".#.", "###"],
+    "2": [".####.", "#....#", ".....#", ".....#", "....#.", "..##..", ".#....", "#.....", "######"],
+    "3": [".####.", "#....#", ".....#", ".....#", "..###.", ".....#", ".....#", "#....#", ".####."],
+    "4": ["....#.", "...##.", "..#.#.", ".#..#.", "#...#.", "######", "....#.", "....#.", "....#."],
+    "5": ["######", "#.....", "#.....", "#####.", ".....#", ".....#", ".....#", "#....#", ".####."],
+    "6": [".####.", "#.....", "#.....", "#####.", "#....#", "#....#", "#....#", "#....#", ".####."],
+    "7": ["######", ".....#", "....#.", "....#.", "...#..", "...#..", "..#...", "..#...", "..#..."],
+    "8": [".####.", "#....#", "#....#", "#....#", ".####.", "#....#", "#....#", "#....#", ".####."],
+    "9": [".####.", "#....#", "#....#", "#....#", ".#####", ".....#", ".....#", ".....#", ".####."],
+    "-": [".....", ".....", ".....", ".....", "#####", ".....", ".....", ".....", "....."],
+    "/": ["....#", "....#", "...#.", "...#.", "..#..", ".#...", ".#...", "#....", "#...."],
+    ".": [".", ".", ".", ".", ".", ".", ".", ".", "#"],
+    "'": ["#", "#", ".", ".", ".", ".", ".", ".", "."],
+    "&": [".##...", "#..#..", "#..#..", ".##...", ".#..#.", "#.#.#.", "#..#..", "#..##.", ".##..#"],
+  };
+  let uid = 0;
+  function svg(text, { track = 2, sweep = false, center = false } = {}) {
+    let x = 0, rects = "";
+    const chars = [...String(text).toUpperCase()];
+    chars.forEach((ch, i) => {
+      if (ch === " ") { x += 3 + track; return; }
+      const rows = G[ch] || G["-"];
+      rows.forEach((row, y) => [...row].forEach((c, j) => { if (c === "#") rects += `<rect x="${x + j}" y="${y}" width="1" height="1"/>`; }));
+      x += rows[0].length + track;
+    });
+    const W = Math.max(1, x - track), id = "pts" + (++uid);
+    const sw = sweep ? `<defs><linearGradient id="${id}" x1="-24" y1="0" x2="-6" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>` +
+      `<animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="${W + 34} 0" begin="indefinite" dur="1.5s" fill="freeze"/></linearGradient></defs><g fill="url(#${id})">${rects}</g>` : "";
+    return `<svg class="pxt" viewBox="-.5 -.5 ${W + 1} 10" shape-rendering="crispEdges" preserveAspectRatio="${center ? "xMidYMid" : "xMinYMid"} meet" aria-hidden="true"><g fill="currentColor">${rects}</g>${sw}</svg>`;
+  }
+  return { svg, glyphs: G };
+})();
+
 // ================================================================ LUMELODY pixel wordmark
 // Drawn by hand on a 9-row pixel grid: one-pixel strokes, wide tracking, crisp square pixels. Signatures kept in
 // pixel form: the E's middle bar floats free, the O is a moon with a crescent inside its ring, the Y is a cup on a stem.
@@ -1475,15 +1546,13 @@ function openSheet(open) { sheet.hidden = !open; $("#picker").setAttribute("aria
 $("#picker").onclick = () => openSheet(sheet.hidden); $("#closeSheet").onclick = () => openSheet(false);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) openSheet(false); });
 function setName(t) {   // the selected sound's name in pixel capitals with a holographic glass finish; a light sweep crosses each new name
-  const n = $("#sNameTxt"); n.innerHTML = LUMI_TYPE.px(t, "nm"); n.setAttribute("aria-label", t);
-  const e = n.firstChild, box = $("#sName").clientWidth || 300;
-  let size = 32; e.style.fontSize = size + "px";
-  while (size > 16 && e.scrollWidth > box - 8) { size -= 1; e.style.fontSize = size + "px"; }
+  const n = $("#sNameTxt"); n.innerHTML = PIXEL_TYPE.svg(t, { track: 2, sweep: true, center: true }); n.setAttribute("aria-label", t);
+  const a = n.querySelector("animateTransform"); if (a && a.beginElement && !reduceMotion) setTimeout(() => { try { a.beginElement(); } catch (e) {} }, 80);
 }
 function renderSound() {
   const p = PRESETS[cur], m = marks[p.id] || {};
   $("#sCat").textContent = (p.cat + " · " + p.genres.slice(0, 2).join(" · ")).toLowerCase();
-  setName(p.name); $("#sPick").innerHTML = LUMI_TYPE.svg(p.name, { stroke: 11, track: 24 }); $("#sPick").setAttribute("aria-label", p.name);
+  setName(p.name); $("#sPick").innerHTML = PIXEL_TYPE.svg(p.name); $("#sPick").setAttribute("aria-label", p.name);
   $("#sDesc").textContent = p.desc + " " + p.use;
   $("#sMeta").textContent = `${p.engine} · plays ${nn(p.range[0])}–${nn(p.range[1])}`;
   document.querySelectorAll(".mark[data-k]").forEach(b => b.setAttribute("aria-pressed", m.verdict === b.dataset.k ? "true" : "false"));
@@ -1536,7 +1605,7 @@ function renderList() {
   });
   $("#list").replaceChildren(...(items.length ? items.map(([p, i]) => {
     const m = marks[p.id] || {};
-    const nb = el("b"); nb.innerHTML = LUMI_TYPE.svg(p.name, { stroke: 11, track: 22, paint: i === cur ? "url(#lmChrome)" : "currentColor" }) + (m.fav ? '<span class="fav">♥</span>' : ""); nb.setAttribute("aria-label", p.name);
+    const nb = el("b"); nb.innerHTML = PIXEL_TYPE.svg(p.name) + (m.fav ? '<span class="fav">♥</span>' : ""); nb.setAttribute("aria-label", p.name);
     const b = el("button", { className: "item", type: "button" }, [nb, el("small", { textContent: p.cat + " · " + p.genres.slice(0, 2).join(", ") }), m.verdict ? el("span", { className: "mk " + m.verdict, textContent: m.verdict }) : null]);
     if (i === cur) b.setAttribute("aria-current", "true");
     b.onclick = () => loadPreset(i);

@@ -4,8 +4,9 @@
   the lighting and the material, not painted on. One hero object (the moon), a liquid-chrome frame, dark-glass panels.
 - **Pixel typography (current):** Pixelify Sans (OFL; modern, clean pixel face) for sound names, titles, buttons and
   readable text; Silkscreen (OFL; crisp micro-pixel, set at its native 8 px) for knob labels, values and panel titles.
-  The selected sound is set in Pixelify Sans 600 capitals with a holographic glass gradient, a soft magenta/cyan
-  glow and a light sweep on each change. The logo is a hand-drawn pixel wordmark on a 9-row grid (one-pixel strokes, wide
+  Sound names (selected sound, picker, browser list) use the LUMELODY pixel alphabet: the logo's thin
+  one-pixel-stroke system drawn by hand for A-Z, 0-9 and - / . ' & on a 9-row grid, crisp square pixels in white,
+  a soft white glow on the selected sound and a light sweep on each change. The logo is a hand-drawn pixel wordmark on a 9-row grid (one-pixel strokes, wide
   tracking, crisp square pixels, white silver with a soft glow and a slow light sweep; floating E bar, crescent-cup
   Y, moon O with its lit edge against the ring). Cliché arcade faces (Press Start 2P)
   and terminal faces (VT323) were rejected. The plugin build must embed both font files.
