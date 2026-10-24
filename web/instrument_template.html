@@ -93,10 +93,18 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .main { display: grid; grid-template-columns: minmax(250px, 330px) minmax(0, 1fr); gap: 22px; align-items: center; }
 .hero { display: grid; justify-items: center; gap: 12px; padding: 6px 0; }
 .orb { position: relative; width: min(280px, 100%); aspect-ratio: 1; cursor: pointer; border: 0; padding: 0; background: none; border-radius: 50%; -webkit-tap-highlight-color: transparent; }
+.orb .body { position: absolute; inset: 0; will-change: transform; }
 .orb canvas { position: absolute; inset: -14%; width: 128%; height: 128%; display: block; pointer-events: none; }
 .orb .fallback { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, var(--ch1) 25%, transparent 60%), var(--foil); opacity: .9; }
 .orb svg { position: absolute; inset: -9%; width: 118%; height: 118%; pointer-events: none; overflow: visible; }
-.orb:active { transform: scale(.985); }
+.orb .ripple { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; padding: 1.2px; background: var(--foil);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: ripple 1.1s cubic-bezier(.15,.7,.2,1) forwards; }
+.orb .ripple.soft { padding: 0; -webkit-mask: none; mask: none; background: radial-gradient(closest-side, transparent 70%, color-mix(in oklab, var(--glow) 35%, transparent) 92%, transparent); animation-duration: .9s; }
+@keyframes ripple { from { transform: scale(.98); opacity: .95; } to { transform: scale(1.7); opacity: 0; } }
+.hero .name.swap { animation: nameIn .7s cubic-bezier(.2,.7,.2,1); }
+.hero .meta.swap { animation: nameIn .7s .08s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes nameIn { from { opacity: 0; filter: blur(8px); transform: translateY(8px); letter-spacing: .08em; } to { opacity: 1; filter: blur(0); transform: none; } }
 .hero .name { font: italic 500 27px/1.1 var(--serif); text-transform: none; text-align: center; letter-spacing: .01em; }
 .hero .meta { color: var(--muted); font-size: 11px; text-align: center; }
 .hero .hint { color: var(--muted); font-size: 10.5px; opacity: .8; }
@@ -151,19 +159,22 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
 .keys { position: relative; height: clamp(86px, 10vw, 112px); touch-action: none; user-select: none; -webkit-user-select: none; border: 1px solid var(--line-strong); border-radius: 4px; overflow: hidden;
   background: color-mix(in oklab, var(--win2) 70%, transparent); }
 .spill { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; mix-blend-mode: screen; }
-.key { position: absolute; top: 0; border: 0; padding: 0; margin: 0; cursor: pointer; background: none; --lum: 0; transition: transform 140ms cubic-bezier(.2,.8,.3,1.15); -webkit-tap-highlight-color: transparent; }
-.key.down { transition-duration: 40ms; }
+.key { position: absolute; top: 0; border: 0; padding: 0; margin: 0; cursor: pointer; background: none; --lum: 0; transform-origin: 50% 0;
+  transition: transform 320ms cubic-bezier(.34,1.7,.5,1); -webkit-tap-highlight-color: transparent; }
+.key.down { transition: transform 50ms cubic-bezier(.2,.8,.4,1); }
 .wk { height: 100%; z-index: 1; }
 .wk::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; pointer-events: none; background: var(--line-strong); }
 .wk:last-of-type::after { display: none; }
 .wk::before, .bk::before { /* the key fills with foil light while its note sounds (velocity sets brightness) */
-  content: ""; position: absolute; inset: 0 1px 0 0; pointer-events: none; opacity: var(--lum);
-  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.06) 40%, rgba(255,255,255,.5) 100%), var(--foil-v); }
-.wk.down { transform: translateY(1px); }
+  content: ""; position: absolute; inset: 0 1px 0 0; pointer-events: none; opacity: min(1, calc(var(--lum) * 1.3));
+  transform-origin: 50% 100%; transform: scaleY(calc(.3 + .7 * var(--lum)));   /* light rises from the front edge on the strike and sinks as it fades */
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.06) 35%, rgba(255,255,255,.55) 100%), var(--foil-v);
+  box-shadow: 0 0 calc(var(--lum) * 14px) color-mix(in oklab, var(--glow) 60%, transparent); }
+.wk.down { transform: perspective(420px) rotateX(-5deg) scaleY(.99); }
 .wk span { position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; font-size: 9.5px; color: var(--muted); pointer-events: none; }
 .bk { height: 60%; z-index: 3; border: 1px solid var(--line-strong); border-top: 0; border-radius: 0 0 2px 2px; background: var(--win2); }
 .bk::before { inset: 0; }
-.bk.down { transform: translateY(1px); }
+.bk.down { transform: perspective(420px) rotateX(-7deg) scaleY(.98); }
 
 /* ------------------------------------------------ browser sheet */
 .sheet { position: absolute; inset: 56px 18px 18px; z-index: 10; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 10px; padding: 14px;
@@ -244,14 +255,23 @@ button, select, input, textarea { font: inherit; color: inherit; text-transform:
     <div class="main">
       <div class="hero">
         <button class="orb" type="button" id="orb" aria-label="New sound: picks a random sound">
-          <span class="fallback" id="orbFallback" hidden></span>
-          <canvas id="orbCv" aria-hidden="true"></canvas>
-          <svg viewBox="-60 -60 120 120" aria-hidden="true">
-            <ellipse rx="56" ry="17" transform="rotate(-18)" fill="none" style="stroke:var(--line-strong)" stroke-width=".35"/>
-            <ellipse rx="54" ry="25" transform="rotate(28)" fill="none" style="stroke:var(--line)" stroke-width=".3"/>
-            <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="38s" repeatCount="indefinite" path="M56 0 A56 17 0 1 1 -56 0 A56 17 0 1 1 56 0" rotate="0" transform="rotate(-18)"/></circle>
-            <g transform="rotate(28)"><circle r="1" style="fill:var(--glow)"><animateMotion dur="61s" repeatCount="indefinite" path="M-54 0 A54 25 0 1 1 54 0 A54 25 0 1 1 -54 0"/></circle></g>
-          </svg>
+          <span class="body" id="orbBody">
+            <svg viewBox="-60 -60 120 120" aria-hidden="true">
+              <g transform="rotate(-18)"><ellipse rx="56" ry="15" fill="none" style="stroke:var(--line)" stroke-width=".35"/>
+                <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="34s" repeatCount="indefinite" path="M56 0 A56 15 0 1 1 -56 0 A56 15 0 1 1 56 0"/></circle></g>
+              <g transform="rotate(26)"><ellipse rx="53" ry="22" fill="none" style="stroke:var(--line)" stroke-width=".28" stroke-dasharray=".6 1.6"/>
+                <circle r=".9" style="fill:var(--glow)"><animateMotion dur="57s" repeatCount="indefinite" path="M-53 0 A53 22 0 1 1 53 0 A53 22 0 1 1 -53 0"/></circle></g>
+            </svg>
+            <span class="fallback" id="orbFallback" hidden></span>
+            <canvas id="orbCv" aria-hidden="true"></canvas>
+            <svg viewBox="-60 -60 120 120" aria-hidden="true">
+              <defs><clipPath id="frontHalf"><rect x="-70" y="0" width="140" height="70"/></clipPath></defs>
+              <g transform="rotate(-18)"><g clip-path="url(#frontHalf)"><ellipse rx="56" ry="15" fill="none" style="stroke:var(--line-strong)" stroke-width=".4"/>
+                <circle r="1.3" style="fill:var(--ink)"><animateMotion dur="34s" repeatCount="indefinite" path="M56 0 A56 15 0 1 1 -56 0 A56 15 0 1 1 56 0"/></circle></g></g>
+              <g transform="rotate(26)"><g clip-path="url(#frontHalf)"><ellipse rx="53" ry="22" fill="none" style="stroke:var(--line-strong)" stroke-width=".3" stroke-dasharray=".6 1.6"/>
+                <circle r=".9" style="fill:var(--glow)"><animateMotion dur="57s" repeatCount="indefinite" path="M-53 0 A53 22 0 1 1 53 0 A53 22 0 1 1 -53 0"/></circle></g></g>
+            </svg>
+          </span>
         </button>
         <div class="name" id="sName">—</div>
         <div class="meta" id="sCat"></div>
@@ -340,6 +360,7 @@ const $ = s => document.querySelector(s);
 const el = (t, p = {}, k = []) => { const n = document.createElement(t); Object.assign(n, p); for (const c of [].concat(k)) if (c != null) n.append(c); return n; };
 const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
 const fxIndex = id => SCHEMA.findIndex(f => f.id === id);
+const reduceMotion = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
 let ctx = null, node = null, ready = false;
 let cur = 0, baseNote = 48, selFx = fxIndex("reverb");
@@ -500,34 +521,55 @@ const ORB = (() => {
   if (gl) {
     const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0., 1.); }`;
     const fs = `precision highp float; varying vec2 v;
-      uniform vec2 light; uniform float time, act; uniform vec3 hh[6]; uniform vec3 gcol, tint;
-      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-      float noise(vec2 p) { vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
-        return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y); }
-      float fbm(vec2 p) { float s = 0., a = .5; for (int i = 0; i < 4; i++) { s += a * noise(p); p = mat2(1.6, 1.2, -1.2, 1.6) * p; a *= .5; } return s; }
+      uniform vec2 light; uniform float time, act, spin; uniform vec3 hh[6]; uniform vec3 gcol, tint;
+      float hash3(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+      float noise3(vec3 p) { vec3 i = floor(p), f = fract(p); vec3 u = f * f * (3. - 2. * f);
+        return mix(mix(mix(hash3(i), hash3(i + vec3(1., 0., 0.)), u.x), mix(hash3(i + vec3(0., 1., 0.)), hash3(i + vec3(1., 1., 0.)), u.x), u.y),
+                   mix(mix(hash3(i + vec3(0., 0., 1.)), hash3(i + vec3(1., 0., 1.)), u.x), mix(hash3(i + vec3(0., 1., 1.)), hash3(i + vec3(1., 1., 1.)), u.x), u.y), u.z); }
+      float fbm3(vec3 p) { float s = 0., a = .5; for (int i = 0; i < 4; i++) { s += a * noise3(p); p = p * 2.03 + vec3(1.7, 9.2, 3.1); a *= .5; } return s; }
       vec3 film(float t) { t = fract(t) * 6.; vec3 s = vec3(0.); for (int i = 0; i < 6; i++) { float d = abs(t - float(i)); d = min(d, 6. - d); s += hh[i] * max(0., 1. - d); } return s; }
+      // object space: a slight axial tilt, then the spin
+      vec3 obj(vec3 n) { float ct = cos(.38), st = sin(.38); n = vec3(n.x, ct * n.y - st * n.z, st * n.y + ct * n.z);
+        float c = cos(spin), s = sin(spin); return vec3(c * n.x + s * n.z, n.y, -s * n.x + c * n.z); }
+      // impact craters: bowl + raised rim, sized and placed from a fixed seed
+      float craters(vec3 d) { float h = 0.;
+        for (int i = 0; i < 18; i++) { float fi = float(i) + 1.;
+          vec3 c = normalize(vec3(fract(sin(fi * 12.9898) * 43758.5) - .5, fract(sin(fi * 78.233) * 24634.6) - .5, fract(sin(fi * 37.719) * 13579.1) - .5));
+          float rad = .07 + .2 * fract(sin(fi * 4.37) * 9631.7);
+          float x = acos(clamp(dot(d, c), -1., 1.)) / rad;
+          h += (x < 1. ? (x * x - 1.) * .5 : 0.) + .3 * exp(-pow((x - 1.) * 4., 2.)); }
+        return h; }
+      float surf(vec3 d) { return craters(d) + (fbm3(d * 6.) - .5) * .22; }
       void main() {
         vec2 p = v * 1.28; float r = length(p); const float R = 1.;
         vec3 col = vec3(0.); float al = 0.;
-        float halo = exp(-max(r - R, 0.) * 7.) * smoothstep(R - .02, R + .03, r) * (.10 + .45 * act);
+        float halo = exp(-max(r - R, 0.) * 6.) * smoothstep(R - .02, R + .03, r) * (.08 + .5 * act);
         vec3 hc = mix(gcol, film(atan(p.y, p.x) * .16 + time * .03), .45);
         col += hc * halo; al += halo;
         if (r < R) {
+          vec3 V = vec3(0., 0., 1.);
           vec2 q = p / R; vec3 n = vec3(q, sqrt(max(0., 1. - dot(q, q))));
-          vec2 sc = vec2(atan(n.x, n.z) + time * .035, asin(clamp(n.y, -1., 1.))) * 3.;
-          float e = .02, h0 = fbm(sc), hx = fbm(sc + vec2(e, 0.)), hy = fbm(sc + vec2(0., e));
-          vec3 nn = normalize(n + vec3((h0 - hx) / e, (h0 - hy) / e, 0.) * .012);   // fine foil relief, not a lumpy surface
-          vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.38 + act * 1.25));   // side light: a crescent that widens as you play
-          float lam = dot(nn, Ld), lit = smoothstep(-.02, .24, lam);
-          float spec = pow(max(dot(reflect(-Ld, nn), vec3(0., 0., 1.)), 0.), 40.) * .6;
-          vec3 f = film(dot(nn.xy, light) * .6 + h0 * .45 + q.x * .4 + q.y * .75 + time * .012) * (.88 + .24 * hash(floor(q * 260.)));
-          float silver = .2 + .72 * max(lam, 0.);
-          vec3 cl = mix(vec3(silver), f * (.3 + .95 * silver), .72) + (vec3(.95) + f * .3) * spec;
-          float spark = step(.992, hash(floor(q * 170.))) * .22;
-          vec3 cd = f * (.035 + spark) + vec3(.01, .01, .016);   // night side: obsidian with a faint foil glimmer
+          vec3 T = normalize(cross(vec3(0., 1., 0.), n) + vec3(1e-4, 0., 0.)), B = cross(n, T);
+          vec3 d = obj(n);
+          float e = .012, h0 = surf(d), h1 = surf(obj(normalize(n + T * e))), h2 = surf(obj(normalize(n + B * e)));
+          vec3 nn = normalize(n - (T * (h1 - h0) + B * (h2 - h0)) / e * .028);   // sculpted relief
+          float mar = smoothstep(.47, .64, fbm3(d * 1.7 + 3.));                    // dark lunar seas: smoother, deeper colour
+          vec3 Ld = normalize(vec3(-1. + light.x * .2, .3 + light.y * .12, -.36 + act * 1.25));   // side light: a crescent that widens as you play
+          float lam = dot(nn, Ld), lit = smoothstep(-.03, .2, lam);
+          vec3 Hv = normalize(Ld + V);
+          float grating = sin(dot(d, vec3(1., .55, .25)) * 150. + time * .6) * .5 + .5;   // holographic micro-lines that shimmer
+          vec3 f = film(dot(normalize(mix(n, nn, .45)), Hv) * 1.7 + d.y * .45 + mar * .3 + grating * .03 + time * .01);
+          float term = exp(-pow((lam - .07) * 7., 2.));            // strongest colour along the shadow line, like a prism edge
+          float bright = (.3 + .62 * max(lam, 0.)) * mix(1., .66, mar);
+          vec3 base = mix(vec3(bright), f * bright * 1.25, .42 + .33 * term + .15 * (1. - mar));
+          float spec = pow(max(dot(reflect(-Ld, nn), V), 0.), 48.) * .3 * (1. - .5 * mar);
+          vec3 cl = base + (vec3(1.) + f * .4) * spec + f * term * .3;
+          float shine = clamp(dot(nn, normalize(vec3(.55, .15, 1.))), 0., 1.);   // earthshine shows the relief on the night side
+          vec3 cd = (f * .045 + vec3(.012, .013, .02)) * (.45 + .9 * shine) * mix(1., .7, mar);
           vec3 c = mix(cd, cl, lit);
-          c += film(atan(q.y, q.x) * .2 + time * .03) * pow(1. - n.z, 4.) * (.1 + .4 * act);   // thin holographic limb
-          float edge = smoothstep(R, R - .01, r);
+          c += f * pow(1. - n.z, 4.) * (.06 + .4 * act) * (.3 + .7 * lit);   // thin holographic limb
+          c *= 1. - .22 * pow(1. - n.z, 3.) * (1. - lit);                     // limb darkening on the night side
+          float edge = smoothstep(R, R - .008, r);
           col = mix(col, c * tint, edge); al = max(al, edge);
         }
         gl_FragColor = vec4(col, al);
@@ -537,33 +579,53 @@ const ORB = (() => {
       const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      for (const u of ["light", "time", "act", "hh", "gcol", "tint"]) U[u] = gl.getUniformLocation(prog, u);
+      for (const u of ["light", "time", "act", "spin", "hh", "gcol", "tint"]) U[u] = gl.getUniformLocation(prog, u);
     } catch (e) { console.warn("moon shader unavailable:", e); gl = null; }
   }
   if (!gl) $("#orbFallback").hidden = false;
-  let act = 0, kick = 0;
+  let act = 0, kick = 0, spin = 0, spinV = 0, sc = 1, scV = 0, scT = 1, res = 1, slow = 0;
+  const body = $("#orbBody");
   return {
-    kick() { kick = 1; },
+    kick() { kick = 1; spinV = 2.6; },
+    press(v) { scT = v; },
     draw(now, target, dt) {
+      // press spring (squash on press, bounce on release) and spin impulse, integrated every frame
+      const steps = Math.max(1, Math.ceil(dt / .008)), h = dt / steps;
+      for (let i = 0; i < steps; i++) { scV += ((scT - sc) * 420 - scV * 15) * h; sc += scV * h; }
+      body.style.transform = Math.abs(sc - 1) > 1e-4 ? `scale(${sc.toFixed(4)})` : "";
+      spinV *= Math.exp(-dt / .7); spin += (.035 + spinV) * dt;
       if (!gl) return;
+      // adaptive quality: a slow machine renders the moon at a lower resolution instead of slowing everything down
+      slow += ((dt > .028 ? 1 : 0) - slow) * .05; if (slow > .6 && res > .5) { res -= .1; slow = 0; }
       kick *= Math.exp(-dt / .5);
       const goal = Math.min(1, target + kick * .8);
       act += (goal - act) * (1 - Math.exp(-dt / (goal > act ? .06 : .5)));
-      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * .85;
+      const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1) * res;
       const w = Math.max(2, Math.round(r.width * d));
       if (cv.width !== w) { cv.width = cv.height = w; gl.viewport(0, 0, w, w); }
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, now / 1000); gl.uniform1f(U.act, act);
+      gl.uniform2f(U.light, CR.light[0], CR.light[1]); gl.uniform1f(U.time, now / 1000); gl.uniform1f(U.act, act); gl.uniform1f(U.spin, spin);
       gl.uniform3fv(U.hh, CR.theme.hh); gl.uniform3fv(U.gcol, CR.theme.glow); gl.uniform3fv(U.tint, CR.theme.tint);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
   };
 })();
-$("#orb").onclick = () => {
-  if (!ctx) startFromGesture();
-  let i = cur; while (PRESETS.length > 1 && i === cur) i = Math.floor(Math.random() * PRESETS.length);
-  loadPreset(i); ORB.kick();
-};
+{
+  const orb = $("#orb");
+  orb.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") ORB.press(1.018); });
+  orb.addEventListener("pointerleave", () => ORB.press(1));
+  orb.addEventListener("pointerdown", () => ORB.press(.9));
+  for (const t of ["pointerup", "pointercancel"]) orb.addEventListener(t, e => ORB.press(e.pointerType === "mouse" && t === "pointerup" ? 1.018 : 1));
+  orb.onclick = () => {
+    if (!ctx) startFromGesture();
+    let i = cur; while (PRESETS.length > 1 && i === cur) i = Math.floor(Math.random() * PRESETS.length);
+    loadPreset(i); ORB.kick();
+    if (!reduceMotion) for (const [cls, delay] of [["ripple", 0], ["ripple soft", 90], ["ripple", 200]]) setTimeout(() => {
+      const r = el("span", { className: cls }); r.addEventListener("animationend", () => r.remove()); orb.append(r);
+    }, delay);
+    for (const n of [$("#sName"), $("#sCat")]) { n.classList.remove("swap"); void n.offsetWidth; n.classList.add("swap"); }
+  };
+}
 function drawStars() {   // a still night sky inside the window; a few stars carry the theme's foil colours
   const cv = $("#stars"), r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
   cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
@@ -693,14 +755,13 @@ function paintKnob(k) {
   CR.draw(k.cv, Math.PI / 2 - ang, { on, glow: k.glow });
 }
 let ambientUntil = 0, orbT = 0;
-const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 function frame(now) {
   const moving = CR.step(now) || now < ambientUntil;
   const list = moving ? knobs : [...dirty];
   for (const k of list) if (k.el.isConnected) paintKnob(k);
   dirty.clear();
   stepLights(now);
-  if (now - orbT > 33) {   // the moon follows the notes being played: total key light, softly limited
+  if (now - orbT > 15) {   // the moon follows the notes being played: total key light, softly limited
     const dt = Math.min(.1, (now - (orbT || now)) / 1000); orbT = now;
     let sum = 0; for (const L of lights.values()) sum += L.lum;
     ORB.draw(reduceMotion ? 0 : now, 1 - Math.exp(-sum / 1.6), dt);
@@ -833,7 +894,7 @@ const spill = $("#spill"), spillCtx = spill.getContext("2d");
 function sizeSpill() { const r = spill.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); spill.width = Math.max(1, Math.round(r.width * d)); spill.height = Math.max(1, Math.round(r.height * d)); spillDirty = true; }
 function hexA(hex, a) { const h = hex.replace("#", ""); const n = parseInt(h.length === 3 ? h.split("").map(c => c + c).join("") : h, 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a.toFixed(3)})`; }
 function stepLights(now) {
-  const dt = Math.min(.05, (now - (lastT || now)) / 1000); lastT = now;
+  const dt = Math.min(.25, (now - (lastT || now)) / 1000); lastT = now;
   if (!lights.size && !spillDirty) return;
   spillDirty = false;
   const kbR = spill.getBoundingClientRect(), d = spill.width / Math.max(1, kbR.width);
