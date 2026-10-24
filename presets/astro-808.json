@@ -1,0 +1,56 @@
+{
+  "name": "Astro 808",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Cloud rap",
+    "Trap"
+  ],
+  "description": "Deep, round 808 with a long tail that slowly wavers, and smooth, wide slides between notes.",
+  "use": "Psychedelic trap 808 lines with big glides.",
+  "preview_phrase": "psych_808",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 5,
+      "s": 0.8,
+      "r": 0.3,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": 1,
+      "a": 0.001,
+      "d": 0.3,
+      "s": 0.05,
+      "r": 0.2,
+      "level": 0.12,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.16,
+    "f_type": -1,
+    "p_env": 7,
+    "p_dec": 0.03,
+    "vib_rate": 0.25,
+    "vib_depth": 6,
+    "vib_delay": 0.8
+  },
+  "fx": {
+    "sat_drive": 0.45,
+    "sat_mix": 0.55,
+    "eq_lc": 24,
+    "eq_hc": 7000
+  },
+  "loudness_trim_db": 4.76,
+  "id": "astro-808",
+  "out_gain_db": 2.76
+}

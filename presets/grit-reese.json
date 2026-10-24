@@ -52,6 +52,7 @@
     "eq_lc": 28,
     "eq_hc": 6500
   },
-  "loudness_trim_db": -7.55,
-  "id": "grit-reese"
+  "loudness_trim_db": 0.7,
+  "id": "grit-reese",
+  "out_gain_db": -1.3
 }

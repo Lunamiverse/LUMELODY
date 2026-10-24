@@ -59,6 +59,7 @@
     "rv_size": 0.9,
     "rv_decay": 6
   },
-  "loudness_trim_db": -4.66,
-  "id": "nebula-drift"
+  "loudness_trim_db": 6.52,
+  "id": "nebula-drift",
+  "out_gain_db": 4.52
 }

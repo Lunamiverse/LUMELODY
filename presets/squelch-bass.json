@@ -49,6 +49,7 @@
     "eq_lc": 30,
     "sat_drive": 0.25
   },
-  "loudness_trim_db": -1.41,
-  "id": "squelch-bass"
+  "loudness_trim_db": 7.39,
+  "id": "squelch-bass",
+  "out_gain_db": 5.39
 }

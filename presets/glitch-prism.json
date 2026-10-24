@@ -45,6 +45,7 @@
     "rv_mix": 0.2,
     "rv_size": 0.6
   },
-  "loudness_trim_db": -2.58,
-  "id": "glitch-prism"
+  "loudness_trim_db": 9.41,
+  "id": "glitch-prism",
+  "out_gain_db": 7.41
 }

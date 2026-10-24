@@ -66,6 +66,7 @@
     "dly_mix": 0.12,
     "width": 1.2
   },
-  "loudness_trim_db": -7.4,
-  "id": "grave-bell"
+  "loudness_trim_db": -1.27,
+  "id": "grave-bell",
+  "out_gain_db": -3.27
 }

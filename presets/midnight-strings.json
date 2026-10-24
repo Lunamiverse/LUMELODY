@@ -64,6 +64,7 @@
     "rv_size": 0.9,
     "rv_decay": 4.5
   },
-  "loudness_trim_db": -4.14,
-  "id": "midnight-strings"
+  "loudness_trim_db": 4.0,
+  "id": "midnight-strings",
+  "out_gain_db": 2.0
 }

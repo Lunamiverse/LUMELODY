@@ -54,6 +54,7 @@
     "dly_fb": 0.25,
     "dly_mix": 0.1
   },
-  "loudness_trim_db": -10.56,
-  "id": "torch-lead"
+  "loudness_trim_db": -0.3,
+  "id": "torch-lead",
+  "out_gain_db": -2.3
 }

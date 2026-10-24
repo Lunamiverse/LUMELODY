@@ -1,0 +1,56 @@
+{
+  "name": "Rage 808",
+  "category": "Trippy",
+  "genres": [
+    "Rage",
+    "Psychedelic trap",
+    "Phonk"
+  ],
+  "description": "Blown-out 808: a deep sub with a hard knock, pushed into saturation so the harmonics scream on top. Long tail, long slides.",
+  "use": "Rage and hard psychedelic trap low end; overlap notes to slide.",
+  "preview_phrase": "psych_808",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.001,
+      "d": 4.5,
+      "s": 0.75,
+      "r": 0.25,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "a": 0.001,
+      "d": 0.25,
+      "s": 0.15,
+      "r": 0.15,
+      "level": 0.35,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.12,
+    "f_type": 0,
+    "f_cut": 3000,
+    "f_drive": 3.5,
+    "p_env": 12,
+    "p_dec": 0.025
+  },
+  "fx": {
+    "sat_drive": 0.95,
+    "sat_mix": 0.8,
+    "eq_lc": 25,
+    "eq_hc": 6000,
+    "eq_pk_f": 1000,
+    "eq_pk_g": -3
+  },
+  "loudness_trim_db": 0.71,
+  "id": "rage-808",
+  "out_gain_db": -1.29
+}

@@ -1,0 +1,75 @@
+{
+  "name": "Night Siren",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Rage",
+    "Hyperpop"
+  ],
+  "description": "A pure, eerie siren tone that swoops between notes with a wide, slow vibrato, like a distant alarm in the fog.",
+  "use": "Haunting single-note lines and swoops; long glides between far-apart notes.",
+  "preview_phrase": "psych_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.06,
+      "d": 1,
+      "s": 1,
+      "r": 0.6,
+      "type": 1
+    },
+    {
+      "wave": 1,
+      "oct": 1,
+      "a": 0.06,
+      "d": 1,
+      "s": 1,
+      "r": 0.6,
+      "level": 0.18,
+      "type": 1
+    },
+    {
+      "vowel": 1,
+      "vmod": 0.6,
+      "tilt": 1.4,
+      "breath": 0.25,
+      "a": 0.08,
+      "d": 1,
+      "s": 0.8,
+      "r": 0.6,
+      "level": 0.18,
+      "type": 6
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.22,
+    "f_type": 0,
+    "f_cut": 3200,
+    "vib_rate": 3.4,
+    "vib_depth": 45,
+    "vib_delay": 0.4
+  },
+  "fx": {
+    "dly_beats": 0.75,
+    "dly_fb": 0.45,
+    "dly_mix": 0.2,
+    "dly_damp": 0.55,
+    "rv_mix": 0.42,
+    "rv_size": 0.92,
+    "rv_decay": 6.5,
+    "rv_damp": 0.55,
+    "eq_lc": 250,
+    "eq_hc": 9000,
+    "sat_drive": 0.2,
+    "width": 1.3
+  },
+  "loudness_trim_db": -0.44,
+  "id": "night-siren",
+  "out_gain_db": -2.44
+}

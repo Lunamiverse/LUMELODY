@@ -51,6 +51,7 @@
     "rv_decay": 6,
     "width": 1.4
   },
-  "loudness_trim_db": -0.47,
-  "id": "cold-air"
+  "loudness_trim_db": 11.92,
+  "id": "cold-air",
+  "out_gain_db": 9.92
 }

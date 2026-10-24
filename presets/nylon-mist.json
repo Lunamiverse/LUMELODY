@@ -42,6 +42,7 @@
     "rv_size": 0.5,
     "rv_decay": 2
   },
-  "loudness_trim_db": 8.36,
-  "id": "nylon-mist"
+  "loudness_trim_db": 20.41,
+  "id": "nylon-mist",
+  "out_gain_db": 18.41
 }

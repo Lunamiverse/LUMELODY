@@ -73,6 +73,7 @@
     "dly_fb": 0.2,
     "dly_mix": 0.08
   },
-  "loudness_trim_db": -8.15,
-  "id": "drill-bell"
+  "loudness_trim_db": 2.29,
+  "id": "drill-bell",
+  "out_gain_db": 0.29
 }

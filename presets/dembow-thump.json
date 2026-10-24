@@ -49,6 +49,7 @@
     "sat_drive": 0.4,
     "eq_lc": 28
   },
-  "loudness_trim_db": -4.85,
-  "id": "dembow-thump"
+  "loudness_trim_db": 6.05,
+  "id": "dembow-thump",
+  "out_gain_db": 4.05
 }

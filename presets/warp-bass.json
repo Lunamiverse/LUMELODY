@@ -1,0 +1,61 @@
+{
+  "name": "Warp Bass",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Drill",
+    "Experimental"
+  ],
+  "description": "A wobbling, phasing reese whose filter breathes slowly, heavy underneath and woozy on top.",
+  "use": "Dark basslines and drops; long held notes.",
+  "preview_phrase": "psych_808",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 4,
+      "det": 20,
+      "spread": 0.4,
+      "drift": 6,
+      "a": 0.005,
+      "d": 1,
+      "s": 1,
+      "r": 0.2,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "a": 0.005,
+      "d": 1,
+      "s": 1,
+      "r": 0.2,
+      "level": 0.55,
+      "filt": 0,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.1,
+    "f_type": 0,
+    "f_cut": 520,
+    "f_res": 0.3,
+    "f_drive": 2.4,
+    "lfo_rate": 0.25,
+    "lfo_cut": 0.7
+  },
+  "fx": {
+    "sat_drive": 0.55,
+    "eq_lc": 26,
+    "eq_hc": 6000,
+    "ch_mix": 0.2,
+    "ch_depth": 2
+  },
+  "loudness_trim_db": 0.95,
+  "id": "warp-bass",
+  "out_gain_db": -1.05
+}

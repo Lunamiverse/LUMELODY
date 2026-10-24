@@ -479,10 +479,10 @@ preset("Night Siren", "Trippy", ["Psychedelic trap", "Rage", "Hyperpop"],
 preset("Desert Fever", "Trippy", ["Psychedelic trap", "Dark R&B", "Cloud rap"],
        "Detuned FM electric keys with a slow tremolo and a seasick pitch wobble, dark and dreamy, like a memory.",
        "Dark chord loops and melodic samples for psychedelic trap and R&B.", "psych_pad",
-       [L(2, cr=1, mr=1, idx=1.3, idx_dec=.9, idx_sus=.2, fb=.06, fm_spread=14, a=.004, d=3.6, s=.15, r=1, keydecay=.35),
+       [L(2, cr=1, mr=1, idx=1.3, idx_dec=.9, idx_sus=.2, fb=.06, fm_spread=6, a=.004, d=3.6, s=.15, r=1, keydecay=.35),
         L(2, cr=1, mr=7, idx=.7, idx_dec=.05, idx_sus=0, a=.001, d=.4, s=0, r=.2, level=.15),
         L(1, wave=2, uni=3, det=14, drift=10, a=.05, d=3, s=.2, r=1, level=.18)],
-       {"f_type": 0, "f_cut": 1700, "f_res": .1, "f_key": .3, "lfo_rate": 4.2, "lfo_amp": .35, "lfo_pan": .3,
+       {"f_type": 0, "f_cut": 1700, "f_res": .1, "f_key": .3, "lfo_rate": 3.6, "lfo_amp": .2, "lfo_pan": .25,
         "vib_rate": .45, "vib_depth": 18, "vib_delay": 0},
        fx(TAPE, PSYCH_SPACE, eq_lc=70, pump=.12, ch_mix=.35, ch_depth=3, width=1.35))
 
@@ -519,7 +519,7 @@ preset("Purple Smoke", "Trippy", ["Psychedelic trap", "Cloud rap", "Dark R&B"],
         L(1, wave=3, pw=.3, oct=-1, a=1.2, d=2, s=.9, r=2.6, level=.3),
         L(5, ncut=1.2, ntrack=1, nq=2, nmode=1, a=1.5, d=2, s=.7, r=2.6, level=.15)],
        {"f_type": 0, "f_cut": 650, "f_res": .35, "f_poles": 4, "f_key": .25, "lfo_rate": .07, "lfo_cut": 1.5, "lfo_pan": .5,
-        "lfo_shape": 1, "vib_rate": .3, "vib_depth": 12, "vib_delay": 0},
+        "vib_rate": .3, "vib_depth": 12, "vib_delay": 0},
        fx(TAPE, PSYCH_SPACE, eq_lc=45, ch_mix=.4, ch_depth=3, width=1.5))
 
 preset("Reverse Dream", "Trippy", ["Psychedelic trap", "Ambient trap", "Cloud rap"],

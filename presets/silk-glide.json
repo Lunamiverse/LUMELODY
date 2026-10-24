@@ -64,6 +64,7 @@
     "rv_size": 0.7,
     "rv_decay": 3
   },
-  "loudness_trim_db": -7.18,
-  "id": "silk-glide"
+  "loudness_trim_db": 0.93,
+  "id": "silk-glide",
+  "out_gain_db": -1.07
 }

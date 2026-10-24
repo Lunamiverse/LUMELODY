@@ -67,6 +67,7 @@
     "rv_size": 0.75,
     "rv_decay": 3.5
   },
-  "loudness_trim_db": -10.29,
-  "id": "ghost-flute"
+  "loudness_trim_db": -0.65,
+  "id": "ghost-flute",
+  "out_gain_db": -2.65
 }

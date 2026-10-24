@@ -63,6 +63,7 @@
     "rv_size": 0.6,
     "rv_decay": 2.5
   },
-  "loudness_trim_db": -9.92,
-  "id": "perreo-lead"
+  "loudness_trim_db": -1.85,
+  "id": "perreo-lead",
+  "out_gain_db": -3.85
 }

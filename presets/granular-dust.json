@@ -43,6 +43,7 @@
     "rv_size": 0.85,
     "rv_decay": 4.5
   },
-  "loudness_trim_db": 8.86,
-  "id": "granular-dust"
+  "loudness_trim_db": 20.89,
+  "id": "granular-dust",
+  "out_gain_db": 18.89
 }

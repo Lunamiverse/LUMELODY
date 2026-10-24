@@ -1,0 +1,67 @@
+{
+  "name": "Reverse Dream",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Ambient trap",
+    "Cloud rap"
+  ],
+  "description": "Notes that swell up backwards out of a grainy haze and stop dead, like a tape played in reverse.",
+  "use": "Transitions, intros and dreamy reversed-sounding chords.",
+  "preview_phrase": "psych_pad",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 16,
+      "spread": 1,
+      "drift": 10,
+      "a": 2.4,
+      "d": 1,
+      "s": 1,
+      "r": 0.05,
+      "type": 1
+    },
+    {
+      "grate": 24,
+      "glen": 0.18,
+      "goct": 0.2,
+      "gfifth": 0.25,
+      "gjit": 18,
+      "a": 2.4,
+      "d": 1,
+      "s": 1,
+      "r": 0.05,
+      "level": 0.5,
+      "type": 7
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 900,
+    "f_env": 1.6,
+    "fa": 2.4,
+    "fd": 1,
+    "fs": 1,
+    "vib_rate": 0.4,
+    "vib_depth": 14,
+    "vib_delay": 0
+  },
+  "fx": {
+    "sat_drive": 0.3,
+    "eq_hc": 7500,
+    "eq_lc": 100,
+    "rv_mix": 0.35,
+    "rv_size": 0.9,
+    "rv_decay": 4,
+    "width": 1.45
+  },
+  "loudness_trim_db": -1.35,
+  "id": "reverse-dream",
+  "out_gain_db": -3.35
+}

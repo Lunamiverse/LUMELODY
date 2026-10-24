@@ -53,6 +53,7 @@
     "rv_decay": 6,
     "width": 1.4
   },
-  "loudness_trim_db": 0.24,
-  "id": "breath-cloud"
+  "loudness_trim_db": 12.46,
+  "id": "breath-cloud",
+  "out_gain_db": 10.46
 }

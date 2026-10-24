@@ -53,6 +53,7 @@
     "rv_damp": 0.65,
     "rv_pre": 20
   },
-  "loudness_trim_db": -3.61,
-  "id": "shadow-mallet"
+  "loudness_trim_db": 5.42,
+  "id": "shadow-mallet",
+  "out_gain_db": 3.42
 }

@@ -63,6 +63,7 @@
     "rv_size": 0.7,
     "rv_decay": 3
   },
-  "loudness_trim_db": -7.14,
-  "id": "smoke-organ"
+  "loudness_trim_db": -0.78,
+  "id": "smoke-organ",
+  "out_gain_db": -2.78
 }

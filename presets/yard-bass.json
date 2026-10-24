@@ -44,6 +44,7 @@
     "sat_drive": 0.25,
     "eq_lc": 28
   },
-  "loudness_trim_db": -8.72,
-  "id": "yard-bass"
+  "loudness_trim_db": 3.23,
+  "id": "yard-bass",
+  "out_gain_db": 1.23
 }

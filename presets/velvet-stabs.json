@@ -61,6 +61,7 @@
     "rv_mix": 0.14,
     "rv_size": 0.45
   },
-  "loudness_trim_db": -2.25,
-  "id": "velvet-stabs"
+  "loudness_trim_db": 4.95,
+  "id": "velvet-stabs",
+  "out_gain_db": 2.95
 }

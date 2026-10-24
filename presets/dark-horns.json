@@ -56,6 +56,7 @@
     "rv_decay": 3.5,
     "width": 1.15
   },
-  "loudness_trim_db": -7.14,
-  "id": "dark-horns"
+  "loudness_trim_db": -1.62,
+  "id": "dark-horns",
+  "out_gain_db": -3.62
 }

@@ -50,6 +50,7 @@
     "eq_pk_f": 900,
     "eq_pk_g": -3
   },
-  "loudness_trim_db": -10.33,
-  "id": "808-grit"
+  "loudness_trim_db": 0.39,
+  "id": "808-grit",
+  "out_gain_db": -1.61
 }

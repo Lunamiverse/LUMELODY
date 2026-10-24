@@ -80,6 +80,7 @@
     "rv_decay": 2.8,
     "rv_damp": 0.6
   },
-  "loudness_trim_db": -5.33,
-  "id": "after-hours-ep"
+  "loudness_trim_db": 2.05,
+  "id": "after-hours-ep",
+  "out_gain_db": 0.05
 }

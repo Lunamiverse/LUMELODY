@@ -40,6 +40,7 @@
     "rv_size": 0.3,
     "ch_mix": 0.15
   },
-  "loudness_trim_db": 14.76,
-  "id": "palm-night"
+  "loudness_trim_db": 26.5,
+  "id": "palm-night",
+  "out_gain_db": 24.5
 }

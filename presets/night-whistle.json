@@ -55,6 +55,7 @@
     "rv_decay": 5,
     "rv_pre": 35
   },
-  "loudness_trim_db": -4.09,
-  "id": "night-whistle"
+  "loudness_trim_db": 7.96,
+  "id": "night-whistle",
+  "out_gain_db": 5.96
 }

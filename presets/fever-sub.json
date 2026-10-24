@@ -1,0 +1,52 @@
+{
+  "name": "Fever Sub",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Ambient trap",
+    "Dark R&B"
+  ],
+  "description": "A clean, deep sub that very slowly wavers in pitch, felt more than heard; trippy without getting muddy.",
+  "use": "Under pads and slow beats; doubling an 808.",
+  "preview_phrase": "psych_808",
+  "range": [
+    24,
+    52
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.01,
+      "d": 1,
+      "s": 1,
+      "r": 0.25,
+      "type": 1
+    },
+    {
+      "wave": 0,
+      "oct": 1,
+      "a": 0.01,
+      "d": 1,
+      "s": 1,
+      "r": 0.25,
+      "level": 0.08,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.12,
+    "f_type": -1,
+    "vib_rate": 0.6,
+    "vib_depth": 9,
+    "vib_delay": 0.3
+  },
+  "fx": {
+    "eq_lc": 22,
+    "sat_drive": 0.15
+  },
+  "loudness_trim_db": 4.99,
+  "id": "fever-sub",
+  "out_gain_db": 2.99
+}

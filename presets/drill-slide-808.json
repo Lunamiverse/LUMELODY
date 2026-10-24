@@ -45,6 +45,7 @@
     "sat_mix": 0.7,
     "eq_lc": 25
   },
-  "loudness_trim_db": -7.24,
-  "id": "drill-slide-808"
+  "loudness_trim_db": 4.67,
+  "id": "drill-slide-808",
+  "out_gain_db": 2.67
 }

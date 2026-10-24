@@ -1,0 +1,76 @@
+{
+  "name": "Mirage Lead",
+  "category": "Trippy",
+  "genres": [
+    "Psychedelic trap",
+    "Rage",
+    "Cloud rap"
+  ],
+  "description": "Warbling detuned lead that bends into every note, smeared by dotted delays: the hazy, hypnotic topline sound.",
+  "use": "Hooks and counter-melodies; overlap notes for long slides.",
+  "preview_phrase": "psych_lead",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 5,
+      "det": 18,
+      "spread": 0.8,
+      "drift": 10,
+      "a": 0.02,
+      "d": 1,
+      "s": 0.85,
+      "r": 0.4,
+      "type": 1
+    },
+    {
+      "wave": 3,
+      "pw": 0.35,
+      "oct": -1,
+      "a": 0.02,
+      "d": 1,
+      "s": 0.85,
+      "r": 0.4,
+      "level": 0.3,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.14,
+    "f_type": 0,
+    "f_cut": 1900,
+    "f_res": 0.25,
+    "f_key": 0.4,
+    "f_drive": 1.4,
+    "vib_rate": 4.6,
+    "vib_depth": 30,
+    "vib_delay": 0.3,
+    "lfo_rate": 0.2,
+    "lfo_cut": 0.3
+  },
+  "fx": {
+    "sat_drive": 0.45,
+    "eq_hc": 7500,
+    "eq_lc": 160,
+    "dly_beats": 0.75,
+    "dly_fb": 0.45,
+    "dly_mix": 0.2,
+    "dly_damp": 0.55,
+    "rv_mix": 0.38,
+    "rv_size": 0.92,
+    "rv_decay": 6.5,
+    "rv_damp": 0.55,
+    "sat_mix": 0.6,
+    "ch_mix": 0.3,
+    "ch_depth": 2.5,
+    "width": 1.35
+  },
+  "loudness_trim_db": 1.37,
+  "id": "mirage-lead",
+  "out_gain_db": -0.63
+}

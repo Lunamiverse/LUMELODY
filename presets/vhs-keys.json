@@ -65,6 +65,7 @@
     "rv_size": 0.5,
     "rv_decay": 2
   },
-  "loudness_trim_db": -4.72,
-  "id": "vhs-keys"
+  "loudness_trim_db": 1.69,
+  "id": "vhs-keys",
+  "out_gain_db": -0.31
 }

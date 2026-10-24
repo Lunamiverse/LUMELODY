@@ -72,6 +72,7 @@
     "rv_pre": 35,
     "width": 1.3
   },
-  "loudness_trim_db": -3.63,
-  "id": "dark-choir"
+  "loudness_trim_db": 2.26,
+  "id": "dark-choir",
+  "out_gain_db": 0.26
 }

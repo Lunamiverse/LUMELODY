@@ -55,6 +55,7 @@
     "rv_mix": 0.12,
     "rv_size": 0.4
   },
-  "loudness_trim_db": -6.06,
-  "id": "bounce-squelch"
+  "loudness_trim_db": 2.66,
+  "id": "bounce-squelch",
+  "out_gain_db": 0.66
 }

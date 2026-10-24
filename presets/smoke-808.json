@@ -1,0 +1,58 @@
+{
+  "name": "Smoke 808",
+  "category": "Trippy",
+  "genres": [
+    "Cloud rap",
+    "Plugg",
+    "Dark R&B"
+  ],
+  "description": "Warm, filtered 808 with a soft knock and a chorus-smeared top, mellow and hazy rather than aggressive.",
+  "use": "Cloud rap and plugg low end, dark R&B.",
+  "preview_phrase": "psych_808",
+  "range": [
+    24,
+    48
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 0,
+      "a": 0.002,
+      "d": 3.5,
+      "s": 0.7,
+      "r": 0.25,
+      "type": 1
+    },
+    {
+      "wave": 2,
+      "uni": 2,
+      "det": 8,
+      "a": 0.002,
+      "d": 0.8,
+      "s": 0.2,
+      "r": 0.2,
+      "level": 0.2,
+      "type": 1
+    }
+  ],
+  "voice": {
+    "mono": 1,
+    "glide": 0.1,
+    "f_type": 0,
+    "f_cut": 900,
+    "f_key": 0.3,
+    "p_env": 6,
+    "p_dec": 0.03
+  },
+  "fx": {
+    "sat_drive": 0.4,
+    "sat_mix": 0.6,
+    "eq_lc": 24,
+    "eq_hc": 5500,
+    "ch_mix": 0.3,
+    "ch_depth": 2.5
+  },
+  "loudness_trim_db": 6.83,
+  "id": "smoke-808",
+  "out_gain_db": 4.83
+}

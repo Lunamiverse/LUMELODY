@@ -60,6 +60,7 @@
     "rv_pre": 30,
     "width": 1.2
   },
-  "loudness_trim_db": -2.27,
-  "id": "siren-vox"
+  "loudness_trim_db": 9.9,
+  "id": "siren-vox",
+  "out_gain_db": 7.9
 }

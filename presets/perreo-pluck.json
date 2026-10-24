@@ -59,6 +59,7 @@
     "rv_mix": 0.18,
     "rv_size": 0.55
   },
-  "loudness_trim_db": -1.01,
-  "id": "perreo-pluck"
+  "loudness_trim_db": 6.81,
+  "id": "perreo-pluck",
+  "out_gain_db": 4.81
 }

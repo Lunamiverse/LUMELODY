@@ -46,6 +46,7 @@
     "eq_lc": 24,
     "eq_hc": 8000
   },
-  "loudness_trim_db": -9.15,
-  "id": "808-boom"
+  "loudness_trim_db": 2.94,
+  "id": "808-boom",
+  "out_gain_db": 0.94
 }

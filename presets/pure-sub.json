@@ -40,6 +40,7 @@
   "fx": {
     "eq_lc": 22
   },
-  "loudness_trim_db": -2.0,
-  "id": "pure-sub"
+  "loudness_trim_db": 10.12,
+  "id": "pure-sub",
+  "out_gain_db": 8.12
 }

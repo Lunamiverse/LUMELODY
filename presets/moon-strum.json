@@ -47,6 +47,7 @@
     "rv_size": 0.65,
     "rv_decay": 3
   },
-  "loudness_trim_db": 9.66,
-  "id": "moon-strum"
+  "loudness_trim_db": 21.55,
+  "id": "moon-strum",
+  "out_gain_db": 19.55
 }

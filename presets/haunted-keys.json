@@ -69,6 +69,7 @@
     "rv_damp": 0.6,
     "width": 1.25
   },
-  "loudness_trim_db": -4.88,
-  "id": "haunted-keys"
+  "loudness_trim_db": 2.47,
+  "id": "haunted-keys",
+  "out_gain_db": 0.47
 }

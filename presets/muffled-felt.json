@@ -77,6 +77,7 @@
     "rv_decay": 3.5,
     "rv_damp": 0.7
   },
-  "loudness_trim_db": -5.88,
-  "id": "muffled-felt"
+  "loudness_trim_db": 0.53,
+  "id": "muffled-felt",
+  "out_gain_db": -1.47
 }

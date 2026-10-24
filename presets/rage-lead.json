@@ -60,6 +60,7 @@
     "rv_decay": 3,
     "width": 1.3
   },
-  "loudness_trim_db": -10.45,
-  "id": "rage-lead"
+  "loudness_trim_db": -1.7,
+  "id": "rage-lead",
+  "out_gain_db": -3.7
 }

@@ -48,6 +48,7 @@
     "rv_decay": 5,
     "width": 1.3
   },
-  "loudness_trim_db": -5.23,
-  "id": "underwater-pad"
+  "loudness_trim_db": 0.97,
+  "id": "underwater-pad",
+  "out_gain_db": -1.03
 }

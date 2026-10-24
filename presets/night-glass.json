@@ -69,6 +69,7 @@
     "rv_size": 0.7,
     "rv_decay": 3
   },
-  "loudness_trim_db": -1.41,
-  "id": "night-glass"
+  "loudness_trim_db": 10.55,
+  "id": "night-glass",
+  "out_gain_db": 8.55
 }

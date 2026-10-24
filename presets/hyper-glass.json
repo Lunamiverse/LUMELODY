@@ -1,0 +1,68 @@
+{
+  "name": "Hyper Glass",
+  "category": "Trippy",
+  "genres": [
+    "Hyperpop",
+    "Rage",
+    "Plugg"
+  ],
+  "description": "Shiny, detuned glass lead with a fast vibrato and a bit of crunch, bright but still dark underneath.",
+  "use": "Hyperpop and rage hooks, fast melodic runs.",
+  "preview_phrase": "psych_arp",
+  "range": [
+    36,
+    96
+  ],
+  "source": "original synthesis (LUMI engine)",
+  "layers": [
+    {
+      "wave": 2,
+      "uni": 7,
+      "det": 20,
+      "spread": 1,
+      "a": 0.002,
+      "d": 0.6,
+      "s": 0.6,
+      "r": 0.25,
+      "type": 1
+    },
+    {
+      "cr": 2,
+      "mr": 1,
+      "idx": 0.9,
+      "idx_dec": 0.15,
+      "idx_sus": 0.2,
+      "a": 0.001,
+      "d": 0.5,
+      "s": 0.4,
+      "r": 0.25,
+      "level": 0.35,
+      "type": 2
+    }
+  ],
+  "voice": {
+    "f_type": 0,
+    "f_cut": 3800,
+    "f_res": 0.2,
+    "f_key": 0.4,
+    "vib_rate": 6.5,
+    "vib_depth": 14,
+    "vib_delay": 0.12
+  },
+  "fx": {
+    "sat_drive": 0.45,
+    "sat_mix": 0.5,
+    "crush_bits": 12,
+    "eq_lc": 220,
+    "eq_hc": 11000,
+    "dly_beats": 0.375,
+    "dly_fb": 0.35,
+    "dly_mix": 0.18,
+    "rv_mix": 0.25,
+    "rv_size": 0.75,
+    "width": 1.4
+  },
+  "loudness_trim_db": 2.54,
+  "id": "hyper-glass",
+  "out_gain_db": 0.54
+}

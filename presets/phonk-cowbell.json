@@ -50,6 +50,7 @@
     "rv_mix": 0.12,
     "rv_size": 0.35
   },
-  "loudness_trim_db": -9.27,
-  "id": "phonk-cowbell"
+  "loudness_trim_db": 0.08,
+  "id": "phonk-cowbell",
+  "out_gain_db": -1.92
 }
